@@ -7,5 +7,3 @@
 export DIR=
 
 java -cp $DIR/parametric-recursive-v3.jar:$DIR/antlr-4.4-complete.jar:$DIR/ST-4.3.jar main.Main $*
-
-mona $*.mona
