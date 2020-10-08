@@ -12,9 +12,11 @@ Prerequisites:
 
 Steps to running the examples:
 
-1. Edit the ws2s-encoder script and set the DIR variable to point to the root directory where this repository is cloned. 
-   
-2. cd examples/<Example> (e.g. examples/tree-linked-leaves) and run: 
-   $ ../../ws2s-encoder <name-of-rec-file-without-extension> (e.g.  ./../ws2s-encoder tll-full)
+1. Edit the ws2s-encoder script and set the DIR variable to point to the root directory of the repository
+
+2. In the root directory of the repository: 
+    $ chmod 755 ws2s-encoder
+    $ cd examples/<Example> (e.g. examples/tree-linked-leaves) and run: 
+    $ ../../ws2s-encoder <name-of-rec-file-without-extension> (e.g.  ./../ws2s-encoder tll-full)
 
 The system is deadlock free if MONA reports that the formula is unsatisfiable.
