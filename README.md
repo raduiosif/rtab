@@ -7,7 +7,7 @@ This repository contains the files needed to reproduce the examples from the pap
 
 Prerequisites: 
 
-1. Install MONA version 1.4-18 from https://www.brics.dk/mona/
+1. Install MONA version 1.4-18 (or later) from https://www.brics.dk/mona/
 2. Java 11.0.1 or later
 
 To run the examples, type in the local root directory of the repository: 
