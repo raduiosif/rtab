@@ -4,7 +4,7 @@
 ## Adjust this to point to the local directory where the examples are downloaded
 ##
 
-export DIR=/Users/radu/Work/papers/parametric-verification/traps/code/recursive-traps
+export DIR=
 
 java -cp $DIR/parametric-recursive-v3.jar:$DIR/antlr-4.4-complete.jar:$DIR/ST-4.3.jar main.Main $*
 
