@@ -16,6 +16,6 @@ Steps to running the examples:
 
 2. In the root directory: 
 
-    $ chmod 755 ws2s-encoder check-all; cd examples; ../check-all
+    $ chmod 755 ws2s-encoder check-all; export DIR=`pwd`; cd examples; ../check-all
     
 The system is deadlock free if MONA reports that the formula is unsatisfiable.
