@@ -1,0 +1,6 @@
+q0 -> q1 : in
+q1 -> q2 : out_0
+q2 -> q3 : in_0
+q3 -> q4 : out_1
+q4 -> q5 : in_1
+q5 -> q0 : out

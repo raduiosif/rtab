@@ -1,0 +1,14 @@
+Master() := 
+	 [a0] _let_ m, s  _in_ 
+	 ()
+	 (m : master, Slave(s / m))
+;
+
+Slave(s / m) := 
+	 [a1] _let_ s1 _in_
+	 (m.snd s.rcv + s.snd m.rcv)
+	 (s : slave, Slave(s1 / m))
+|	 [a2]
+	 (m.snd s.rcv + s.snd m.rcv)
+	 (s : slave)
+;

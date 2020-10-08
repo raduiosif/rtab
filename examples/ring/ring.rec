@@ -1,0 +1,8 @@
+A0() :=
+  [r1] _let_ x1, x2 _in_ (x2.out x1.in) (A1(x1,x2))
+;
+
+A1(x1, x2) :=
+  [r2] _let_ x3 _in_ (x1.out x3.in) (x1:c1, A1(x3, x2))
+| [r3] (x1.out x2.in) (x1:c1, x2:c2)
+;

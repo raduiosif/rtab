@@ -1,0 +1,21 @@
+R() :=
+  [r0] _let_ r, n _in_
+    (r.out n.in + n.out r.in)
+    (r : root, T(n))
+;
+    
+T(n) :=
+  [r1] _let_ n0, n1 _in_
+    (n.out_0 n0.in + n0.out n.in_0 + 
+     n.out_1 n1.in + n1.out n.in_1)
+    (n : node, T(n0), T(n1))
+| [r2] 
+    () 
+    (L(n))
+;
+
+L(l) := 
+  [r4] 
+  ()
+  (l : leaf)
+;

@@ -1,0 +1,4 @@
+q0 -> q1 : rcv
+q1 -> q0 : snd
+q0 -> q2 : in
+q2 -> q0 : out

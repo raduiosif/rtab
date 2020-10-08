@@ -1,0 +1,14 @@
+Ring() :=
+  [a1] _let_ p0, f0, fn _in_
+  (p0.take fn.grb f0.grb + p0.leave f0.rel fn.rel)
+  (p0 : philo_X, Pipe(f0, fn))
+;
+Pipe(f0, fn) :=
+  [a2] _let_ p0, f1 _in_
+  (p0.take f0.grb f1.grb + p0.leave f0.rel f1.rel)
+  (f0 : fork, p0 : philo_X, Pipe(f1, fn))
+  
+| [a3] _let_ p0 _in_
+  (p0.take f0.grb fn.grb + p0.leave f0.rel fn.rel)
+  (f0 : fork, p0 : philo_X, fn : fork)
+;

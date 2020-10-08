@@ -1,0 +1,20 @@
+Root() := 
+  [a1] _let_ r0, l1, n1, r1, x _in_
+    (r0.request_snd n1.request_rcv +
+     r0.reply_rcv n1.reply_snd)
+    (r0 : root, x : leaf_init, Node(l1, n1, r1))
+;
+
+Node(l0, n0, r0) :=
+  [a2] _let_ n1, r1, l2, n2 _in_
+     (n0.request_snd n1.request_rcv n2.request_rcv +
+      n0.reply_rcv n1.reply_snd n2.reply_snd)
+    (n0 : node, Node(l0, n1, r1), Node(l2, n2, r0))
+| [a3] 
+     (n0.request_snd l0.request_rcv r0.request_rcv +
+      n0.reply_rcv l0.reply_snd r0.reply_snd)
+    (n0 : node, Leaf(l0), Leaf(r0))
+;
+
+Leaf(l0) :=
+  [a4] () (l0 : leaf);

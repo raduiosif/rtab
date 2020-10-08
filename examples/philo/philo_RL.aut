@@ -1,0 +1,3 @@
+w -> h : take_right
+h -> e : take_left
+e -> w : leave

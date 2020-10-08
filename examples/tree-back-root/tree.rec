@@ -1,0 +1,14 @@
+Root() :=
+  [a0] _let_ r, n1, n2 _in_
+    (r.out n1.in + r.out n2.in)
+    (r : root, Tree(n1 / r), Tree(n2 / r))
+;
+    
+Tree(n / r) :=
+  [a1] _let_ n1, n2 _in_
+    (n.out n1.in + n.out n2.in)
+    (n : node, Tree(n1 / r), Tree(n2 / r))
+| [a2] 
+    (n.out r.in) 
+    (n : node)
+;
