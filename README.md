@@ -7,7 +7,8 @@ This repository contains the files needed to reproduce the examples from the pap
 
 Prerequisites: 
 
-* Install MONA version 1.4-18 from https://www.brics.dk/mona/
+1. Install MONA version 1.4-18 from https://www.brics.dk/mona/
+2. Java 11.0.1 or later
 
 Steps to running the examples:
 
@@ -16,6 +17,5 @@ Steps to running the examples:
    
 2. cd examples/<Example> (e.g. examples/tree-linked-leaves) and run: 
    $ ../../ws2s-encoder <name-of-rec-file-without-extension> (e.g.  ./../ws2s-encoder tll-full)
-   $ mona <name-of-rec-file-without-extension.mona> (e.g. mona tll-full.mona)
 
-The system is deadlock free is MONA reports that the formula is unsatisfiable.
+The system is deadlock free if MONA reports that the formula is unsatisfiable.
