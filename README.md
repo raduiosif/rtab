@@ -13,7 +13,6 @@ Prerequisites:
 Steps to running the examples:
 
 1. Edit the ws2s-encoder script and set the DIR variable to point to the root directory where this repository is cloned. 
-   At this point the command ./ws2s-encoder should yield the message "usage:  ws2s-encoder [-ws1s|-ws2s] model" 
    
 2. cd examples/<Example> (e.g. examples/tree-linked-leaves) and run: 
    $ ../../ws2s-encoder <name-of-rec-file-without-extension> (e.g.  ./../ws2s-encoder tll-full)
