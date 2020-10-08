@@ -1,0 +1,542 @@
+/*
+ *
+ * main
+ *
+ */
+
+main(ruleVars, stateVars, genericPreds, preds, asserts) ::= <<
+ws2s;
+
+pred intersects_1(var2 X, Y) =
+  (ex1 x: (x in X) & (x in Y));
+
+pred included_1(var2 X, Y) =
+  (all1 x: (x in X) => (x in Y));
+
+<genericPreds: {pred| <pred>}; separator="\n\n">
+
+pred one_transition_flow_2
+  (var1 z1, var2 X1, Y1,
+   var1 z2, var2 X2, Y2) =
+   (z1 notin X1 & z2 notin X2  &  z1 notin Y1 & z2 notin Y2) |
+
+   (z1    in X1 & z2 notin X2  &  z1    in Y1 & z2 notin Y2) |
+   (z1    in X1 & z2 notin X2  &  z1 notin Y1 & z2    in Y2) |
+   (z1 notin X1 & z2    in X2  &  z1    in Y1 & z2 notin Y2) |
+   (z1 notin X1 & z2    in X2  &  z1 notin Y1 & z2    in Y2) |
+
+   (z1    in X1 & z2    in X2);
+
+pred one_transition_flow_3
+  (var1 z1, var2 X1, Y1,
+   var1 z2, var2 X2, Y2,
+   var1 z3, var2 X3, Y3) =
+   (z1 notin X1 & z2 notin X2 & z3 notin X3  &  z1 notin Y1 & z2 notin Y2 & z3 notin Y3) |
+
+   (z1    in X1 & z2 notin X2 & z3 notin X3  &  z1    in Y1 & z2 notin Y2 & z3 notin Y3) |
+   (z1    in X1 & z2 notin X2 & z3 notin X3  &  z1 notin Y1 & z2    in Y2 & z3 notin Y3) |
+   (z1    in X1 & z2 notin X2 & z3 notin X3  &  z1 notin Y1 & z2 notin Y2 & z3    in Y3) |
+   (z1 notin X1 & z2    in X2 & z3 notin X3  &  z1    in Y1 & z2 notin Y2 & z3 notin Y3) |
+   (z1 notin X1 & z2    in X2 & z3 notin X3  &  z1 notin Y1 & z2    in Y2 & z3 notin Y3) |
+   (z1 notin X1 & z2    in X2 & z3 notin X3  &  z1 notin Y1 & z2 notin Y2 & z3    in Y3) |
+   (z1 notin X1 & z2 notin X2 & z3    in X3  &  z1    in Y1 & z2 notin Y2 & z3 notin Y3) |
+   (z1 notin X1 & z2 notin X2 & z3    in X3  &  z1 notin Y1 & z2    in Y2 & z3 notin Y3) |
+   (z1 notin X1 & z2 notin X2 & z3    in X3  &  z1 notin Y1 & z2 notin Y2 & z3    in Y3) |
+
+   (z1    in X1 & z2    in X2              ) |
+   (z1    in X1               & z3    in X3) |
+   (              z2    in X2 & z3    in X3);
+
+<preds: {pred| <pred>}; separator="\n\n">
+
+#
+# assertions checking
+#
+
+var2 <Ur_list(ruleVars)>;
+
+var2 <Xq_list(stateVars)>;
+
+<asserts: {assert| <assert>
+  (<Ur_list(ruleVars)>,
+   <Xq_list(stateVars)>)}; separator=" &\n">;
+
+>>
+
+/*
+ *
+ * trap-related:  constraints / invariant / initially_not_empty
+ *
+ */
+
+trap_invariant(ruleVars, stateVars, stateVarsCount) ::= <<
+
+pred trap_constraints
+  (var2 <Ur_list(ruleVars)>,
+   var2 <Zq_list(stateVars)>) =
+   ext_configuration
+     (<Ur_list(ruleVars)>,
+      <Zq_list(stateVars)>) &
+   trap_initially_not_empty
+     (<Ur_list(ruleVars)>,
+      <Zq_list(stateVars)>) &
+   trap_flow
+     (<Ur_list(ruleVars)>,
+      <Zq_list(stateVars)>);
+
+pred trap_invariant
+  (var2 <Ur_list(ruleVars)>,
+   var2 <Xq_list(stateVars)>) =
+   configuration
+     (<Ur_list(ruleVars)>,
+      <Xq_list(stateVars)>) &
+   all2 <Zq_list(stateVars)>:
+     trap_constraints
+       (<Ur_list(ruleVars)>,
+        <Zq_list(stateVars)>) =>
+     intersects_<stateVarsCount>
+       (<Zq_list(stateVars)>,
+        <Xq_list(stateVars)>);
+
+>>
+
+trap_initially_not_empty(ruleVars, stateVars, initialStateVars) ::= <<
+
+pred trap_initially_not_empty
+  (var2 <Ur_list(ruleVars)>,
+   var2 <Xq_list(stateVars)>) =
+   ext_configuration
+     (<Ur_list(ruleVars)>,
+      <Xq_list(stateVars)>) &
+   (<initialStateVars: {stateVar |(ex1 x : x in <Ur(stateVar)> & x in <Xq(stateVar)>)}; separator=" |\n    ">);
+>>
+
+/*
+ *
+ * one-related: constraints / invariant / initially_excatly_one
+ *
+ */
+
+one_invariant(ruleVars, stateVars, stateVarsCount) ::= <<
+
+pred one_constraints
+  (var2 <Ur_list(ruleVars)>,
+   var2 <Zq_list(stateVars)>) =
+   ext_configuration
+     (<Ur_list(ruleVars)>,
+      <Zq_list(stateVars)>) &
+   one_initially_exactly_one
+     (<Ur_list(ruleVars)>,
+      <Zq_list(stateVars)>) &
+   one_flow
+     (<Ur_list(ruleVars)>,
+      <Zq_list(stateVars)>);
+
+pred one_invariant
+  (var2 <Ur_list(ruleVars)>,
+   var2 <Xq_list(stateVars)>) =
+   configuration
+     (<Ur_list(ruleVars)>,
+      <Xq_list(stateVars)>) &
+   all2 <Zq_list(stateVars)> :
+     one_constraints
+       (<Ur_list(ruleVars)>,
+        <Zq_list(stateVars)>) =>
+     uniquely_intersects_<stateVarsCount>
+       (<Zq_list(stateVars)>,
+        <Xq_list(stateVars)>);
+
+>>
+
+one_initially_exactly_one(ruleVars, stateVars, dependencies) ::= <<
+
+pred one_initially_exactly_one
+  (var2 <Ur_list(ruleVars)>,
+   var2 <Xq_list(stateVars)>) =
+   ext_configuration
+     (<Ur_list(ruleVars)>,
+      <Xq_list(stateVars)>) &
+   (<dependencies: {dep|(<dep.term>)}; separator=" |\n    ">);
+
+>>
+
+one_initially_exactly_one_dependency(initVar, otherInitVars) ::= <<
+(ex1 x0 : x0 in <Xq(initVar)> & x0 in <Ur(initVar)> &
+        all1 x : ((x in <Xq(initVar)> & x in <Ur(initVar)>) => x = x0))<if(otherInitVars)> &<endif>
+     <otherInitVars: {otherVar| (all1 x : (x notin <Xq(otherVar)> | x notin <Ur(otherVar)>))}; separator=" &\n">
+>>
+
+/*
+ *
+ * deadlock-related
+ *
+ */
+
+deadlock(ruleVars, stateVars, stateVarsCount) ::= <<
+
+pred deadlock
+  (var2 <Ur_list(ruleVars)>,
+   var2 <Xq_list(stateVars)>) =
+   configuration
+     (<Ur_list(ruleVars)>,
+      <Xq_list(stateVars)>) &
+   disabled_flow
+     (<Ur_list(ruleVars)>,
+      <Xq_list(stateVars)>);
+
+>>
+
+
+/*
+ *
+ * trap flow(s) - on extended configurations
+ *
+ */
+
+trap_flow(ruleVars, stateVars, interactions) ::= <<
+
+<interactions:{it|<it.flowPreds>}; separator="\n\n">
+
+pred trap_flow
+  (var2 <Ur_list(ruleVars)>,
+   var2 <Xq_list(stateVars)>) =
+  ext_configuration
+    (<Ur_list(ruleVars)>,
+     <Xq_list(stateVars)>) &
+  <interactions:{it| trap_<it.rid>_<it.iid>_flow
+  (<Ur_list(ruleVars)>,
+   <Xq_list(stateVars)>) }; separator = " &\n">;
+>>
+
+trap_interaction_flow(interaction, ruleVars, stateVars, interactionVars, bindings) ::= <<
+
+<bindings: {b|<b.flowPreds>}; separator="\n\n">
+
+pred trap_<interaction.rid>_<interaction.iid>_flow
+  (var2 <Ur_list(ruleVars)>,
+   var2 <Xq_list(stateVars)>) =
+  <bindings: {b| (all1 x_0, <xi_list(interactionVars)> :
+  <b.term>) }; separator = " &\n">;
+>>
+
+trap_bound_interaction_term(interaction, bindingIndex, ruleVars, stateVars, interactionVars, locals, globals) ::= <<
+(x_0 in U_<interaction.rid><if(locals)> & <endif>
+ <locals: {loc | x_0 = x_<loc.cid>}; separator=" &\n" ><if(globals)> & <endif>
+ <globals: {glo | path_<interaction.rid>_<glo.cid>_<glo.bind_rid>_<glo.bind_cid>
+  (<Ur_list(ruleVars)>, x_0, x_<glo.cid>)}; separator=" &\n" >) =>
+trap_<interaction.rid>_<interaction.iid>_<bindingIndex>_flow
+  (<Xq_list(stateVars)>,
+   <xi_list(interactionVars)>)
+>>
+
+trap_bound_interaction_flow(interaction, bindingIndex, stateVars, interactionVars, flowTransitions) ::= <<
+
+pred trap_<interaction.rid>_<interaction.iid>_<bindingIndex>_flow
+  (var2 <Xq_list(stateVars)>,
+   var1 <xi_list(interactionVars)>) =
+   <flowTransitions; separator=" &\n">;
+>>
+
+trap_transition_flow(items, multiplicity) ::=
+<<((<items:{it| x_<it.var> in X_<it.cid>_<it.source>}; separator=" | " >) =>
+ (<items:{it| x_<it.var> in X_<it.cid>_<it.target>}; separator=" | " >))>>
+
+/*
+ *
+ * one flow(s) - on extended configurations
+ *
+ */
+
+one_flow(ruleVars, stateVars, interactions) ::= <<
+
+<interactions:{it|<it.flowPreds>}; separator="\n\n">
+
+pred one_flow
+  (var2 <Ur_list(ruleVars)>,
+   var2 <Xq_list(stateVars)>) =
+  ext_configuration
+    (<Ur_list(ruleVars)>,
+     <Xq_list(stateVars)>) &
+  <interactions:{it| one_<it.rid>_<it.iid>_flow
+  (<Ur_list(ruleVars)>,
+   <Xq_list(stateVars)>) }; separator = " &\n">;
+>>
+
+one_interaction_flow(interaction, ruleVars, stateVars, interactionVars, bindings) ::= <<
+
+<bindings: {b|<b.flowPreds>}; separator="\n\n">
+
+pred one_<interaction.rid>_<interaction.iid>_flow
+  (var2 <Ur_list(ruleVars)>,
+   var2 <Xq_list(stateVars)>) =
+  <bindings: {b| (all1 x_0, <xi_list(interactionVars)> :
+  <b.term>) }; separator = " &\n">;
+>>
+
+one_bound_interaction_term(interaction, bindingIndex, ruleVars, stateVars, interactionVars, locals, globals) ::= <<
+(x_0 in U_<interaction.rid><if(locals)> & <endif>
+ <locals: {loc | x_0 = x_<loc.cid>}; separator=" &\n" ><if(globals)> & <endif>
+ <globals: {glo | path_<interaction.rid>_<glo.cid>_<glo.bind_rid>_<glo.bind_cid>
+  (<Ur_list(ruleVars)>, x_0, x_<glo.cid>)}; separator=" &\n" >) =>
+one_<interaction.rid>_<interaction.iid>_<bindingIndex>_flow
+  (<Xq_list(stateVars)>,
+   <xi_list(interactionVars)>)
+>>
+
+one_bound_interaction_flow(interaction, bindingIndex, stateVars, interactionVars, flowTransitions) ::= <<
+
+pred one_<interaction.rid>_<interaction.iid>_<bindingIndex>_flow
+  (var2 <Xq_list(stateVars)>,
+   var1 <xi_list(interactionVars)>) =
+   <flowTransitions; separator=" &\n">;
+>>
+
+one_transition_flow(items, multiplicity) ::=
+<<one_transition_flow_<multiplicity>(<items:{it|x_<it.var>, X_<it.cid>_<it.source>, X_<it.cid>_<it.target>}; separator=", ">)>>
+
+
+
+/*
+ *
+ * disabled flow(s) - on extended configurations
+ *
+ */
+
+disabled_flow(ruleVars, stateVars, interactions) ::= <<
+
+<interactions:{it|<it.flowPreds>}; separator="\n\n">
+
+pred disabled_flow
+  (var2 <Ur_list(ruleVars)>,
+   var2 <Xq_list(stateVars)>) =
+  ext_configuration
+    (<Ur_list(ruleVars)>,
+     <Xq_list(stateVars)>) &
+  <interactions:{it| disabled_<it.rid>_<it.iid>_flow
+  (<Ur_list(ruleVars)>,
+   <Xq_list(stateVars)>) }; separator = " &\n">;
+>>
+
+disabled_interaction_flow(interaction, ruleVars, stateVars, interactionVars, bindings) ::= <<
+
+<bindings: {b|<b.flowPreds>}; separator="\n\n">
+
+pred disabled_<interaction.rid>_<interaction.iid>_flow
+  (var2 <Ur_list(ruleVars)>,
+   var2 <Xq_list(stateVars)>) =
+  <bindings: {b| (all1 x_0, <xi_list(interactionVars)> :
+  <b.term>) }; separator = " &\n">;
+>>
+
+disabled_bound_interaction_term(interaction, bindingIndex, ruleVars, stateVars, interactionVars, locals, globals) ::= <<
+(x_0 in U_<interaction.rid><if(locals)> & <endif>
+ <locals: {loc | x_0 = x_<loc.cid>}; separator=" &\n" ><if(globals)> & <endif>
+ <globals: {glo | path_<interaction.rid>_<glo.cid>_<glo.bind_rid>_<glo.bind_cid>
+  (<Ur_list(ruleVars)>, x_0, x_<glo.cid>)}; separator=" &\n" >) =>
+disabled_<interaction.rid>_<interaction.iid>_<bindingIndex>_flow
+  (<Xq_list(stateVars)>,
+   <xi_list(interactionVars)>)
+>>
+
+disabled_bound_interaction_flow(interaction, bindingIndex, stateVars, interactionVars, flowTransitions) ::= <<
+
+pred disabled_<interaction.rid>_<interaction.iid>_<bindingIndex>_flow
+  (var2 <Xq_list(stateVars)>,
+   var1 <xi_list(interactionVars)>) =
+   <flowTransitions; separator=" &\n">;
+>>
+
+disabled_transition_flow(items, multiplicity) ::=
+<<(<items:{it| x_<it.var> notin X_<it.cid>_<it.source>}; separator=" | " >)>>
+
+/*
+ *
+ * tree paths
+ *
+ */
+
+path(init, end, ruleVars, raVars, raVarsCount,
+     raDownVars, raDownVarsCount, raUpVars, raUpVarsCount,
+     dependencies, preds) ::= <<
+
+
+<preds: {pred| <pred>}; separator="\n\n">
+
+pred path_<init.rid>_<init.cid>_<end.rid>_<end.cid>
+  (var2 <Ur_list(ruleVars)>,
+   var1 u0, u1) =
+   backbone_tree
+     (<Ur_list(ruleVars)>) &
+   ex2 <Wc_list(raVars)> :
+   ex2 W_up, W_down :
+   ex1 w_top :
+     <raVars: {raVar| included_1(<Wc(raVar)>, <Ur(raVar)>)}; separator=" &\n"> &
+     ~intersects_1(W_down, W_up) &
+     partition_<raDownVarsCount>(W_down, <Wc_list(raDownVars)>) &
+     (w_top in W_down) &
+     (root in W_down => w_top = root) &
+     (all1 w : (w in W_down & w ~= w_top) => w^ in W_down) &
+     (all1 w1, w2: (w1 in W_down & w1 ~= root &
+                    w2 in W_down & w2 ~= root & w1^ = w2^) => w1 = w2) &
+     <if(raUpVars)>
+     partition_<raUpVarsCount>(W_up, <Wc_list(raUpVars)>) &
+     (all1 w : w in W_up => (w^ in W_up | w^ = w_top)) &
+     (all1 w1, w2: (w1 in W_up & w1 ~= root &
+                    w2 in W_up & w2 ~= root & w1^ = w2^) => w1 = w2) &
+     <endif>
+     <dependencies: {dep| <dep.term>}; separator=" &\n"> &
+     u0 in <Wc(init)> &
+     u1 in <Wc(end)> &
+     (all1 w : w in <Wc(end)> => w = u1);
+
+>>
+
+path_up_dependency(raVar, succRaVars) ::= <<(all1 w: (w in <Wc(raVar)>) =>
+  (<succRaVars: {succRaVar| w^ in <Wc(succRaVar)>}; separator=" | ">))>>
+
+path_down_dependency(raVar, succRaVars) ::= <<(all1 w: (w in <Wc(raVar)>) =>
+  (<succRaVars: {succRaVar| w.<succRaVar.branch> in <Wc(succRaVar)>}; separator=" | ">))
+>>
+
+/*
+ *
+ * extended configuration / configuration
+ *
+ */
+
+ext_configuration(ruleVars, stateVars, dependencies) ::= <<
+
+pred ext_configuration
+  (var2 <Ur_list(ruleVars)>,
+   var2 <Xq_list(stateVars)>) =
+   backbone_tree
+     (<Ur_list(ruleVars)>) &
+   <dependencies: {dep|<dep.term>}; separator=" &\n">;
+>>
+
+ext_configuration_dep(stateVar, ruleVars)  ::= <<
+(all1 x : x in <Xq(stateVar)> =>
+   (<ruleVars: {ruleVar| x in <Ur(ruleVar)>}; separator=" | ">))
+>>
+
+configuration(ruleVars, stateVars, dependencies, disjointPairs) ::= <<
+
+pred configuration
+  (var2 <Ur_list(ruleVars)>,
+   var2 <Xq_list(stateVars)>) =
+   ext_configuration
+     (<Ur_list(ruleVars)>,
+      <Xq_list(stateVars)>) &
+   <dependencies: {dep|<dep.term>}; separator=" &\n"><if(disjointPairs)> & <endif>
+   <disjointPairs: {pair|~intersects_1(X_<pair.cid>_<pair.sid1>, X_<pair.cid>_<pair.sid2>)}; separator=" &\n">;
+>>
+
+configuration_dep(size, ruleVar, stateVars)  ::= <<
+(all1 x: x in <Ur(ruleVar)> =>
+  (<stateVars: {stateVar| x in <Xq(stateVar)>}; separator=" | ">))>>
+
+
+/*
+ * 
+ * backbone tree
+ *
+ */
+ 
+backbone_tree(ruleVars, rulesCount, dependencies, startRuleVars) ::= <<
+
+pred backbone_tree
+  (var2 <Ur_list(ruleVars)>) =
+  (ex2 U:
+    partition_<rulesCount>
+      (U, <Ur_list(ruleVars)>) &
+    (all1 u : (u ~= root & u in U) => (u^ in U) ) &
+    <dependencies: {dep|<dep.term>}; separator=" &\n"> &
+    (<startRuleVars: {ruleVar| root in <Ur(ruleVar)>}; separator=" |\n">)
+  );
+>>
+
+backbone_tree_0_dep(ruleVar) ::= <<(all1 u: (u in <Ur(ruleVar)>) =>
+    (u.0 notin U & u.1 notin U))>>
+
+backbone_tree_1_dep(ruleVar, children) ::= <<(all1 u: (u in <Ur(ruleVar)>) => (
+    <children: {c| (u.0 in <Ur(c)> & u.1 notin U) }; separator=" | \n">
+  ))>>
+
+backbone_tree_2_dep(ruleVar, childrenPairs) ::= <<(all1 u: (u in <Ur(ruleVar)>) => (
+    <childrenPairs: {cp| (u.0 in U_<cp.rid0> & u.1 in U_<cp.rid1>) }; separator=" | \n">
+  ))>>
+
+/*
+ *
+ * variable lists
+ *
+ */
+
+Wc_list(raVars) ::= "<raVars:Wc(); separator=\", \">"
+
+Wc(raVar) ::= "W_<raVar.rid>_<raVar.cid>"
+
+
+xi_list(interactionVars) ::= "<interactionVars:xi(); separator=\", \">"
+
+xi(interactionVar) ::= "x_<interactionVar.cid>"
+
+
+Xq_list(stateVars) ::= "<stateVars:Xq(); separator=\", \">"
+
+Xq(stateVar) ::= "X_<stateVar.cid>_<stateVar.sid>"
+
+Yq_list(stateVars) ::= "<stateVars:Yq(); separator=\", \">"
+
+Yq(stateVar) ::= "Y_<stateVar.cid>_<stateVar.sid>"
+
+Zq_list(stateVars) ::= "<stateVars:Zq(); separator=\", \">"
+
+Zq(stateVar) ::= "Z_<stateVar.cid>_<stateVar.sid>"
+
+
+Ur_list(ruleVars) ::= "<ruleVars:Ur(); separator=\", \">"
+
+Ur(ruleVar) ::= "U_<ruleVar.rid>"
+
+/*
+ *
+ * base predicates helper
+ *
+ */
+
+partition(size, indexes, pairs) ::= <<
+
+pred partition_<size>
+  (var2 Y, <indexes: {idx| X_<idx.i>}; separator=", ">) =
+  (all1 x: x in Y \<=>
+    (<indexes: {idx| x in X_<idx.i>}; separator=" | ">)) <if(pairs)> &<endif>
+  <pairs:{pair|~intersects_1(X_<pair.i>, X_<pair.j>)}; separator=" &\n">;
+>>
+
+intersects(size, indexes, pairs) ::= <<
+
+pred intersects_<size>
+  (var2 <indexes: {idx| X_<idx.i>}; separator=", ">,
+   var2 <indexes: {idx| Y_<idx.i>}; separator=", ">) =
+   <indexes: {idx| intersects_1(X_<idx.i>, Y_<idx.i>)}; separator=" |\n">;
+>>
+
+uniquely_intersects(size, indexes, pairs) ::= <<
+
+pred uniquely_intersects_<size>
+  (var2 <indexes: {idx| X_<idx.i>}; separator=", ">,
+   var2 <indexes: {idx| Y_<idx.i>}; separator=", ">) =
+  (<indexes: {idx| (ex1 z1: (z1 in X_<idx.i> & z1 in Y_<idx.i>) &
+     (all1 z2: (z2 in X_<idx.i> & z2 in Y_<idx.i>) => z1 = z2))}; separator=" |\n   ">) &
+  (all1 z:
+     <pairs: {pair| (z notin X_<pair.i> | z notin Y_<pair.i> | z notin X_<pair.j> | z notin Y_<pair.j>) }; separator=" &\n">);
+>>
+
+included(size, indexes, pairs) ::= <<
+
+pred included_<size>
+  (var2 <indexes: {idx| X_<idx.i>}; separator=", ">,
+   var2 <indexes: {idx| Y_<idx.i>}; separator=", ">) =
+   <indexes: {idx| included_1(X_<idx.i>, Y_<idx.i>)}; separator=" &\n">;
+>>
