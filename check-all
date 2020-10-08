@@ -1,0 +1,37 @@
+#!/bin/bash 
+
+# ! run it in the examples directory !
+
+MONA=mona
+
+CHECK ()
+{
+    EXDIR=$1
+    EXNAME=$2
+    OPT=$3
+
+    echo ""
+    echo "$EXDIR / $EXNAME / $OPT"
+    cd $EXDIR
+    ../../ws2s-encoder $OPT $EXNAME > /dev/null
+    $MONA -t -q $EXNAME.mona | egrep "Formula|counter-example|Total"
+    cd ..
+}
+
+# ws1s
+
+CHECK ring ring -ws1s
+CHECK star star -ws1s
+CHECK star star-ring -ws1s
+CHECK philo philo_binary_sim "-1 -ws1s"
+CHECK philo philo_binary_asim_tweak "-1 -ws1s"
+CHECK philo philo_ternary -ws1s
+
+#ws2s
+
+CHECK tree-dfs tree -ws2s
+CHECK tree-back-root tree -ws2s
+CHECK tree-linked-leaves tll_full -ws2s
+
+
+
