@@ -10,11 +10,7 @@ Prerequisites:
 1. Install MONA version 1.4-18 from https://www.brics.dk/mona/
 2. Java 11.0.1 or later
 
-Steps to running the examples:
-
-1. Edit the ws2s-encoder script and set the DIR variable to point to the root directory of the repository
-
-2. In the root directory: 
+To run the examples, type in the local root directory of the repository: 
 
     $ chmod 755 ws2s-encoder check-all check; ./check
     
