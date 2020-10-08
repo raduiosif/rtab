@@ -1,4 +1,4 @@
-# /bin/bash
+#!/bin/bash
 
 ##
 ## Adjust this to point to the local directory where the examples are downloaded
