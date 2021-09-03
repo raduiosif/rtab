@@ -2,8 +2,8 @@ Recursive Term Algebra of Behaviors
 
 This repository contains the files needed to reproduce the examples from the paper
 
-    "Verifying Safety Properties of Inductively Defined Parameterized Systems" 
-     by Marius Bozga and Radu Iosif
+    "Specification and Safety Verification of Parametric Hierarchical Distributed Systems" 
+     by Marius Bozga and Radu Iosif, 17th edition of the International Conference on Formal Aspects of Component Software (FACS), October 28– 29, 2021.
 
 Prerequisites: 
 
