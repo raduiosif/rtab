@@ -1,0 +1,824 @@
+ws2s;
+
+pred intersects_1(var2 X, Y) =
+  (ex1 x: (x in X) & (x in Y));
+
+pred included_1(var2 X, Y) =
+  (all1 x: (x in X) => (x in Y));
+
+pred intersects_4
+  (var2 X_1, X_2, X_3, X_4,
+   var2 Y_1, Y_2, Y_3, Y_4) =
+   intersects_1(X_1, Y_1) |
+   intersects_1(X_2, Y_2) |
+   intersects_1(X_3, Y_3) |
+   intersects_1(X_4, Y_4);
+
+pred uniquely_intersects_4
+  (var2 X_1, X_2, X_3, X_4,
+   var2 Y_1, Y_2, Y_3, Y_4) =
+  (ex1 x: (
+( (x in X_1 & x in Y_1) &
+ ~(x in X_2 & x in Y_2) &
+ ~(x in X_3 & x in Y_3) &
+ ~(x in X_4 & x in Y_4)) |
+(~(x in X_1 & x in Y_1) &
+  (x in X_2 & x in Y_2) &
+ ~(x in X_3 & x in Y_3) &
+ ~(x in X_4 & x in Y_4)) |
+(~(x in X_1 & x in Y_1) &
+ ~(x in X_2 & x in Y_2) &
+  (x in X_3 & x in Y_3) &
+ ~(x in X_4 & x in Y_4)) |
+(~(x in X_1 & x in Y_1) &
+ ~(x in X_2 & x in Y_2) &
+ ~(x in X_3 & x in Y_3) &
+  (x in X_4 & x in Y_4)))
+& (all1 y:
+((y in X_1 & y in Y_1) |
+ (y in X_2 & y in Y_2) |
+ (y in X_3 & y in Y_3) |
+ (y in X_4 & y in Y_4)) => x = y));
+
+pred partition_3
+  (var2 Y, X_1, X_2, X_3) =
+  (all1 x: x in Y <=>
+    (x in X_1 | x in X_2 | x in X_3))  &
+  ~intersects_1(X_1, X_2) &
+  ~intersects_1(X_1, X_3) &
+  ~intersects_1(X_2, X_3);
+
+pred partition_2
+  (var2 Y, X_1, X_2) =
+  (all1 x: x in Y <=>
+    (x in X_1 | x in X_2))  &
+  ~intersects_1(X_1, X_2);
+
+pred partition_1
+  (var2 Y, X_1) =
+  (all1 x: x in Y <=>
+    (x in X_1)) 
+;
+
+pred one_transition_flow_2
+  (var1 z1, var2 X1, Y1,
+   var1 z2, var2 X2, Y2) =
+   (z1 notin X1 & z2 notin X2  &  z1 notin Y1 & z2 notin Y2) |
+
+   (z1    in X1 & z2 notin X2  &  z1    in Y1 & z2 notin Y2) |
+   (z1    in X1 & z2 notin X2  &  z1 notin Y1 & z2    in Y2) |
+   (z1 notin X1 & z2    in X2  &  z1    in Y1 & z2 notin Y2) |
+   (z1 notin X1 & z2    in X2  &  z1 notin Y1 & z2    in Y2) |
+
+   (z1    in X1 & z2    in X2);
+
+pred one_transition_flow_3
+  (var1 z1, var2 X1, Y1,
+   var1 z2, var2 X2, Y2,
+   var1 z3, var2 X3, Y3) =
+   (z1 notin X1 & z2 notin X2 & z3 notin X3  &  z1 notin Y1 & z2 notin Y2 & z3 notin Y3) |
+
+   (z1    in X1 & z2 notin X2 & z3 notin X3  &  z1    in Y1 & z2 notin Y2 & z3 notin Y3) |
+   (z1    in X1 & z2 notin X2 & z3 notin X3  &  z1 notin Y1 & z2    in Y2 & z3 notin Y3) |
+   (z1    in X1 & z2 notin X2 & z3 notin X3  &  z1 notin Y1 & z2 notin Y2 & z3    in Y3) |
+   (z1 notin X1 & z2    in X2 & z3 notin X3  &  z1    in Y1 & z2 notin Y2 & z3 notin Y3) |
+   (z1 notin X1 & z2    in X2 & z3 notin X3  &  z1 notin Y1 & z2    in Y2 & z3 notin Y3) |
+   (z1 notin X1 & z2    in X2 & z3 notin X3  &  z1 notin Y1 & z2 notin Y2 & z3    in Y3) |
+   (z1 notin X1 & z2 notin X2 & z3    in X3  &  z1    in Y1 & z2 notin Y2 & z3 notin Y3) |
+   (z1 notin X1 & z2 notin X2 & z3    in X3  &  z1 notin Y1 & z2    in Y2 & z3 notin Y3) |
+   (z1 notin X1 & z2 notin X2 & z3    in X3  &  z1 notin Y1 & z2 notin Y2 & z3    in Y3) |
+
+   (z1    in X1 & z2    in X2              ) |
+   (z1    in X1               & z3    in X3) |
+   (              z2    in X2 & z3    in X3);
+
+
+#
+# backbone tree
+#
+
+
+
+pred backbone_tree
+  (var2 U_Root_a0, U_Tree_a1, U_Tree_a2) =
+  (ex2 U:
+    partition_3
+      (U, U_Root_a0, U_Tree_a1, U_Tree_a2) &
+    (all1 u : (u ~= root & u in U) => (u^ in U) ) &
+    (all1 u: (u in U_Root_a0) => (
+        (u.0 in U_Tree_a1 & u.1 in U_Tree_a1)  | 
+        (u.0 in U_Tree_a1 & u.1 in U_Tree_a2)  | 
+        (u.0 in U_Tree_a2 & u.1 in U_Tree_a1)  | 
+        (u.0 in U_Tree_a2 & u.1 in U_Tree_a2) 
+      )) &
+    (all1 u: (u in U_Tree_a1) => (
+        (u.0 in U_Tree_a1 & u.1 in U_Tree_a1)  | 
+        (u.0 in U_Tree_a1 & u.1 in U_Tree_a2)  | 
+        (u.0 in U_Tree_a2 & u.1 in U_Tree_a1)  | 
+        (u.0 in U_Tree_a2 & u.1 in U_Tree_a2) 
+      )) &
+    (all1 u: (u in U_Tree_a2) =>
+        (u.0 notin U & u.1 notin U)) &
+    (root in U_Root_a0)
+  );
+
+
+#
+# ext / configurations
+#
+
+
+
+pred ext_configuration
+  (var2 U_Root_a0, U_Tree_a1, U_Tree_a2,
+   var2 X_n_q0, X_n_q1, X_r_q0, X_r_q1) =
+   backbone_tree
+     (U_Root_a0, U_Tree_a1, U_Tree_a2) &
+   (all1 x : x in X_n_q0 =>
+      (x in U_Tree_a1 | x in U_Tree_a2)) &
+   (all1 x : x in X_n_q1 =>
+      (x in U_Tree_a1 | x in U_Tree_a2)) &
+   (all1 x : x in X_r_q0 =>
+      (x in U_Root_a0)) &
+   (all1 x : x in X_r_q1 =>
+      (x in U_Root_a0));
+
+pred configuration
+  (var2 U_Root_a0, U_Tree_a1, U_Tree_a2,
+   var2 X_n_q0, X_n_q1, X_r_q0, X_r_q1) =
+   ext_configuration
+     (U_Root_a0, U_Tree_a1, U_Tree_a2,
+      X_n_q0, X_n_q1, X_r_q0, X_r_q1) &
+   (all1 x: x in U_Root_a0 =>
+     (x in X_r_q0 | x in X_r_q1)) &
+   (all1 x: x in U_Tree_a1 =>
+     (x in X_n_q0 | x in X_n_q1)) &
+   (all1 x: x in U_Tree_a2 =>
+     (x in X_n_q0 | x in X_n_q1)) & 
+   ~intersects_1(X_n_q0, X_n_q1) &
+   ~intersects_1(X_r_q0, X_r_q1);
+
+
+#
+# backbone tree paths
+#
+
+
+
+
+
+pred path_Root_a0_n1_Tree_a1_n
+  (var2 U_Root_a0, U_Tree_a1, U_Tree_a2,
+   var1 u0, u1) =
+   backbone_tree
+     (U_Root_a0, U_Tree_a1, U_Tree_a2) &
+   ex2 W_Root_a0_n1, W_Tree_a1_n :
+   ex2 W_up, W_down :
+   ex1 w_top :
+     included_1(W_Root_a0_n1, U_Root_a0) &
+     included_1(W_Tree_a1_n, U_Tree_a1) &
+     ~intersects_1(W_down, W_up) &
+     partition_2(W_down, W_Root_a0_n1, W_Tree_a1_n) &
+     (w_top in W_down) &
+     (root in W_down => w_top = root) &
+     (all1 w : (w in W_down & w ~= w_top) => w^ in W_down) &
+     (all1 w1, w2: (w1 in W_down & w1 ~= root &
+                    w2 in W_down & w2 ~= root & w1^ = w2^) => w1 = w2) &
+     (all1 w: (w in W_Root_a0_n1) =>
+       (w.0 in W_Tree_a1_n)) &
+     u0 in W_Root_a0_n1 &
+     u1 in W_Tree_a1_n &
+     (all1 w : w in W_Tree_a1_n => w = u1);
+
+
+pred path_Root_a0_n1_Tree_a2_n
+  (var2 U_Root_a0, U_Tree_a1, U_Tree_a2,
+   var1 u0, u1) =
+   backbone_tree
+     (U_Root_a0, U_Tree_a1, U_Tree_a2) &
+   ex2 W_Root_a0_n1, W_Tree_a2_n :
+   ex2 W_up, W_down :
+   ex1 w_top :
+     included_1(W_Root_a0_n1, U_Root_a0) &
+     included_1(W_Tree_a2_n, U_Tree_a2) &
+     ~intersects_1(W_down, W_up) &
+     partition_2(W_down, W_Root_a0_n1, W_Tree_a2_n) &
+     (w_top in W_down) &
+     (root in W_down => w_top = root) &
+     (all1 w : (w in W_down & w ~= w_top) => w^ in W_down) &
+     (all1 w1, w2: (w1 in W_down & w1 ~= root &
+                    w2 in W_down & w2 ~= root & w1^ = w2^) => w1 = w2) &
+     (all1 w: (w in W_Root_a0_n1) =>
+       (w.0 in W_Tree_a2_n)) &
+     u0 in W_Root_a0_n1 &
+     u1 in W_Tree_a2_n &
+     (all1 w : w in W_Tree_a2_n => w = u1);
+
+
+pred path_Root_a0_n2_Tree_a1_n
+  (var2 U_Root_a0, U_Tree_a1, U_Tree_a2,
+   var1 u0, u1) =
+   backbone_tree
+     (U_Root_a0, U_Tree_a1, U_Tree_a2) &
+   ex2 W_Root_a0_n2, W_Tree_a1_n :
+   ex2 W_up, W_down :
+   ex1 w_top :
+     included_1(W_Root_a0_n2, U_Root_a0) &
+     included_1(W_Tree_a1_n, U_Tree_a1) &
+     ~intersects_1(W_down, W_up) &
+     partition_2(W_down, W_Root_a0_n2, W_Tree_a1_n) &
+     (w_top in W_down) &
+     (root in W_down => w_top = root) &
+     (all1 w : (w in W_down & w ~= w_top) => w^ in W_down) &
+     (all1 w1, w2: (w1 in W_down & w1 ~= root &
+                    w2 in W_down & w2 ~= root & w1^ = w2^) => w1 = w2) &
+     (all1 w: (w in W_Root_a0_n2) =>
+       (w.1 in W_Tree_a1_n)) &
+     u0 in W_Root_a0_n2 &
+     u1 in W_Tree_a1_n &
+     (all1 w : w in W_Tree_a1_n => w = u1);
+
+
+pred path_Root_a0_n2_Tree_a2_n
+  (var2 U_Root_a0, U_Tree_a1, U_Tree_a2,
+   var1 u0, u1) =
+   backbone_tree
+     (U_Root_a0, U_Tree_a1, U_Tree_a2) &
+   ex2 W_Root_a0_n2, W_Tree_a2_n :
+   ex2 W_up, W_down :
+   ex1 w_top :
+     included_1(W_Root_a0_n2, U_Root_a0) &
+     included_1(W_Tree_a2_n, U_Tree_a2) &
+     ~intersects_1(W_down, W_up) &
+     partition_2(W_down, W_Root_a0_n2, W_Tree_a2_n) &
+     (w_top in W_down) &
+     (root in W_down => w_top = root) &
+     (all1 w : (w in W_down & w ~= w_top) => w^ in W_down) &
+     (all1 w1, w2: (w1 in W_down & w1 ~= root &
+                    w2 in W_down & w2 ~= root & w1^ = w2^) => w1 = w2) &
+     (all1 w: (w in W_Root_a0_n2) =>
+       (w.1 in W_Tree_a2_n)) &
+     u0 in W_Root_a0_n2 &
+     u1 in W_Tree_a2_n &
+     (all1 w : w in W_Tree_a2_n => w = u1);
+
+
+pred path_Tree_a1_r_Root_a0_r
+  (var2 U_Root_a0, U_Tree_a1, U_Tree_a2,
+   var1 u0, u1) =
+   backbone_tree
+     (U_Root_a0, U_Tree_a1, U_Tree_a2) &
+   ex2 W_Tree_a1_r, W_Root_a0_r :
+   ex2 W_up, W_down :
+   ex1 w_top :
+     included_1(W_Tree_a1_r, U_Tree_a1) &
+     included_1(W_Root_a0_r, U_Root_a0) &
+     ~intersects_1(W_down, W_up) &
+     partition_1(W_down, W_Root_a0_r) &
+     (w_top in W_down) &
+     (root in W_down => w_top = root) &
+     (all1 w : (w in W_down & w ~= w_top) => w^ in W_down) &
+     (all1 w1, w2: (w1 in W_down & w1 ~= root &
+                    w2 in W_down & w2 ~= root & w1^ = w2^) => w1 = w2) &
+     partition_1(W_up, W_Tree_a1_r) &
+     (all1 w : w in W_up => (w^ in W_up | w^ = w_top)) &
+     (all1 w1, w2: (w1 in W_up & w1 ~= root &
+                    w2 in W_up & w2 ~= root & w1^ = w2^) => w1 = w2) &
+     (all1 w: (w in W_Tree_a1_r) =>
+       (w^ in W_Root_a0_r | w^ in W_Root_a0_r | w^ in W_Tree_a1_r | w^ in W_Tree_a1_r)) &
+     u0 in W_Tree_a1_r &
+     u1 in W_Root_a0_r &
+     (all1 w : w in W_Root_a0_r => w = u1);
+
+
+pred path_Tree_a1_n1_Tree_a1_n
+  (var2 U_Root_a0, U_Tree_a1, U_Tree_a2,
+   var1 u0, u1) =
+   backbone_tree
+     (U_Root_a0, U_Tree_a1, U_Tree_a2) &
+   ex2 W_Tree_a1_n1, W_Tree_a1_n :
+   ex2 W_up, W_down :
+   ex1 w_top :
+     included_1(W_Tree_a1_n1, U_Tree_a1) &
+     included_1(W_Tree_a1_n, U_Tree_a1) &
+     ~intersects_1(W_down, W_up) &
+     partition_2(W_down, W_Tree_a1_n1, W_Tree_a1_n) &
+     (w_top in W_down) &
+     (root in W_down => w_top = root) &
+     (all1 w : (w in W_down & w ~= w_top) => w^ in W_down) &
+     (all1 w1, w2: (w1 in W_down & w1 ~= root &
+                    w2 in W_down & w2 ~= root & w1^ = w2^) => w1 = w2) &
+     (all1 w: (w in W_Tree_a1_n1) =>
+       (w.0 in W_Tree_a1_n)) &
+     u0 in W_Tree_a1_n1 &
+     u1 in W_Tree_a1_n &
+     (all1 w : w in W_Tree_a1_n => w = u1);
+
+
+pred path_Tree_a1_n1_Tree_a2_n
+  (var2 U_Root_a0, U_Tree_a1, U_Tree_a2,
+   var1 u0, u1) =
+   backbone_tree
+     (U_Root_a0, U_Tree_a1, U_Tree_a2) &
+   ex2 W_Tree_a1_n1, W_Tree_a2_n :
+   ex2 W_up, W_down :
+   ex1 w_top :
+     included_1(W_Tree_a1_n1, U_Tree_a1) &
+     included_1(W_Tree_a2_n, U_Tree_a2) &
+     ~intersects_1(W_down, W_up) &
+     partition_2(W_down, W_Tree_a1_n1, W_Tree_a2_n) &
+     (w_top in W_down) &
+     (root in W_down => w_top = root) &
+     (all1 w : (w in W_down & w ~= w_top) => w^ in W_down) &
+     (all1 w1, w2: (w1 in W_down & w1 ~= root &
+                    w2 in W_down & w2 ~= root & w1^ = w2^) => w1 = w2) &
+     (all1 w: (w in W_Tree_a1_n1) =>
+       (w.0 in W_Tree_a2_n)) &
+     u0 in W_Tree_a1_n1 &
+     u1 in W_Tree_a2_n &
+     (all1 w : w in W_Tree_a2_n => w = u1);
+
+
+pred path_Tree_a1_n2_Tree_a1_n
+  (var2 U_Root_a0, U_Tree_a1, U_Tree_a2,
+   var1 u0, u1) =
+   backbone_tree
+     (U_Root_a0, U_Tree_a1, U_Tree_a2) &
+   ex2 W_Tree_a1_n2, W_Tree_a1_n :
+   ex2 W_up, W_down :
+   ex1 w_top :
+     included_1(W_Tree_a1_n2, U_Tree_a1) &
+     included_1(W_Tree_a1_n, U_Tree_a1) &
+     ~intersects_1(W_down, W_up) &
+     partition_2(W_down, W_Tree_a1_n2, W_Tree_a1_n) &
+     (w_top in W_down) &
+     (root in W_down => w_top = root) &
+     (all1 w : (w in W_down & w ~= w_top) => w^ in W_down) &
+     (all1 w1, w2: (w1 in W_down & w1 ~= root &
+                    w2 in W_down & w2 ~= root & w1^ = w2^) => w1 = w2) &
+     (all1 w: (w in W_Tree_a1_n2) =>
+       (w.1 in W_Tree_a1_n)) &
+     u0 in W_Tree_a1_n2 &
+     u1 in W_Tree_a1_n &
+     (all1 w : w in W_Tree_a1_n => w = u1);
+
+
+pred path_Tree_a1_n2_Tree_a2_n
+  (var2 U_Root_a0, U_Tree_a1, U_Tree_a2,
+   var1 u0, u1) =
+   backbone_tree
+     (U_Root_a0, U_Tree_a1, U_Tree_a2) &
+   ex2 W_Tree_a1_n2, W_Tree_a2_n :
+   ex2 W_up, W_down :
+   ex1 w_top :
+     included_1(W_Tree_a1_n2, U_Tree_a1) &
+     included_1(W_Tree_a2_n, U_Tree_a2) &
+     ~intersects_1(W_down, W_up) &
+     partition_2(W_down, W_Tree_a1_n2, W_Tree_a2_n) &
+     (w_top in W_down) &
+     (root in W_down => w_top = root) &
+     (all1 w : (w in W_down & w ~= w_top) => w^ in W_down) &
+     (all1 w1, w2: (w1 in W_down & w1 ~= root &
+                    w2 in W_down & w2 ~= root & w1^ = w2^) => w1 = w2) &
+     (all1 w: (w in W_Tree_a1_n2) =>
+       (w.1 in W_Tree_a2_n)) &
+     u0 in W_Tree_a1_n2 &
+     u1 in W_Tree_a2_n &
+     (all1 w : w in W_Tree_a2_n => w = u1);
+
+
+pred path_Tree_a2_r_Root_a0_r
+  (var2 U_Root_a0, U_Tree_a1, U_Tree_a2,
+   var1 u0, u1) =
+   backbone_tree
+     (U_Root_a0, U_Tree_a1, U_Tree_a2) &
+   ex2 W_Tree_a2_r, W_Root_a0_r, W_Tree_a1_r :
+   ex2 W_up, W_down :
+   ex1 w_top :
+     included_1(W_Tree_a2_r, U_Tree_a2) &
+     included_1(W_Root_a0_r, U_Root_a0) &
+     included_1(W_Tree_a1_r, U_Tree_a1) &
+     ~intersects_1(W_down, W_up) &
+     partition_1(W_down, W_Root_a0_r) &
+     (w_top in W_down) &
+     (root in W_down => w_top = root) &
+     (all1 w : (w in W_down & w ~= w_top) => w^ in W_down) &
+     (all1 w1, w2: (w1 in W_down & w1 ~= root &
+                    w2 in W_down & w2 ~= root & w1^ = w2^) => w1 = w2) &
+     partition_2(W_up, W_Tree_a2_r, W_Tree_a1_r) &
+     (all1 w : w in W_up => (w^ in W_up | w^ = w_top)) &
+     (all1 w1, w2: (w1 in W_up & w1 ~= root &
+                    w2 in W_up & w2 ~= root & w1^ = w2^) => w1 = w2) &
+     (all1 w: (w in W_Tree_a2_r) =>
+       (w^ in W_Root_a0_r | w^ in W_Root_a0_r | w^ in W_Tree_a1_r | w^ in W_Tree_a1_r)) &
+     (all1 w: (w in W_Tree_a1_r) =>
+       (w^ in W_Root_a0_r | w^ in W_Root_a0_r | w^ in W_Tree_a1_r | w^ in W_Tree_a1_r)) &
+     u0 in W_Tree_a2_r &
+     u1 in W_Root_a0_r &
+     (all1 w : w in W_Root_a0_r => w = u1);
+
+
+
+#
+# trap invariants
+#
+
+
+
+pred trap_initially_not_empty
+  (var2 U_Root_a0, U_Tree_a1, U_Tree_a2,
+   var2 X_n_q0, X_n_q1, X_r_q0, X_r_q1) =
+   ext_configuration
+     (U_Root_a0, U_Tree_a1, U_Tree_a2,
+      X_n_q0, X_n_q1, X_r_q0, X_r_q1) &
+   ((ex1 x : x in U_Root_a0 & x in X_r_q0) |
+    (ex1 x : x in U_Tree_a1 & x in X_n_q0) |
+    (ex1 x : x in U_Tree_a2 & x in X_n_q0));
+
+pred trap_Root_a0_r_out_n1_in_0_flow
+  (var2 X_n_q0, X_n_q1, X_r_q0, X_r_q1,
+   var1 x_r, x_n1) =
+   ((x_r in X_r_q0 | x_n1 in X_n_q0) =>
+    (x_r in X_r_q1 | x_n1 in X_n_q1));
+
+pred trap_Root_a0_r_out_n1_in_1_flow
+  (var2 X_n_q0, X_n_q1, X_r_q0, X_r_q1,
+   var1 x_r, x_n1) =
+   ((x_r in X_r_q0 | x_n1 in X_n_q0) =>
+    (x_r in X_r_q1 | x_n1 in X_n_q1));
+
+pred trap_Root_a0_r_out_n1_in_flow
+  (var2 U_Root_a0, U_Tree_a1, U_Tree_a2,
+   var2 X_n_q0, X_n_q1, X_r_q0, X_r_q1) =
+  (all1 x_0, x_r, x_n1 :
+    (x_0 in U_Root_a0 & 
+     x_0 = x_r & 
+     path_Root_a0_n1_Tree_a1_n
+       (U_Root_a0, U_Tree_a1, U_Tree_a2, x_0, x_n1)) =>
+    trap_Root_a0_r_out_n1_in_0_flow
+      (X_n_q0, X_n_q1, X_r_q0, X_r_q1,
+       x_r, x_n1))  &
+  (all1 x_0, x_r, x_n1 :
+    (x_0 in U_Root_a0 & 
+     x_0 = x_r & 
+     path_Root_a0_n1_Tree_a2_n
+       (U_Root_a0, U_Tree_a1, U_Tree_a2, x_0, x_n1)) =>
+    trap_Root_a0_r_out_n1_in_1_flow
+      (X_n_q0, X_n_q1, X_r_q0, X_r_q1,
+       x_r, x_n1)) ;
+
+pred trap_Root_a0_r_out_n2_in_0_flow
+  (var2 X_n_q0, X_n_q1, X_r_q0, X_r_q1,
+   var1 x_r, x_n2) =
+   ((x_r in X_r_q0 | x_n2 in X_n_q0) =>
+    (x_r in X_r_q1 | x_n2 in X_n_q1));
+
+pred trap_Root_a0_r_out_n2_in_1_flow
+  (var2 X_n_q0, X_n_q1, X_r_q0, X_r_q1,
+   var1 x_r, x_n2) =
+   ((x_r in X_r_q0 | x_n2 in X_n_q0) =>
+    (x_r in X_r_q1 | x_n2 in X_n_q1));
+
+pred trap_Root_a0_r_out_n2_in_flow
+  (var2 U_Root_a0, U_Tree_a1, U_Tree_a2,
+   var2 X_n_q0, X_n_q1, X_r_q0, X_r_q1) =
+  (all1 x_0, x_r, x_n2 :
+    (x_0 in U_Root_a0 & 
+     x_0 = x_r & 
+     path_Root_a0_n2_Tree_a1_n
+       (U_Root_a0, U_Tree_a1, U_Tree_a2, x_0, x_n2)) =>
+    trap_Root_a0_r_out_n2_in_0_flow
+      (X_n_q0, X_n_q1, X_r_q0, X_r_q1,
+       x_r, x_n2))  &
+  (all1 x_0, x_r, x_n2 :
+    (x_0 in U_Root_a0 & 
+     x_0 = x_r & 
+     path_Root_a0_n2_Tree_a2_n
+       (U_Root_a0, U_Tree_a1, U_Tree_a2, x_0, x_n2)) =>
+    trap_Root_a0_r_out_n2_in_1_flow
+      (X_n_q0, X_n_q1, X_r_q0, X_r_q1,
+       x_r, x_n2)) ;
+
+pred trap_Tree_a1_n_out_n1_in_0_flow
+  (var2 X_n_q0, X_n_q1, X_r_q0, X_r_q1,
+   var1 x_n, x_n1) =
+   ((x_n in X_n_q1 | x_n1 in X_n_q0) =>
+    (x_n in X_n_q0 | x_n1 in X_n_q1));
+
+pred trap_Tree_a1_n_out_n1_in_1_flow
+  (var2 X_n_q0, X_n_q1, X_r_q0, X_r_q1,
+   var1 x_n, x_n1) =
+   ((x_n in X_n_q1 | x_n1 in X_n_q0) =>
+    (x_n in X_n_q0 | x_n1 in X_n_q1));
+
+pred trap_Tree_a1_n_out_n1_in_flow
+  (var2 U_Root_a0, U_Tree_a1, U_Tree_a2,
+   var2 X_n_q0, X_n_q1, X_r_q0, X_r_q1) =
+  (all1 x_0, x_n, x_n1 :
+    (x_0 in U_Tree_a1 & 
+     x_0 = x_n & 
+     path_Tree_a1_n1_Tree_a1_n
+       (U_Root_a0, U_Tree_a1, U_Tree_a2, x_0, x_n1)) =>
+    trap_Tree_a1_n_out_n1_in_0_flow
+      (X_n_q0, X_n_q1, X_r_q0, X_r_q1,
+       x_n, x_n1))  &
+  (all1 x_0, x_n, x_n1 :
+    (x_0 in U_Tree_a1 & 
+     x_0 = x_n & 
+     path_Tree_a1_n1_Tree_a2_n
+       (U_Root_a0, U_Tree_a1, U_Tree_a2, x_0, x_n1)) =>
+    trap_Tree_a1_n_out_n1_in_1_flow
+      (X_n_q0, X_n_q1, X_r_q0, X_r_q1,
+       x_n, x_n1)) ;
+
+pred trap_Tree_a1_n_out_n2_in_0_flow
+  (var2 X_n_q0, X_n_q1, X_r_q0, X_r_q1,
+   var1 x_n, x_n2) =
+   ((x_n in X_n_q1 | x_n2 in X_n_q0) =>
+    (x_n in X_n_q0 | x_n2 in X_n_q1));
+
+pred trap_Tree_a1_n_out_n2_in_1_flow
+  (var2 X_n_q0, X_n_q1, X_r_q0, X_r_q1,
+   var1 x_n, x_n2) =
+   ((x_n in X_n_q1 | x_n2 in X_n_q0) =>
+    (x_n in X_n_q0 | x_n2 in X_n_q1));
+
+pred trap_Tree_a1_n_out_n2_in_flow
+  (var2 U_Root_a0, U_Tree_a1, U_Tree_a2,
+   var2 X_n_q0, X_n_q1, X_r_q0, X_r_q1) =
+  (all1 x_0, x_n, x_n2 :
+    (x_0 in U_Tree_a1 & 
+     x_0 = x_n & 
+     path_Tree_a1_n2_Tree_a1_n
+       (U_Root_a0, U_Tree_a1, U_Tree_a2, x_0, x_n2)) =>
+    trap_Tree_a1_n_out_n2_in_0_flow
+      (X_n_q0, X_n_q1, X_r_q0, X_r_q1,
+       x_n, x_n2))  &
+  (all1 x_0, x_n, x_n2 :
+    (x_0 in U_Tree_a1 & 
+     x_0 = x_n & 
+     path_Tree_a1_n2_Tree_a2_n
+       (U_Root_a0, U_Tree_a1, U_Tree_a2, x_0, x_n2)) =>
+    trap_Tree_a1_n_out_n2_in_1_flow
+      (X_n_q0, X_n_q1, X_r_q0, X_r_q1,
+       x_n, x_n2)) ;
+
+pred trap_Tree_a2_n_out_r_in_0_flow
+  (var2 X_n_q0, X_n_q1, X_r_q0, X_r_q1,
+   var1 x_n, x_r) =
+   ((x_n in X_n_q1 | x_r in X_r_q1) =>
+    (x_n in X_n_q0 | x_r in X_r_q0));
+
+pred trap_Tree_a2_n_out_r_in_flow
+  (var2 U_Root_a0, U_Tree_a1, U_Tree_a2,
+   var2 X_n_q0, X_n_q1, X_r_q0, X_r_q1) =
+  (all1 x_0, x_n, x_r :
+    (x_0 in U_Tree_a2 & 
+     x_0 = x_n & 
+     path_Tree_a2_r_Root_a0_r
+       (U_Root_a0, U_Tree_a1, U_Tree_a2, x_0, x_r)) =>
+    trap_Tree_a2_n_out_r_in_0_flow
+      (X_n_q0, X_n_q1, X_r_q0, X_r_q1,
+       x_n, x_r)) ;
+
+pred trap_flow
+  (var2 U_Root_a0, U_Tree_a1, U_Tree_a2,
+   var2 X_n_q0, X_n_q1, X_r_q0, X_r_q1) =
+  ext_configuration
+    (U_Root_a0, U_Tree_a1, U_Tree_a2,
+     X_n_q0, X_n_q1, X_r_q0, X_r_q1) &
+  trap_Root_a0_r_out_n1_in_flow
+    (U_Root_a0, U_Tree_a1, U_Tree_a2,
+     X_n_q0, X_n_q1, X_r_q0, X_r_q1)  &
+  trap_Root_a0_r_out_n2_in_flow
+    (U_Root_a0, U_Tree_a1, U_Tree_a2,
+     X_n_q0, X_n_q1, X_r_q0, X_r_q1)  &
+  trap_Tree_a1_n_out_n1_in_flow
+    (U_Root_a0, U_Tree_a1, U_Tree_a2,
+     X_n_q0, X_n_q1, X_r_q0, X_r_q1)  &
+  trap_Tree_a1_n_out_n2_in_flow
+    (U_Root_a0, U_Tree_a1, U_Tree_a2,
+     X_n_q0, X_n_q1, X_r_q0, X_r_q1)  &
+  trap_Tree_a2_n_out_r_in_flow
+    (U_Root_a0, U_Tree_a1, U_Tree_a2,
+     X_n_q0, X_n_q1, X_r_q0, X_r_q1) ;
+
+pred trap_constraints
+  (var2 U_Root_a0, U_Tree_a1, U_Tree_a2,
+   var2 Z_n_q0, Z_n_q1, Z_r_q0, Z_r_q1) =
+   ext_configuration
+     (U_Root_a0, U_Tree_a1, U_Tree_a2,
+      Z_n_q0, Z_n_q1, Z_r_q0, Z_r_q1) &
+   trap_initially_not_empty
+     (U_Root_a0, U_Tree_a1, U_Tree_a2,
+      Z_n_q0, Z_n_q1, Z_r_q0, Z_r_q1) &
+   trap_flow
+     (U_Root_a0, U_Tree_a1, U_Tree_a2,
+      Z_n_q0, Z_n_q1, Z_r_q0, Z_r_q1);
+
+pred trap_invariant
+  (var2 U_Root_a0, U_Tree_a1, U_Tree_a2,
+   var2 X_n_q0, X_n_q1, X_r_q0, X_r_q1) =
+   configuration
+     (U_Root_a0, U_Tree_a1, U_Tree_a2,
+      X_n_q0, X_n_q1, X_r_q0, X_r_q1) &
+   all2 Z_n_q0, Z_n_q1, Z_r_q0, Z_r_q1:
+     trap_constraints
+       (U_Root_a0, U_Tree_a1, U_Tree_a2,
+        Z_n_q0, Z_n_q1, Z_r_q0, Z_r_q1) =>
+     intersects_4
+       (Z_n_q0, Z_n_q1, Z_r_q0, Z_r_q1,
+        X_n_q0, X_n_q1, X_r_q0, X_r_q1);
+
+
+
+#
+# deadlock
+#
+
+
+
+pred disabled_Root_a0_r_out_n1_in_0_flow
+  (var2 X_n_q0, X_n_q1, X_r_q0, X_r_q1,
+   var1 x_r, x_n1) =
+   (x_r notin X_r_q0 | x_n1 notin X_n_q0);
+
+pred disabled_Root_a0_r_out_n1_in_1_flow
+  (var2 X_n_q0, X_n_q1, X_r_q0, X_r_q1,
+   var1 x_r, x_n1) =
+   (x_r notin X_r_q0 | x_n1 notin X_n_q0);
+
+pred disabled_Root_a0_r_out_n1_in_flow
+  (var2 U_Root_a0, U_Tree_a1, U_Tree_a2,
+   var2 X_n_q0, X_n_q1, X_r_q0, X_r_q1) =
+  (all1 x_0, x_r, x_n1 :
+    (x_0 in U_Root_a0 & 
+     x_0 = x_r & 
+     path_Root_a0_n1_Tree_a1_n
+       (U_Root_a0, U_Tree_a1, U_Tree_a2, x_0, x_n1)) =>
+    disabled_Root_a0_r_out_n1_in_0_flow
+      (X_n_q0, X_n_q1, X_r_q0, X_r_q1,
+       x_r, x_n1))  &
+  (all1 x_0, x_r, x_n1 :
+    (x_0 in U_Root_a0 & 
+     x_0 = x_r & 
+     path_Root_a0_n1_Tree_a2_n
+       (U_Root_a0, U_Tree_a1, U_Tree_a2, x_0, x_n1)) =>
+    disabled_Root_a0_r_out_n1_in_1_flow
+      (X_n_q0, X_n_q1, X_r_q0, X_r_q1,
+       x_r, x_n1)) ;
+
+pred disabled_Root_a0_r_out_n2_in_0_flow
+  (var2 X_n_q0, X_n_q1, X_r_q0, X_r_q1,
+   var1 x_r, x_n2) =
+   (x_r notin X_r_q0 | x_n2 notin X_n_q0);
+
+pred disabled_Root_a0_r_out_n2_in_1_flow
+  (var2 X_n_q0, X_n_q1, X_r_q0, X_r_q1,
+   var1 x_r, x_n2) =
+   (x_r notin X_r_q0 | x_n2 notin X_n_q0);
+
+pred disabled_Root_a0_r_out_n2_in_flow
+  (var2 U_Root_a0, U_Tree_a1, U_Tree_a2,
+   var2 X_n_q0, X_n_q1, X_r_q0, X_r_q1) =
+  (all1 x_0, x_r, x_n2 :
+    (x_0 in U_Root_a0 & 
+     x_0 = x_r & 
+     path_Root_a0_n2_Tree_a1_n
+       (U_Root_a0, U_Tree_a1, U_Tree_a2, x_0, x_n2)) =>
+    disabled_Root_a0_r_out_n2_in_0_flow
+      (X_n_q0, X_n_q1, X_r_q0, X_r_q1,
+       x_r, x_n2))  &
+  (all1 x_0, x_r, x_n2 :
+    (x_0 in U_Root_a0 & 
+     x_0 = x_r & 
+     path_Root_a0_n2_Tree_a2_n
+       (U_Root_a0, U_Tree_a1, U_Tree_a2, x_0, x_n2)) =>
+    disabled_Root_a0_r_out_n2_in_1_flow
+      (X_n_q0, X_n_q1, X_r_q0, X_r_q1,
+       x_r, x_n2)) ;
+
+pred disabled_Tree_a1_n_out_n1_in_0_flow
+  (var2 X_n_q0, X_n_q1, X_r_q0, X_r_q1,
+   var1 x_n, x_n1) =
+   (x_n notin X_n_q1 | x_n1 notin X_n_q0);
+
+pred disabled_Tree_a1_n_out_n1_in_1_flow
+  (var2 X_n_q0, X_n_q1, X_r_q0, X_r_q1,
+   var1 x_n, x_n1) =
+   (x_n notin X_n_q1 | x_n1 notin X_n_q0);
+
+pred disabled_Tree_a1_n_out_n1_in_flow
+  (var2 U_Root_a0, U_Tree_a1, U_Tree_a2,
+   var2 X_n_q0, X_n_q1, X_r_q0, X_r_q1) =
+  (all1 x_0, x_n, x_n1 :
+    (x_0 in U_Tree_a1 & 
+     x_0 = x_n & 
+     path_Tree_a1_n1_Tree_a1_n
+       (U_Root_a0, U_Tree_a1, U_Tree_a2, x_0, x_n1)) =>
+    disabled_Tree_a1_n_out_n1_in_0_flow
+      (X_n_q0, X_n_q1, X_r_q0, X_r_q1,
+       x_n, x_n1))  &
+  (all1 x_0, x_n, x_n1 :
+    (x_0 in U_Tree_a1 & 
+     x_0 = x_n & 
+     path_Tree_a1_n1_Tree_a2_n
+       (U_Root_a0, U_Tree_a1, U_Tree_a2, x_0, x_n1)) =>
+    disabled_Tree_a1_n_out_n1_in_1_flow
+      (X_n_q0, X_n_q1, X_r_q0, X_r_q1,
+       x_n, x_n1)) ;
+
+pred disabled_Tree_a1_n_out_n2_in_0_flow
+  (var2 X_n_q0, X_n_q1, X_r_q0, X_r_q1,
+   var1 x_n, x_n2) =
+   (x_n notin X_n_q1 | x_n2 notin X_n_q0);
+
+pred disabled_Tree_a1_n_out_n2_in_1_flow
+  (var2 X_n_q0, X_n_q1, X_r_q0, X_r_q1,
+   var1 x_n, x_n2) =
+   (x_n notin X_n_q1 | x_n2 notin X_n_q0);
+
+pred disabled_Tree_a1_n_out_n2_in_flow
+  (var2 U_Root_a0, U_Tree_a1, U_Tree_a2,
+   var2 X_n_q0, X_n_q1, X_r_q0, X_r_q1) =
+  (all1 x_0, x_n, x_n2 :
+    (x_0 in U_Tree_a1 & 
+     x_0 = x_n & 
+     path_Tree_a1_n2_Tree_a1_n
+       (U_Root_a0, U_Tree_a1, U_Tree_a2, x_0, x_n2)) =>
+    disabled_Tree_a1_n_out_n2_in_0_flow
+      (X_n_q0, X_n_q1, X_r_q0, X_r_q1,
+       x_n, x_n2))  &
+  (all1 x_0, x_n, x_n2 :
+    (x_0 in U_Tree_a1 & 
+     x_0 = x_n & 
+     path_Tree_a1_n2_Tree_a2_n
+       (U_Root_a0, U_Tree_a1, U_Tree_a2, x_0, x_n2)) =>
+    disabled_Tree_a1_n_out_n2_in_1_flow
+      (X_n_q0, X_n_q1, X_r_q0, X_r_q1,
+       x_n, x_n2)) ;
+
+pred disabled_Tree_a2_n_out_r_in_0_flow
+  (var2 X_n_q0, X_n_q1, X_r_q0, X_r_q1,
+   var1 x_n, x_r) =
+   (x_n notin X_n_q1 | x_r notin X_r_q1);
+
+pred disabled_Tree_a2_n_out_r_in_flow
+  (var2 U_Root_a0, U_Tree_a1, U_Tree_a2,
+   var2 X_n_q0, X_n_q1, X_r_q0, X_r_q1) =
+  (all1 x_0, x_n, x_r :
+    (x_0 in U_Tree_a2 & 
+     x_0 = x_n & 
+     path_Tree_a2_r_Root_a0_r
+       (U_Root_a0, U_Tree_a1, U_Tree_a2, x_0, x_r)) =>
+    disabled_Tree_a2_n_out_r_in_0_flow
+      (X_n_q0, X_n_q1, X_r_q0, X_r_q1,
+       x_n, x_r)) ;
+
+pred disabled_flow
+  (var2 U_Root_a0, U_Tree_a1, U_Tree_a2,
+   var2 X_n_q0, X_n_q1, X_r_q0, X_r_q1) =
+  ext_configuration
+    (U_Root_a0, U_Tree_a1, U_Tree_a2,
+     X_n_q0, X_n_q1, X_r_q0, X_r_q1) &
+  disabled_Root_a0_r_out_n1_in_flow
+    (U_Root_a0, U_Tree_a1, U_Tree_a2,
+     X_n_q0, X_n_q1, X_r_q0, X_r_q1)  &
+  disabled_Root_a0_r_out_n2_in_flow
+    (U_Root_a0, U_Tree_a1, U_Tree_a2,
+     X_n_q0, X_n_q1, X_r_q0, X_r_q1)  &
+  disabled_Tree_a1_n_out_n1_in_flow
+    (U_Root_a0, U_Tree_a1, U_Tree_a2,
+     X_n_q0, X_n_q1, X_r_q0, X_r_q1)  &
+  disabled_Tree_a1_n_out_n2_in_flow
+    (U_Root_a0, U_Tree_a1, U_Tree_a2,
+     X_n_q0, X_n_q1, X_r_q0, X_r_q1)  &
+  disabled_Tree_a2_n_out_r_in_flow
+    (U_Root_a0, U_Tree_a1, U_Tree_a2,
+     X_n_q0, X_n_q1, X_r_q0, X_r_q1) ;
+
+pred deadlock
+  (var2 U_Root_a0, U_Tree_a1, U_Tree_a2,
+   var2 X_n_q0, X_n_q1, X_r_q0, X_r_q1) =
+   configuration
+     (U_Root_a0, U_Tree_a1, U_Tree_a2,
+      X_n_q0, X_n_q1, X_r_q0, X_r_q1) &
+   disabled_flow
+     (U_Root_a0, U_Tree_a1, U_Tree_a2,
+      X_n_q0, X_n_q1, X_r_q0, X_r_q1);
+
+
+#
+# assertions checking
+#
+
+var2 U_Root_a0, U_Tree_a1, U_Tree_a2;
+
+var2 X_n_q0, X_n_q1, X_r_q0, X_r_q1;
+
+trap_invariant
+  (U_Root_a0, U_Tree_a1, U_Tree_a2,
+   X_n_q0, X_n_q1, X_r_q0, X_r_q1) &
+deadlock
+  (U_Root_a0, U_Tree_a1, U_Tree_a2,
+   X_n_q0, X_n_q1, X_r_q0, X_r_q1);

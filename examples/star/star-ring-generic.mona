@@ -1,0 +1,1621 @@
+ws1s;
+
+pred intersects_1(var2 X, Y) =
+  (ex1 x: (x in X) & (x in Y));
+
+pred included_1(var2 X, Y) =
+  (all1 x: (x in X) => (x in Y));
+
+pred intersects_8
+  (var2 X_1, X_2, X_3, X_4, X_5, X_6, X_7, X_8,
+   var2 Y_1, Y_2, Y_3, Y_4, Y_5, Y_6, Y_7, Y_8) =
+   intersects_1(X_1, Y_1) |
+   intersects_1(X_2, Y_2) |
+   intersects_1(X_3, Y_3) |
+   intersects_1(X_4, Y_4) |
+   intersects_1(X_5, Y_5) |
+   intersects_1(X_6, Y_6) |
+   intersects_1(X_7, Y_7) |
+   intersects_1(X_8, Y_8);
+
+pred uniquely_intersects_8
+  (var2 X_1, X_2, X_3, X_4, X_5, X_6, X_7, X_8,
+   var2 Y_1, Y_2, Y_3, Y_4, Y_5, Y_6, Y_7, Y_8) =
+  (ex1 x: (
+( (x in X_1 & x in Y_1) &
+ ~(x in X_2 & x in Y_2) &
+ ~(x in X_3 & x in Y_3) &
+ ~(x in X_4 & x in Y_4) &
+ ~(x in X_5 & x in Y_5) &
+ ~(x in X_6 & x in Y_6) &
+ ~(x in X_7 & x in Y_7) &
+ ~(x in X_8 & x in Y_8)) |
+(~(x in X_1 & x in Y_1) &
+  (x in X_2 & x in Y_2) &
+ ~(x in X_3 & x in Y_3) &
+ ~(x in X_4 & x in Y_4) &
+ ~(x in X_5 & x in Y_5) &
+ ~(x in X_6 & x in Y_6) &
+ ~(x in X_7 & x in Y_7) &
+ ~(x in X_8 & x in Y_8)) |
+(~(x in X_1 & x in Y_1) &
+ ~(x in X_2 & x in Y_2) &
+  (x in X_3 & x in Y_3) &
+ ~(x in X_4 & x in Y_4) &
+ ~(x in X_5 & x in Y_5) &
+ ~(x in X_6 & x in Y_6) &
+ ~(x in X_7 & x in Y_7) &
+ ~(x in X_8 & x in Y_8)) |
+(~(x in X_1 & x in Y_1) &
+ ~(x in X_2 & x in Y_2) &
+ ~(x in X_3 & x in Y_3) &
+  (x in X_4 & x in Y_4) &
+ ~(x in X_5 & x in Y_5) &
+ ~(x in X_6 & x in Y_6) &
+ ~(x in X_7 & x in Y_7) &
+ ~(x in X_8 & x in Y_8)) |
+(~(x in X_1 & x in Y_1) &
+ ~(x in X_2 & x in Y_2) &
+ ~(x in X_3 & x in Y_3) &
+ ~(x in X_4 & x in Y_4) &
+  (x in X_5 & x in Y_5) &
+ ~(x in X_6 & x in Y_6) &
+ ~(x in X_7 & x in Y_7) &
+ ~(x in X_8 & x in Y_8)) |
+(~(x in X_1 & x in Y_1) &
+ ~(x in X_2 & x in Y_2) &
+ ~(x in X_3 & x in Y_3) &
+ ~(x in X_4 & x in Y_4) &
+ ~(x in X_5 & x in Y_5) &
+  (x in X_6 & x in Y_6) &
+ ~(x in X_7 & x in Y_7) &
+ ~(x in X_8 & x in Y_8)) |
+(~(x in X_1 & x in Y_1) &
+ ~(x in X_2 & x in Y_2) &
+ ~(x in X_3 & x in Y_3) &
+ ~(x in X_4 & x in Y_4) &
+ ~(x in X_5 & x in Y_5) &
+ ~(x in X_6 & x in Y_6) &
+  (x in X_7 & x in Y_7) &
+ ~(x in X_8 & x in Y_8)) |
+(~(x in X_1 & x in Y_1) &
+ ~(x in X_2 & x in Y_2) &
+ ~(x in X_3 & x in Y_3) &
+ ~(x in X_4 & x in Y_4) &
+ ~(x in X_5 & x in Y_5) &
+ ~(x in X_6 & x in Y_6) &
+ ~(x in X_7 & x in Y_7) &
+  (x in X_8 & x in Y_8)))
+& (all1 y:
+((y in X_1 & y in Y_1) |
+ (y in X_2 & y in Y_2) |
+ (y in X_3 & y in Y_3) |
+ (y in X_4 & y in Y_4) |
+ (y in X_5 & y in Y_5) |
+ (y in X_6 & y in Y_6) |
+ (y in X_7 & y in Y_7) |
+ (y in X_8 & y in Y_8)) => x = y));
+
+pred partition_5
+  (var2 Y, X_1, X_2, X_3, X_4, X_5) =
+  (all1 x: x in Y <=>
+    (x in X_1 | x in X_2 | x in X_3 | x in X_4 | x in X_5))  &
+  ~intersects_1(X_1, X_2) &
+  ~intersects_1(X_1, X_3) &
+  ~intersects_1(X_1, X_4) &
+  ~intersects_1(X_1, X_5) &
+  ~intersects_1(X_2, X_3) &
+  ~intersects_1(X_2, X_4) &
+  ~intersects_1(X_2, X_5) &
+  ~intersects_1(X_3, X_4) &
+  ~intersects_1(X_3, X_5) &
+  ~intersects_1(X_4, X_5);
+
+pred partition_2
+  (var2 Y, X_1, X_2) =
+  (all1 x: x in Y <=>
+    (x in X_1 | x in X_2))  &
+  ~intersects_1(X_1, X_2);
+
+pred partition_3
+  (var2 Y, X_1, X_2, X_3) =
+  (all1 x: x in Y <=>
+    (x in X_1 | x in X_2 | x in X_3))  &
+  ~intersects_1(X_1, X_2) &
+  ~intersects_1(X_1, X_3) &
+  ~intersects_1(X_2, X_3);
+
+pred partition_4
+  (var2 Y, X_1, X_2, X_3, X_4) =
+  (all1 x: x in Y <=>
+    (x in X_1 | x in X_2 | x in X_3 | x in X_4))  &
+  ~intersects_1(X_1, X_2) &
+  ~intersects_1(X_1, X_3) &
+  ~intersects_1(X_1, X_4) &
+  ~intersects_1(X_2, X_3) &
+  ~intersects_1(X_2, X_4) &
+  ~intersects_1(X_3, X_4);
+
+pred partition_1
+  (var2 Y, X_1) =
+  (all1 x: x in Y <=>
+    (x in X_1)) 
+;
+
+pred one_transition_flow_2
+  (var1 z1, var2 X1, Y1,
+   var1 z2, var2 X2, Y2) =
+   (z1 notin X1 & z2 notin X2  &  z1 notin Y1 & z2 notin Y2) |
+
+   (z1    in X1 & z2 notin X2  &  z1    in Y1 & z2 notin Y2) |
+   (z1    in X1 & z2 notin X2  &  z1 notin Y1 & z2    in Y2) |
+   (z1 notin X1 & z2    in X2  &  z1    in Y1 & z2 notin Y2) |
+   (z1 notin X1 & z2    in X2  &  z1 notin Y1 & z2    in Y2) |
+
+   (z1    in X1 & z2    in X2);
+
+pred one_transition_flow_3
+  (var1 z1, var2 X1, Y1,
+   var1 z2, var2 X2, Y2,
+   var1 z3, var2 X3, Y3) =
+   (z1 notin X1 & z2 notin X2 & z3 notin X3  &  z1 notin Y1 & z2 notin Y2 & z3 notin Y3) |
+
+   (z1    in X1 & z2 notin X2 & z3 notin X3  &  z1    in Y1 & z2 notin Y2 & z3 notin Y3) |
+   (z1    in X1 & z2 notin X2 & z3 notin X3  &  z1 notin Y1 & z2    in Y2 & z3 notin Y3) |
+   (z1    in X1 & z2 notin X2 & z3 notin X3  &  z1 notin Y1 & z2 notin Y2 & z3    in Y3) |
+   (z1 notin X1 & z2    in X2 & z3 notin X3  &  z1    in Y1 & z2 notin Y2 & z3 notin Y3) |
+   (z1 notin X1 & z2    in X2 & z3 notin X3  &  z1 notin Y1 & z2    in Y2 & z3 notin Y3) |
+   (z1 notin X1 & z2    in X2 & z3 notin X3  &  z1 notin Y1 & z2 notin Y2 & z3    in Y3) |
+   (z1 notin X1 & z2 notin X2 & z3    in X3  &  z1    in Y1 & z2 notin Y2 & z3 notin Y3) |
+   (z1 notin X1 & z2 notin X2 & z3    in X3  &  z1 notin Y1 & z2    in Y2 & z3 notin Y3) |
+   (z1 notin X1 & z2 notin X2 & z3    in X3  &  z1 notin Y1 & z2 notin Y2 & z3    in Y3) |
+
+   (z1    in X1 & z2    in X2              ) |
+   (z1    in X1               & z3    in X3) |
+   (              z2    in X2 & z3    in X3);
+
+
+#
+# backbone tree
+#
+
+
+
+pred backbone_tree
+  (var2 U_Master_a0, U_Slave1_a1, U_Slave1_a2, U_Slave1_a3, U_Slave2_a4) =
+  (ex2 U:
+    partition_5
+      (U, U_Master_a0, U_Slave1_a1, U_Slave1_a2, U_Slave1_a3, U_Slave2_a4) &
+    (all1 u : (u ~= 0 & u in U) => (u-1 in U) ) &
+    (all1 u: (u in U_Master_a0) => (
+        (u+1 in U_Slave1_a1)  | 
+        (u+1 in U_Slave1_a2)  | 
+        (u+1 in U_Slave1_a3) 
+      )) &
+    (all1 u: (u in U_Slave1_a1) => (
+        (u+1 in U_Slave1_a1)  | 
+        (u+1 in U_Slave1_a2)  | 
+        (u+1 in U_Slave1_a3) 
+      )) &
+    (all1 u: (u in U_Slave1_a2) =>
+        (u+1 notin U)) &
+    (all1 u: (u in U_Slave1_a3) => (
+        (u+1 in U_Slave2_a4) 
+      )) &
+    (all1 u: (u in U_Slave2_a4) => (
+        (u+1 in U_Slave1_a1)  | 
+        (u+1 in U_Slave1_a2)  | 
+        (u+1 in U_Slave1_a3) 
+      )) &
+    (0 in U_Master_a0)
+  );
+
+
+#
+# ext / configurations
+#
+
+
+
+pred ext_configuration
+  (var2 U_Master_a0, U_Slave1_a1, U_Slave1_a2, U_Slave1_a3, U_Slave2_a4,
+   var2 X_m_q0, X_m_q1, X_s0_q0, X_s0_q1, X_s0_q2, X_s1_q0, X_s1_q1, X_s1_q2) =
+   backbone_tree
+     (U_Master_a0, U_Slave1_a1, U_Slave1_a2, U_Slave1_a3, U_Slave2_a4) &
+   (all1 x : x in X_m_q0 =>
+      (x in U_Master_a0)) &
+   (all1 x : x in X_m_q1 =>
+      (x in U_Master_a0)) &
+   (all1 x : x in X_s0_q0 =>
+      (x in U_Slave1_a1 | x in U_Slave1_a2)) &
+   (all1 x : x in X_s0_q1 =>
+      (x in U_Slave1_a1 | x in U_Slave1_a2)) &
+   (all1 x : x in X_s0_q2 =>
+      (x in U_Slave1_a1 | x in U_Slave1_a2)) &
+   (all1 x : x in X_s1_q0 =>
+      (x in U_Slave1_a2 | x in U_Slave2_a4)) &
+   (all1 x : x in X_s1_q1 =>
+      (x in U_Slave1_a2 | x in U_Slave2_a4)) &
+   (all1 x : x in X_s1_q2 =>
+      (x in U_Slave1_a2 | x in U_Slave2_a4));
+
+pred configuration
+  (var2 U_Master_a0, U_Slave1_a1, U_Slave1_a2, U_Slave1_a3, U_Slave2_a4,
+   var2 X_m_q0, X_m_q1, X_s0_q0, X_s0_q1, X_s0_q2, X_s1_q0, X_s1_q1, X_s1_q2) =
+   ext_configuration
+     (U_Master_a0, U_Slave1_a1, U_Slave1_a2, U_Slave1_a3, U_Slave2_a4,
+      X_m_q0, X_m_q1, X_s0_q0, X_s0_q1, X_s0_q2, X_s1_q0, X_s1_q1, X_s1_q2) &
+   (all1 x: x in U_Master_a0 =>
+     (x in X_m_q0 | x in X_m_q1)) &
+   (all1 x: x in U_Slave1_a1 =>
+     (x in X_s0_q0 | x in X_s0_q1 | x in X_s0_q2)) &
+   (all1 x: x in U_Slave1_a2 =>
+     (x in X_s0_q0 | x in X_s0_q1 | x in X_s0_q2)) &
+   (all1 x: x in U_Slave1_a2 =>
+     (x in X_s1_q0 | x in X_s1_q1 | x in X_s1_q2)) &
+   (all1 x: x in U_Slave2_a4 =>
+     (x in X_s1_q0 | x in X_s1_q1 | x in X_s1_q2)) & 
+   ~intersects_1(X_m_q0, X_m_q1) &
+   ~intersects_1(X_s0_q0, X_s0_q1) &
+   ~intersects_1(X_s0_q0, X_s0_q2) &
+   ~intersects_1(X_s0_q1, X_s0_q2) &
+   ~intersects_1(X_s1_q0, X_s1_q1) &
+   ~intersects_1(X_s1_q0, X_s1_q2) &
+   ~intersects_1(X_s1_q1, X_s1_q2);
+
+
+#
+# backbone tree paths
+#
+
+
+
+
+
+pred path_Master_a0_s0_Slave1_a1_s0
+  (var2 U_Master_a0, U_Slave1_a1, U_Slave1_a2, U_Slave1_a3, U_Slave2_a4,
+   var1 u0, u1) =
+   backbone_tree
+     (U_Master_a0, U_Slave1_a1, U_Slave1_a2, U_Slave1_a3, U_Slave2_a4) &
+   ex2 W_Master_a0_s0, W_Slave1_a1_s0 :
+   ex2 W_up, W_down :
+   ex1 w_top :
+     included_1(W_Master_a0_s0, U_Master_a0) &
+     included_1(W_Slave1_a1_s0, U_Slave1_a1) &
+     ~intersects_1(W_down, W_up) &
+     partition_2(W_down, W_Master_a0_s0, W_Slave1_a1_s0) &
+     (w_top in W_down) &
+     (0 in W_down => w_top = 0) &
+     (all1 w : (w in W_down & w ~= w_top) => w-1 in W_down) &
+     (all1 w1, w2: (w1 in W_down & w1 ~= 0 &
+                    w2 in W_down & w2 ~= 0 & w1-1 = w2-1) => w1 = w2) &
+     (all1 w: (w in W_Master_a0_s0) =>
+       (w+1 in W_Slave1_a1_s0)) &
+     u0 in W_Master_a0_s0 &
+     u1 in W_Slave1_a1_s0 &
+     (all1 w : w in W_Slave1_a1_s0 => w = u1);
+
+
+pred path_Master_a0_s0_Slave1_a2_s0
+  (var2 U_Master_a0, U_Slave1_a1, U_Slave1_a2, U_Slave1_a3, U_Slave2_a4,
+   var1 u0, u1) =
+   backbone_tree
+     (U_Master_a0, U_Slave1_a1, U_Slave1_a2, U_Slave1_a3, U_Slave2_a4) &
+   ex2 W_Master_a0_s0, W_Slave1_a2_s0 :
+   ex2 W_up, W_down :
+   ex1 w_top :
+     included_1(W_Master_a0_s0, U_Master_a0) &
+     included_1(W_Slave1_a2_s0, U_Slave1_a2) &
+     ~intersects_1(W_down, W_up) &
+     partition_2(W_down, W_Master_a0_s0, W_Slave1_a2_s0) &
+     (w_top in W_down) &
+     (0 in W_down => w_top = 0) &
+     (all1 w : (w in W_down & w ~= w_top) => w-1 in W_down) &
+     (all1 w1, w2: (w1 in W_down & w1 ~= 0 &
+                    w2 in W_down & w2 ~= 0 & w1-1 = w2-1) => w1 = w2) &
+     (all1 w: (w in W_Master_a0_s0) =>
+       (w+1 in W_Slave1_a2_s0)) &
+     u0 in W_Master_a0_s0 &
+     u1 in W_Slave1_a2_s0 &
+     (all1 w : w in W_Slave1_a2_s0 => w = u1);
+
+
+pred path_Master_a0_s0_Slave2_a4_s1
+  (var2 U_Master_a0, U_Slave1_a1, U_Slave1_a2, U_Slave1_a3, U_Slave2_a4,
+   var1 u0, u1) =
+   backbone_tree
+     (U_Master_a0, U_Slave1_a1, U_Slave1_a2, U_Slave1_a3, U_Slave2_a4) &
+   ex2 W_Master_a0_s0, W_Slave1_a3_s0, W_Slave2_a4_s1 :
+   ex2 W_up, W_down :
+   ex1 w_top :
+     included_1(W_Master_a0_s0, U_Master_a0) &
+     included_1(W_Slave1_a3_s0, U_Slave1_a3) &
+     included_1(W_Slave2_a4_s1, U_Slave2_a4) &
+     ~intersects_1(W_down, W_up) &
+     partition_3(W_down, W_Master_a0_s0, W_Slave1_a3_s0, W_Slave2_a4_s1) &
+     (w_top in W_down) &
+     (0 in W_down => w_top = 0) &
+     (all1 w : (w in W_down & w ~= w_top) => w-1 in W_down) &
+     (all1 w1, w2: (w1 in W_down & w1 ~= 0 &
+                    w2 in W_down & w2 ~= 0 & w1-1 = w2-1) => w1 = w2) &
+     (all1 w: (w in W_Master_a0_s0) =>
+       (w+1 in W_Slave1_a3_s0)) &
+     (all1 w: (w in W_Slave1_a3_s0) =>
+       (w+1 in W_Slave2_a4_s1)) &
+     u0 in W_Master_a0_s0 &
+     u1 in W_Slave2_a4_s1 &
+     (all1 w : w in W_Slave2_a4_s1 => w = u1);
+
+
+pred path_Master_a0_s1_Slave1_a2_s1
+  (var2 U_Master_a0, U_Slave1_a1, U_Slave1_a2, U_Slave1_a3, U_Slave2_a4,
+   var1 u0, u1) =
+   backbone_tree
+     (U_Master_a0, U_Slave1_a1, U_Slave1_a2, U_Slave1_a3, U_Slave2_a4) &
+   ex2 W_Master_a0_s1, W_Slave1_a1_s1, W_Slave1_a2_s1, W_Slave1_a3_s1, W_Slave2_a4_s0 :
+   ex2 W_up, W_down :
+   ex1 w_top :
+     included_1(W_Master_a0_s1, U_Master_a0) &
+     included_1(W_Slave1_a1_s1, U_Slave1_a1) &
+     included_1(W_Slave1_a2_s1, U_Slave1_a2) &
+     included_1(W_Slave1_a3_s1, U_Slave1_a3) &
+     included_1(W_Slave2_a4_s0, U_Slave2_a4) &
+     ~intersects_1(W_down, W_up) &
+     partition_5(W_down, W_Master_a0_s1, W_Slave1_a1_s1, W_Slave1_a2_s1, W_Slave1_a3_s1, W_Slave2_a4_s0) &
+     (w_top in W_down) &
+     (0 in W_down => w_top = 0) &
+     (all1 w : (w in W_down & w ~= w_top) => w-1 in W_down) &
+     (all1 w1, w2: (w1 in W_down & w1 ~= 0 &
+                    w2 in W_down & w2 ~= 0 & w1-1 = w2-1) => w1 = w2) &
+     (all1 w: (w in W_Master_a0_s1) =>
+       (w+1 in W_Slave1_a1_s1 | w+1 in W_Slave1_a2_s1 | w+1 in W_Slave1_a3_s1)) &
+     (all1 w: (w in W_Slave1_a1_s1) =>
+       (w+1 in W_Slave1_a1_s1 | w+1 in W_Slave1_a2_s1 | w+1 in W_Slave1_a3_s1)) &
+     (all1 w: (w in W_Slave1_a3_s1) =>
+       (w+1 in W_Slave2_a4_s0)) &
+     (all1 w: (w in W_Slave2_a4_s0) =>
+       (w+1 in W_Slave1_a1_s1 | w+1 in W_Slave1_a2_s1 | w+1 in W_Slave1_a3_s1)) &
+     u0 in W_Master_a0_s1 &
+     u1 in W_Slave1_a2_s1 &
+     (all1 w : w in W_Slave1_a2_s1 => w = u1);
+
+
+pred path_Slave1_a1_s1_Slave1_a2_s1
+  (var2 U_Master_a0, U_Slave1_a1, U_Slave1_a2, U_Slave1_a3, U_Slave2_a4,
+   var1 u0, u1) =
+   backbone_tree
+     (U_Master_a0, U_Slave1_a1, U_Slave1_a2, U_Slave1_a3, U_Slave2_a4) &
+   ex2 W_Slave1_a1_s1, W_Slave1_a2_s1, W_Slave1_a3_s1, W_Slave2_a4_s0 :
+   ex2 W_up, W_down :
+   ex1 w_top :
+     included_1(W_Slave1_a1_s1, U_Slave1_a1) &
+     included_1(W_Slave1_a2_s1, U_Slave1_a2) &
+     included_1(W_Slave1_a3_s1, U_Slave1_a3) &
+     included_1(W_Slave2_a4_s0, U_Slave2_a4) &
+     ~intersects_1(W_down, W_up) &
+     partition_4(W_down, W_Slave1_a1_s1, W_Slave1_a2_s1, W_Slave1_a3_s1, W_Slave2_a4_s0) &
+     (w_top in W_down) &
+     (0 in W_down => w_top = 0) &
+     (all1 w : (w in W_down & w ~= w_top) => w-1 in W_down) &
+     (all1 w1, w2: (w1 in W_down & w1 ~= 0 &
+                    w2 in W_down & w2 ~= 0 & w1-1 = w2-1) => w1 = w2) &
+     (all1 w: (w in W_Slave1_a1_s1) =>
+       (w+1 in W_Slave1_a1_s1 | w+1 in W_Slave1_a2_s1 | w+1 in W_Slave1_a3_s1)) &
+     (all1 w: (w in W_Slave1_a3_s1) =>
+       (w+1 in W_Slave2_a4_s0)) &
+     (all1 w: (w in W_Slave2_a4_s0) =>
+       (w+1 in W_Slave1_a1_s1 | w+1 in W_Slave1_a2_s1 | w+1 in W_Slave1_a3_s1)) &
+     u0 in W_Slave1_a1_s1 &
+     u1 in W_Slave1_a2_s1 &
+     (all1 w : w in W_Slave1_a2_s1 => w = u1);
+
+
+pred path_Slave1_a1_m_Master_a0_m
+  (var2 U_Master_a0, U_Slave1_a1, U_Slave1_a2, U_Slave1_a3, U_Slave2_a4,
+   var1 u0, u1) =
+   backbone_tree
+     (U_Master_a0, U_Slave1_a1, U_Slave1_a2, U_Slave1_a3, U_Slave2_a4) &
+   ex2 W_Slave1_a1_m, W_Master_a0_m, W_Slave2_a4_m, W_Slave1_a3_m :
+   ex2 W_up, W_down :
+   ex1 w_top :
+     included_1(W_Slave1_a1_m, U_Slave1_a1) &
+     included_1(W_Master_a0_m, U_Master_a0) &
+     included_1(W_Slave2_a4_m, U_Slave2_a4) &
+     included_1(W_Slave1_a3_m, U_Slave1_a3) &
+     ~intersects_1(W_down, W_up) &
+     partition_1(W_down, W_Master_a0_m) &
+     (w_top in W_down) &
+     (0 in W_down => w_top = 0) &
+     (all1 w : (w in W_down & w ~= w_top) => w-1 in W_down) &
+     (all1 w1, w2: (w1 in W_down & w1 ~= 0 &
+                    w2 in W_down & w2 ~= 0 & w1-1 = w2-1) => w1 = w2) &
+     partition_3(W_up, W_Slave1_a1_m, W_Slave2_a4_m, W_Slave1_a3_m) &
+     (all1 w : w in W_up => (w-1 in W_up | w-1 = w_top)) &
+     (all1 w1, w2: (w1 in W_up & w1 ~= 0 &
+                    w2 in W_up & w2 ~= 0 & w1-1 = w2-1) => w1 = w2) &
+     (all1 w: (w in W_Slave1_a1_m) =>
+       (w-1 in W_Master_a0_m | w-1 in W_Slave1_a1_m | w-1 in W_Slave2_a4_m)) &
+     (all1 w: (w in W_Slave2_a4_m) =>
+       (w-1 in W_Slave1_a3_m)) &
+     (all1 w: (w in W_Slave1_a3_m) =>
+       (w-1 in W_Master_a0_m | w-1 in W_Slave1_a1_m | w-1 in W_Slave2_a4_m)) &
+     u0 in W_Slave1_a1_m &
+     u1 in W_Master_a0_m &
+     (all1 w : w in W_Master_a0_m => w = u1);
+
+
+pred path_Slave1_a1_s2_Slave1_a1_s0
+  (var2 U_Master_a0, U_Slave1_a1, U_Slave1_a2, U_Slave1_a3, U_Slave2_a4,
+   var1 u0, u1) =
+   backbone_tree
+     (U_Master_a0, U_Slave1_a1, U_Slave1_a2, U_Slave1_a3, U_Slave2_a4) &
+   ex2 W_Slave1_a1_s2, W_Slave1_a1_s0 :
+   ex2 W_up, W_down :
+   ex1 w_top :
+     included_1(W_Slave1_a1_s2, U_Slave1_a1) &
+     included_1(W_Slave1_a1_s0, U_Slave1_a1) &
+     ~intersects_1(W_down, W_up) &
+     partition_2(W_down, W_Slave1_a1_s2, W_Slave1_a1_s0) &
+     (w_top in W_down) &
+     (0 in W_down => w_top = 0) &
+     (all1 w : (w in W_down & w ~= w_top) => w-1 in W_down) &
+     (all1 w1, w2: (w1 in W_down & w1 ~= 0 &
+                    w2 in W_down & w2 ~= 0 & w1-1 = w2-1) => w1 = w2) &
+     (all1 w: (w in W_Slave1_a1_s2) =>
+       (w+1 in W_Slave1_a1_s0)) &
+     u0 in W_Slave1_a1_s2 &
+     u1 in W_Slave1_a1_s0 &
+     (all1 w : w in W_Slave1_a1_s0 => w = u1);
+
+
+pred path_Slave1_a1_s2_Slave1_a2_s0
+  (var2 U_Master_a0, U_Slave1_a1, U_Slave1_a2, U_Slave1_a3, U_Slave2_a4,
+   var1 u0, u1) =
+   backbone_tree
+     (U_Master_a0, U_Slave1_a1, U_Slave1_a2, U_Slave1_a3, U_Slave2_a4) &
+   ex2 W_Slave1_a1_s2, W_Slave1_a2_s0 :
+   ex2 W_up, W_down :
+   ex1 w_top :
+     included_1(W_Slave1_a1_s2, U_Slave1_a1) &
+     included_1(W_Slave1_a2_s0, U_Slave1_a2) &
+     ~intersects_1(W_down, W_up) &
+     partition_2(W_down, W_Slave1_a1_s2, W_Slave1_a2_s0) &
+     (w_top in W_down) &
+     (0 in W_down => w_top = 0) &
+     (all1 w : (w in W_down & w ~= w_top) => w-1 in W_down) &
+     (all1 w1, w2: (w1 in W_down & w1 ~= 0 &
+                    w2 in W_down & w2 ~= 0 & w1-1 = w2-1) => w1 = w2) &
+     (all1 w: (w in W_Slave1_a1_s2) =>
+       (w+1 in W_Slave1_a2_s0)) &
+     u0 in W_Slave1_a1_s2 &
+     u1 in W_Slave1_a2_s0 &
+     (all1 w : w in W_Slave1_a2_s0 => w = u1);
+
+
+pred path_Slave1_a1_s2_Slave2_a4_s1
+  (var2 U_Master_a0, U_Slave1_a1, U_Slave1_a2, U_Slave1_a3, U_Slave2_a4,
+   var1 u0, u1) =
+   backbone_tree
+     (U_Master_a0, U_Slave1_a1, U_Slave1_a2, U_Slave1_a3, U_Slave2_a4) &
+   ex2 W_Slave1_a1_s2, W_Slave1_a3_s0, W_Slave2_a4_s1 :
+   ex2 W_up, W_down :
+   ex1 w_top :
+     included_1(W_Slave1_a1_s2, U_Slave1_a1) &
+     included_1(W_Slave1_a3_s0, U_Slave1_a3) &
+     included_1(W_Slave2_a4_s1, U_Slave2_a4) &
+     ~intersects_1(W_down, W_up) &
+     partition_3(W_down, W_Slave1_a1_s2, W_Slave1_a3_s0, W_Slave2_a4_s1) &
+     (w_top in W_down) &
+     (0 in W_down => w_top = 0) &
+     (all1 w : (w in W_down & w ~= w_top) => w-1 in W_down) &
+     (all1 w1, w2: (w1 in W_down & w1 ~= 0 &
+                    w2 in W_down & w2 ~= 0 & w1-1 = w2-1) => w1 = w2) &
+     (all1 w: (w in W_Slave1_a1_s2) =>
+       (w+1 in W_Slave1_a3_s0)) &
+     (all1 w: (w in W_Slave1_a3_s0) =>
+       (w+1 in W_Slave2_a4_s1)) &
+     u0 in W_Slave1_a1_s2 &
+     u1 in W_Slave2_a4_s1 &
+     (all1 w : w in W_Slave2_a4_s1 => w = u1);
+
+
+pred path_Slave1_a2_m_Master_a0_m
+  (var2 U_Master_a0, U_Slave1_a1, U_Slave1_a2, U_Slave1_a3, U_Slave2_a4,
+   var1 u0, u1) =
+   backbone_tree
+     (U_Master_a0, U_Slave1_a1, U_Slave1_a2, U_Slave1_a3, U_Slave2_a4) &
+   ex2 W_Slave1_a2_m, W_Master_a0_m, W_Slave1_a1_m, W_Slave2_a4_m, W_Slave1_a3_m :
+   ex2 W_up, W_down :
+   ex1 w_top :
+     included_1(W_Slave1_a2_m, U_Slave1_a2) &
+     included_1(W_Master_a0_m, U_Master_a0) &
+     included_1(W_Slave1_a1_m, U_Slave1_a1) &
+     included_1(W_Slave2_a4_m, U_Slave2_a4) &
+     included_1(W_Slave1_a3_m, U_Slave1_a3) &
+     ~intersects_1(W_down, W_up) &
+     partition_1(W_down, W_Master_a0_m) &
+     (w_top in W_down) &
+     (0 in W_down => w_top = 0) &
+     (all1 w : (w in W_down & w ~= w_top) => w-1 in W_down) &
+     (all1 w1, w2: (w1 in W_down & w1 ~= 0 &
+                    w2 in W_down & w2 ~= 0 & w1-1 = w2-1) => w1 = w2) &
+     partition_4(W_up, W_Slave1_a2_m, W_Slave1_a1_m, W_Slave2_a4_m, W_Slave1_a3_m) &
+     (all1 w : w in W_up => (w-1 in W_up | w-1 = w_top)) &
+     (all1 w1, w2: (w1 in W_up & w1 ~= 0 &
+                    w2 in W_up & w2 ~= 0 & w1-1 = w2-1) => w1 = w2) &
+     (all1 w: (w in W_Slave1_a2_m) =>
+       (w-1 in W_Master_a0_m | w-1 in W_Slave1_a1_m | w-1 in W_Slave2_a4_m)) &
+     (all1 w: (w in W_Slave1_a1_m) =>
+       (w-1 in W_Master_a0_m | w-1 in W_Slave1_a1_m | w-1 in W_Slave2_a4_m)) &
+     (all1 w: (w in W_Slave2_a4_m) =>
+       (w-1 in W_Slave1_a3_m)) &
+     (all1 w: (w in W_Slave1_a3_m) =>
+       (w-1 in W_Master_a0_m | w-1 in W_Slave1_a1_m | w-1 in W_Slave2_a4_m)) &
+     u0 in W_Slave1_a2_m &
+     u1 in W_Master_a0_m &
+     (all1 w : w in W_Master_a0_m => w = u1);
+
+
+pred path_Slave1_a3_s0_Slave2_a4_s1
+  (var2 U_Master_a0, U_Slave1_a1, U_Slave1_a2, U_Slave1_a3, U_Slave2_a4,
+   var1 u0, u1) =
+   backbone_tree
+     (U_Master_a0, U_Slave1_a1, U_Slave1_a2, U_Slave1_a3, U_Slave2_a4) &
+   ex2 W_Slave1_a3_s0, W_Slave2_a4_s1 :
+   ex2 W_up, W_down :
+   ex1 w_top :
+     included_1(W_Slave1_a3_s0, U_Slave1_a3) &
+     included_1(W_Slave2_a4_s1, U_Slave2_a4) &
+     ~intersects_1(W_down, W_up) &
+     partition_2(W_down, W_Slave1_a3_s0, W_Slave2_a4_s1) &
+     (w_top in W_down) &
+     (0 in W_down => w_top = 0) &
+     (all1 w : (w in W_down & w ~= w_top) => w-1 in W_down) &
+     (all1 w1, w2: (w1 in W_down & w1 ~= 0 &
+                    w2 in W_down & w2 ~= 0 & w1-1 = w2-1) => w1 = w2) &
+     (all1 w: (w in W_Slave1_a3_s0) =>
+       (w+1 in W_Slave2_a4_s1)) &
+     u0 in W_Slave1_a3_s0 &
+     u1 in W_Slave2_a4_s1 &
+     (all1 w : w in W_Slave2_a4_s1 => w = u1);
+
+
+pred path_Slave1_a3_s1_Slave1_a2_s1
+  (var2 U_Master_a0, U_Slave1_a1, U_Slave1_a2, U_Slave1_a3, U_Slave2_a4,
+   var1 u0, u1) =
+   backbone_tree
+     (U_Master_a0, U_Slave1_a1, U_Slave1_a2, U_Slave1_a3, U_Slave2_a4) &
+   ex2 W_Slave1_a3_s1, W_Slave2_a4_s0, W_Slave1_a1_s1, W_Slave1_a2_s1 :
+   ex2 W_up, W_down :
+   ex1 w_top :
+     included_1(W_Slave1_a3_s1, U_Slave1_a3) &
+     included_1(W_Slave2_a4_s0, U_Slave2_a4) &
+     included_1(W_Slave1_a1_s1, U_Slave1_a1) &
+     included_1(W_Slave1_a2_s1, U_Slave1_a2) &
+     ~intersects_1(W_down, W_up) &
+     partition_4(W_down, W_Slave1_a3_s1, W_Slave2_a4_s0, W_Slave1_a1_s1, W_Slave1_a2_s1) &
+     (w_top in W_down) &
+     (0 in W_down => w_top = 0) &
+     (all1 w : (w in W_down & w ~= w_top) => w-1 in W_down) &
+     (all1 w1, w2: (w1 in W_down & w1 ~= 0 &
+                    w2 in W_down & w2 ~= 0 & w1-1 = w2-1) => w1 = w2) &
+     (all1 w: (w in W_Slave1_a3_s1) =>
+       (w+1 in W_Slave2_a4_s0)) &
+     (all1 w: (w in W_Slave2_a4_s0) =>
+       (w+1 in W_Slave1_a1_s1 | w+1 in W_Slave1_a2_s1 | w+1 in W_Slave1_a3_s1)) &
+     (all1 w: (w in W_Slave1_a1_s1) =>
+       (w+1 in W_Slave1_a1_s1 | w+1 in W_Slave1_a2_s1 | w+1 in W_Slave1_a3_s1)) &
+     u0 in W_Slave1_a3_s1 &
+     u1 in W_Slave1_a2_s1 &
+     (all1 w : w in W_Slave1_a2_s1 => w = u1);
+
+
+pred path_Slave1_a3_m_Master_a0_m
+  (var2 U_Master_a0, U_Slave1_a1, U_Slave1_a2, U_Slave1_a3, U_Slave2_a4,
+   var1 u0, u1) =
+   backbone_tree
+     (U_Master_a0, U_Slave1_a1, U_Slave1_a2, U_Slave1_a3, U_Slave2_a4) &
+   ex2 W_Slave1_a3_m, W_Master_a0_m, W_Slave1_a1_m, W_Slave2_a4_m :
+   ex2 W_up, W_down :
+   ex1 w_top :
+     included_1(W_Slave1_a3_m, U_Slave1_a3) &
+     included_1(W_Master_a0_m, U_Master_a0) &
+     included_1(W_Slave1_a1_m, U_Slave1_a1) &
+     included_1(W_Slave2_a4_m, U_Slave2_a4) &
+     ~intersects_1(W_down, W_up) &
+     partition_1(W_down, W_Master_a0_m) &
+     (w_top in W_down) &
+     (0 in W_down => w_top = 0) &
+     (all1 w : (w in W_down & w ~= w_top) => w-1 in W_down) &
+     (all1 w1, w2: (w1 in W_down & w1 ~= 0 &
+                    w2 in W_down & w2 ~= 0 & w1-1 = w2-1) => w1 = w2) &
+     partition_3(W_up, W_Slave1_a3_m, W_Slave1_a1_m, W_Slave2_a4_m) &
+     (all1 w : w in W_up => (w-1 in W_up | w-1 = w_top)) &
+     (all1 w1, w2: (w1 in W_up & w1 ~= 0 &
+                    w2 in W_up & w2 ~= 0 & w1-1 = w2-1) => w1 = w2) &
+     (all1 w: (w in W_Slave1_a3_m) =>
+       (w-1 in W_Master_a0_m | w-1 in W_Slave1_a1_m | w-1 in W_Slave2_a4_m)) &
+     (all1 w: (w in W_Slave1_a1_m) =>
+       (w-1 in W_Master_a0_m | w-1 in W_Slave1_a1_m | w-1 in W_Slave2_a4_m)) &
+     (all1 w: (w in W_Slave2_a4_m) =>
+       (w-1 in W_Slave1_a3_m)) &
+     u0 in W_Slave1_a3_m &
+     u1 in W_Master_a0_m &
+     (all1 w : w in W_Master_a0_m => w = u1);
+
+
+pred path_Slave2_a4_s0_Slave1_a2_s1
+  (var2 U_Master_a0, U_Slave1_a1, U_Slave1_a2, U_Slave1_a3, U_Slave2_a4,
+   var1 u0, u1) =
+   backbone_tree
+     (U_Master_a0, U_Slave1_a1, U_Slave1_a2, U_Slave1_a3, U_Slave2_a4) &
+   ex2 W_Slave2_a4_s0, W_Slave1_a1_s1, W_Slave1_a2_s1, W_Slave1_a3_s1 :
+   ex2 W_up, W_down :
+   ex1 w_top :
+     included_1(W_Slave2_a4_s0, U_Slave2_a4) &
+     included_1(W_Slave1_a1_s1, U_Slave1_a1) &
+     included_1(W_Slave1_a2_s1, U_Slave1_a2) &
+     included_1(W_Slave1_a3_s1, U_Slave1_a3) &
+     ~intersects_1(W_down, W_up) &
+     partition_4(W_down, W_Slave2_a4_s0, W_Slave1_a1_s1, W_Slave1_a2_s1, W_Slave1_a3_s1) &
+     (w_top in W_down) &
+     (0 in W_down => w_top = 0) &
+     (all1 w : (w in W_down & w ~= w_top) => w-1 in W_down) &
+     (all1 w1, w2: (w1 in W_down & w1 ~= 0 &
+                    w2 in W_down & w2 ~= 0 & w1-1 = w2-1) => w1 = w2) &
+     (all1 w: (w in W_Slave2_a4_s0) =>
+       (w+1 in W_Slave1_a1_s1 | w+1 in W_Slave1_a2_s1 | w+1 in W_Slave1_a3_s1)) &
+     (all1 w: (w in W_Slave1_a1_s1) =>
+       (w+1 in W_Slave1_a1_s1 | w+1 in W_Slave1_a2_s1 | w+1 in W_Slave1_a3_s1)) &
+     (all1 w: (w in W_Slave1_a3_s1) =>
+       (w+1 in W_Slave2_a4_s0)) &
+     u0 in W_Slave2_a4_s0 &
+     u1 in W_Slave1_a2_s1 &
+     (all1 w : w in W_Slave1_a2_s1 => w = u1);
+
+
+pred path_Slave2_a4_m_Master_a0_m
+  (var2 U_Master_a0, U_Slave1_a1, U_Slave1_a2, U_Slave1_a3, U_Slave2_a4,
+   var1 u0, u1) =
+   backbone_tree
+     (U_Master_a0, U_Slave1_a1, U_Slave1_a2, U_Slave1_a3, U_Slave2_a4) &
+   ex2 W_Slave2_a4_m, W_Slave1_a3_m, W_Master_a0_m, W_Slave1_a1_m :
+   ex2 W_up, W_down :
+   ex1 w_top :
+     included_1(W_Slave2_a4_m, U_Slave2_a4) &
+     included_1(W_Slave1_a3_m, U_Slave1_a3) &
+     included_1(W_Master_a0_m, U_Master_a0) &
+     included_1(W_Slave1_a1_m, U_Slave1_a1) &
+     ~intersects_1(W_down, W_up) &
+     partition_1(W_down, W_Master_a0_m) &
+     (w_top in W_down) &
+     (0 in W_down => w_top = 0) &
+     (all1 w : (w in W_down & w ~= w_top) => w-1 in W_down) &
+     (all1 w1, w2: (w1 in W_down & w1 ~= 0 &
+                    w2 in W_down & w2 ~= 0 & w1-1 = w2-1) => w1 = w2) &
+     partition_3(W_up, W_Slave2_a4_m, W_Slave1_a3_m, W_Slave1_a1_m) &
+     (all1 w : w in W_up => (w-1 in W_up | w-1 = w_top)) &
+     (all1 w1, w2: (w1 in W_up & w1 ~= 0 &
+                    w2 in W_up & w2 ~= 0 & w1-1 = w2-1) => w1 = w2) &
+     (all1 w: (w in W_Slave2_a4_m) =>
+       (w-1 in W_Slave1_a3_m)) &
+     (all1 w: (w in W_Slave1_a3_m) =>
+       (w-1 in W_Master_a0_m | w-1 in W_Slave1_a1_m | w-1 in W_Slave2_a4_m)) &
+     (all1 w: (w in W_Slave1_a1_m) =>
+       (w-1 in W_Master_a0_m | w-1 in W_Slave1_a1_m | w-1 in W_Slave2_a4_m)) &
+     u0 in W_Slave2_a4_m &
+     u1 in W_Master_a0_m &
+     (all1 w : w in W_Master_a0_m => w = u1);
+
+
+pred path_Slave2_a4_s3_Slave1_a1_s0
+  (var2 U_Master_a0, U_Slave1_a1, U_Slave1_a2, U_Slave1_a3, U_Slave2_a4,
+   var1 u0, u1) =
+   backbone_tree
+     (U_Master_a0, U_Slave1_a1, U_Slave1_a2, U_Slave1_a3, U_Slave2_a4) &
+   ex2 W_Slave2_a4_s3, W_Slave1_a1_s0 :
+   ex2 W_up, W_down :
+   ex1 w_top :
+     included_1(W_Slave2_a4_s3, U_Slave2_a4) &
+     included_1(W_Slave1_a1_s0, U_Slave1_a1) &
+     ~intersects_1(W_down, W_up) &
+     partition_2(W_down, W_Slave2_a4_s3, W_Slave1_a1_s0) &
+     (w_top in W_down) &
+     (0 in W_down => w_top = 0) &
+     (all1 w : (w in W_down & w ~= w_top) => w-1 in W_down) &
+     (all1 w1, w2: (w1 in W_down & w1 ~= 0 &
+                    w2 in W_down & w2 ~= 0 & w1-1 = w2-1) => w1 = w2) &
+     (all1 w: (w in W_Slave2_a4_s3) =>
+       (w+1 in W_Slave1_a1_s0)) &
+     u0 in W_Slave2_a4_s3 &
+     u1 in W_Slave1_a1_s0 &
+     (all1 w : w in W_Slave1_a1_s0 => w = u1);
+
+
+pred path_Slave2_a4_s3_Slave1_a2_s0
+  (var2 U_Master_a0, U_Slave1_a1, U_Slave1_a2, U_Slave1_a3, U_Slave2_a4,
+   var1 u0, u1) =
+   backbone_tree
+     (U_Master_a0, U_Slave1_a1, U_Slave1_a2, U_Slave1_a3, U_Slave2_a4) &
+   ex2 W_Slave2_a4_s3, W_Slave1_a2_s0 :
+   ex2 W_up, W_down :
+   ex1 w_top :
+     included_1(W_Slave2_a4_s3, U_Slave2_a4) &
+     included_1(W_Slave1_a2_s0, U_Slave1_a2) &
+     ~intersects_1(W_down, W_up) &
+     partition_2(W_down, W_Slave2_a4_s3, W_Slave1_a2_s0) &
+     (w_top in W_down) &
+     (0 in W_down => w_top = 0) &
+     (all1 w : (w in W_down & w ~= w_top) => w-1 in W_down) &
+     (all1 w1, w2: (w1 in W_down & w1 ~= 0 &
+                    w2 in W_down & w2 ~= 0 & w1-1 = w2-1) => w1 = w2) &
+     (all1 w: (w in W_Slave2_a4_s3) =>
+       (w+1 in W_Slave1_a2_s0)) &
+     u0 in W_Slave2_a4_s3 &
+     u1 in W_Slave1_a2_s0 &
+     (all1 w : w in W_Slave1_a2_s0 => w = u1);
+
+
+pred path_Slave2_a4_s3_Slave2_a4_s1
+  (var2 U_Master_a0, U_Slave1_a1, U_Slave1_a2, U_Slave1_a3, U_Slave2_a4,
+   var1 u0, u1) =
+   backbone_tree
+     (U_Master_a0, U_Slave1_a1, U_Slave1_a2, U_Slave1_a3, U_Slave2_a4) &
+   ex2 W_Slave2_a4_s3, W_Slave1_a3_s0, W_Slave2_a4_s1 :
+   ex2 W_up, W_down :
+   ex1 w_top :
+     included_1(W_Slave2_a4_s3, U_Slave2_a4) &
+     included_1(W_Slave1_a3_s0, U_Slave1_a3) &
+     included_1(W_Slave2_a4_s1, U_Slave2_a4) &
+     ~intersects_1(W_down, W_up) &
+     partition_3(W_down, W_Slave2_a4_s3, W_Slave1_a3_s0, W_Slave2_a4_s1) &
+     (w_top in W_down) &
+     (0 in W_down => w_top = 0) &
+     (all1 w : (w in W_down & w ~= w_top) => w-1 in W_down) &
+     (all1 w1, w2: (w1 in W_down & w1 ~= 0 &
+                    w2 in W_down & w2 ~= 0 & w1-1 = w2-1) => w1 = w2) &
+     (all1 w: (w in W_Slave2_a4_s3) =>
+       (w+1 in W_Slave1_a3_s0)) &
+     (all1 w: (w in W_Slave1_a3_s0) =>
+       (w+1 in W_Slave2_a4_s1)) &
+     u0 in W_Slave2_a4_s3 &
+     u1 in W_Slave2_a4_s1 &
+     (all1 w : w in W_Slave2_a4_s1 => w = u1);
+
+
+
+#
+# trap invariants
+#
+
+
+
+pred trap_initially_not_empty
+  (var2 U_Master_a0, U_Slave1_a1, U_Slave1_a2, U_Slave1_a3, U_Slave2_a4,
+   var2 X_m_q0, X_m_q1, X_s0_q0, X_s0_q1, X_s0_q2, X_s1_q0, X_s1_q1, X_s1_q2) =
+   ext_configuration
+     (U_Master_a0, U_Slave1_a1, U_Slave1_a2, U_Slave1_a3, U_Slave2_a4,
+      X_m_q0, X_m_q1, X_s0_q0, X_s0_q1, X_s0_q2, X_s1_q0, X_s1_q1, X_s1_q2) &
+   ((ex1 x : x in U_Master_a0 & x in X_m_q0) |
+    (ex1 x : x in U_Slave1_a1 & x in X_s0_q0) |
+    (ex1 x : x in U_Slave1_a2 & x in X_s0_q0) |
+    (ex1 x : x in U_Slave1_a2 & x in X_s1_q0) |
+    (ex1 x : x in U_Slave2_a4 & x in X_s1_q0));
+
+pred trap_Master_a0_s1_out_s0_in_0_flow
+  (var2 X_m_q0, X_m_q1, X_s0_q0, X_s0_q1, X_s0_q2, X_s1_q0, X_s1_q1, X_s1_q2,
+   var1 x_s1, x_s0) =
+   ((x_s1 in X_s1_q0 | x_s0 in X_s0_q0) =>
+    (x_s1 in X_s1_q1 | x_s0 in X_s0_q2));
+
+pred trap_Master_a0_s1_out_s0_in_1_flow
+  (var2 X_m_q0, X_m_q1, X_s0_q0, X_s0_q1, X_s0_q2, X_s1_q0, X_s1_q1, X_s1_q2,
+   var1 x_s1, x_s0) =
+   ((x_s1 in X_s1_q0 | x_s0 in X_s0_q0) =>
+    (x_s1 in X_s1_q1 | x_s0 in X_s0_q2));
+
+pred trap_Master_a0_s1_out_s0_in_2_flow
+  (var2 X_m_q0, X_m_q1, X_s0_q0, X_s0_q1, X_s0_q2, X_s1_q0, X_s1_q1, X_s1_q2,
+   var1 x_s1, x_s0) =
+   ((x_s1 in X_s1_q0 | x_s0 in X_s1_q1) =>
+    (x_s1 in X_s1_q1 | x_s0 in X_s1_q0));
+
+pred trap_Master_a0_s1_out_s0_in_flow
+  (var2 U_Master_a0, U_Slave1_a1, U_Slave1_a2, U_Slave1_a3, U_Slave2_a4,
+   var2 X_m_q0, X_m_q1, X_s0_q0, X_s0_q1, X_s0_q2, X_s1_q0, X_s1_q1, X_s1_q2) =
+  (all1 x_0, x_s1, x_s0 :
+    (x_0 in U_Master_a0
+     & 
+     path_Master_a0_s1_Slave1_a2_s1
+       (U_Master_a0, U_Slave1_a1, U_Slave1_a2, U_Slave1_a3, U_Slave2_a4, x_0, x_s1) &
+     path_Master_a0_s0_Slave1_a1_s0
+       (U_Master_a0, U_Slave1_a1, U_Slave1_a2, U_Slave1_a3, U_Slave2_a4, x_0, x_s0)) =>
+    trap_Master_a0_s1_out_s0_in_0_flow
+      (X_m_q0, X_m_q1, X_s0_q0, X_s0_q1, X_s0_q2, X_s1_q0, X_s1_q1, X_s1_q2,
+       x_s1, x_s0))  &
+  (all1 x_0, x_s1, x_s0 :
+    (x_0 in U_Master_a0
+     & 
+     path_Master_a0_s1_Slave1_a2_s1
+       (U_Master_a0, U_Slave1_a1, U_Slave1_a2, U_Slave1_a3, U_Slave2_a4, x_0, x_s1) &
+     path_Master_a0_s0_Slave1_a2_s0
+       (U_Master_a0, U_Slave1_a1, U_Slave1_a2, U_Slave1_a3, U_Slave2_a4, x_0, x_s0)) =>
+    trap_Master_a0_s1_out_s0_in_1_flow
+      (X_m_q0, X_m_q1, X_s0_q0, X_s0_q1, X_s0_q2, X_s1_q0, X_s1_q1, X_s1_q2,
+       x_s1, x_s0))  &
+  (all1 x_0, x_s1, x_s0 :
+    (x_0 in U_Master_a0
+     & 
+     path_Master_a0_s1_Slave1_a2_s1
+       (U_Master_a0, U_Slave1_a1, U_Slave1_a2, U_Slave1_a3, U_Slave2_a4, x_0, x_s1) &
+     path_Master_a0_s0_Slave2_a4_s1
+       (U_Master_a0, U_Slave1_a1, U_Slave1_a2, U_Slave1_a3, U_Slave2_a4, x_0, x_s0)) =>
+    trap_Master_a0_s1_out_s0_in_2_flow
+      (X_m_q0, X_m_q1, X_s0_q0, X_s0_q1, X_s0_q2, X_s1_q0, X_s1_q1, X_s1_q2,
+       x_s1, x_s0)) ;
+
+pred trap_Slave1_a1_m_snd_s0_rcv_0_flow
+  (var2 X_m_q0, X_m_q1, X_s0_q0, X_s0_q1, X_s0_q2, X_s1_q0, X_s1_q1, X_s1_q2,
+   var1 x_m, x_s0) =
+   ((x_m in X_m_q0 | x_s0 in X_s0_q0) =>
+    (x_m in X_m_q1 | x_s0 in X_s0_q1));
+
+pred trap_Slave1_a1_m_snd_s0_rcv_flow
+  (var2 U_Master_a0, U_Slave1_a1, U_Slave1_a2, U_Slave1_a3, U_Slave2_a4,
+   var2 X_m_q0, X_m_q1, X_s0_q0, X_s0_q1, X_s0_q2, X_s1_q0, X_s1_q1, X_s1_q2) =
+  (all1 x_0, x_m, x_s0 :
+    (x_0 in U_Slave1_a1 & 
+     x_0 = x_s0 & 
+     path_Slave1_a1_m_Master_a0_m
+       (U_Master_a0, U_Slave1_a1, U_Slave1_a2, U_Slave1_a3, U_Slave2_a4, x_0, x_m)) =>
+    trap_Slave1_a1_m_snd_s0_rcv_0_flow
+      (X_m_q0, X_m_q1, X_s0_q0, X_s0_q1, X_s0_q2, X_s1_q0, X_s1_q1, X_s1_q2,
+       x_m, x_s0)) ;
+
+pred trap_Slave1_a1_s0_snd_m_rcv_0_flow
+  (var2 X_m_q0, X_m_q1, X_s0_q0, X_s0_q1, X_s0_q2, X_s1_q0, X_s1_q1, X_s1_q2,
+   var1 x_s0, x_m) =
+   ((x_s0 in X_s0_q1 | x_m in X_m_q1) =>
+    (x_s0 in X_s0_q0 | x_m in X_m_q0));
+
+pred trap_Slave1_a1_s0_snd_m_rcv_flow
+  (var2 U_Master_a0, U_Slave1_a1, U_Slave1_a2, U_Slave1_a3, U_Slave2_a4,
+   var2 X_m_q0, X_m_q1, X_s0_q0, X_s0_q1, X_s0_q2, X_s1_q0, X_s1_q1, X_s1_q2) =
+  (all1 x_0, x_s0, x_m :
+    (x_0 in U_Slave1_a1 & 
+     x_0 = x_s0 & 
+     path_Slave1_a1_m_Master_a0_m
+       (U_Master_a0, U_Slave1_a1, U_Slave1_a2, U_Slave1_a3, U_Slave2_a4, x_0, x_m)) =>
+    trap_Slave1_a1_s0_snd_m_rcv_0_flow
+      (X_m_q0, X_m_q1, X_s0_q0, X_s0_q1, X_s0_q2, X_s1_q0, X_s1_q1, X_s1_q2,
+       x_s0, x_m)) ;
+
+pred trap_Slave1_a1_s0_out_s2_in_0_flow
+  (var2 X_m_q0, X_m_q1, X_s0_q0, X_s0_q1, X_s0_q2, X_s1_q0, X_s1_q1, X_s1_q2,
+   var1 x_s0, x_s2) =
+   ((x_s0 in X_s0_q2 | x_s2 in X_s0_q0) =>
+    (x_s0 in X_s0_q0 | x_s2 in X_s0_q2));
+
+pred trap_Slave1_a1_s0_out_s2_in_1_flow
+  (var2 X_m_q0, X_m_q1, X_s0_q0, X_s0_q1, X_s0_q2, X_s1_q0, X_s1_q1, X_s1_q2,
+   var1 x_s0, x_s2) =
+   ((x_s0 in X_s0_q2 | x_s2 in X_s0_q0) =>
+    (x_s0 in X_s0_q0 | x_s2 in X_s0_q2));
+
+pred trap_Slave1_a1_s0_out_s2_in_2_flow
+  (var2 X_m_q0, X_m_q1, X_s0_q0, X_s0_q1, X_s0_q2, X_s1_q0, X_s1_q1, X_s1_q2,
+   var1 x_s0, x_s2) =
+   ((x_s0 in X_s0_q2 | x_s2 in X_s1_q1) =>
+    (x_s0 in X_s0_q0 | x_s2 in X_s1_q0));
+
+pred trap_Slave1_a1_s0_out_s2_in_flow
+  (var2 U_Master_a0, U_Slave1_a1, U_Slave1_a2, U_Slave1_a3, U_Slave2_a4,
+   var2 X_m_q0, X_m_q1, X_s0_q0, X_s0_q1, X_s0_q2, X_s1_q0, X_s1_q1, X_s1_q2) =
+  (all1 x_0, x_s0, x_s2 :
+    (x_0 in U_Slave1_a1 & 
+     x_0 = x_s0 & 
+     path_Slave1_a1_s2_Slave1_a1_s0
+       (U_Master_a0, U_Slave1_a1, U_Slave1_a2, U_Slave1_a3, U_Slave2_a4, x_0, x_s2)) =>
+    trap_Slave1_a1_s0_out_s2_in_0_flow
+      (X_m_q0, X_m_q1, X_s0_q0, X_s0_q1, X_s0_q2, X_s1_q0, X_s1_q1, X_s1_q2,
+       x_s0, x_s2))  &
+  (all1 x_0, x_s0, x_s2 :
+    (x_0 in U_Slave1_a1 & 
+     x_0 = x_s0 & 
+     path_Slave1_a1_s2_Slave1_a2_s0
+       (U_Master_a0, U_Slave1_a1, U_Slave1_a2, U_Slave1_a3, U_Slave2_a4, x_0, x_s2)) =>
+    trap_Slave1_a1_s0_out_s2_in_1_flow
+      (X_m_q0, X_m_q1, X_s0_q0, X_s0_q1, X_s0_q2, X_s1_q0, X_s1_q1, X_s1_q2,
+       x_s0, x_s2))  &
+  (all1 x_0, x_s0, x_s2 :
+    (x_0 in U_Slave1_a1 & 
+     x_0 = x_s0 & 
+     path_Slave1_a1_s2_Slave2_a4_s1
+       (U_Master_a0, U_Slave1_a1, U_Slave1_a2, U_Slave1_a3, U_Slave2_a4, x_0, x_s2)) =>
+    trap_Slave1_a1_s0_out_s2_in_2_flow
+      (X_m_q0, X_m_q1, X_s0_q0, X_s0_q1, X_s0_q2, X_s1_q0, X_s1_q1, X_s1_q2,
+       x_s0, x_s2)) ;
+
+pred trap_Slave1_a2_m_snd_s0_rcv_0_flow
+  (var2 X_m_q0, X_m_q1, X_s0_q0, X_s0_q1, X_s0_q2, X_s1_q0, X_s1_q1, X_s1_q2,
+   var1 x_m, x_s0) =
+   ((x_m in X_m_q0 | x_s0 in X_s0_q0) =>
+    (x_m in X_m_q1 | x_s0 in X_s0_q1));
+
+pred trap_Slave1_a2_m_snd_s0_rcv_flow
+  (var2 U_Master_a0, U_Slave1_a1, U_Slave1_a2, U_Slave1_a3, U_Slave2_a4,
+   var2 X_m_q0, X_m_q1, X_s0_q0, X_s0_q1, X_s0_q2, X_s1_q0, X_s1_q1, X_s1_q2) =
+  (all1 x_0, x_m, x_s0 :
+    (x_0 in U_Slave1_a2 & 
+     x_0 = x_s0 & 
+     path_Slave1_a2_m_Master_a0_m
+       (U_Master_a0, U_Slave1_a1, U_Slave1_a2, U_Slave1_a3, U_Slave2_a4, x_0, x_m)) =>
+    trap_Slave1_a2_m_snd_s0_rcv_0_flow
+      (X_m_q0, X_m_q1, X_s0_q0, X_s0_q1, X_s0_q2, X_s1_q0, X_s1_q1, X_s1_q2,
+       x_m, x_s0)) ;
+
+pred trap_Slave1_a2_s0_snd_m_rcv_0_flow
+  (var2 X_m_q0, X_m_q1, X_s0_q0, X_s0_q1, X_s0_q2, X_s1_q0, X_s1_q1, X_s1_q2,
+   var1 x_s0, x_m) =
+   ((x_s0 in X_s0_q1 | x_m in X_m_q1) =>
+    (x_s0 in X_s0_q0 | x_m in X_m_q0));
+
+pred trap_Slave1_a2_s0_snd_m_rcv_flow
+  (var2 U_Master_a0, U_Slave1_a1, U_Slave1_a2, U_Slave1_a3, U_Slave2_a4,
+   var2 X_m_q0, X_m_q1, X_s0_q0, X_s0_q1, X_s0_q2, X_s1_q0, X_s1_q1, X_s1_q2) =
+  (all1 x_0, x_s0, x_m :
+    (x_0 in U_Slave1_a2 & 
+     x_0 = x_s0 & 
+     path_Slave1_a2_m_Master_a0_m
+       (U_Master_a0, U_Slave1_a1, U_Slave1_a2, U_Slave1_a3, U_Slave2_a4, x_0, x_m)) =>
+    trap_Slave1_a2_s0_snd_m_rcv_0_flow
+      (X_m_q0, X_m_q1, X_s0_q0, X_s0_q1, X_s0_q2, X_s1_q0, X_s1_q1, X_s1_q2,
+       x_s0, x_m)) ;
+
+pred trap_Slave1_a2_m_snd_s1_rcv_0_flow
+  (var2 X_m_q0, X_m_q1, X_s0_q0, X_s0_q1, X_s0_q2, X_s1_q0, X_s1_q1, X_s1_q2,
+   var1 x_m, x_s1) =
+   ((x_m in X_m_q0 | x_s1 in X_s1_q1) =>
+    (x_m in X_m_q1 | x_s1 in X_s1_q2));
+
+pred trap_Slave1_a2_m_snd_s1_rcv_flow
+  (var2 U_Master_a0, U_Slave1_a1, U_Slave1_a2, U_Slave1_a3, U_Slave2_a4,
+   var2 X_m_q0, X_m_q1, X_s0_q0, X_s0_q1, X_s0_q2, X_s1_q0, X_s1_q1, X_s1_q2) =
+  (all1 x_0, x_m, x_s1 :
+    (x_0 in U_Slave1_a2 & 
+     x_0 = x_s1 & 
+     path_Slave1_a2_m_Master_a0_m
+       (U_Master_a0, U_Slave1_a1, U_Slave1_a2, U_Slave1_a3, U_Slave2_a4, x_0, x_m)) =>
+    trap_Slave1_a2_m_snd_s1_rcv_0_flow
+      (X_m_q0, X_m_q1, X_s0_q0, X_s0_q1, X_s0_q2, X_s1_q0, X_s1_q1, X_s1_q2,
+       x_m, x_s1)) ;
+
+pred trap_Slave1_a2_s1_snd_m_rcv_0_flow
+  (var2 X_m_q0, X_m_q1, X_s0_q0, X_s0_q1, X_s0_q2, X_s1_q0, X_s1_q1, X_s1_q2,
+   var1 x_s1, x_m) =
+   ((x_s1 in X_s1_q2 | x_m in X_m_q1) =>
+    (x_s1 in X_s1_q1 | x_m in X_m_q0));
+
+pred trap_Slave1_a2_s1_snd_m_rcv_flow
+  (var2 U_Master_a0, U_Slave1_a1, U_Slave1_a2, U_Slave1_a3, U_Slave2_a4,
+   var2 X_m_q0, X_m_q1, X_s0_q0, X_s0_q1, X_s0_q2, X_s1_q0, X_s1_q1, X_s1_q2) =
+  (all1 x_0, x_s1, x_m :
+    (x_0 in U_Slave1_a2 & 
+     x_0 = x_s1 & 
+     path_Slave1_a2_m_Master_a0_m
+       (U_Master_a0, U_Slave1_a1, U_Slave1_a2, U_Slave1_a3, U_Slave2_a4, x_0, x_m)) =>
+    trap_Slave1_a2_s1_snd_m_rcv_0_flow
+      (X_m_q0, X_m_q1, X_s0_q0, X_s0_q1, X_s0_q2, X_s1_q0, X_s1_q1, X_s1_q2,
+       x_s1, x_m)) ;
+
+pred trap_Slave1_a2_s0_out_s1_in_0_flow
+  (var2 X_m_q0, X_m_q1, X_s0_q0, X_s0_q1, X_s0_q2, X_s1_q0, X_s1_q1, X_s1_q2,
+   var1 x_s0, x_s1) =
+   ((x_s0 in X_s0_q2 | x_s1 in X_s1_q1) =>
+    (x_s0 in X_s0_q0 | x_s1 in X_s1_q0));
+
+pred trap_Slave1_a2_s0_out_s1_in_flow
+  (var2 U_Master_a0, U_Slave1_a1, U_Slave1_a2, U_Slave1_a3, U_Slave2_a4,
+   var2 X_m_q0, X_m_q1, X_s0_q0, X_s0_q1, X_s0_q2, X_s1_q0, X_s1_q1, X_s1_q2) =
+  (all1 x_0, x_s0, x_s1 :
+    (x_0 in U_Slave1_a2 & 
+     x_0 = x_s0 &
+     x_0 = x_s1
+    ) =>
+    trap_Slave1_a2_s0_out_s1_in_0_flow
+      (X_m_q0, X_m_q1, X_s0_q0, X_s0_q1, X_s0_q2, X_s1_q0, X_s1_q1, X_s1_q2,
+       x_s0, x_s1)) ;
+
+pred trap_Slave2_a4_m_snd_s1_rcv_0_flow
+  (var2 X_m_q0, X_m_q1, X_s0_q0, X_s0_q1, X_s0_q2, X_s1_q0, X_s1_q1, X_s1_q2,
+   var1 x_m, x_s1) =
+   ((x_m in X_m_q0 | x_s1 in X_s1_q1) =>
+    (x_m in X_m_q1 | x_s1 in X_s1_q2));
+
+pred trap_Slave2_a4_m_snd_s1_rcv_flow
+  (var2 U_Master_a0, U_Slave1_a1, U_Slave1_a2, U_Slave1_a3, U_Slave2_a4,
+   var2 X_m_q0, X_m_q1, X_s0_q0, X_s0_q1, X_s0_q2, X_s1_q0, X_s1_q1, X_s1_q2) =
+  (all1 x_0, x_m, x_s1 :
+    (x_0 in U_Slave2_a4 & 
+     x_0 = x_s1 & 
+     path_Slave2_a4_m_Master_a0_m
+       (U_Master_a0, U_Slave1_a1, U_Slave1_a2, U_Slave1_a3, U_Slave2_a4, x_0, x_m)) =>
+    trap_Slave2_a4_m_snd_s1_rcv_0_flow
+      (X_m_q0, X_m_q1, X_s0_q0, X_s0_q1, X_s0_q2, X_s1_q0, X_s1_q1, X_s1_q2,
+       x_m, x_s1)) ;
+
+pred trap_Slave2_a4_s1_snd_m_rcv_0_flow
+  (var2 X_m_q0, X_m_q1, X_s0_q0, X_s0_q1, X_s0_q2, X_s1_q0, X_s1_q1, X_s1_q2,
+   var1 x_s1, x_m) =
+   ((x_s1 in X_s1_q2 | x_m in X_m_q1) =>
+    (x_s1 in X_s1_q1 | x_m in X_m_q0));
+
+pred trap_Slave2_a4_s1_snd_m_rcv_flow
+  (var2 U_Master_a0, U_Slave1_a1, U_Slave1_a2, U_Slave1_a3, U_Slave2_a4,
+   var2 X_m_q0, X_m_q1, X_s0_q0, X_s0_q1, X_s0_q2, X_s1_q0, X_s1_q1, X_s1_q2) =
+  (all1 x_0, x_s1, x_m :
+    (x_0 in U_Slave2_a4 & 
+     x_0 = x_s1 & 
+     path_Slave2_a4_m_Master_a0_m
+       (U_Master_a0, U_Slave1_a1, U_Slave1_a2, U_Slave1_a3, U_Slave2_a4, x_0, x_m)) =>
+    trap_Slave2_a4_s1_snd_m_rcv_0_flow
+      (X_m_q0, X_m_q1, X_s0_q0, X_s0_q1, X_s0_q2, X_s1_q0, X_s1_q1, X_s1_q2,
+       x_s1, x_m)) ;
+
+pred trap_Slave2_a4_s1_out_s3_in_0_flow
+  (var2 X_m_q0, X_m_q1, X_s0_q0, X_s0_q1, X_s0_q2, X_s1_q0, X_s1_q1, X_s1_q2,
+   var1 x_s1, x_s3) =
+   ((x_s1 in X_s1_q0 | x_s3 in X_s0_q0) =>
+    (x_s1 in X_s1_q1 | x_s3 in X_s0_q2));
+
+pred trap_Slave2_a4_s1_out_s3_in_1_flow
+  (var2 X_m_q0, X_m_q1, X_s0_q0, X_s0_q1, X_s0_q2, X_s1_q0, X_s1_q1, X_s1_q2,
+   var1 x_s1, x_s3) =
+   ((x_s1 in X_s1_q0 | x_s3 in X_s0_q0) =>
+    (x_s1 in X_s1_q1 | x_s3 in X_s0_q2));
+
+pred trap_Slave2_a4_s1_out_s3_in_2_flow
+  (var2 X_m_q0, X_m_q1, X_s0_q0, X_s0_q1, X_s0_q2, X_s1_q0, X_s1_q1, X_s1_q2,
+   var1 x_s1, x_s3) =
+   ((x_s1 in X_s1_q0 | x_s3 in X_s1_q1) =>
+    (x_s1 in X_s1_q1 | x_s3 in X_s1_q0));
+
+pred trap_Slave2_a4_s1_out_s3_in_flow
+  (var2 U_Master_a0, U_Slave1_a1, U_Slave1_a2, U_Slave1_a3, U_Slave2_a4,
+   var2 X_m_q0, X_m_q1, X_s0_q0, X_s0_q1, X_s0_q2, X_s1_q0, X_s1_q1, X_s1_q2) =
+  (all1 x_0, x_s1, x_s3 :
+    (x_0 in U_Slave2_a4 & 
+     x_0 = x_s1 & 
+     path_Slave2_a4_s3_Slave1_a1_s0
+       (U_Master_a0, U_Slave1_a1, U_Slave1_a2, U_Slave1_a3, U_Slave2_a4, x_0, x_s3)) =>
+    trap_Slave2_a4_s1_out_s3_in_0_flow
+      (X_m_q0, X_m_q1, X_s0_q0, X_s0_q1, X_s0_q2, X_s1_q0, X_s1_q1, X_s1_q2,
+       x_s1, x_s3))  &
+  (all1 x_0, x_s1, x_s3 :
+    (x_0 in U_Slave2_a4 & 
+     x_0 = x_s1 & 
+     path_Slave2_a4_s3_Slave1_a2_s0
+       (U_Master_a0, U_Slave1_a1, U_Slave1_a2, U_Slave1_a3, U_Slave2_a4, x_0, x_s3)) =>
+    trap_Slave2_a4_s1_out_s3_in_1_flow
+      (X_m_q0, X_m_q1, X_s0_q0, X_s0_q1, X_s0_q2, X_s1_q0, X_s1_q1, X_s1_q2,
+       x_s1, x_s3))  &
+  (all1 x_0, x_s1, x_s3 :
+    (x_0 in U_Slave2_a4 & 
+     x_0 = x_s1 & 
+     path_Slave2_a4_s3_Slave2_a4_s1
+       (U_Master_a0, U_Slave1_a1, U_Slave1_a2, U_Slave1_a3, U_Slave2_a4, x_0, x_s3)) =>
+    trap_Slave2_a4_s1_out_s3_in_2_flow
+      (X_m_q0, X_m_q1, X_s0_q0, X_s0_q1, X_s0_q2, X_s1_q0, X_s1_q1, X_s1_q2,
+       x_s1, x_s3)) ;
+
+pred trap_flow
+  (var2 U_Master_a0, U_Slave1_a1, U_Slave1_a2, U_Slave1_a3, U_Slave2_a4,
+   var2 X_m_q0, X_m_q1, X_s0_q0, X_s0_q1, X_s0_q2, X_s1_q0, X_s1_q1, X_s1_q2) =
+  ext_configuration
+    (U_Master_a0, U_Slave1_a1, U_Slave1_a2, U_Slave1_a3, U_Slave2_a4,
+     X_m_q0, X_m_q1, X_s0_q0, X_s0_q1, X_s0_q2, X_s1_q0, X_s1_q1, X_s1_q2) &
+  trap_Master_a0_s1_out_s0_in_flow
+    (U_Master_a0, U_Slave1_a1, U_Slave1_a2, U_Slave1_a3, U_Slave2_a4,
+     X_m_q0, X_m_q1, X_s0_q0, X_s0_q1, X_s0_q2, X_s1_q0, X_s1_q1, X_s1_q2)  &
+  trap_Slave1_a1_m_snd_s0_rcv_flow
+    (U_Master_a0, U_Slave1_a1, U_Slave1_a2, U_Slave1_a3, U_Slave2_a4,
+     X_m_q0, X_m_q1, X_s0_q0, X_s0_q1, X_s0_q2, X_s1_q0, X_s1_q1, X_s1_q2)  &
+  trap_Slave1_a1_s0_snd_m_rcv_flow
+    (U_Master_a0, U_Slave1_a1, U_Slave1_a2, U_Slave1_a3, U_Slave2_a4,
+     X_m_q0, X_m_q1, X_s0_q0, X_s0_q1, X_s0_q2, X_s1_q0, X_s1_q1, X_s1_q2)  &
+  trap_Slave1_a1_s0_out_s2_in_flow
+    (U_Master_a0, U_Slave1_a1, U_Slave1_a2, U_Slave1_a3, U_Slave2_a4,
+     X_m_q0, X_m_q1, X_s0_q0, X_s0_q1, X_s0_q2, X_s1_q0, X_s1_q1, X_s1_q2)  &
+  trap_Slave1_a2_m_snd_s0_rcv_flow
+    (U_Master_a0, U_Slave1_a1, U_Slave1_a2, U_Slave1_a3, U_Slave2_a4,
+     X_m_q0, X_m_q1, X_s0_q0, X_s0_q1, X_s0_q2, X_s1_q0, X_s1_q1, X_s1_q2)  &
+  trap_Slave1_a2_s0_snd_m_rcv_flow
+    (U_Master_a0, U_Slave1_a1, U_Slave1_a2, U_Slave1_a3, U_Slave2_a4,
+     X_m_q0, X_m_q1, X_s0_q0, X_s0_q1, X_s0_q2, X_s1_q0, X_s1_q1, X_s1_q2)  &
+  trap_Slave1_a2_m_snd_s1_rcv_flow
+    (U_Master_a0, U_Slave1_a1, U_Slave1_a2, U_Slave1_a3, U_Slave2_a4,
+     X_m_q0, X_m_q1, X_s0_q0, X_s0_q1, X_s0_q2, X_s1_q0, X_s1_q1, X_s1_q2)  &
+  trap_Slave1_a2_s1_snd_m_rcv_flow
+    (U_Master_a0, U_Slave1_a1, U_Slave1_a2, U_Slave1_a3, U_Slave2_a4,
+     X_m_q0, X_m_q1, X_s0_q0, X_s0_q1, X_s0_q2, X_s1_q0, X_s1_q1, X_s1_q2)  &
+  trap_Slave1_a2_s0_out_s1_in_flow
+    (U_Master_a0, U_Slave1_a1, U_Slave1_a2, U_Slave1_a3, U_Slave2_a4,
+     X_m_q0, X_m_q1, X_s0_q0, X_s0_q1, X_s0_q2, X_s1_q0, X_s1_q1, X_s1_q2)  &
+  trap_Slave2_a4_m_snd_s1_rcv_flow
+    (U_Master_a0, U_Slave1_a1, U_Slave1_a2, U_Slave1_a3, U_Slave2_a4,
+     X_m_q0, X_m_q1, X_s0_q0, X_s0_q1, X_s0_q2, X_s1_q0, X_s1_q1, X_s1_q2)  &
+  trap_Slave2_a4_s1_snd_m_rcv_flow
+    (U_Master_a0, U_Slave1_a1, U_Slave1_a2, U_Slave1_a3, U_Slave2_a4,
+     X_m_q0, X_m_q1, X_s0_q0, X_s0_q1, X_s0_q2, X_s1_q0, X_s1_q1, X_s1_q2)  &
+  trap_Slave2_a4_s1_out_s3_in_flow
+    (U_Master_a0, U_Slave1_a1, U_Slave1_a2, U_Slave1_a3, U_Slave2_a4,
+     X_m_q0, X_m_q1, X_s0_q0, X_s0_q1, X_s0_q2, X_s1_q0, X_s1_q1, X_s1_q2) ;
+
+pred trap_constraints
+  (var2 U_Master_a0, U_Slave1_a1, U_Slave1_a2, U_Slave1_a3, U_Slave2_a4,
+   var2 Z_m_q0, Z_m_q1, Z_s0_q0, Z_s0_q1, Z_s0_q2, Z_s1_q0, Z_s1_q1, Z_s1_q2) =
+   ext_configuration
+     (U_Master_a0, U_Slave1_a1, U_Slave1_a2, U_Slave1_a3, U_Slave2_a4,
+      Z_m_q0, Z_m_q1, Z_s0_q0, Z_s0_q1, Z_s0_q2, Z_s1_q0, Z_s1_q1, Z_s1_q2) &
+   trap_initially_not_empty
+     (U_Master_a0, U_Slave1_a1, U_Slave1_a2, U_Slave1_a3, U_Slave2_a4,
+      Z_m_q0, Z_m_q1, Z_s0_q0, Z_s0_q1, Z_s0_q2, Z_s1_q0, Z_s1_q1, Z_s1_q2) &
+   trap_flow
+     (U_Master_a0, U_Slave1_a1, U_Slave1_a2, U_Slave1_a3, U_Slave2_a4,
+      Z_m_q0, Z_m_q1, Z_s0_q0, Z_s0_q1, Z_s0_q2, Z_s1_q0, Z_s1_q1, Z_s1_q2);
+
+pred trap_invariant
+  (var2 U_Master_a0, U_Slave1_a1, U_Slave1_a2, U_Slave1_a3, U_Slave2_a4,
+   var2 X_m_q0, X_m_q1, X_s0_q0, X_s0_q1, X_s0_q2, X_s1_q0, X_s1_q1, X_s1_q2) =
+   configuration
+     (U_Master_a0, U_Slave1_a1, U_Slave1_a2, U_Slave1_a3, U_Slave2_a4,
+      X_m_q0, X_m_q1, X_s0_q0, X_s0_q1, X_s0_q2, X_s1_q0, X_s1_q1, X_s1_q2) &
+   all2 Z_m_q0, Z_m_q1, Z_s0_q0, Z_s0_q1, Z_s0_q2, Z_s1_q0, Z_s1_q1, Z_s1_q2:
+     trap_constraints
+       (U_Master_a0, U_Slave1_a1, U_Slave1_a2, U_Slave1_a3, U_Slave2_a4,
+        Z_m_q0, Z_m_q1, Z_s0_q0, Z_s0_q1, Z_s0_q2, Z_s1_q0, Z_s1_q1, Z_s1_q2) =>
+     intersects_8
+       (Z_m_q0, Z_m_q1, Z_s0_q0, Z_s0_q1, Z_s0_q2, Z_s1_q0, Z_s1_q1, Z_s1_q2,
+        X_m_q0, X_m_q1, X_s0_q0, X_s0_q1, X_s0_q2, X_s1_q0, X_s1_q1, X_s1_q2);
+
+
+
+#
+# one invariants
+#
+
+
+
+pred one_initially_exactly_one
+  (var2 U_Master_a0, U_Slave1_a1, U_Slave1_a2, U_Slave1_a3, U_Slave2_a4,
+   var2 X_m_q0, X_m_q1, X_s0_q0, X_s0_q1, X_s0_q2, X_s1_q0, X_s1_q1, X_s1_q2) =
+   ext_configuration
+     (U_Master_a0, U_Slave1_a1, U_Slave1_a2, U_Slave1_a3, U_Slave2_a4,
+      X_m_q0, X_m_q1, X_s0_q0, X_s0_q1, X_s0_q2, X_s1_q0, X_s1_q1, X_s1_q2) &
+   (((ex1 x0 : x0 in X_m_q0 & x0 in U_Master_a0 &
+        all1 x : ((x in X_m_q0 & x in U_Master_a0) => x = x0)) &
+     (all1 x : (x notin X_s0_q0 | x notin U_Slave1_a1)) &
+     (all1 x : (x notin X_s0_q0 | x notin U_Slave1_a2)) &
+     (all1 x : (x notin X_s1_q0 | x notin U_Slave1_a2)) &
+     (all1 x : (x notin X_s1_q0 | x notin U_Slave2_a4))) |
+    ((ex1 x0 : x0 in X_s0_q0 & x0 in U_Slave1_a1 &
+        all1 x : ((x in X_s0_q0 & x in U_Slave1_a1) => x = x0)) &
+     (all1 x : (x notin X_m_q0 | x notin U_Master_a0)) &
+     (all1 x : (x notin X_s0_q0 | x notin U_Slave1_a2)) &
+     (all1 x : (x notin X_s1_q0 | x notin U_Slave1_a2)) &
+     (all1 x : (x notin X_s1_q0 | x notin U_Slave2_a4))) |
+    ((ex1 x0 : x0 in X_s0_q0 & x0 in U_Slave1_a2 &
+        all1 x : ((x in X_s0_q0 & x in U_Slave1_a2) => x = x0)) &
+     (all1 x : (x notin X_m_q0 | x notin U_Master_a0)) &
+     (all1 x : (x notin X_s0_q0 | x notin U_Slave1_a1)) &
+     (all1 x : (x notin X_s1_q0 | x notin U_Slave1_a2)) &
+     (all1 x : (x notin X_s1_q0 | x notin U_Slave2_a4))) |
+    ((ex1 x0 : x0 in X_s1_q0 & x0 in U_Slave1_a2 &
+        all1 x : ((x in X_s1_q0 & x in U_Slave1_a2) => x = x0)) &
+     (all1 x : (x notin X_m_q0 | x notin U_Master_a0)) &
+     (all1 x : (x notin X_s0_q0 | x notin U_Slave1_a1)) &
+     (all1 x : (x notin X_s0_q0 | x notin U_Slave1_a2)) &
+     (all1 x : (x notin X_s1_q0 | x notin U_Slave2_a4))) |
+    ((ex1 x0 : x0 in X_s1_q0 & x0 in U_Slave2_a4 &
+        all1 x : ((x in X_s1_q0 & x in U_Slave2_a4) => x = x0)) &
+     (all1 x : (x notin X_m_q0 | x notin U_Master_a0)) &
+     (all1 x : (x notin X_s0_q0 | x notin U_Slave1_a1)) &
+     (all1 x : (x notin X_s0_q0 | x notin U_Slave1_a2)) &
+     (all1 x : (x notin X_s1_q0 | x notin U_Slave1_a2))));
+
+
+pred one_Master_a0_s1_out_s0_in_0_flow
+  (var2 X_m_q0, X_m_q1, X_s0_q0, X_s0_q1, X_s0_q2, X_s1_q0, X_s1_q1, X_s1_q2,
+   var1 x_s1, x_s0) =
+   one_transition_flow_2(x_s1, X_s1_q0, X_s1_q1, x_s0, X_s0_q0, X_s0_q2);
+
+pred one_Master_a0_s1_out_s0_in_1_flow
+  (var2 X_m_q0, X_m_q1, X_s0_q0, X_s0_q1, X_s0_q2, X_s1_q0, X_s1_q1, X_s1_q2,
+   var1 x_s1, x_s0) =
+   one_transition_flow_2(x_s1, X_s1_q0, X_s1_q1, x_s0, X_s0_q0, X_s0_q2);
+
+pred one_Master_a0_s1_out_s0_in_2_flow
+  (var2 X_m_q0, X_m_q1, X_s0_q0, X_s0_q1, X_s0_q2, X_s1_q0, X_s1_q1, X_s1_q2,
+   var1 x_s1, x_s0) =
+   one_transition_flow_2(x_s1, X_s1_q0, X_s1_q1, x_s0, X_s1_q1, X_s1_q0);
+
+pred one_Master_a0_s1_out_s0_in_flow
+  (var2 U_Master_a0, U_Slave1_a1, U_Slave1_a2, U_Slave1_a3, U_Slave2_a4,
+   var2 X_m_q0, X_m_q1, X_s0_q0, X_s0_q1, X_s0_q2, X_s1_q0, X_s1_q1, X_s1_q2) =
+  (all1 x_0, x_s1, x_s0 :
+    (x_0 in U_Master_a0
+     & 
+     path_Master_a0_s1_Slave1_a2_s1
+       (U_Master_a0, U_Slave1_a1, U_Slave1_a2, U_Slave1_a3, U_Slave2_a4, x_0, x_s1) &
+     path_Master_a0_s0_Slave1_a1_s0
+       (U_Master_a0, U_Slave1_a1, U_Slave1_a2, U_Slave1_a3, U_Slave2_a4, x_0, x_s0)) =>
+    one_Master_a0_s1_out_s0_in_0_flow
+      (X_m_q0, X_m_q1, X_s0_q0, X_s0_q1, X_s0_q2, X_s1_q0, X_s1_q1, X_s1_q2,
+       x_s1, x_s0))  &
+  (all1 x_0, x_s1, x_s0 :
+    (x_0 in U_Master_a0
+     & 
+     path_Master_a0_s1_Slave1_a2_s1
+       (U_Master_a0, U_Slave1_a1, U_Slave1_a2, U_Slave1_a3, U_Slave2_a4, x_0, x_s1) &
+     path_Master_a0_s0_Slave1_a2_s0
+       (U_Master_a0, U_Slave1_a1, U_Slave1_a2, U_Slave1_a3, U_Slave2_a4, x_0, x_s0)) =>
+    one_Master_a0_s1_out_s0_in_1_flow
+      (X_m_q0, X_m_q1, X_s0_q0, X_s0_q1, X_s0_q2, X_s1_q0, X_s1_q1, X_s1_q2,
+       x_s1, x_s0))  &
+  (all1 x_0, x_s1, x_s0 :
+    (x_0 in U_Master_a0
+     & 
+     path_Master_a0_s1_Slave1_a2_s1
+       (U_Master_a0, U_Slave1_a1, U_Slave1_a2, U_Slave1_a3, U_Slave2_a4, x_0, x_s1) &
+     path_Master_a0_s0_Slave2_a4_s1
+       (U_Master_a0, U_Slave1_a1, U_Slave1_a2, U_Slave1_a3, U_Slave2_a4, x_0, x_s0)) =>
+    one_Master_a0_s1_out_s0_in_2_flow
+      (X_m_q0, X_m_q1, X_s0_q0, X_s0_q1, X_s0_q2, X_s1_q0, X_s1_q1, X_s1_q2,
+       x_s1, x_s0)) ;
+
+pred one_Slave1_a1_m_snd_s0_rcv_0_flow
+  (var2 X_m_q0, X_m_q1, X_s0_q0, X_s0_q1, X_s0_q2, X_s1_q0, X_s1_q1, X_s1_q2,
+   var1 x_m, x_s0) =
+   one_transition_flow_2(x_m, X_m_q0, X_m_q1, x_s0, X_s0_q0, X_s0_q1);
+
+pred one_Slave1_a1_m_snd_s0_rcv_flow
+  (var2 U_Master_a0, U_Slave1_a1, U_Slave1_a2, U_Slave1_a3, U_Slave2_a4,
+   var2 X_m_q0, X_m_q1, X_s0_q0, X_s0_q1, X_s0_q2, X_s1_q0, X_s1_q1, X_s1_q2) =
+  (all1 x_0, x_m, x_s0 :
+    (x_0 in U_Slave1_a1 & 
+     x_0 = x_s0 & 
+     path_Slave1_a1_m_Master_a0_m
+       (U_Master_a0, U_Slave1_a1, U_Slave1_a2, U_Slave1_a3, U_Slave2_a4, x_0, x_m)) =>
+    one_Slave1_a1_m_snd_s0_rcv_0_flow
+      (X_m_q0, X_m_q1, X_s0_q0, X_s0_q1, X_s0_q2, X_s1_q0, X_s1_q1, X_s1_q2,
+       x_m, x_s0)) ;
+
+pred one_Slave1_a1_s0_snd_m_rcv_0_flow
+  (var2 X_m_q0, X_m_q1, X_s0_q0, X_s0_q1, X_s0_q2, X_s1_q0, X_s1_q1, X_s1_q2,
+   var1 x_s0, x_m) =
+   one_transition_flow_2(x_s0, X_s0_q1, X_s0_q0, x_m, X_m_q1, X_m_q0);
+
+pred one_Slave1_a1_s0_snd_m_rcv_flow
+  (var2 U_Master_a0, U_Slave1_a1, U_Slave1_a2, U_Slave1_a3, U_Slave2_a4,
+   var2 X_m_q0, X_m_q1, X_s0_q0, X_s0_q1, X_s0_q2, X_s1_q0, X_s1_q1, X_s1_q2) =
+  (all1 x_0, x_s0, x_m :
+    (x_0 in U_Slave1_a1 & 
+     x_0 = x_s0 & 
+     path_Slave1_a1_m_Master_a0_m
+       (U_Master_a0, U_Slave1_a1, U_Slave1_a2, U_Slave1_a3, U_Slave2_a4, x_0, x_m)) =>
+    one_Slave1_a1_s0_snd_m_rcv_0_flow
+      (X_m_q0, X_m_q1, X_s0_q0, X_s0_q1, X_s0_q2, X_s1_q0, X_s1_q1, X_s1_q2,
+       x_s0, x_m)) ;
+
+pred one_Slave1_a1_s0_out_s2_in_0_flow
+  (var2 X_m_q0, X_m_q1, X_s0_q0, X_s0_q1, X_s0_q2, X_s1_q0, X_s1_q1, X_s1_q2,
+   var1 x_s0, x_s2) =
+   one_transition_flow_2(x_s0, X_s0_q2, X_s0_q0, x_s2, X_s0_q0, X_s0_q2);
+
+pred one_Slave1_a1_s0_out_s2_in_1_flow
+  (var2 X_m_q0, X_m_q1, X_s0_q0, X_s0_q1, X_s0_q2, X_s1_q0, X_s1_q1, X_s1_q2,
+   var1 x_s0, x_s2) =
+   one_transition_flow_2(x_s0, X_s0_q2, X_s0_q0, x_s2, X_s0_q0, X_s0_q2);
+
+pred one_Slave1_a1_s0_out_s2_in_2_flow
+  (var2 X_m_q0, X_m_q1, X_s0_q0, X_s0_q1, X_s0_q2, X_s1_q0, X_s1_q1, X_s1_q2,
+   var1 x_s0, x_s2) =
+   one_transition_flow_2(x_s0, X_s0_q2, X_s0_q0, x_s2, X_s1_q1, X_s1_q0);
+
+pred one_Slave1_a1_s0_out_s2_in_flow
+  (var2 U_Master_a0, U_Slave1_a1, U_Slave1_a2, U_Slave1_a3, U_Slave2_a4,
+   var2 X_m_q0, X_m_q1, X_s0_q0, X_s0_q1, X_s0_q2, X_s1_q0, X_s1_q1, X_s1_q2) =
+  (all1 x_0, x_s0, x_s2 :
+    (x_0 in U_Slave1_a1 & 
+     x_0 = x_s0 & 
+     path_Slave1_a1_s2_Slave1_a1_s0
+       (U_Master_a0, U_Slave1_a1, U_Slave1_a2, U_Slave1_a3, U_Slave2_a4, x_0, x_s2)) =>
+    one_Slave1_a1_s0_out_s2_in_0_flow
+      (X_m_q0, X_m_q1, X_s0_q0, X_s0_q1, X_s0_q2, X_s1_q0, X_s1_q1, X_s1_q2,
+       x_s0, x_s2))  &
+  (all1 x_0, x_s0, x_s2 :
+    (x_0 in U_Slave1_a1 & 
+     x_0 = x_s0 & 
+     path_Slave1_a1_s2_Slave1_a2_s0
+       (U_Master_a0, U_Slave1_a1, U_Slave1_a2, U_Slave1_a3, U_Slave2_a4, x_0, x_s2)) =>
+    one_Slave1_a1_s0_out_s2_in_1_flow
+      (X_m_q0, X_m_q1, X_s0_q0, X_s0_q1, X_s0_q2, X_s1_q0, X_s1_q1, X_s1_q2,
+       x_s0, x_s2))  &
+  (all1 x_0, x_s0, x_s2 :
+    (x_0 in U_Slave1_a1 & 
+     x_0 = x_s0 & 
+     path_Slave1_a1_s2_Slave2_a4_s1
+       (U_Master_a0, U_Slave1_a1, U_Slave1_a2, U_Slave1_a3, U_Slave2_a4, x_0, x_s2)) =>
+    one_Slave1_a1_s0_out_s2_in_2_flow
+      (X_m_q0, X_m_q1, X_s0_q0, X_s0_q1, X_s0_q2, X_s1_q0, X_s1_q1, X_s1_q2,
+       x_s0, x_s2)) ;
+
+pred one_Slave1_a2_m_snd_s0_rcv_0_flow
+  (var2 X_m_q0, X_m_q1, X_s0_q0, X_s0_q1, X_s0_q2, X_s1_q0, X_s1_q1, X_s1_q2,
+   var1 x_m, x_s0) =
+   one_transition_flow_2(x_m, X_m_q0, X_m_q1, x_s0, X_s0_q0, X_s0_q1);
+
+pred one_Slave1_a2_m_snd_s0_rcv_flow
+  (var2 U_Master_a0, U_Slave1_a1, U_Slave1_a2, U_Slave1_a3, U_Slave2_a4,
+   var2 X_m_q0, X_m_q1, X_s0_q0, X_s0_q1, X_s0_q2, X_s1_q0, X_s1_q1, X_s1_q2) =
+  (all1 x_0, x_m, x_s0 :
+    (x_0 in U_Slave1_a2 & 
+     x_0 = x_s0 & 
+     path_Slave1_a2_m_Master_a0_m
+       (U_Master_a0, U_Slave1_a1, U_Slave1_a2, U_Slave1_a3, U_Slave2_a4, x_0, x_m)) =>
+    one_Slave1_a2_m_snd_s0_rcv_0_flow
+      (X_m_q0, X_m_q1, X_s0_q0, X_s0_q1, X_s0_q2, X_s1_q0, X_s1_q1, X_s1_q2,
+       x_m, x_s0)) ;
+
+pred one_Slave1_a2_s0_snd_m_rcv_0_flow
+  (var2 X_m_q0, X_m_q1, X_s0_q0, X_s0_q1, X_s0_q2, X_s1_q0, X_s1_q1, X_s1_q2,
+   var1 x_s0, x_m) =
+   one_transition_flow_2(x_s0, X_s0_q1, X_s0_q0, x_m, X_m_q1, X_m_q0);
+
+pred one_Slave1_a2_s0_snd_m_rcv_flow
+  (var2 U_Master_a0, U_Slave1_a1, U_Slave1_a2, U_Slave1_a3, U_Slave2_a4,
+   var2 X_m_q0, X_m_q1, X_s0_q0, X_s0_q1, X_s0_q2, X_s1_q0, X_s1_q1, X_s1_q2) =
+  (all1 x_0, x_s0, x_m :
+    (x_0 in U_Slave1_a2 & 
+     x_0 = x_s0 & 
+     path_Slave1_a2_m_Master_a0_m
+       (U_Master_a0, U_Slave1_a1, U_Slave1_a2, U_Slave1_a3, U_Slave2_a4, x_0, x_m)) =>
+    one_Slave1_a2_s0_snd_m_rcv_0_flow
+      (X_m_q0, X_m_q1, X_s0_q0, X_s0_q1, X_s0_q2, X_s1_q0, X_s1_q1, X_s1_q2,
+       x_s0, x_m)) ;
+
+pred one_Slave1_a2_m_snd_s1_rcv_0_flow
+  (var2 X_m_q0, X_m_q1, X_s0_q0, X_s0_q1, X_s0_q2, X_s1_q0, X_s1_q1, X_s1_q2,
+   var1 x_m, x_s1) =
+   one_transition_flow_2(x_m, X_m_q0, X_m_q1, x_s1, X_s1_q1, X_s1_q2);
+
+pred one_Slave1_a2_m_snd_s1_rcv_flow
+  (var2 U_Master_a0, U_Slave1_a1, U_Slave1_a2, U_Slave1_a3, U_Slave2_a4,
+   var2 X_m_q0, X_m_q1, X_s0_q0, X_s0_q1, X_s0_q2, X_s1_q0, X_s1_q1, X_s1_q2) =
+  (all1 x_0, x_m, x_s1 :
+    (x_0 in U_Slave1_a2 & 
+     x_0 = x_s1 & 
+     path_Slave1_a2_m_Master_a0_m
+       (U_Master_a0, U_Slave1_a1, U_Slave1_a2, U_Slave1_a3, U_Slave2_a4, x_0, x_m)) =>
+    one_Slave1_a2_m_snd_s1_rcv_0_flow
+      (X_m_q0, X_m_q1, X_s0_q0, X_s0_q1, X_s0_q2, X_s1_q0, X_s1_q1, X_s1_q2,
+       x_m, x_s1)) ;
+
+pred one_Slave1_a2_s1_snd_m_rcv_0_flow
+  (var2 X_m_q0, X_m_q1, X_s0_q0, X_s0_q1, X_s0_q2, X_s1_q0, X_s1_q1, X_s1_q2,
+   var1 x_s1, x_m) =
+   one_transition_flow_2(x_s1, X_s1_q2, X_s1_q1, x_m, X_m_q1, X_m_q0);
+
+pred one_Slave1_a2_s1_snd_m_rcv_flow
+  (var2 U_Master_a0, U_Slave1_a1, U_Slave1_a2, U_Slave1_a3, U_Slave2_a4,
+   var2 X_m_q0, X_m_q1, X_s0_q0, X_s0_q1, X_s0_q2, X_s1_q0, X_s1_q1, X_s1_q2) =
+  (all1 x_0, x_s1, x_m :
+    (x_0 in U_Slave1_a2 & 
+     x_0 = x_s1 & 
+     path_Slave1_a2_m_Master_a0_m
+       (U_Master_a0, U_Slave1_a1, U_Slave1_a2, U_Slave1_a3, U_Slave2_a4, x_0, x_m)) =>
+    one_Slave1_a2_s1_snd_m_rcv_0_flow
+      (X_m_q0, X_m_q1, X_s0_q0, X_s0_q1, X_s0_q2, X_s1_q0, X_s1_q1, X_s1_q2,
+       x_s1, x_m)) ;
+
+pred one_Slave1_a2_s0_out_s1_in_0_flow
+  (var2 X_m_q0, X_m_q1, X_s0_q0, X_s0_q1, X_s0_q2, X_s1_q0, X_s1_q1, X_s1_q2,
+   var1 x_s0, x_s1) =
+   one_transition_flow_2(x_s0, X_s0_q2, X_s0_q0, x_s1, X_s1_q1, X_s1_q0);
+
+pred one_Slave1_a2_s0_out_s1_in_flow
+  (var2 U_Master_a0, U_Slave1_a1, U_Slave1_a2, U_Slave1_a3, U_Slave2_a4,
+   var2 X_m_q0, X_m_q1, X_s0_q0, X_s0_q1, X_s0_q2, X_s1_q0, X_s1_q1, X_s1_q2) =
+  (all1 x_0, x_s0, x_s1 :
+    (x_0 in U_Slave1_a2 & 
+     x_0 = x_s0 &
+     x_0 = x_s1
+    ) =>
+    one_Slave1_a2_s0_out_s1_in_0_flow
+      (X_m_q0, X_m_q1, X_s0_q0, X_s0_q1, X_s0_q2, X_s1_q0, X_s1_q1, X_s1_q2,
+       x_s0, x_s1)) ;
+
+pred one_Slave2_a4_m_snd_s1_rcv_0_flow
+  (var2 X_m_q0, X_m_q1, X_s0_q0, X_s0_q1, X_s0_q2, X_s1_q0, X_s1_q1, X_s1_q2,
+   var1 x_m, x_s1) =
+   one_transition_flow_2(x_m, X_m_q0, X_m_q1, x_s1, X_s1_q1, X_s1_q2);
+
+pred one_Slave2_a4_m_snd_s1_rcv_flow
+  (var2 U_Master_a0, U_Slave1_a1, U_Slave1_a2, U_Slave1_a3, U_Slave2_a4,
+   var2 X_m_q0, X_m_q1, X_s0_q0, X_s0_q1, X_s0_q2, X_s1_q0, X_s1_q1, X_s1_q2) =
+  (all1 x_0, x_m, x_s1 :
+    (x_0 in U_Slave2_a4 & 
+     x_0 = x_s1 & 
+     path_Slave2_a4_m_Master_a0_m
+       (U_Master_a0, U_Slave1_a1, U_Slave1_a2, U_Slave1_a3, U_Slave2_a4, x_0, x_m)) =>
+    one_Slave2_a4_m_snd_s1_rcv_0_flow
+      (X_m_q0, X_m_q1, X_s0_q0, X_s0_q1, X_s0_q2, X_s1_q0, X_s1_q1, X_s1_q2,
+       x_m, x_s1)) ;
+
+pred one_Slave2_a4_s1_snd_m_rcv_0_flow
+  (var2 X_m_q0, X_m_q1, X_s0_q0, X_s0_q1, X_s0_q2, X_s1_q0, X_s1_q1, X_s1_q2,
+   var1 x_s1, x_m) =
+   one_transition_flow_2(x_s1, X_s1_q2, X_s1_q1, x_m, X_m_q1, X_m_q0);
+
+pred one_Slave2_a4_s1_snd_m_rcv_flow
+  (var2 U_Master_a0, U_Slave1_a1, U_Slave1_a2, U_Slave1_a3, U_Slave2_a4,
+   var2 X_m_q0, X_m_q1, X_s0_q0, X_s0_q1, X_s0_q2, X_s1_q0, X_s1_q1, X_s1_q2) =
+  (all1 x_0, x_s1, x_m :
+    (x_0 in U_Slave2_a4 & 
+     x_0 = x_s1 & 
+     path_Slave2_a4_m_Master_a0_m
+       (U_Master_a0, U_Slave1_a1, U_Slave1_a2, U_Slave1_a3, U_Slave2_a4, x_0, x_m)) =>
+    one_Slave2_a4_s1_snd_m_rcv_0_flow
+      (X_m_q0, X_m_q1, X_s0_q0, X_s0_q1, X_s0_q2, X_s1_q0, X_s1_q1, X_s1_q2,
+       x_s1, x_m)) ;
+
+pred one_Slave2_a4_s1_out_s3_in_0_flow
+  (var2 X_m_q0, X_m_q1, X_s0_q0, X_s0_q1, X_s0_q2, X_s1_q0, X_s1_q1, X_s1_q2,
+   var1 x_s1, x_s3) =
+   one_transition_flow_2(x_s1, X_s1_q0, X_s1_q1, x_s3, X_s0_q0, X_s0_q2);
+
+pred one_Slave2_a4_s1_out_s3_in_1_flow
+  (var2 X_m_q0, X_m_q1, X_s0_q0, X_s0_q1, X_s0_q2, X_s1_q0, X_s1_q1, X_s1_q2,
+   var1 x_s1, x_s3) =
+   one_transition_flow_2(x_s1, X_s1_q0, X_s1_q1, x_s3, X_s0_q0, X_s0_q2);
+
+pred one_Slave2_a4_s1_out_s3_in_2_flow
+  (var2 X_m_q0, X_m_q1, X_s0_q0, X_s0_q1, X_s0_q2, X_s1_q0, X_s1_q1, X_s1_q2,
+   var1 x_s1, x_s3) =
+   one_transition_flow_2(x_s1, X_s1_q0, X_s1_q1, x_s3, X_s1_q1, X_s1_q0);
+
+pred one_Slave2_a4_s1_out_s3_in_flow
+  (var2 U_Master_a0, U_Slave1_a1, U_Slave1_a2, U_Slave1_a3, U_Slave2_a4,
+   var2 X_m_q0, X_m_q1, X_s0_q0, X_s0_q1, X_s0_q2, X_s1_q0, X_s1_q1, X_s1_q2) =
+  (all1 x_0, x_s1, x_s3 :
+    (x_0 in U_Slave2_a4 & 
+     x_0 = x_s1 & 
+     path_Slave2_a4_s3_Slave1_a1_s0
+       (U_Master_a0, U_Slave1_a1, U_Slave1_a2, U_Slave1_a3, U_Slave2_a4, x_0, x_s3)) =>
+    one_Slave2_a4_s1_out_s3_in_0_flow
+      (X_m_q0, X_m_q1, X_s0_q0, X_s0_q1, X_s0_q2, X_s1_q0, X_s1_q1, X_s1_q2,
+       x_s1, x_s3))  &
+  (all1 x_0, x_s1, x_s3 :
+    (x_0 in U_Slave2_a4 & 
+     x_0 = x_s1 & 
+     path_Slave2_a4_s3_Slave1_a2_s0
+       (U_Master_a0, U_Slave1_a1, U_Slave1_a2, U_Slave1_a3, U_Slave2_a4, x_0, x_s3)) =>
+    one_Slave2_a4_s1_out_s3_in_1_flow
+      (X_m_q0, X_m_q1, X_s0_q0, X_s0_q1, X_s0_q2, X_s1_q0, X_s1_q1, X_s1_q2,
+       x_s1, x_s3))  &
+  (all1 x_0, x_s1, x_s3 :
+    (x_0 in U_Slave2_a4 & 
+     x_0 = x_s1 & 
+     path_Slave2_a4_s3_Slave2_a4_s1
+       (U_Master_a0, U_Slave1_a1, U_Slave1_a2, U_Slave1_a3, U_Slave2_a4, x_0, x_s3)) =>
+    one_Slave2_a4_s1_out_s3_in_2_flow
+      (X_m_q0, X_m_q1, X_s0_q0, X_s0_q1, X_s0_q2, X_s1_q0, X_s1_q1, X_s1_q2,
+       x_s1, x_s3)) ;
+
+pred one_flow
+  (var2 U_Master_a0, U_Slave1_a1, U_Slave1_a2, U_Slave1_a3, U_Slave2_a4,
+   var2 X_m_q0, X_m_q1, X_s0_q0, X_s0_q1, X_s0_q2, X_s1_q0, X_s1_q1, X_s1_q2) =
+  ext_configuration
+    (U_Master_a0, U_Slave1_a1, U_Slave1_a2, U_Slave1_a3, U_Slave2_a4,
+     X_m_q0, X_m_q1, X_s0_q0, X_s0_q1, X_s0_q2, X_s1_q0, X_s1_q1, X_s1_q2) &
+  one_Master_a0_s1_out_s0_in_flow
+    (U_Master_a0, U_Slave1_a1, U_Slave1_a2, U_Slave1_a3, U_Slave2_a4,
+     X_m_q0, X_m_q1, X_s0_q0, X_s0_q1, X_s0_q2, X_s1_q0, X_s1_q1, X_s1_q2)  &
+  one_Slave1_a1_m_snd_s0_rcv_flow
+    (U_Master_a0, U_Slave1_a1, U_Slave1_a2, U_Slave1_a3, U_Slave2_a4,
+     X_m_q0, X_m_q1, X_s0_q0, X_s0_q1, X_s0_q2, X_s1_q0, X_s1_q1, X_s1_q2)  &
+  one_Slave1_a1_s0_snd_m_rcv_flow
+    (U_Master_a0, U_Slave1_a1, U_Slave1_a2, U_Slave1_a3, U_Slave2_a4,
+     X_m_q0, X_m_q1, X_s0_q0, X_s0_q1, X_s0_q2, X_s1_q0, X_s1_q1, X_s1_q2)  &
+  one_Slave1_a1_s0_out_s2_in_flow
+    (U_Master_a0, U_Slave1_a1, U_Slave1_a2, U_Slave1_a3, U_Slave2_a4,
+     X_m_q0, X_m_q1, X_s0_q0, X_s0_q1, X_s0_q2, X_s1_q0, X_s1_q1, X_s1_q2)  &
+  one_Slave1_a2_m_snd_s0_rcv_flow
+    (U_Master_a0, U_Slave1_a1, U_Slave1_a2, U_Slave1_a3, U_Slave2_a4,
+     X_m_q0, X_m_q1, X_s0_q0, X_s0_q1, X_s0_q2, X_s1_q0, X_s1_q1, X_s1_q2)  &
+  one_Slave1_a2_s0_snd_m_rcv_flow
+    (U_Master_a0, U_Slave1_a1, U_Slave1_a2, U_Slave1_a3, U_Slave2_a4,
+     X_m_q0, X_m_q1, X_s0_q0, X_s0_q1, X_s0_q2, X_s1_q0, X_s1_q1, X_s1_q2)  &
+  one_Slave1_a2_m_snd_s1_rcv_flow
+    (U_Master_a0, U_Slave1_a1, U_Slave1_a2, U_Slave1_a3, U_Slave2_a4,
+     X_m_q0, X_m_q1, X_s0_q0, X_s0_q1, X_s0_q2, X_s1_q0, X_s1_q1, X_s1_q2)  &
+  one_Slave1_a2_s1_snd_m_rcv_flow
+    (U_Master_a0, U_Slave1_a1, U_Slave1_a2, U_Slave1_a3, U_Slave2_a4,
+     X_m_q0, X_m_q1, X_s0_q0, X_s0_q1, X_s0_q2, X_s1_q0, X_s1_q1, X_s1_q2)  &
+  one_Slave1_a2_s0_out_s1_in_flow
+    (U_Master_a0, U_Slave1_a1, U_Slave1_a2, U_Slave1_a3, U_Slave2_a4,
+     X_m_q0, X_m_q1, X_s0_q0, X_s0_q1, X_s0_q2, X_s1_q0, X_s1_q1, X_s1_q2)  &
+  one_Slave2_a4_m_snd_s1_rcv_flow
+    (U_Master_a0, U_Slave1_a1, U_Slave1_a2, U_Slave1_a3, U_Slave2_a4,
+     X_m_q0, X_m_q1, X_s0_q0, X_s0_q1, X_s0_q2, X_s1_q0, X_s1_q1, X_s1_q2)  &
+  one_Slave2_a4_s1_snd_m_rcv_flow
+    (U_Master_a0, U_Slave1_a1, U_Slave1_a2, U_Slave1_a3, U_Slave2_a4,
+     X_m_q0, X_m_q1, X_s0_q0, X_s0_q1, X_s0_q2, X_s1_q0, X_s1_q1, X_s1_q2)  &
+  one_Slave2_a4_s1_out_s3_in_flow
+    (U_Master_a0, U_Slave1_a1, U_Slave1_a2, U_Slave1_a3, U_Slave2_a4,
+     X_m_q0, X_m_q1, X_s0_q0, X_s0_q1, X_s0_q2, X_s1_q0, X_s1_q1, X_s1_q2) ;
+
+pred one_constraints
+  (var2 U_Master_a0, U_Slave1_a1, U_Slave1_a2, U_Slave1_a3, U_Slave2_a4,
+   var2 Z_m_q0, Z_m_q1, Z_s0_q0, Z_s0_q1, Z_s0_q2, Z_s1_q0, Z_s1_q1, Z_s1_q2) =
+   ext_configuration
+     (U_Master_a0, U_Slave1_a1, U_Slave1_a2, U_Slave1_a3, U_Slave2_a4,
+      Z_m_q0, Z_m_q1, Z_s0_q0, Z_s0_q1, Z_s0_q2, Z_s1_q0, Z_s1_q1, Z_s1_q2) &
+   one_initially_exactly_one
+     (U_Master_a0, U_Slave1_a1, U_Slave1_a2, U_Slave1_a3, U_Slave2_a4,
+      Z_m_q0, Z_m_q1, Z_s0_q0, Z_s0_q1, Z_s0_q2, Z_s1_q0, Z_s1_q1, Z_s1_q2) &
+   one_flow
+     (U_Master_a0, U_Slave1_a1, U_Slave1_a2, U_Slave1_a3, U_Slave2_a4,
+      Z_m_q0, Z_m_q1, Z_s0_q0, Z_s0_q1, Z_s0_q2, Z_s1_q0, Z_s1_q1, Z_s1_q2);
+
+pred one_invariant
+  (var2 U_Master_a0, U_Slave1_a1, U_Slave1_a2, U_Slave1_a3, U_Slave2_a4,
+   var2 X_m_q0, X_m_q1, X_s0_q0, X_s0_q1, X_s0_q2, X_s1_q0, X_s1_q1, X_s1_q2) =
+   configuration
+     (U_Master_a0, U_Slave1_a1, U_Slave1_a2, U_Slave1_a3, U_Slave2_a4,
+      X_m_q0, X_m_q1, X_s0_q0, X_s0_q1, X_s0_q2, X_s1_q0, X_s1_q1, X_s1_q2) &
+   all2 Z_m_q0, Z_m_q1, Z_s0_q0, Z_s0_q1, Z_s0_q2, Z_s1_q0, Z_s1_q1, Z_s1_q2 :
+     one_constraints
+       (U_Master_a0, U_Slave1_a1, U_Slave1_a2, U_Slave1_a3, U_Slave2_a4,
+        Z_m_q0, Z_m_q1, Z_s0_q0, Z_s0_q1, Z_s0_q2, Z_s1_q0, Z_s1_q1, Z_s1_q2) =>
+     uniquely_intersects_8
+       (Z_m_q0, Z_m_q1, Z_s0_q0, Z_s0_q1, Z_s0_q2, Z_s1_q0, Z_s1_q1, Z_s1_q2,
+        X_m_q0, X_m_q1, X_s0_q0, X_s0_q1, X_s0_q2, X_s1_q0, X_s1_q1, X_s1_q2);
+
+
+
+#
+# star-ring-generic_mutex.mona
+#
+
+
+
+pred not_mutex
+  (var2 U_Master_a0, U_Slave1_a1, U_Slave1_a2, U_Slave1_a3, U_Slave2_a4,
+   var2 X_m_q0, X_m_q1, X_s0_q0, X_s0_q1, X_s0_q2, X_s1_q0, X_s1_q1, X_s1_q2) =
+   configuration
+     (U_Master_a0, U_Slave1_a1, U_Slave1_a2, U_Slave1_a3, U_Slave2_a4,
+      X_m_q0, X_m_q1, X_s0_q0, X_s0_q1, X_s0_q2, X_s1_q0, X_s1_q1, X_s1_q2) &
+   ex1 x1, x2:
+     ( x1 ~= x2 &
+       (x1 in X_s0_q2 | x1 in X_s1_q0) &
+       (x2 in X_s0_q2 | x2 in X_s1_q0));
+
+
+#
+# assertions checking
+#
+
+var2 U_Master_a0, U_Slave1_a1, U_Slave1_a2, U_Slave1_a3, U_Slave2_a4;
+
+var2 X_m_q0, X_m_q1, X_s0_q0, X_s0_q1, X_s0_q2, X_s1_q0, X_s1_q1, X_s1_q2;
+
+trap_invariant
+  (U_Master_a0, U_Slave1_a1, U_Slave1_a2, U_Slave1_a3, U_Slave2_a4,
+   X_m_q0, X_m_q1, X_s0_q0, X_s0_q1, X_s0_q2, X_s1_q0, X_s1_q1, X_s1_q2) &
+one_invariant
+  (U_Master_a0, U_Slave1_a1, U_Slave1_a2, U_Slave1_a3, U_Slave2_a4,
+   X_m_q0, X_m_q1, X_s0_q0, X_s0_q1, X_s0_q2, X_s1_q0, X_s1_q1, X_s1_q2) &
+not_mutex
+  (U_Master_a0, U_Slave1_a1, U_Slave1_a2, U_Slave1_a3, U_Slave2_a4,
+   X_m_q0, X_m_q1, X_s0_q0, X_s0_q1, X_s0_q2, X_s1_q0, X_s1_q1, X_s1_q2);

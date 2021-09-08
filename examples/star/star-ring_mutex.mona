@@ -1,0 +1,10 @@
+pred not_mutex
+  (var2 U_Master_a0, U_Slave_a1, U_Slave_a2,
+   var2 X_m_q0, X_m_q1, X_s0_q0, X_s0_q1, X_s0_q2, X_s1_q0, X_s1_q1, X_s1_q2) =
+   configuration
+     (U_Master_a0, U_Slave_a1, U_Slave_a2,
+      X_m_q0, X_m_q1, X_s0_q0, X_s0_q1, X_s0_q2, X_s1_q0, X_s1_q1, X_s1_q2) &
+   ex1 x1, x2:
+     ( x1 ~= x2 &
+       (x1 in X_s0_q2 | x1 in X_s1_q0 ) &
+       (x2 in X_s0_q2 | x2 in X_s1_q0 ));

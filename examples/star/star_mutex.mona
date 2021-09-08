@@ -1,0 +1,4 @@
+pred not_mutex
+  (var2 U_Master_a0, U_Slave_a1, U_Slave_a2,
+   var2 X_m_q0, X_m_q1, X_s_q0, X_s_q1) =
+true;

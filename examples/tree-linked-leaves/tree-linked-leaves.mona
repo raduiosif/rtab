@@ -1,0 +1,1531 @@
+ws2s;
+
+pred intersects_1(var2 X, Y) =
+  (ex1 x: (x in X) & (x in Y));
+
+pred included_1(var2 X, Y) =
+  (all1 x: (x in X) => (x in Y));
+
+pred intersects_11
+  (var2 X_1, X_2, X_3, X_4, X_5, X_6, X_7, X_8, X_9, X_10, X_11,
+   var2 Y_1, Y_2, Y_3, Y_4, Y_5, Y_6, Y_7, Y_8, Y_9, Y_10, Y_11) =
+   intersects_1(X_1, Y_1) |
+   intersects_1(X_2, Y_2) |
+   intersects_1(X_3, Y_3) |
+   intersects_1(X_4, Y_4) |
+   intersects_1(X_5, Y_5) |
+   intersects_1(X_6, Y_6) |
+   intersects_1(X_7, Y_7) |
+   intersects_1(X_8, Y_8) |
+   intersects_1(X_9, Y_9) |
+   intersects_1(X_10, Y_10) |
+   intersects_1(X_11, Y_11);
+
+pred uniquely_intersects_11
+  (var2 X_1, X_2, X_3, X_4, X_5, X_6, X_7, X_8, X_9, X_10, X_11,
+   var2 Y_1, Y_2, Y_3, Y_4, Y_5, Y_6, Y_7, Y_8, Y_9, Y_10, Y_11) =
+  (ex1 x: (
+( (x in X_1 & x in Y_1) &
+ ~(x in X_2 & x in Y_2) &
+ ~(x in X_3 & x in Y_3) &
+ ~(x in X_4 & x in Y_4) &
+ ~(x in X_5 & x in Y_5) &
+ ~(x in X_6 & x in Y_6) &
+ ~(x in X_7 & x in Y_7) &
+ ~(x in X_8 & x in Y_8) &
+ ~(x in X_9 & x in Y_9) &
+ ~(x in X_10 & x in Y_10) &
+ ~(x in X_11 & x in Y_11)) |
+(~(x in X_1 & x in Y_1) &
+  (x in X_2 & x in Y_2) &
+ ~(x in X_3 & x in Y_3) &
+ ~(x in X_4 & x in Y_4) &
+ ~(x in X_5 & x in Y_5) &
+ ~(x in X_6 & x in Y_6) &
+ ~(x in X_7 & x in Y_7) &
+ ~(x in X_8 & x in Y_8) &
+ ~(x in X_9 & x in Y_9) &
+ ~(x in X_10 & x in Y_10) &
+ ~(x in X_11 & x in Y_11)) |
+(~(x in X_1 & x in Y_1) &
+ ~(x in X_2 & x in Y_2) &
+  (x in X_3 & x in Y_3) &
+ ~(x in X_4 & x in Y_4) &
+ ~(x in X_5 & x in Y_5) &
+ ~(x in X_6 & x in Y_6) &
+ ~(x in X_7 & x in Y_7) &
+ ~(x in X_8 & x in Y_8) &
+ ~(x in X_9 & x in Y_9) &
+ ~(x in X_10 & x in Y_10) &
+ ~(x in X_11 & x in Y_11)) |
+(~(x in X_1 & x in Y_1) &
+ ~(x in X_2 & x in Y_2) &
+ ~(x in X_3 & x in Y_3) &
+  (x in X_4 & x in Y_4) &
+ ~(x in X_5 & x in Y_5) &
+ ~(x in X_6 & x in Y_6) &
+ ~(x in X_7 & x in Y_7) &
+ ~(x in X_8 & x in Y_8) &
+ ~(x in X_9 & x in Y_9) &
+ ~(x in X_10 & x in Y_10) &
+ ~(x in X_11 & x in Y_11)) |
+(~(x in X_1 & x in Y_1) &
+ ~(x in X_2 & x in Y_2) &
+ ~(x in X_3 & x in Y_3) &
+ ~(x in X_4 & x in Y_4) &
+  (x in X_5 & x in Y_5) &
+ ~(x in X_6 & x in Y_6) &
+ ~(x in X_7 & x in Y_7) &
+ ~(x in X_8 & x in Y_8) &
+ ~(x in X_9 & x in Y_9) &
+ ~(x in X_10 & x in Y_10) &
+ ~(x in X_11 & x in Y_11)) |
+(~(x in X_1 & x in Y_1) &
+ ~(x in X_2 & x in Y_2) &
+ ~(x in X_3 & x in Y_3) &
+ ~(x in X_4 & x in Y_4) &
+ ~(x in X_5 & x in Y_5) &
+  (x in X_6 & x in Y_6) &
+ ~(x in X_7 & x in Y_7) &
+ ~(x in X_8 & x in Y_8) &
+ ~(x in X_9 & x in Y_9) &
+ ~(x in X_10 & x in Y_10) &
+ ~(x in X_11 & x in Y_11)) |
+(~(x in X_1 & x in Y_1) &
+ ~(x in X_2 & x in Y_2) &
+ ~(x in X_3 & x in Y_3) &
+ ~(x in X_4 & x in Y_4) &
+ ~(x in X_5 & x in Y_5) &
+ ~(x in X_6 & x in Y_6) &
+  (x in X_7 & x in Y_7) &
+ ~(x in X_8 & x in Y_8) &
+ ~(x in X_9 & x in Y_9) &
+ ~(x in X_10 & x in Y_10) &
+ ~(x in X_11 & x in Y_11)) |
+(~(x in X_1 & x in Y_1) &
+ ~(x in X_2 & x in Y_2) &
+ ~(x in X_3 & x in Y_3) &
+ ~(x in X_4 & x in Y_4) &
+ ~(x in X_5 & x in Y_5) &
+ ~(x in X_6 & x in Y_6) &
+ ~(x in X_7 & x in Y_7) &
+  (x in X_8 & x in Y_8) &
+ ~(x in X_9 & x in Y_9) &
+ ~(x in X_10 & x in Y_10) &
+ ~(x in X_11 & x in Y_11)) |
+(~(x in X_1 & x in Y_1) &
+ ~(x in X_2 & x in Y_2) &
+ ~(x in X_3 & x in Y_3) &
+ ~(x in X_4 & x in Y_4) &
+ ~(x in X_5 & x in Y_5) &
+ ~(x in X_6 & x in Y_6) &
+ ~(x in X_7 & x in Y_7) &
+ ~(x in X_8 & x in Y_8) &
+  (x in X_9 & x in Y_9) &
+ ~(x in X_10 & x in Y_10) &
+ ~(x in X_11 & x in Y_11)) |
+(~(x in X_1 & x in Y_1) &
+ ~(x in X_2 & x in Y_2) &
+ ~(x in X_3 & x in Y_3) &
+ ~(x in X_4 & x in Y_4) &
+ ~(x in X_5 & x in Y_5) &
+ ~(x in X_6 & x in Y_6) &
+ ~(x in X_7 & x in Y_7) &
+ ~(x in X_8 & x in Y_8) &
+ ~(x in X_9 & x in Y_9) &
+  (x in X_10 & x in Y_10) &
+ ~(x in X_11 & x in Y_11)) |
+(~(x in X_1 & x in Y_1) &
+ ~(x in X_2 & x in Y_2) &
+ ~(x in X_3 & x in Y_3) &
+ ~(x in X_4 & x in Y_4) &
+ ~(x in X_5 & x in Y_5) &
+ ~(x in X_6 & x in Y_6) &
+ ~(x in X_7 & x in Y_7) &
+ ~(x in X_8 & x in Y_8) &
+ ~(x in X_9 & x in Y_9) &
+ ~(x in X_10 & x in Y_10) &
+  (x in X_11 & x in Y_11)))
+& (all1 y:
+((y in X_1 & y in Y_1) |
+ (y in X_2 & y in Y_2) |
+ (y in X_3 & y in Y_3) |
+ (y in X_4 & y in Y_4) |
+ (y in X_5 & y in Y_5) |
+ (y in X_6 & y in Y_6) |
+ (y in X_7 & y in Y_7) |
+ (y in X_8 & y in Y_8) |
+ (y in X_9 & y in Y_9) |
+ (y in X_10 & y in Y_10) |
+ (y in X_11 & y in Y_11)) => x = y));
+
+pred partition_4
+  (var2 Y, X_1, X_2, X_3, X_4) =
+  (all1 x: x in Y <=>
+    (x in X_1 | x in X_2 | x in X_3 | x in X_4))  &
+  ~intersects_1(X_1, X_2) &
+  ~intersects_1(X_1, X_3) &
+  ~intersects_1(X_1, X_4) &
+  ~intersects_1(X_2, X_3) &
+  ~intersects_1(X_2, X_4) &
+  ~intersects_1(X_3, X_4);
+
+pred partition_2
+  (var2 Y, X_1, X_2) =
+  (all1 x: x in Y <=>
+    (x in X_1 | x in X_2))  &
+  ~intersects_1(X_1, X_2);
+
+pred partition_3
+  (var2 Y, X_1, X_2, X_3) =
+  (all1 x: x in Y <=>
+    (x in X_1 | x in X_2 | x in X_3))  &
+  ~intersects_1(X_1, X_2) &
+  ~intersects_1(X_1, X_3) &
+  ~intersects_1(X_2, X_3);
+
+pred one_transition_flow_2
+  (var1 z1, var2 X1, Y1,
+   var1 z2, var2 X2, Y2) =
+   (z1 notin X1 & z2 notin X2  &  z1 notin Y1 & z2 notin Y2) |
+
+   (z1    in X1 & z2 notin X2  &  z1    in Y1 & z2 notin Y2) |
+   (z1    in X1 & z2 notin X2  &  z1 notin Y1 & z2    in Y2) |
+   (z1 notin X1 & z2    in X2  &  z1    in Y1 & z2 notin Y2) |
+   (z1 notin X1 & z2    in X2  &  z1 notin Y1 & z2    in Y2) |
+
+   (z1    in X1 & z2    in X2);
+
+pred one_transition_flow_3
+  (var1 z1, var2 X1, Y1,
+   var1 z2, var2 X2, Y2,
+   var1 z3, var2 X3, Y3) =
+   (z1 notin X1 & z2 notin X2 & z3 notin X3  &  z1 notin Y1 & z2 notin Y2 & z3 notin Y3) |
+
+   (z1    in X1 & z2 notin X2 & z3 notin X3  &  z1    in Y1 & z2 notin Y2 & z3 notin Y3) |
+   (z1    in X1 & z2 notin X2 & z3 notin X3  &  z1 notin Y1 & z2    in Y2 & z3 notin Y3) |
+   (z1    in X1 & z2 notin X2 & z3 notin X3  &  z1 notin Y1 & z2 notin Y2 & z3    in Y3) |
+   (z1 notin X1 & z2    in X2 & z3 notin X3  &  z1    in Y1 & z2 notin Y2 & z3 notin Y3) |
+   (z1 notin X1 & z2    in X2 & z3 notin X3  &  z1 notin Y1 & z2    in Y2 & z3 notin Y3) |
+   (z1 notin X1 & z2    in X2 & z3 notin X3  &  z1 notin Y1 & z2 notin Y2 & z3    in Y3) |
+   (z1 notin X1 & z2 notin X2 & z3    in X3  &  z1    in Y1 & z2 notin Y2 & z3 notin Y3) |
+   (z1 notin X1 & z2 notin X2 & z3    in X3  &  z1 notin Y1 & z2    in Y2 & z3 notin Y3) |
+   (z1 notin X1 & z2 notin X2 & z3    in X3  &  z1 notin Y1 & z2 notin Y2 & z3    in Y3) |
+
+   (z1    in X1 & z2    in X2              ) |
+   (z1    in X1               & z3    in X3) |
+   (              z2    in X2 & z3    in X3);
+
+
+#
+# backbone tree
+#
+
+
+
+pred backbone_tree
+  (var2 U_Root_a1, U_Node_a2, U_Node_a3, U_Leaf_a4) =
+  (ex2 U:
+    partition_4
+      (U, U_Root_a1, U_Node_a2, U_Node_a3, U_Leaf_a4) &
+    (all1 u : (u ~= root & u in U) => (u^ in U) ) &
+    (all1 u: (u in U_Root_a1) => (
+        (u.0 in U_Node_a2 & u.1 notin U)  | 
+        (u.0 in U_Node_a3 & u.1 notin U) 
+      )) &
+    (all1 u: (u in U_Node_a2) => (
+        (u.0 in U_Node_a2 & u.1 in U_Node_a2)  | 
+        (u.0 in U_Node_a2 & u.1 in U_Node_a3)  | 
+        (u.0 in U_Node_a3 & u.1 in U_Node_a2)  | 
+        (u.0 in U_Node_a3 & u.1 in U_Node_a3) 
+      )) &
+    (all1 u: (u in U_Node_a3) => (
+        (u.0 in U_Leaf_a4 & u.1 in U_Leaf_a4) 
+      )) &
+    (all1 u: (u in U_Leaf_a4) =>
+        (u.0 notin U & u.1 notin U)) &
+    (root in U_Root_a1)
+  );
+
+
+#
+# ext / configurations
+#
+
+
+
+pred ext_configuration
+  (var2 U_Root_a1, U_Node_a2, U_Node_a3, U_Leaf_a4,
+   var2 X_l0_q0, X_l0_q1, X_l0_q2, X_n0_q0, X_n0_q1, X_n0_q2, X_n0_q3, X_r0_q0, X_r0_q2, X_x_q0, X_x_q1) =
+   backbone_tree
+     (U_Root_a1, U_Node_a2, U_Node_a3, U_Leaf_a4) &
+   (all1 x : x in X_l0_q0 =>
+      (x in U_Leaf_a4)) &
+   (all1 x : x in X_l0_q1 =>
+      (x in U_Leaf_a4)) &
+   (all1 x : x in X_l0_q2 =>
+      (x in U_Leaf_a4)) &
+   (all1 x : x in X_n0_q0 =>
+      (x in U_Node_a2 | x in U_Node_a3)) &
+   (all1 x : x in X_n0_q1 =>
+      (x in U_Node_a2 | x in U_Node_a3)) &
+   (all1 x : x in X_n0_q2 =>
+      (x in U_Node_a2 | x in U_Node_a3)) &
+   (all1 x : x in X_n0_q3 =>
+      (x in U_Node_a2 | x in U_Node_a3)) &
+   (all1 x : x in X_r0_q0 =>
+      (x in U_Root_a1)) &
+   (all1 x : x in X_r0_q2 =>
+      (x in U_Root_a1)) &
+   (all1 x : x in X_x_q0 =>
+      (x in U_Root_a1)) &
+   (all1 x : x in X_x_q1 =>
+      (x in U_Root_a1));
+
+pred configuration
+  (var2 U_Root_a1, U_Node_a2, U_Node_a3, U_Leaf_a4,
+   var2 X_l0_q0, X_l0_q1, X_l0_q2, X_n0_q0, X_n0_q1, X_n0_q2, X_n0_q3, X_r0_q0, X_r0_q2, X_x_q0, X_x_q1) =
+   ext_configuration
+     (U_Root_a1, U_Node_a2, U_Node_a3, U_Leaf_a4,
+      X_l0_q0, X_l0_q1, X_l0_q2, X_n0_q0, X_n0_q1, X_n0_q2, X_n0_q3, X_r0_q0, X_r0_q2, X_x_q0, X_x_q1) &
+   (all1 x: x in U_Root_a1 =>
+     (x in X_r0_q0 | x in X_r0_q2)) &
+   (all1 x: x in U_Root_a1 =>
+     (x in X_x_q0 | x in X_x_q1)) &
+   (all1 x: x in U_Node_a2 =>
+     (x in X_n0_q0 | x in X_n0_q1 | x in X_n0_q2 | x in X_n0_q3)) &
+   (all1 x: x in U_Node_a3 =>
+     (x in X_n0_q0 | x in X_n0_q1 | x in X_n0_q2 | x in X_n0_q3)) &
+   (all1 x: x in U_Leaf_a4 =>
+     (x in X_l0_q0 | x in X_l0_q1 | x in X_l0_q2)) & 
+   ~intersects_1(X_l0_q0, X_l0_q1) &
+   ~intersects_1(X_l0_q0, X_l0_q2) &
+   ~intersects_1(X_l0_q1, X_l0_q2) &
+   ~intersects_1(X_n0_q0, X_n0_q1) &
+   ~intersects_1(X_n0_q0, X_n0_q2) &
+   ~intersects_1(X_n0_q0, X_n0_q3) &
+   ~intersects_1(X_n0_q1, X_n0_q2) &
+   ~intersects_1(X_n0_q1, X_n0_q3) &
+   ~intersects_1(X_n0_q2, X_n0_q3) &
+   ~intersects_1(X_r0_q0, X_r0_q2) &
+   ~intersects_1(X_x_q0, X_x_q1);
+
+
+#
+# backbone tree paths
+#
+
+
+
+
+
+pred path_Root_a1_l1_Leaf_a4_l0
+  (var2 U_Root_a1, U_Node_a2, U_Node_a3, U_Leaf_a4,
+   var1 u0, u1) =
+   backbone_tree
+     (U_Root_a1, U_Node_a2, U_Node_a3, U_Leaf_a4) &
+   ex2 W_Root_a1_l1, W_Node_a2_l0, W_Node_a3_l0, W_Leaf_a4_l0 :
+   ex2 W_up, W_down :
+   ex1 w_top :
+     included_1(W_Root_a1_l1, U_Root_a1) &
+     included_1(W_Node_a2_l0, U_Node_a2) &
+     included_1(W_Node_a3_l0, U_Node_a3) &
+     included_1(W_Leaf_a4_l0, U_Leaf_a4) &
+     ~intersects_1(W_down, W_up) &
+     partition_4(W_down, W_Root_a1_l1, W_Node_a2_l0, W_Node_a3_l0, W_Leaf_a4_l0) &
+     (w_top in W_down) &
+     (root in W_down => w_top = root) &
+     (all1 w : (w in W_down & w ~= w_top) => w^ in W_down) &
+     (all1 w1, w2: (w1 in W_down & w1 ~= root &
+                    w2 in W_down & w2 ~= root & w1^ = w2^) => w1 = w2) &
+     (all1 w: (w in W_Root_a1_l1) =>
+       (w.0 in W_Node_a2_l0 | w.0 in W_Node_a3_l0)) &
+     (all1 w: (w in W_Node_a2_l0) =>
+       (w.0 in W_Node_a2_l0 | w.0 in W_Node_a3_l0)) &
+     (all1 w: (w in W_Node_a3_l0) =>
+       (w.0 in W_Leaf_a4_l0)) &
+     u0 in W_Root_a1_l1 &
+     u1 in W_Leaf_a4_l0 &
+     (all1 w : w in W_Leaf_a4_l0 => w = u1);
+
+
+pred path_Root_a1_n1_Node_a2_n0
+  (var2 U_Root_a1, U_Node_a2, U_Node_a3, U_Leaf_a4,
+   var1 u0, u1) =
+   backbone_tree
+     (U_Root_a1, U_Node_a2, U_Node_a3, U_Leaf_a4) &
+   ex2 W_Root_a1_n1, W_Node_a2_n0 :
+   ex2 W_up, W_down :
+   ex1 w_top :
+     included_1(W_Root_a1_n1, U_Root_a1) &
+     included_1(W_Node_a2_n0, U_Node_a2) &
+     ~intersects_1(W_down, W_up) &
+     partition_2(W_down, W_Root_a1_n1, W_Node_a2_n0) &
+     (w_top in W_down) &
+     (root in W_down => w_top = root) &
+     (all1 w : (w in W_down & w ~= w_top) => w^ in W_down) &
+     (all1 w1, w2: (w1 in W_down & w1 ~= root &
+                    w2 in W_down & w2 ~= root & w1^ = w2^) => w1 = w2) &
+     (all1 w: (w in W_Root_a1_n1) =>
+       (w.0 in W_Node_a2_n0)) &
+     u0 in W_Root_a1_n1 &
+     u1 in W_Node_a2_n0 &
+     (all1 w : w in W_Node_a2_n0 => w = u1);
+
+
+pred path_Root_a1_n1_Node_a3_n0
+  (var2 U_Root_a1, U_Node_a2, U_Node_a3, U_Leaf_a4,
+   var1 u0, u1) =
+   backbone_tree
+     (U_Root_a1, U_Node_a2, U_Node_a3, U_Leaf_a4) &
+   ex2 W_Root_a1_n1, W_Node_a3_n0 :
+   ex2 W_up, W_down :
+   ex1 w_top :
+     included_1(W_Root_a1_n1, U_Root_a1) &
+     included_1(W_Node_a3_n0, U_Node_a3) &
+     ~intersects_1(W_down, W_up) &
+     partition_2(W_down, W_Root_a1_n1, W_Node_a3_n0) &
+     (w_top in W_down) &
+     (root in W_down => w_top = root) &
+     (all1 w : (w in W_down & w ~= w_top) => w^ in W_down) &
+     (all1 w1, w2: (w1 in W_down & w1 ~= root &
+                    w2 in W_down & w2 ~= root & w1^ = w2^) => w1 = w2) &
+     (all1 w: (w in W_Root_a1_n1) =>
+       (w.0 in W_Node_a3_n0)) &
+     u0 in W_Root_a1_n1 &
+     u1 in W_Node_a3_n0 &
+     (all1 w : w in W_Node_a3_n0 => w = u1);
+
+
+pred path_Root_a1_r1_Leaf_a4_l0
+  (var2 U_Root_a1, U_Node_a2, U_Node_a3, U_Leaf_a4,
+   var1 u0, u1) =
+   backbone_tree
+     (U_Root_a1, U_Node_a2, U_Node_a3, U_Leaf_a4) &
+   ex2 W_Root_a1_r1, W_Node_a2_r0, W_Node_a3_r0, W_Leaf_a4_l0 :
+   ex2 W_up, W_down :
+   ex1 w_top :
+     included_1(W_Root_a1_r1, U_Root_a1) &
+     included_1(W_Node_a2_r0, U_Node_a2) &
+     included_1(W_Node_a3_r0, U_Node_a3) &
+     included_1(W_Leaf_a4_l0, U_Leaf_a4) &
+     ~intersects_1(W_down, W_up) &
+     partition_4(W_down, W_Root_a1_r1, W_Node_a2_r0, W_Node_a3_r0, W_Leaf_a4_l0) &
+     (w_top in W_down) &
+     (root in W_down => w_top = root) &
+     (all1 w : (w in W_down & w ~= w_top) => w^ in W_down) &
+     (all1 w1, w2: (w1 in W_down & w1 ~= root &
+                    w2 in W_down & w2 ~= root & w1^ = w2^) => w1 = w2) &
+     (all1 w: (w in W_Root_a1_r1) =>
+       (w.0 in W_Node_a2_r0 | w.0 in W_Node_a3_r0)) &
+     (all1 w: (w in W_Node_a2_r0) =>
+       (w.1 in W_Node_a2_r0 | w.1 in W_Node_a3_r0)) &
+     (all1 w: (w in W_Node_a3_r0) =>
+       (w.1 in W_Leaf_a4_l0)) &
+     u0 in W_Root_a1_r1 &
+     u1 in W_Leaf_a4_l0 &
+     (all1 w : w in W_Leaf_a4_l0 => w = u1);
+
+
+pred path_Node_a2_l0_Leaf_a4_l0
+  (var2 U_Root_a1, U_Node_a2, U_Node_a3, U_Leaf_a4,
+   var1 u0, u1) =
+   backbone_tree
+     (U_Root_a1, U_Node_a2, U_Node_a3, U_Leaf_a4) &
+   ex2 W_Node_a2_l0, W_Node_a3_l0, W_Leaf_a4_l0 :
+   ex2 W_up, W_down :
+   ex1 w_top :
+     included_1(W_Node_a2_l0, U_Node_a2) &
+     included_1(W_Node_a3_l0, U_Node_a3) &
+     included_1(W_Leaf_a4_l0, U_Leaf_a4) &
+     ~intersects_1(W_down, W_up) &
+     partition_3(W_down, W_Node_a2_l0, W_Node_a3_l0, W_Leaf_a4_l0) &
+     (w_top in W_down) &
+     (root in W_down => w_top = root) &
+     (all1 w : (w in W_down & w ~= w_top) => w^ in W_down) &
+     (all1 w1, w2: (w1 in W_down & w1 ~= root &
+                    w2 in W_down & w2 ~= root & w1^ = w2^) => w1 = w2) &
+     (all1 w: (w in W_Node_a2_l0) =>
+       (w.0 in W_Node_a2_l0 | w.0 in W_Node_a3_l0)) &
+     (all1 w: (w in W_Node_a3_l0) =>
+       (w.0 in W_Leaf_a4_l0)) &
+     u0 in W_Node_a2_l0 &
+     u1 in W_Leaf_a4_l0 &
+     (all1 w : w in W_Leaf_a4_l0 => w = u1);
+
+
+pred path_Node_a2_r0_Leaf_a4_l0
+  (var2 U_Root_a1, U_Node_a2, U_Node_a3, U_Leaf_a4,
+   var1 u0, u1) =
+   backbone_tree
+     (U_Root_a1, U_Node_a2, U_Node_a3, U_Leaf_a4) &
+   ex2 W_Node_a2_r0, W_Node_a3_r0, W_Leaf_a4_l0 :
+   ex2 W_up, W_down :
+   ex1 w_top :
+     included_1(W_Node_a2_r0, U_Node_a2) &
+     included_1(W_Node_a3_r0, U_Node_a3) &
+     included_1(W_Leaf_a4_l0, U_Leaf_a4) &
+     ~intersects_1(W_down, W_up) &
+     partition_3(W_down, W_Node_a2_r0, W_Node_a3_r0, W_Leaf_a4_l0) &
+     (w_top in W_down) &
+     (root in W_down => w_top = root) &
+     (all1 w : (w in W_down & w ~= w_top) => w^ in W_down) &
+     (all1 w1, w2: (w1 in W_down & w1 ~= root &
+                    w2 in W_down & w2 ~= root & w1^ = w2^) => w1 = w2) &
+     (all1 w: (w in W_Node_a2_r0) =>
+       (w.1 in W_Node_a2_r0 | w.1 in W_Node_a3_r0)) &
+     (all1 w: (w in W_Node_a3_r0) =>
+       (w.1 in W_Leaf_a4_l0)) &
+     u0 in W_Node_a2_r0 &
+     u1 in W_Leaf_a4_l0 &
+     (all1 w : w in W_Leaf_a4_l0 => w = u1);
+
+
+pred path_Node_a2_n1_Node_a2_n0
+  (var2 U_Root_a1, U_Node_a2, U_Node_a3, U_Leaf_a4,
+   var1 u0, u1) =
+   backbone_tree
+     (U_Root_a1, U_Node_a2, U_Node_a3, U_Leaf_a4) &
+   ex2 W_Node_a2_n1, W_Node_a2_n0 :
+   ex2 W_up, W_down :
+   ex1 w_top :
+     included_1(W_Node_a2_n1, U_Node_a2) &
+     included_1(W_Node_a2_n0, U_Node_a2) &
+     ~intersects_1(W_down, W_up) &
+     partition_2(W_down, W_Node_a2_n1, W_Node_a2_n0) &
+     (w_top in W_down) &
+     (root in W_down => w_top = root) &
+     (all1 w : (w in W_down & w ~= w_top) => w^ in W_down) &
+     (all1 w1, w2: (w1 in W_down & w1 ~= root &
+                    w2 in W_down & w2 ~= root & w1^ = w2^) => w1 = w2) &
+     (all1 w: (w in W_Node_a2_n1) =>
+       (w.0 in W_Node_a2_n0)) &
+     u0 in W_Node_a2_n1 &
+     u1 in W_Node_a2_n0 &
+     (all1 w : w in W_Node_a2_n0 => w = u1);
+
+
+pred path_Node_a2_n1_Node_a3_n0
+  (var2 U_Root_a1, U_Node_a2, U_Node_a3, U_Leaf_a4,
+   var1 u0, u1) =
+   backbone_tree
+     (U_Root_a1, U_Node_a2, U_Node_a3, U_Leaf_a4) &
+   ex2 W_Node_a2_n1, W_Node_a3_n0 :
+   ex2 W_up, W_down :
+   ex1 w_top :
+     included_1(W_Node_a2_n1, U_Node_a2) &
+     included_1(W_Node_a3_n0, U_Node_a3) &
+     ~intersects_1(W_down, W_up) &
+     partition_2(W_down, W_Node_a2_n1, W_Node_a3_n0) &
+     (w_top in W_down) &
+     (root in W_down => w_top = root) &
+     (all1 w : (w in W_down & w ~= w_top) => w^ in W_down) &
+     (all1 w1, w2: (w1 in W_down & w1 ~= root &
+                    w2 in W_down & w2 ~= root & w1^ = w2^) => w1 = w2) &
+     (all1 w: (w in W_Node_a2_n1) =>
+       (w.0 in W_Node_a3_n0)) &
+     u0 in W_Node_a2_n1 &
+     u1 in W_Node_a3_n0 &
+     (all1 w : w in W_Node_a3_n0 => w = u1);
+
+
+pred path_Node_a2_r1_Leaf_a4_l0
+  (var2 U_Root_a1, U_Node_a2, U_Node_a3, U_Leaf_a4,
+   var1 u0, u1) =
+   backbone_tree
+     (U_Root_a1, U_Node_a2, U_Node_a3, U_Leaf_a4) &
+   ex2 W_Node_a2_r1, W_Node_a2_r0, W_Node_a3_r0, W_Leaf_a4_l0 :
+   ex2 W_up, W_down :
+   ex1 w_top :
+     included_1(W_Node_a2_r1, U_Node_a2) &
+     included_1(W_Node_a2_r0, U_Node_a2) &
+     included_1(W_Node_a3_r0, U_Node_a3) &
+     included_1(W_Leaf_a4_l0, U_Leaf_a4) &
+     ~intersects_1(W_down, W_up) &
+     partition_4(W_down, W_Node_a2_r1, W_Node_a2_r0, W_Node_a3_r0, W_Leaf_a4_l0) &
+     (w_top in W_down) &
+     (root in W_down => w_top = root) &
+     (all1 w : (w in W_down & w ~= w_top) => w^ in W_down) &
+     (all1 w1, w2: (w1 in W_down & w1 ~= root &
+                    w2 in W_down & w2 ~= root & w1^ = w2^) => w1 = w2) &
+     (all1 w: (w in W_Node_a2_r1) =>
+       (w.0 in W_Node_a2_r0 | w.0 in W_Node_a3_r0)) &
+     (all1 w: (w in W_Node_a2_r0) =>
+       (w.1 in W_Node_a2_r0 | w.1 in W_Node_a3_r0)) &
+     (all1 w: (w in W_Node_a3_r0) =>
+       (w.1 in W_Leaf_a4_l0)) &
+     u0 in W_Node_a2_r1 &
+     u1 in W_Leaf_a4_l0 &
+     (all1 w : w in W_Leaf_a4_l0 => w = u1);
+
+
+pred path_Node_a2_l2_Leaf_a4_l0
+  (var2 U_Root_a1, U_Node_a2, U_Node_a3, U_Leaf_a4,
+   var1 u0, u1) =
+   backbone_tree
+     (U_Root_a1, U_Node_a2, U_Node_a3, U_Leaf_a4) &
+   ex2 W_Node_a2_l2, W_Node_a2_l0, W_Node_a3_l0, W_Leaf_a4_l0 :
+   ex2 W_up, W_down :
+   ex1 w_top :
+     included_1(W_Node_a2_l2, U_Node_a2) &
+     included_1(W_Node_a2_l0, U_Node_a2) &
+     included_1(W_Node_a3_l0, U_Node_a3) &
+     included_1(W_Leaf_a4_l0, U_Leaf_a4) &
+     ~intersects_1(W_down, W_up) &
+     partition_4(W_down, W_Node_a2_l2, W_Node_a2_l0, W_Node_a3_l0, W_Leaf_a4_l0) &
+     (w_top in W_down) &
+     (root in W_down => w_top = root) &
+     (all1 w : (w in W_down & w ~= w_top) => w^ in W_down) &
+     (all1 w1, w2: (w1 in W_down & w1 ~= root &
+                    w2 in W_down & w2 ~= root & w1^ = w2^) => w1 = w2) &
+     (all1 w: (w in W_Node_a2_l2) =>
+       (w.1 in W_Node_a2_l0 | w.1 in W_Node_a3_l0)) &
+     (all1 w: (w in W_Node_a2_l0) =>
+       (w.0 in W_Node_a2_l0 | w.0 in W_Node_a3_l0)) &
+     (all1 w: (w in W_Node_a3_l0) =>
+       (w.0 in W_Leaf_a4_l0)) &
+     u0 in W_Node_a2_l2 &
+     u1 in W_Leaf_a4_l0 &
+     (all1 w : w in W_Leaf_a4_l0 => w = u1);
+
+
+pred path_Node_a2_n2_Node_a2_n0
+  (var2 U_Root_a1, U_Node_a2, U_Node_a3, U_Leaf_a4,
+   var1 u0, u1) =
+   backbone_tree
+     (U_Root_a1, U_Node_a2, U_Node_a3, U_Leaf_a4) &
+   ex2 W_Node_a2_n2, W_Node_a2_n0 :
+   ex2 W_up, W_down :
+   ex1 w_top :
+     included_1(W_Node_a2_n2, U_Node_a2) &
+     included_1(W_Node_a2_n0, U_Node_a2) &
+     ~intersects_1(W_down, W_up) &
+     partition_2(W_down, W_Node_a2_n2, W_Node_a2_n0) &
+     (w_top in W_down) &
+     (root in W_down => w_top = root) &
+     (all1 w : (w in W_down & w ~= w_top) => w^ in W_down) &
+     (all1 w1, w2: (w1 in W_down & w1 ~= root &
+                    w2 in W_down & w2 ~= root & w1^ = w2^) => w1 = w2) &
+     (all1 w: (w in W_Node_a2_n2) =>
+       (w.1 in W_Node_a2_n0)) &
+     u0 in W_Node_a2_n2 &
+     u1 in W_Node_a2_n0 &
+     (all1 w : w in W_Node_a2_n0 => w = u1);
+
+
+pred path_Node_a2_n2_Node_a3_n0
+  (var2 U_Root_a1, U_Node_a2, U_Node_a3, U_Leaf_a4,
+   var1 u0, u1) =
+   backbone_tree
+     (U_Root_a1, U_Node_a2, U_Node_a3, U_Leaf_a4) &
+   ex2 W_Node_a2_n2, W_Node_a3_n0 :
+   ex2 W_up, W_down :
+   ex1 w_top :
+     included_1(W_Node_a2_n2, U_Node_a2) &
+     included_1(W_Node_a3_n0, U_Node_a3) &
+     ~intersects_1(W_down, W_up) &
+     partition_2(W_down, W_Node_a2_n2, W_Node_a3_n0) &
+     (w_top in W_down) &
+     (root in W_down => w_top = root) &
+     (all1 w : (w in W_down & w ~= w_top) => w^ in W_down) &
+     (all1 w1, w2: (w1 in W_down & w1 ~= root &
+                    w2 in W_down & w2 ~= root & w1^ = w2^) => w1 = w2) &
+     (all1 w: (w in W_Node_a2_n2) =>
+       (w.1 in W_Node_a3_n0)) &
+     u0 in W_Node_a2_n2 &
+     u1 in W_Node_a3_n0 &
+     (all1 w : w in W_Node_a3_n0 => w = u1);
+
+
+pred path_Node_a3_l0_Leaf_a4_l0
+  (var2 U_Root_a1, U_Node_a2, U_Node_a3, U_Leaf_a4,
+   var1 u0, u1) =
+   backbone_tree
+     (U_Root_a1, U_Node_a2, U_Node_a3, U_Leaf_a4) &
+   ex2 W_Node_a3_l0, W_Leaf_a4_l0 :
+   ex2 W_up, W_down :
+   ex1 w_top :
+     included_1(W_Node_a3_l0, U_Node_a3) &
+     included_1(W_Leaf_a4_l0, U_Leaf_a4) &
+     ~intersects_1(W_down, W_up) &
+     partition_2(W_down, W_Node_a3_l0, W_Leaf_a4_l0) &
+     (w_top in W_down) &
+     (root in W_down => w_top = root) &
+     (all1 w : (w in W_down & w ~= w_top) => w^ in W_down) &
+     (all1 w1, w2: (w1 in W_down & w1 ~= root &
+                    w2 in W_down & w2 ~= root & w1^ = w2^) => w1 = w2) &
+     (all1 w: (w in W_Node_a3_l0) =>
+       (w.0 in W_Leaf_a4_l0)) &
+     u0 in W_Node_a3_l0 &
+     u1 in W_Leaf_a4_l0 &
+     (all1 w : w in W_Leaf_a4_l0 => w = u1);
+
+
+pred path_Node_a3_r0_Leaf_a4_l0
+  (var2 U_Root_a1, U_Node_a2, U_Node_a3, U_Leaf_a4,
+   var1 u0, u1) =
+   backbone_tree
+     (U_Root_a1, U_Node_a2, U_Node_a3, U_Leaf_a4) &
+   ex2 W_Node_a3_r0, W_Leaf_a4_l0 :
+   ex2 W_up, W_down :
+   ex1 w_top :
+     included_1(W_Node_a3_r0, U_Node_a3) &
+     included_1(W_Leaf_a4_l0, U_Leaf_a4) &
+     ~intersects_1(W_down, W_up) &
+     partition_2(W_down, W_Node_a3_r0, W_Leaf_a4_l0) &
+     (w_top in W_down) &
+     (root in W_down => w_top = root) &
+     (all1 w : (w in W_down & w ~= w_top) => w^ in W_down) &
+     (all1 w1, w2: (w1 in W_down & w1 ~= root &
+                    w2 in W_down & w2 ~= root & w1^ = w2^) => w1 = w2) &
+     (all1 w: (w in W_Node_a3_r0) =>
+       (w.1 in W_Leaf_a4_l0)) &
+     u0 in W_Node_a3_r0 &
+     u1 in W_Leaf_a4_l0 &
+     (all1 w : w in W_Leaf_a4_l0 => w = u1);
+
+
+
+#
+# trap invariants
+#
+
+
+
+pred trap_initially_not_empty
+  (var2 U_Root_a1, U_Node_a2, U_Node_a3, U_Leaf_a4,
+   var2 X_l0_q0, X_l0_q1, X_l0_q2, X_n0_q0, X_n0_q1, X_n0_q2, X_n0_q3, X_r0_q0, X_r0_q2, X_x_q0, X_x_q1) =
+   ext_configuration
+     (U_Root_a1, U_Node_a2, U_Node_a3, U_Leaf_a4,
+      X_l0_q0, X_l0_q1, X_l0_q2, X_n0_q0, X_n0_q1, X_n0_q2, X_n0_q3, X_r0_q0, X_r0_q2, X_x_q0, X_x_q1) &
+   ((ex1 x : x in U_Root_a1 & x in X_r0_q0) |
+    (ex1 x : x in U_Root_a1 & x in X_x_q0) |
+    (ex1 x : x in U_Node_a2 & x in X_n0_q0) |
+    (ex1 x : x in U_Node_a3 & x in X_n0_q0) |
+    (ex1 x : x in U_Leaf_a4 & x in X_l0_q0));
+
+pred trap_Root_a1_r0_request_snd_n1_request_rcv_0_flow
+  (var2 X_l0_q0, X_l0_q1, X_l0_q2, X_n0_q0, X_n0_q1, X_n0_q2, X_n0_q3, X_r0_q0, X_r0_q2, X_x_q0, X_x_q1,
+   var1 x_r0, x_n1) =
+   ((x_r0 in X_r0_q0 | x_n1 in X_n0_q0) =>
+    (x_r0 in X_r0_q2 | x_n1 in X_n0_q1));
+
+pred trap_Root_a1_r0_request_snd_n1_request_rcv_1_flow
+  (var2 X_l0_q0, X_l0_q1, X_l0_q2, X_n0_q0, X_n0_q1, X_n0_q2, X_n0_q3, X_r0_q0, X_r0_q2, X_x_q0, X_x_q1,
+   var1 x_r0, x_n1) =
+   ((x_r0 in X_r0_q0 | x_n1 in X_n0_q0) =>
+    (x_r0 in X_r0_q2 | x_n1 in X_n0_q1));
+
+pred trap_Root_a1_r0_request_snd_n1_request_rcv_flow
+  (var2 U_Root_a1, U_Node_a2, U_Node_a3, U_Leaf_a4,
+   var2 X_l0_q0, X_l0_q1, X_l0_q2, X_n0_q0, X_n0_q1, X_n0_q2, X_n0_q3, X_r0_q0, X_r0_q2, X_x_q0, X_x_q1) =
+  (all1 x_0, x_r0, x_n1 :
+    (x_0 in U_Root_a1 & 
+     x_0 = x_r0 & 
+     path_Root_a1_n1_Node_a2_n0
+       (U_Root_a1, U_Node_a2, U_Node_a3, U_Leaf_a4, x_0, x_n1)) =>
+    trap_Root_a1_r0_request_snd_n1_request_rcv_0_flow
+      (X_l0_q0, X_l0_q1, X_l0_q2, X_n0_q0, X_n0_q1, X_n0_q2, X_n0_q3, X_r0_q0, X_r0_q2, X_x_q0, X_x_q1,
+       x_r0, x_n1))  &
+  (all1 x_0, x_r0, x_n1 :
+    (x_0 in U_Root_a1 & 
+     x_0 = x_r0 & 
+     path_Root_a1_n1_Node_a3_n0
+       (U_Root_a1, U_Node_a2, U_Node_a3, U_Leaf_a4, x_0, x_n1)) =>
+    trap_Root_a1_r0_request_snd_n1_request_rcv_1_flow
+      (X_l0_q0, X_l0_q1, X_l0_q2, X_n0_q0, X_n0_q1, X_n0_q2, X_n0_q3, X_r0_q0, X_r0_q2, X_x_q0, X_x_q1,
+       x_r0, x_n1)) ;
+
+pred trap_Root_a1_r0_reply_rcv_n1_reply_snd_0_flow
+  (var2 X_l0_q0, X_l0_q1, X_l0_q2, X_n0_q0, X_n0_q1, X_n0_q2, X_n0_q3, X_r0_q0, X_r0_q2, X_x_q0, X_x_q1,
+   var1 x_r0, x_n1) =
+   ((x_r0 in X_r0_q2 | x_n1 in X_n0_q3) =>
+    (x_r0 in X_r0_q0 | x_n1 in X_n0_q0));
+
+pred trap_Root_a1_r0_reply_rcv_n1_reply_snd_1_flow
+  (var2 X_l0_q0, X_l0_q1, X_l0_q2, X_n0_q0, X_n0_q1, X_n0_q2, X_n0_q3, X_r0_q0, X_r0_q2, X_x_q0, X_x_q1,
+   var1 x_r0, x_n1) =
+   ((x_r0 in X_r0_q2 | x_n1 in X_n0_q3) =>
+    (x_r0 in X_r0_q0 | x_n1 in X_n0_q0));
+
+pred trap_Root_a1_r0_reply_rcv_n1_reply_snd_flow
+  (var2 U_Root_a1, U_Node_a2, U_Node_a3, U_Leaf_a4,
+   var2 X_l0_q0, X_l0_q1, X_l0_q2, X_n0_q0, X_n0_q1, X_n0_q2, X_n0_q3, X_r0_q0, X_r0_q2, X_x_q0, X_x_q1) =
+  (all1 x_0, x_r0, x_n1 :
+    (x_0 in U_Root_a1 & 
+     x_0 = x_r0 & 
+     path_Root_a1_n1_Node_a2_n0
+       (U_Root_a1, U_Node_a2, U_Node_a3, U_Leaf_a4, x_0, x_n1)) =>
+    trap_Root_a1_r0_reply_rcv_n1_reply_snd_0_flow
+      (X_l0_q0, X_l0_q1, X_l0_q2, X_n0_q0, X_n0_q1, X_n0_q2, X_n0_q3, X_r0_q0, X_r0_q2, X_x_q0, X_x_q1,
+       x_r0, x_n1))  &
+  (all1 x_0, x_r0, x_n1 :
+    (x_0 in U_Root_a1 & 
+     x_0 = x_r0 & 
+     path_Root_a1_n1_Node_a3_n0
+       (U_Root_a1, U_Node_a2, U_Node_a3, U_Leaf_a4, x_0, x_n1)) =>
+    trap_Root_a1_r0_reply_rcv_n1_reply_snd_1_flow
+      (X_l0_q0, X_l0_q1, X_l0_q2, X_n0_q0, X_n0_q1, X_n0_q2, X_n0_q3, X_r0_q0, X_r0_q2, X_x_q0, X_x_q1,
+       x_r0, x_n1)) ;
+
+pred trap_Root_a1_x_token_snd_l1_token_rcv_0_flow
+  (var2 X_l0_q0, X_l0_q1, X_l0_q2, X_n0_q0, X_n0_q1, X_n0_q2, X_n0_q3, X_r0_q0, X_r0_q2, X_x_q0, X_x_q1,
+   var1 x_x, x_l1) =
+   ((x_x in X_x_q0 | x_l1 in X_l0_q0) =>
+    (x_x in X_x_q1 | x_l1 in X_l0_q1));
+
+pred trap_Root_a1_x_token_snd_l1_token_rcv_flow
+  (var2 U_Root_a1, U_Node_a2, U_Node_a3, U_Leaf_a4,
+   var2 X_l0_q0, X_l0_q1, X_l0_q2, X_n0_q0, X_n0_q1, X_n0_q2, X_n0_q3, X_r0_q0, X_r0_q2, X_x_q0, X_x_q1) =
+  (all1 x_0, x_x, x_l1 :
+    (x_0 in U_Root_a1 & 
+     x_0 = x_x & 
+     path_Root_a1_l1_Leaf_a4_l0
+       (U_Root_a1, U_Node_a2, U_Node_a3, U_Leaf_a4, x_0, x_l1)) =>
+    trap_Root_a1_x_token_snd_l1_token_rcv_0_flow
+      (X_l0_q0, X_l0_q1, X_l0_q2, X_n0_q0, X_n0_q1, X_n0_q2, X_n0_q3, X_r0_q0, X_r0_q2, X_x_q0, X_x_q1,
+       x_x, x_l1)) ;
+
+pred trap_Root_a1_r1_token_snd_x_token_rcv_0_flow
+  (var2 X_l0_q0, X_l0_q1, X_l0_q2, X_n0_q0, X_n0_q1, X_n0_q2, X_n0_q3, X_r0_q0, X_r0_q2, X_x_q0, X_x_q1,
+   var1 x_r1, x_x) =
+   ((x_r1 in X_l0_q1 | x_x in X_x_q1) =>
+    (x_r1 in X_l0_q0 | x_x in X_x_q0));
+
+pred trap_Root_a1_r1_token_snd_x_token_rcv_flow
+  (var2 U_Root_a1, U_Node_a2, U_Node_a3, U_Leaf_a4,
+   var2 X_l0_q0, X_l0_q1, X_l0_q2, X_n0_q0, X_n0_q1, X_n0_q2, X_n0_q3, X_r0_q0, X_r0_q2, X_x_q0, X_x_q1) =
+  (all1 x_0, x_r1, x_x :
+    (x_0 in U_Root_a1 & 
+     x_0 = x_x & 
+     path_Root_a1_r1_Leaf_a4_l0
+       (U_Root_a1, U_Node_a2, U_Node_a3, U_Leaf_a4, x_0, x_r1)) =>
+    trap_Root_a1_r1_token_snd_x_token_rcv_0_flow
+      (X_l0_q0, X_l0_q1, X_l0_q2, X_n0_q0, X_n0_q1, X_n0_q2, X_n0_q3, X_r0_q0, X_r0_q2, X_x_q0, X_x_q1,
+       x_r1, x_x)) ;
+
+pred trap_Node_a2_n0_request_snd_n1_request_rcv_n2_request_rcv_0_flow
+  (var2 X_l0_q0, X_l0_q1, X_l0_q2, X_n0_q0, X_n0_q1, X_n0_q2, X_n0_q3, X_r0_q0, X_r0_q2, X_x_q0, X_x_q1,
+   var1 x_n0, x_n1, x_n2) =
+   ((x_n0 in X_n0_q1 | x_n1 in X_n0_q0 | x_n2 in X_n0_q0) =>
+    (x_n0 in X_n0_q2 | x_n1 in X_n0_q1 | x_n2 in X_n0_q1));
+
+pred trap_Node_a2_n0_request_snd_n1_request_rcv_n2_request_rcv_1_flow
+  (var2 X_l0_q0, X_l0_q1, X_l0_q2, X_n0_q0, X_n0_q1, X_n0_q2, X_n0_q3, X_r0_q0, X_r0_q2, X_x_q0, X_x_q1,
+   var1 x_n0, x_n1, x_n2) =
+   ((x_n0 in X_n0_q1 | x_n1 in X_n0_q0 | x_n2 in X_n0_q0) =>
+    (x_n0 in X_n0_q2 | x_n1 in X_n0_q1 | x_n2 in X_n0_q1));
+
+pred trap_Node_a2_n0_request_snd_n1_request_rcv_n2_request_rcv_2_flow
+  (var2 X_l0_q0, X_l0_q1, X_l0_q2, X_n0_q0, X_n0_q1, X_n0_q2, X_n0_q3, X_r0_q0, X_r0_q2, X_x_q0, X_x_q1,
+   var1 x_n0, x_n1, x_n2) =
+   ((x_n0 in X_n0_q1 | x_n1 in X_n0_q0 | x_n2 in X_n0_q0) =>
+    (x_n0 in X_n0_q2 | x_n1 in X_n0_q1 | x_n2 in X_n0_q1));
+
+pred trap_Node_a2_n0_request_snd_n1_request_rcv_n2_request_rcv_3_flow
+  (var2 X_l0_q0, X_l0_q1, X_l0_q2, X_n0_q0, X_n0_q1, X_n0_q2, X_n0_q3, X_r0_q0, X_r0_q2, X_x_q0, X_x_q1,
+   var1 x_n0, x_n1, x_n2) =
+   ((x_n0 in X_n0_q1 | x_n1 in X_n0_q0 | x_n2 in X_n0_q0) =>
+    (x_n0 in X_n0_q2 | x_n1 in X_n0_q1 | x_n2 in X_n0_q1));
+
+pred trap_Node_a2_n0_request_snd_n1_request_rcv_n2_request_rcv_flow
+  (var2 U_Root_a1, U_Node_a2, U_Node_a3, U_Leaf_a4,
+   var2 X_l0_q0, X_l0_q1, X_l0_q2, X_n0_q0, X_n0_q1, X_n0_q2, X_n0_q3, X_r0_q0, X_r0_q2, X_x_q0, X_x_q1) =
+  (all1 x_0, x_n0, x_n1, x_n2 :
+    (x_0 in U_Node_a2 & 
+     x_0 = x_n0 & 
+     path_Node_a2_n1_Node_a2_n0
+       (U_Root_a1, U_Node_a2, U_Node_a3, U_Leaf_a4, x_0, x_n1) &
+     path_Node_a2_n2_Node_a2_n0
+       (U_Root_a1, U_Node_a2, U_Node_a3, U_Leaf_a4, x_0, x_n2)) =>
+    trap_Node_a2_n0_request_snd_n1_request_rcv_n2_request_rcv_0_flow
+      (X_l0_q0, X_l0_q1, X_l0_q2, X_n0_q0, X_n0_q1, X_n0_q2, X_n0_q3, X_r0_q0, X_r0_q2, X_x_q0, X_x_q1,
+       x_n0, x_n1, x_n2))  &
+  (all1 x_0, x_n0, x_n1, x_n2 :
+    (x_0 in U_Node_a2 & 
+     x_0 = x_n0 & 
+     path_Node_a2_n1_Node_a2_n0
+       (U_Root_a1, U_Node_a2, U_Node_a3, U_Leaf_a4, x_0, x_n1) &
+     path_Node_a2_n2_Node_a3_n0
+       (U_Root_a1, U_Node_a2, U_Node_a3, U_Leaf_a4, x_0, x_n2)) =>
+    trap_Node_a2_n0_request_snd_n1_request_rcv_n2_request_rcv_1_flow
+      (X_l0_q0, X_l0_q1, X_l0_q2, X_n0_q0, X_n0_q1, X_n0_q2, X_n0_q3, X_r0_q0, X_r0_q2, X_x_q0, X_x_q1,
+       x_n0, x_n1, x_n2))  &
+  (all1 x_0, x_n0, x_n1, x_n2 :
+    (x_0 in U_Node_a2 & 
+     x_0 = x_n0 & 
+     path_Node_a2_n1_Node_a3_n0
+       (U_Root_a1, U_Node_a2, U_Node_a3, U_Leaf_a4, x_0, x_n1) &
+     path_Node_a2_n2_Node_a2_n0
+       (U_Root_a1, U_Node_a2, U_Node_a3, U_Leaf_a4, x_0, x_n2)) =>
+    trap_Node_a2_n0_request_snd_n1_request_rcv_n2_request_rcv_2_flow
+      (X_l0_q0, X_l0_q1, X_l0_q2, X_n0_q0, X_n0_q1, X_n0_q2, X_n0_q3, X_r0_q0, X_r0_q2, X_x_q0, X_x_q1,
+       x_n0, x_n1, x_n2))  &
+  (all1 x_0, x_n0, x_n1, x_n2 :
+    (x_0 in U_Node_a2 & 
+     x_0 = x_n0 & 
+     path_Node_a2_n1_Node_a3_n0
+       (U_Root_a1, U_Node_a2, U_Node_a3, U_Leaf_a4, x_0, x_n1) &
+     path_Node_a2_n2_Node_a3_n0
+       (U_Root_a1, U_Node_a2, U_Node_a3, U_Leaf_a4, x_0, x_n2)) =>
+    trap_Node_a2_n0_request_snd_n1_request_rcv_n2_request_rcv_3_flow
+      (X_l0_q0, X_l0_q1, X_l0_q2, X_n0_q0, X_n0_q1, X_n0_q2, X_n0_q3, X_r0_q0, X_r0_q2, X_x_q0, X_x_q1,
+       x_n0, x_n1, x_n2)) ;
+
+pred trap_Node_a2_n0_reply_rcv_n1_reply_snd_n2_reply_snd_0_flow
+  (var2 X_l0_q0, X_l0_q1, X_l0_q2, X_n0_q0, X_n0_q1, X_n0_q2, X_n0_q3, X_r0_q0, X_r0_q2, X_x_q0, X_x_q1,
+   var1 x_n0, x_n1, x_n2) =
+   ((x_n0 in X_n0_q2 | x_n1 in X_n0_q3 | x_n2 in X_n0_q3) =>
+    (x_n0 in X_n0_q3 | x_n1 in X_n0_q0 | x_n2 in X_n0_q0));
+
+pred trap_Node_a2_n0_reply_rcv_n1_reply_snd_n2_reply_snd_1_flow
+  (var2 X_l0_q0, X_l0_q1, X_l0_q2, X_n0_q0, X_n0_q1, X_n0_q2, X_n0_q3, X_r0_q0, X_r0_q2, X_x_q0, X_x_q1,
+   var1 x_n0, x_n1, x_n2) =
+   ((x_n0 in X_n0_q2 | x_n1 in X_n0_q3 | x_n2 in X_n0_q3) =>
+    (x_n0 in X_n0_q3 | x_n1 in X_n0_q0 | x_n2 in X_n0_q0));
+
+pred trap_Node_a2_n0_reply_rcv_n1_reply_snd_n2_reply_snd_2_flow
+  (var2 X_l0_q0, X_l0_q1, X_l0_q2, X_n0_q0, X_n0_q1, X_n0_q2, X_n0_q3, X_r0_q0, X_r0_q2, X_x_q0, X_x_q1,
+   var1 x_n0, x_n1, x_n2) =
+   ((x_n0 in X_n0_q2 | x_n1 in X_n0_q3 | x_n2 in X_n0_q3) =>
+    (x_n0 in X_n0_q3 | x_n1 in X_n0_q0 | x_n2 in X_n0_q0));
+
+pred trap_Node_a2_n0_reply_rcv_n1_reply_snd_n2_reply_snd_3_flow
+  (var2 X_l0_q0, X_l0_q1, X_l0_q2, X_n0_q0, X_n0_q1, X_n0_q2, X_n0_q3, X_r0_q0, X_r0_q2, X_x_q0, X_x_q1,
+   var1 x_n0, x_n1, x_n2) =
+   ((x_n0 in X_n0_q2 | x_n1 in X_n0_q3 | x_n2 in X_n0_q3) =>
+    (x_n0 in X_n0_q3 | x_n1 in X_n0_q0 | x_n2 in X_n0_q0));
+
+pred trap_Node_a2_n0_reply_rcv_n1_reply_snd_n2_reply_snd_flow
+  (var2 U_Root_a1, U_Node_a2, U_Node_a3, U_Leaf_a4,
+   var2 X_l0_q0, X_l0_q1, X_l0_q2, X_n0_q0, X_n0_q1, X_n0_q2, X_n0_q3, X_r0_q0, X_r0_q2, X_x_q0, X_x_q1) =
+  (all1 x_0, x_n0, x_n1, x_n2 :
+    (x_0 in U_Node_a2 & 
+     x_0 = x_n0 & 
+     path_Node_a2_n1_Node_a2_n0
+       (U_Root_a1, U_Node_a2, U_Node_a3, U_Leaf_a4, x_0, x_n1) &
+     path_Node_a2_n2_Node_a2_n0
+       (U_Root_a1, U_Node_a2, U_Node_a3, U_Leaf_a4, x_0, x_n2)) =>
+    trap_Node_a2_n0_reply_rcv_n1_reply_snd_n2_reply_snd_0_flow
+      (X_l0_q0, X_l0_q1, X_l0_q2, X_n0_q0, X_n0_q1, X_n0_q2, X_n0_q3, X_r0_q0, X_r0_q2, X_x_q0, X_x_q1,
+       x_n0, x_n1, x_n2))  &
+  (all1 x_0, x_n0, x_n1, x_n2 :
+    (x_0 in U_Node_a2 & 
+     x_0 = x_n0 & 
+     path_Node_a2_n1_Node_a2_n0
+       (U_Root_a1, U_Node_a2, U_Node_a3, U_Leaf_a4, x_0, x_n1) &
+     path_Node_a2_n2_Node_a3_n0
+       (U_Root_a1, U_Node_a2, U_Node_a3, U_Leaf_a4, x_0, x_n2)) =>
+    trap_Node_a2_n0_reply_rcv_n1_reply_snd_n2_reply_snd_1_flow
+      (X_l0_q0, X_l0_q1, X_l0_q2, X_n0_q0, X_n0_q1, X_n0_q2, X_n0_q3, X_r0_q0, X_r0_q2, X_x_q0, X_x_q1,
+       x_n0, x_n1, x_n2))  &
+  (all1 x_0, x_n0, x_n1, x_n2 :
+    (x_0 in U_Node_a2 & 
+     x_0 = x_n0 & 
+     path_Node_a2_n1_Node_a3_n0
+       (U_Root_a1, U_Node_a2, U_Node_a3, U_Leaf_a4, x_0, x_n1) &
+     path_Node_a2_n2_Node_a2_n0
+       (U_Root_a1, U_Node_a2, U_Node_a3, U_Leaf_a4, x_0, x_n2)) =>
+    trap_Node_a2_n0_reply_rcv_n1_reply_snd_n2_reply_snd_2_flow
+      (X_l0_q0, X_l0_q1, X_l0_q2, X_n0_q0, X_n0_q1, X_n0_q2, X_n0_q3, X_r0_q0, X_r0_q2, X_x_q0, X_x_q1,
+       x_n0, x_n1, x_n2))  &
+  (all1 x_0, x_n0, x_n1, x_n2 :
+    (x_0 in U_Node_a2 & 
+     x_0 = x_n0 & 
+     path_Node_a2_n1_Node_a3_n0
+       (U_Root_a1, U_Node_a2, U_Node_a3, U_Leaf_a4, x_0, x_n1) &
+     path_Node_a2_n2_Node_a3_n0
+       (U_Root_a1, U_Node_a2, U_Node_a3, U_Leaf_a4, x_0, x_n2)) =>
+    trap_Node_a2_n0_reply_rcv_n1_reply_snd_n2_reply_snd_3_flow
+      (X_l0_q0, X_l0_q1, X_l0_q2, X_n0_q0, X_n0_q1, X_n0_q2, X_n0_q3, X_r0_q0, X_r0_q2, X_x_q0, X_x_q1,
+       x_n0, x_n1, x_n2)) ;
+
+pred trap_Node_a2_r1_token_snd_l2_token_rcv_0_flow
+  (var2 X_l0_q0, X_l0_q1, X_l0_q2, X_n0_q0, X_n0_q1, X_n0_q2, X_n0_q3, X_r0_q0, X_r0_q2, X_x_q0, X_x_q1,
+   var1 x_r1, x_l2) =
+   ((x_r1 in X_l0_q1 | x_l2 in X_l0_q0) =>
+    (x_r1 in X_l0_q0 | x_l2 in X_l0_q1));
+
+pred trap_Node_a2_r1_token_snd_l2_token_rcv_flow
+  (var2 U_Root_a1, U_Node_a2, U_Node_a3, U_Leaf_a4,
+   var2 X_l0_q0, X_l0_q1, X_l0_q2, X_n0_q0, X_n0_q1, X_n0_q2, X_n0_q3, X_r0_q0, X_r0_q2, X_x_q0, X_x_q1) =
+  (all1 x_0, x_r1, x_l2 :
+    (x_0 in U_Node_a2
+     & 
+     path_Node_a2_r1_Leaf_a4_l0
+       (U_Root_a1, U_Node_a2, U_Node_a3, U_Leaf_a4, x_0, x_r1) &
+     path_Node_a2_l2_Leaf_a4_l0
+       (U_Root_a1, U_Node_a2, U_Node_a3, U_Leaf_a4, x_0, x_l2)) =>
+    trap_Node_a2_r1_token_snd_l2_token_rcv_0_flow
+      (X_l0_q0, X_l0_q1, X_l0_q2, X_n0_q0, X_n0_q1, X_n0_q2, X_n0_q3, X_r0_q0, X_r0_q2, X_x_q0, X_x_q1,
+       x_r1, x_l2)) ;
+
+pred trap_Node_a3_n0_request_snd_l0_request_rcv_r0_request_rcv_0_flow
+  (var2 X_l0_q0, X_l0_q1, X_l0_q2, X_n0_q0, X_n0_q1, X_n0_q2, X_n0_q3, X_r0_q0, X_r0_q2, X_x_q0, X_x_q1,
+   var1 x_n0, x_l0, x_r0) =
+   ((x_n0 in X_n0_q1 | x_l0 in X_l0_q0 | x_r0 in X_l0_q0) =>
+    (x_n0 in X_n0_q2 | x_l0 in X_l0_q2 | x_r0 in X_l0_q2));
+
+pred trap_Node_a3_n0_request_snd_l0_request_rcv_r0_request_rcv_flow
+  (var2 U_Root_a1, U_Node_a2, U_Node_a3, U_Leaf_a4,
+   var2 X_l0_q0, X_l0_q1, X_l0_q2, X_n0_q0, X_n0_q1, X_n0_q2, X_n0_q3, X_r0_q0, X_r0_q2, X_x_q0, X_x_q1) =
+  (all1 x_0, x_n0, x_l0, x_r0 :
+    (x_0 in U_Node_a3 & 
+     x_0 = x_n0 & 
+     path_Node_a3_l0_Leaf_a4_l0
+       (U_Root_a1, U_Node_a2, U_Node_a3, U_Leaf_a4, x_0, x_l0) &
+     path_Node_a3_r0_Leaf_a4_l0
+       (U_Root_a1, U_Node_a2, U_Node_a3, U_Leaf_a4, x_0, x_r0)) =>
+    trap_Node_a3_n0_request_snd_l0_request_rcv_r0_request_rcv_0_flow
+      (X_l0_q0, X_l0_q1, X_l0_q2, X_n0_q0, X_n0_q1, X_n0_q2, X_n0_q3, X_r0_q0, X_r0_q2, X_x_q0, X_x_q1,
+       x_n0, x_l0, x_r0)) ;
+
+pred trap_Node_a3_n0_reply_rcv_l0_reply_snd_r0_reply_snd_0_flow
+  (var2 X_l0_q0, X_l0_q1, X_l0_q2, X_n0_q0, X_n0_q1, X_n0_q2, X_n0_q3, X_r0_q0, X_r0_q2, X_x_q0, X_x_q1,
+   var1 x_n0, x_l0, x_r0) =
+   ((x_n0 in X_n0_q2 | x_l0 in X_l0_q2 | x_r0 in X_l0_q2) =>
+    (x_n0 in X_n0_q3 | x_l0 in X_l0_q0 | x_r0 in X_l0_q0));
+
+pred trap_Node_a3_n0_reply_rcv_l0_reply_snd_r0_reply_snd_flow
+  (var2 U_Root_a1, U_Node_a2, U_Node_a3, U_Leaf_a4,
+   var2 X_l0_q0, X_l0_q1, X_l0_q2, X_n0_q0, X_n0_q1, X_n0_q2, X_n0_q3, X_r0_q0, X_r0_q2, X_x_q0, X_x_q1) =
+  (all1 x_0, x_n0, x_l0, x_r0 :
+    (x_0 in U_Node_a3 & 
+     x_0 = x_n0 & 
+     path_Node_a3_l0_Leaf_a4_l0
+       (U_Root_a1, U_Node_a2, U_Node_a3, U_Leaf_a4, x_0, x_l0) &
+     path_Node_a3_r0_Leaf_a4_l0
+       (U_Root_a1, U_Node_a2, U_Node_a3, U_Leaf_a4, x_0, x_r0)) =>
+    trap_Node_a3_n0_reply_rcv_l0_reply_snd_r0_reply_snd_0_flow
+      (X_l0_q0, X_l0_q1, X_l0_q2, X_n0_q0, X_n0_q1, X_n0_q2, X_n0_q3, X_r0_q0, X_r0_q2, X_x_q0, X_x_q1,
+       x_n0, x_l0, x_r0)) ;
+
+pred trap_Node_a3_l0_token_snd_r0_token_rcv_0_flow
+  (var2 X_l0_q0, X_l0_q1, X_l0_q2, X_n0_q0, X_n0_q1, X_n0_q2, X_n0_q3, X_r0_q0, X_r0_q2, X_x_q0, X_x_q1,
+   var1 x_l0, x_r0) =
+   ((x_l0 in X_l0_q1 | x_r0 in X_l0_q0) =>
+    (x_l0 in X_l0_q0 | x_r0 in X_l0_q1));
+
+pred trap_Node_a3_l0_token_snd_r0_token_rcv_flow
+  (var2 U_Root_a1, U_Node_a2, U_Node_a3, U_Leaf_a4,
+   var2 X_l0_q0, X_l0_q1, X_l0_q2, X_n0_q0, X_n0_q1, X_n0_q2, X_n0_q3, X_r0_q0, X_r0_q2, X_x_q0, X_x_q1) =
+  (all1 x_0, x_l0, x_r0 :
+    (x_0 in U_Node_a3
+     & 
+     path_Node_a3_l0_Leaf_a4_l0
+       (U_Root_a1, U_Node_a2, U_Node_a3, U_Leaf_a4, x_0, x_l0) &
+     path_Node_a3_r0_Leaf_a4_l0
+       (U_Root_a1, U_Node_a2, U_Node_a3, U_Leaf_a4, x_0, x_r0)) =>
+    trap_Node_a3_l0_token_snd_r0_token_rcv_0_flow
+      (X_l0_q0, X_l0_q1, X_l0_q2, X_n0_q0, X_n0_q1, X_n0_q2, X_n0_q3, X_r0_q0, X_r0_q2, X_x_q0, X_x_q1,
+       x_l0, x_r0)) ;
+
+pred trap_flow
+  (var2 U_Root_a1, U_Node_a2, U_Node_a3, U_Leaf_a4,
+   var2 X_l0_q0, X_l0_q1, X_l0_q2, X_n0_q0, X_n0_q1, X_n0_q2, X_n0_q3, X_r0_q0, X_r0_q2, X_x_q0, X_x_q1) =
+  ext_configuration
+    (U_Root_a1, U_Node_a2, U_Node_a3, U_Leaf_a4,
+     X_l0_q0, X_l0_q1, X_l0_q2, X_n0_q0, X_n0_q1, X_n0_q2, X_n0_q3, X_r0_q0, X_r0_q2, X_x_q0, X_x_q1) &
+  trap_Root_a1_r0_request_snd_n1_request_rcv_flow
+    (U_Root_a1, U_Node_a2, U_Node_a3, U_Leaf_a4,
+     X_l0_q0, X_l0_q1, X_l0_q2, X_n0_q0, X_n0_q1, X_n0_q2, X_n0_q3, X_r0_q0, X_r0_q2, X_x_q0, X_x_q1)  &
+  trap_Root_a1_r0_reply_rcv_n1_reply_snd_flow
+    (U_Root_a1, U_Node_a2, U_Node_a3, U_Leaf_a4,
+     X_l0_q0, X_l0_q1, X_l0_q2, X_n0_q0, X_n0_q1, X_n0_q2, X_n0_q3, X_r0_q0, X_r0_q2, X_x_q0, X_x_q1)  &
+  trap_Root_a1_x_token_snd_l1_token_rcv_flow
+    (U_Root_a1, U_Node_a2, U_Node_a3, U_Leaf_a4,
+     X_l0_q0, X_l0_q1, X_l0_q2, X_n0_q0, X_n0_q1, X_n0_q2, X_n0_q3, X_r0_q0, X_r0_q2, X_x_q0, X_x_q1)  &
+  trap_Root_a1_r1_token_snd_x_token_rcv_flow
+    (U_Root_a1, U_Node_a2, U_Node_a3, U_Leaf_a4,
+     X_l0_q0, X_l0_q1, X_l0_q2, X_n0_q0, X_n0_q1, X_n0_q2, X_n0_q3, X_r0_q0, X_r0_q2, X_x_q0, X_x_q1)  &
+  trap_Node_a2_n0_request_snd_n1_request_rcv_n2_request_rcv_flow
+    (U_Root_a1, U_Node_a2, U_Node_a3, U_Leaf_a4,
+     X_l0_q0, X_l0_q1, X_l0_q2, X_n0_q0, X_n0_q1, X_n0_q2, X_n0_q3, X_r0_q0, X_r0_q2, X_x_q0, X_x_q1)  &
+  trap_Node_a2_n0_reply_rcv_n1_reply_snd_n2_reply_snd_flow
+    (U_Root_a1, U_Node_a2, U_Node_a3, U_Leaf_a4,
+     X_l0_q0, X_l0_q1, X_l0_q2, X_n0_q0, X_n0_q1, X_n0_q2, X_n0_q3, X_r0_q0, X_r0_q2, X_x_q0, X_x_q1)  &
+  trap_Node_a2_r1_token_snd_l2_token_rcv_flow
+    (U_Root_a1, U_Node_a2, U_Node_a3, U_Leaf_a4,
+     X_l0_q0, X_l0_q1, X_l0_q2, X_n0_q0, X_n0_q1, X_n0_q2, X_n0_q3, X_r0_q0, X_r0_q2, X_x_q0, X_x_q1)  &
+  trap_Node_a3_n0_request_snd_l0_request_rcv_r0_request_rcv_flow
+    (U_Root_a1, U_Node_a2, U_Node_a3, U_Leaf_a4,
+     X_l0_q0, X_l0_q1, X_l0_q2, X_n0_q0, X_n0_q1, X_n0_q2, X_n0_q3, X_r0_q0, X_r0_q2, X_x_q0, X_x_q1)  &
+  trap_Node_a3_n0_reply_rcv_l0_reply_snd_r0_reply_snd_flow
+    (U_Root_a1, U_Node_a2, U_Node_a3, U_Leaf_a4,
+     X_l0_q0, X_l0_q1, X_l0_q2, X_n0_q0, X_n0_q1, X_n0_q2, X_n0_q3, X_r0_q0, X_r0_q2, X_x_q0, X_x_q1)  &
+  trap_Node_a3_l0_token_snd_r0_token_rcv_flow
+    (U_Root_a1, U_Node_a2, U_Node_a3, U_Leaf_a4,
+     X_l0_q0, X_l0_q1, X_l0_q2, X_n0_q0, X_n0_q1, X_n0_q2, X_n0_q3, X_r0_q0, X_r0_q2, X_x_q0, X_x_q1) ;
+
+pred trap_constraints
+  (var2 U_Root_a1, U_Node_a2, U_Node_a3, U_Leaf_a4,
+   var2 Z_l0_q0, Z_l0_q1, Z_l0_q2, Z_n0_q0, Z_n0_q1, Z_n0_q2, Z_n0_q3, Z_r0_q0, Z_r0_q2, Z_x_q0, Z_x_q1) =
+   ext_configuration
+     (U_Root_a1, U_Node_a2, U_Node_a3, U_Leaf_a4,
+      Z_l0_q0, Z_l0_q1, Z_l0_q2, Z_n0_q0, Z_n0_q1, Z_n0_q2, Z_n0_q3, Z_r0_q0, Z_r0_q2, Z_x_q0, Z_x_q1) &
+   trap_initially_not_empty
+     (U_Root_a1, U_Node_a2, U_Node_a3, U_Leaf_a4,
+      Z_l0_q0, Z_l0_q1, Z_l0_q2, Z_n0_q0, Z_n0_q1, Z_n0_q2, Z_n0_q3, Z_r0_q0, Z_r0_q2, Z_x_q0, Z_x_q1) &
+   trap_flow
+     (U_Root_a1, U_Node_a2, U_Node_a3, U_Leaf_a4,
+      Z_l0_q0, Z_l0_q1, Z_l0_q2, Z_n0_q0, Z_n0_q1, Z_n0_q2, Z_n0_q3, Z_r0_q0, Z_r0_q2, Z_x_q0, Z_x_q1);
+
+pred trap_invariant
+  (var2 U_Root_a1, U_Node_a2, U_Node_a3, U_Leaf_a4,
+   var2 X_l0_q0, X_l0_q1, X_l0_q2, X_n0_q0, X_n0_q1, X_n0_q2, X_n0_q3, X_r0_q0, X_r0_q2, X_x_q0, X_x_q1) =
+   configuration
+     (U_Root_a1, U_Node_a2, U_Node_a3, U_Leaf_a4,
+      X_l0_q0, X_l0_q1, X_l0_q2, X_n0_q0, X_n0_q1, X_n0_q2, X_n0_q3, X_r0_q0, X_r0_q2, X_x_q0, X_x_q1) &
+   all2 Z_l0_q0, Z_l0_q1, Z_l0_q2, Z_n0_q0, Z_n0_q1, Z_n0_q2, Z_n0_q3, Z_r0_q0, Z_r0_q2, Z_x_q0, Z_x_q1:
+     trap_constraints
+       (U_Root_a1, U_Node_a2, U_Node_a3, U_Leaf_a4,
+        Z_l0_q0, Z_l0_q1, Z_l0_q2, Z_n0_q0, Z_n0_q1, Z_n0_q2, Z_n0_q3, Z_r0_q0, Z_r0_q2, Z_x_q0, Z_x_q1) =>
+     intersects_11
+       (Z_l0_q0, Z_l0_q1, Z_l0_q2, Z_n0_q0, Z_n0_q1, Z_n0_q2, Z_n0_q3, Z_r0_q0, Z_r0_q2, Z_x_q0, Z_x_q1,
+        X_l0_q0, X_l0_q1, X_l0_q2, X_n0_q0, X_n0_q1, X_n0_q2, X_n0_q3, X_r0_q0, X_r0_q2, X_x_q0, X_x_q1);
+
+
+
+#
+# one invariants
+#
+
+
+
+pred one_initially_exactly_one
+  (var2 U_Root_a1, U_Node_a2, U_Node_a3, U_Leaf_a4,
+   var2 X_l0_q0, X_l0_q1, X_l0_q2, X_n0_q0, X_n0_q1, X_n0_q2, X_n0_q3, X_r0_q0, X_r0_q2, X_x_q0, X_x_q1) =
+   ext_configuration
+     (U_Root_a1, U_Node_a2, U_Node_a3, U_Leaf_a4,
+      X_l0_q0, X_l0_q1, X_l0_q2, X_n0_q0, X_n0_q1, X_n0_q2, X_n0_q3, X_r0_q0, X_r0_q2, X_x_q0, X_x_q1) &
+   (((ex1 x0 : x0 in X_r0_q0 & x0 in U_Root_a1 &
+        all1 x : ((x in X_r0_q0 & x in U_Root_a1) => x = x0)) &
+     (all1 x : (x notin X_x_q0 | x notin U_Root_a1)) &
+     (all1 x : (x notin X_n0_q0 | x notin U_Node_a2)) &
+     (all1 x : (x notin X_n0_q0 | x notin U_Node_a3)) &
+     (all1 x : (x notin X_l0_q0 | x notin U_Leaf_a4))) |
+    ((ex1 x0 : x0 in X_x_q0 & x0 in U_Root_a1 &
+        all1 x : ((x in X_x_q0 & x in U_Root_a1) => x = x0)) &
+     (all1 x : (x notin X_r0_q0 | x notin U_Root_a1)) &
+     (all1 x : (x notin X_n0_q0 | x notin U_Node_a2)) &
+     (all1 x : (x notin X_n0_q0 | x notin U_Node_a3)) &
+     (all1 x : (x notin X_l0_q0 | x notin U_Leaf_a4))) |
+    ((ex1 x0 : x0 in X_n0_q0 & x0 in U_Node_a2 &
+        all1 x : ((x in X_n0_q0 & x in U_Node_a2) => x = x0)) &
+     (all1 x : (x notin X_r0_q0 | x notin U_Root_a1)) &
+     (all1 x : (x notin X_x_q0 | x notin U_Root_a1)) &
+     (all1 x : (x notin X_n0_q0 | x notin U_Node_a3)) &
+     (all1 x : (x notin X_l0_q0 | x notin U_Leaf_a4))) |
+    ((ex1 x0 : x0 in X_n0_q0 & x0 in U_Node_a3 &
+        all1 x : ((x in X_n0_q0 & x in U_Node_a3) => x = x0)) &
+     (all1 x : (x notin X_r0_q0 | x notin U_Root_a1)) &
+     (all1 x : (x notin X_x_q0 | x notin U_Root_a1)) &
+     (all1 x : (x notin X_n0_q0 | x notin U_Node_a2)) &
+     (all1 x : (x notin X_l0_q0 | x notin U_Leaf_a4))) |
+    ((ex1 x0 : x0 in X_l0_q0 & x0 in U_Leaf_a4 &
+        all1 x : ((x in X_l0_q0 & x in U_Leaf_a4) => x = x0)) &
+     (all1 x : (x notin X_r0_q0 | x notin U_Root_a1)) &
+     (all1 x : (x notin X_x_q0 | x notin U_Root_a1)) &
+     (all1 x : (x notin X_n0_q0 | x notin U_Node_a2)) &
+     (all1 x : (x notin X_n0_q0 | x notin U_Node_a3))));
+
+
+pred one_Root_a1_r0_request_snd_n1_request_rcv_0_flow
+  (var2 X_l0_q0, X_l0_q1, X_l0_q2, X_n0_q0, X_n0_q1, X_n0_q2, X_n0_q3, X_r0_q0, X_r0_q2, X_x_q0, X_x_q1,
+   var1 x_r0, x_n1) =
+   one_transition_flow_2(x_r0, X_r0_q0, X_r0_q2, x_n1, X_n0_q0, X_n0_q1);
+
+pred one_Root_a1_r0_request_snd_n1_request_rcv_1_flow
+  (var2 X_l0_q0, X_l0_q1, X_l0_q2, X_n0_q0, X_n0_q1, X_n0_q2, X_n0_q3, X_r0_q0, X_r0_q2, X_x_q0, X_x_q1,
+   var1 x_r0, x_n1) =
+   one_transition_flow_2(x_r0, X_r0_q0, X_r0_q2, x_n1, X_n0_q0, X_n0_q1);
+
+pred one_Root_a1_r0_request_snd_n1_request_rcv_flow
+  (var2 U_Root_a1, U_Node_a2, U_Node_a3, U_Leaf_a4,
+   var2 X_l0_q0, X_l0_q1, X_l0_q2, X_n0_q0, X_n0_q1, X_n0_q2, X_n0_q3, X_r0_q0, X_r0_q2, X_x_q0, X_x_q1) =
+  (all1 x_0, x_r0, x_n1 :
+    (x_0 in U_Root_a1 & 
+     x_0 = x_r0 & 
+     path_Root_a1_n1_Node_a2_n0
+       (U_Root_a1, U_Node_a2, U_Node_a3, U_Leaf_a4, x_0, x_n1)) =>
+    one_Root_a1_r0_request_snd_n1_request_rcv_0_flow
+      (X_l0_q0, X_l0_q1, X_l0_q2, X_n0_q0, X_n0_q1, X_n0_q2, X_n0_q3, X_r0_q0, X_r0_q2, X_x_q0, X_x_q1,
+       x_r0, x_n1))  &
+  (all1 x_0, x_r0, x_n1 :
+    (x_0 in U_Root_a1 & 
+     x_0 = x_r0 & 
+     path_Root_a1_n1_Node_a3_n0
+       (U_Root_a1, U_Node_a2, U_Node_a3, U_Leaf_a4, x_0, x_n1)) =>
+    one_Root_a1_r0_request_snd_n1_request_rcv_1_flow
+      (X_l0_q0, X_l0_q1, X_l0_q2, X_n0_q0, X_n0_q1, X_n0_q2, X_n0_q3, X_r0_q0, X_r0_q2, X_x_q0, X_x_q1,
+       x_r0, x_n1)) ;
+
+pred one_Root_a1_r0_reply_rcv_n1_reply_snd_0_flow
+  (var2 X_l0_q0, X_l0_q1, X_l0_q2, X_n0_q0, X_n0_q1, X_n0_q2, X_n0_q3, X_r0_q0, X_r0_q2, X_x_q0, X_x_q1,
+   var1 x_r0, x_n1) =
+   one_transition_flow_2(x_r0, X_r0_q2, X_r0_q0, x_n1, X_n0_q3, X_n0_q0);
+
+pred one_Root_a1_r0_reply_rcv_n1_reply_snd_1_flow
+  (var2 X_l0_q0, X_l0_q1, X_l0_q2, X_n0_q0, X_n0_q1, X_n0_q2, X_n0_q3, X_r0_q0, X_r0_q2, X_x_q0, X_x_q1,
+   var1 x_r0, x_n1) =
+   one_transition_flow_2(x_r0, X_r0_q2, X_r0_q0, x_n1, X_n0_q3, X_n0_q0);
+
+pred one_Root_a1_r0_reply_rcv_n1_reply_snd_flow
+  (var2 U_Root_a1, U_Node_a2, U_Node_a3, U_Leaf_a4,
+   var2 X_l0_q0, X_l0_q1, X_l0_q2, X_n0_q0, X_n0_q1, X_n0_q2, X_n0_q3, X_r0_q0, X_r0_q2, X_x_q0, X_x_q1) =
+  (all1 x_0, x_r0, x_n1 :
+    (x_0 in U_Root_a1 & 
+     x_0 = x_r0 & 
+     path_Root_a1_n1_Node_a2_n0
+       (U_Root_a1, U_Node_a2, U_Node_a3, U_Leaf_a4, x_0, x_n1)) =>
+    one_Root_a1_r0_reply_rcv_n1_reply_snd_0_flow
+      (X_l0_q0, X_l0_q1, X_l0_q2, X_n0_q0, X_n0_q1, X_n0_q2, X_n0_q3, X_r0_q0, X_r0_q2, X_x_q0, X_x_q1,
+       x_r0, x_n1))  &
+  (all1 x_0, x_r0, x_n1 :
+    (x_0 in U_Root_a1 & 
+     x_0 = x_r0 & 
+     path_Root_a1_n1_Node_a3_n0
+       (U_Root_a1, U_Node_a2, U_Node_a3, U_Leaf_a4, x_0, x_n1)) =>
+    one_Root_a1_r0_reply_rcv_n1_reply_snd_1_flow
+      (X_l0_q0, X_l0_q1, X_l0_q2, X_n0_q0, X_n0_q1, X_n0_q2, X_n0_q3, X_r0_q0, X_r0_q2, X_x_q0, X_x_q1,
+       x_r0, x_n1)) ;
+
+pred one_Root_a1_x_token_snd_l1_token_rcv_0_flow
+  (var2 X_l0_q0, X_l0_q1, X_l0_q2, X_n0_q0, X_n0_q1, X_n0_q2, X_n0_q3, X_r0_q0, X_r0_q2, X_x_q0, X_x_q1,
+   var1 x_x, x_l1) =
+   one_transition_flow_2(x_x, X_x_q0, X_x_q1, x_l1, X_l0_q0, X_l0_q1);
+
+pred one_Root_a1_x_token_snd_l1_token_rcv_flow
+  (var2 U_Root_a1, U_Node_a2, U_Node_a3, U_Leaf_a4,
+   var2 X_l0_q0, X_l0_q1, X_l0_q2, X_n0_q0, X_n0_q1, X_n0_q2, X_n0_q3, X_r0_q0, X_r0_q2, X_x_q0, X_x_q1) =
+  (all1 x_0, x_x, x_l1 :
+    (x_0 in U_Root_a1 & 
+     x_0 = x_x & 
+     path_Root_a1_l1_Leaf_a4_l0
+       (U_Root_a1, U_Node_a2, U_Node_a3, U_Leaf_a4, x_0, x_l1)) =>
+    one_Root_a1_x_token_snd_l1_token_rcv_0_flow
+      (X_l0_q0, X_l0_q1, X_l0_q2, X_n0_q0, X_n0_q1, X_n0_q2, X_n0_q3, X_r0_q0, X_r0_q2, X_x_q0, X_x_q1,
+       x_x, x_l1)) ;
+
+pred one_Root_a1_r1_token_snd_x_token_rcv_0_flow
+  (var2 X_l0_q0, X_l0_q1, X_l0_q2, X_n0_q0, X_n0_q1, X_n0_q2, X_n0_q3, X_r0_q0, X_r0_q2, X_x_q0, X_x_q1,
+   var1 x_r1, x_x) =
+   one_transition_flow_2(x_r1, X_l0_q1, X_l0_q0, x_x, X_x_q1, X_x_q0);
+
+pred one_Root_a1_r1_token_snd_x_token_rcv_flow
+  (var2 U_Root_a1, U_Node_a2, U_Node_a3, U_Leaf_a4,
+   var2 X_l0_q0, X_l0_q1, X_l0_q2, X_n0_q0, X_n0_q1, X_n0_q2, X_n0_q3, X_r0_q0, X_r0_q2, X_x_q0, X_x_q1) =
+  (all1 x_0, x_r1, x_x :
+    (x_0 in U_Root_a1 & 
+     x_0 = x_x & 
+     path_Root_a1_r1_Leaf_a4_l0
+       (U_Root_a1, U_Node_a2, U_Node_a3, U_Leaf_a4, x_0, x_r1)) =>
+    one_Root_a1_r1_token_snd_x_token_rcv_0_flow
+      (X_l0_q0, X_l0_q1, X_l0_q2, X_n0_q0, X_n0_q1, X_n0_q2, X_n0_q3, X_r0_q0, X_r0_q2, X_x_q0, X_x_q1,
+       x_r1, x_x)) ;
+
+pred one_Node_a2_n0_request_snd_n1_request_rcv_n2_request_rcv_0_flow
+  (var2 X_l0_q0, X_l0_q1, X_l0_q2, X_n0_q0, X_n0_q1, X_n0_q2, X_n0_q3, X_r0_q0, X_r0_q2, X_x_q0, X_x_q1,
+   var1 x_n0, x_n1, x_n2) =
+   one_transition_flow_3(x_n0, X_n0_q1, X_n0_q2, x_n1, X_n0_q0, X_n0_q1, x_n2, X_n0_q0, X_n0_q1);
+
+pred one_Node_a2_n0_request_snd_n1_request_rcv_n2_request_rcv_1_flow
+  (var2 X_l0_q0, X_l0_q1, X_l0_q2, X_n0_q0, X_n0_q1, X_n0_q2, X_n0_q3, X_r0_q0, X_r0_q2, X_x_q0, X_x_q1,
+   var1 x_n0, x_n1, x_n2) =
+   one_transition_flow_3(x_n0, X_n0_q1, X_n0_q2, x_n1, X_n0_q0, X_n0_q1, x_n2, X_n0_q0, X_n0_q1);
+
+pred one_Node_a2_n0_request_snd_n1_request_rcv_n2_request_rcv_2_flow
+  (var2 X_l0_q0, X_l0_q1, X_l0_q2, X_n0_q0, X_n0_q1, X_n0_q2, X_n0_q3, X_r0_q0, X_r0_q2, X_x_q0, X_x_q1,
+   var1 x_n0, x_n1, x_n2) =
+   one_transition_flow_3(x_n0, X_n0_q1, X_n0_q2, x_n1, X_n0_q0, X_n0_q1, x_n2, X_n0_q0, X_n0_q1);
+
+pred one_Node_a2_n0_request_snd_n1_request_rcv_n2_request_rcv_3_flow
+  (var2 X_l0_q0, X_l0_q1, X_l0_q2, X_n0_q0, X_n0_q1, X_n0_q2, X_n0_q3, X_r0_q0, X_r0_q2, X_x_q0, X_x_q1,
+   var1 x_n0, x_n1, x_n2) =
+   one_transition_flow_3(x_n0, X_n0_q1, X_n0_q2, x_n1, X_n0_q0, X_n0_q1, x_n2, X_n0_q0, X_n0_q1);
+
+pred one_Node_a2_n0_request_snd_n1_request_rcv_n2_request_rcv_flow
+  (var2 U_Root_a1, U_Node_a2, U_Node_a3, U_Leaf_a4,
+   var2 X_l0_q0, X_l0_q1, X_l0_q2, X_n0_q0, X_n0_q1, X_n0_q2, X_n0_q3, X_r0_q0, X_r0_q2, X_x_q0, X_x_q1) =
+  (all1 x_0, x_n0, x_n1, x_n2 :
+    (x_0 in U_Node_a2 & 
+     x_0 = x_n0 & 
+     path_Node_a2_n1_Node_a2_n0
+       (U_Root_a1, U_Node_a2, U_Node_a3, U_Leaf_a4, x_0, x_n1) &
+     path_Node_a2_n2_Node_a2_n0
+       (U_Root_a1, U_Node_a2, U_Node_a3, U_Leaf_a4, x_0, x_n2)) =>
+    one_Node_a2_n0_request_snd_n1_request_rcv_n2_request_rcv_0_flow
+      (X_l0_q0, X_l0_q1, X_l0_q2, X_n0_q0, X_n0_q1, X_n0_q2, X_n0_q3, X_r0_q0, X_r0_q2, X_x_q0, X_x_q1,
+       x_n0, x_n1, x_n2))  &
+  (all1 x_0, x_n0, x_n1, x_n2 :
+    (x_0 in U_Node_a2 & 
+     x_0 = x_n0 & 
+     path_Node_a2_n1_Node_a2_n0
+       (U_Root_a1, U_Node_a2, U_Node_a3, U_Leaf_a4, x_0, x_n1) &
+     path_Node_a2_n2_Node_a3_n0
+       (U_Root_a1, U_Node_a2, U_Node_a3, U_Leaf_a4, x_0, x_n2)) =>
+    one_Node_a2_n0_request_snd_n1_request_rcv_n2_request_rcv_1_flow
+      (X_l0_q0, X_l0_q1, X_l0_q2, X_n0_q0, X_n0_q1, X_n0_q2, X_n0_q3, X_r0_q0, X_r0_q2, X_x_q0, X_x_q1,
+       x_n0, x_n1, x_n2))  &
+  (all1 x_0, x_n0, x_n1, x_n2 :
+    (x_0 in U_Node_a2 & 
+     x_0 = x_n0 & 
+     path_Node_a2_n1_Node_a3_n0
+       (U_Root_a1, U_Node_a2, U_Node_a3, U_Leaf_a4, x_0, x_n1) &
+     path_Node_a2_n2_Node_a2_n0
+       (U_Root_a1, U_Node_a2, U_Node_a3, U_Leaf_a4, x_0, x_n2)) =>
+    one_Node_a2_n0_request_snd_n1_request_rcv_n2_request_rcv_2_flow
+      (X_l0_q0, X_l0_q1, X_l0_q2, X_n0_q0, X_n0_q1, X_n0_q2, X_n0_q3, X_r0_q0, X_r0_q2, X_x_q0, X_x_q1,
+       x_n0, x_n1, x_n2))  &
+  (all1 x_0, x_n0, x_n1, x_n2 :
+    (x_0 in U_Node_a2 & 
+     x_0 = x_n0 & 
+     path_Node_a2_n1_Node_a3_n0
+       (U_Root_a1, U_Node_a2, U_Node_a3, U_Leaf_a4, x_0, x_n1) &
+     path_Node_a2_n2_Node_a3_n0
+       (U_Root_a1, U_Node_a2, U_Node_a3, U_Leaf_a4, x_0, x_n2)) =>
+    one_Node_a2_n0_request_snd_n1_request_rcv_n2_request_rcv_3_flow
+      (X_l0_q0, X_l0_q1, X_l0_q2, X_n0_q0, X_n0_q1, X_n0_q2, X_n0_q3, X_r0_q0, X_r0_q2, X_x_q0, X_x_q1,
+       x_n0, x_n1, x_n2)) ;
+
+pred one_Node_a2_n0_reply_rcv_n1_reply_snd_n2_reply_snd_0_flow
+  (var2 X_l0_q0, X_l0_q1, X_l0_q2, X_n0_q0, X_n0_q1, X_n0_q2, X_n0_q3, X_r0_q0, X_r0_q2, X_x_q0, X_x_q1,
+   var1 x_n0, x_n1, x_n2) =
+   one_transition_flow_3(x_n0, X_n0_q2, X_n0_q3, x_n1, X_n0_q3, X_n0_q0, x_n2, X_n0_q3, X_n0_q0);
+
+pred one_Node_a2_n0_reply_rcv_n1_reply_snd_n2_reply_snd_1_flow
+  (var2 X_l0_q0, X_l0_q1, X_l0_q2, X_n0_q0, X_n0_q1, X_n0_q2, X_n0_q3, X_r0_q0, X_r0_q2, X_x_q0, X_x_q1,
+   var1 x_n0, x_n1, x_n2) =
+   one_transition_flow_3(x_n0, X_n0_q2, X_n0_q3, x_n1, X_n0_q3, X_n0_q0, x_n2, X_n0_q3, X_n0_q0);
+
+pred one_Node_a2_n0_reply_rcv_n1_reply_snd_n2_reply_snd_2_flow
+  (var2 X_l0_q0, X_l0_q1, X_l0_q2, X_n0_q0, X_n0_q1, X_n0_q2, X_n0_q3, X_r0_q0, X_r0_q2, X_x_q0, X_x_q1,
+   var1 x_n0, x_n1, x_n2) =
+   one_transition_flow_3(x_n0, X_n0_q2, X_n0_q3, x_n1, X_n0_q3, X_n0_q0, x_n2, X_n0_q3, X_n0_q0);
+
+pred one_Node_a2_n0_reply_rcv_n1_reply_snd_n2_reply_snd_3_flow
+  (var2 X_l0_q0, X_l0_q1, X_l0_q2, X_n0_q0, X_n0_q1, X_n0_q2, X_n0_q3, X_r0_q0, X_r0_q2, X_x_q0, X_x_q1,
+   var1 x_n0, x_n1, x_n2) =
+   one_transition_flow_3(x_n0, X_n0_q2, X_n0_q3, x_n1, X_n0_q3, X_n0_q0, x_n2, X_n0_q3, X_n0_q0);
+
+pred one_Node_a2_n0_reply_rcv_n1_reply_snd_n2_reply_snd_flow
+  (var2 U_Root_a1, U_Node_a2, U_Node_a3, U_Leaf_a4,
+   var2 X_l0_q0, X_l0_q1, X_l0_q2, X_n0_q0, X_n0_q1, X_n0_q2, X_n0_q3, X_r0_q0, X_r0_q2, X_x_q0, X_x_q1) =
+  (all1 x_0, x_n0, x_n1, x_n2 :
+    (x_0 in U_Node_a2 & 
+     x_0 = x_n0 & 
+     path_Node_a2_n1_Node_a2_n0
+       (U_Root_a1, U_Node_a2, U_Node_a3, U_Leaf_a4, x_0, x_n1) &
+     path_Node_a2_n2_Node_a2_n0
+       (U_Root_a1, U_Node_a2, U_Node_a3, U_Leaf_a4, x_0, x_n2)) =>
+    one_Node_a2_n0_reply_rcv_n1_reply_snd_n2_reply_snd_0_flow
+      (X_l0_q0, X_l0_q1, X_l0_q2, X_n0_q0, X_n0_q1, X_n0_q2, X_n0_q3, X_r0_q0, X_r0_q2, X_x_q0, X_x_q1,
+       x_n0, x_n1, x_n2))  &
+  (all1 x_0, x_n0, x_n1, x_n2 :
+    (x_0 in U_Node_a2 & 
+     x_0 = x_n0 & 
+     path_Node_a2_n1_Node_a2_n0
+       (U_Root_a1, U_Node_a2, U_Node_a3, U_Leaf_a4, x_0, x_n1) &
+     path_Node_a2_n2_Node_a3_n0
+       (U_Root_a1, U_Node_a2, U_Node_a3, U_Leaf_a4, x_0, x_n2)) =>
+    one_Node_a2_n0_reply_rcv_n1_reply_snd_n2_reply_snd_1_flow
+      (X_l0_q0, X_l0_q1, X_l0_q2, X_n0_q0, X_n0_q1, X_n0_q2, X_n0_q3, X_r0_q0, X_r0_q2, X_x_q0, X_x_q1,
+       x_n0, x_n1, x_n2))  &
+  (all1 x_0, x_n0, x_n1, x_n2 :
+    (x_0 in U_Node_a2 & 
+     x_0 = x_n0 & 
+     path_Node_a2_n1_Node_a3_n0
+       (U_Root_a1, U_Node_a2, U_Node_a3, U_Leaf_a4, x_0, x_n1) &
+     path_Node_a2_n2_Node_a2_n0
+       (U_Root_a1, U_Node_a2, U_Node_a3, U_Leaf_a4, x_0, x_n2)) =>
+    one_Node_a2_n0_reply_rcv_n1_reply_snd_n2_reply_snd_2_flow
+      (X_l0_q0, X_l0_q1, X_l0_q2, X_n0_q0, X_n0_q1, X_n0_q2, X_n0_q3, X_r0_q0, X_r0_q2, X_x_q0, X_x_q1,
+       x_n0, x_n1, x_n2))  &
+  (all1 x_0, x_n0, x_n1, x_n2 :
+    (x_0 in U_Node_a2 & 
+     x_0 = x_n0 & 
+     path_Node_a2_n1_Node_a3_n0
+       (U_Root_a1, U_Node_a2, U_Node_a3, U_Leaf_a4, x_0, x_n1) &
+     path_Node_a2_n2_Node_a3_n0
+       (U_Root_a1, U_Node_a2, U_Node_a3, U_Leaf_a4, x_0, x_n2)) =>
+    one_Node_a2_n0_reply_rcv_n1_reply_snd_n2_reply_snd_3_flow
+      (X_l0_q0, X_l0_q1, X_l0_q2, X_n0_q0, X_n0_q1, X_n0_q2, X_n0_q3, X_r0_q0, X_r0_q2, X_x_q0, X_x_q1,
+       x_n0, x_n1, x_n2)) ;
+
+pred one_Node_a2_r1_token_snd_l2_token_rcv_0_flow
+  (var2 X_l0_q0, X_l0_q1, X_l0_q2, X_n0_q0, X_n0_q1, X_n0_q2, X_n0_q3, X_r0_q0, X_r0_q2, X_x_q0, X_x_q1,
+   var1 x_r1, x_l2) =
+   one_transition_flow_2(x_r1, X_l0_q1, X_l0_q0, x_l2, X_l0_q0, X_l0_q1);
+
+pred one_Node_a2_r1_token_snd_l2_token_rcv_flow
+  (var2 U_Root_a1, U_Node_a2, U_Node_a3, U_Leaf_a4,
+   var2 X_l0_q0, X_l0_q1, X_l0_q2, X_n0_q0, X_n0_q1, X_n0_q2, X_n0_q3, X_r0_q0, X_r0_q2, X_x_q0, X_x_q1) =
+  (all1 x_0, x_r1, x_l2 :
+    (x_0 in U_Node_a2
+     & 
+     path_Node_a2_r1_Leaf_a4_l0
+       (U_Root_a1, U_Node_a2, U_Node_a3, U_Leaf_a4, x_0, x_r1) &
+     path_Node_a2_l2_Leaf_a4_l0
+       (U_Root_a1, U_Node_a2, U_Node_a3, U_Leaf_a4, x_0, x_l2)) =>
+    one_Node_a2_r1_token_snd_l2_token_rcv_0_flow
+      (X_l0_q0, X_l0_q1, X_l0_q2, X_n0_q0, X_n0_q1, X_n0_q2, X_n0_q3, X_r0_q0, X_r0_q2, X_x_q0, X_x_q1,
+       x_r1, x_l2)) ;
+
+pred one_Node_a3_n0_request_snd_l0_request_rcv_r0_request_rcv_0_flow
+  (var2 X_l0_q0, X_l0_q1, X_l0_q2, X_n0_q0, X_n0_q1, X_n0_q2, X_n0_q3, X_r0_q0, X_r0_q2, X_x_q0, X_x_q1,
+   var1 x_n0, x_l0, x_r0) =
+   one_transition_flow_3(x_n0, X_n0_q1, X_n0_q2, x_l0, X_l0_q0, X_l0_q2, x_r0, X_l0_q0, X_l0_q2);
+
+pred one_Node_a3_n0_request_snd_l0_request_rcv_r0_request_rcv_flow
+  (var2 U_Root_a1, U_Node_a2, U_Node_a3, U_Leaf_a4,
+   var2 X_l0_q0, X_l0_q1, X_l0_q2, X_n0_q0, X_n0_q1, X_n0_q2, X_n0_q3, X_r0_q0, X_r0_q2, X_x_q0, X_x_q1) =
+  (all1 x_0, x_n0, x_l0, x_r0 :
+    (x_0 in U_Node_a3 & 
+     x_0 = x_n0 & 
+     path_Node_a3_l0_Leaf_a4_l0
+       (U_Root_a1, U_Node_a2, U_Node_a3, U_Leaf_a4, x_0, x_l0) &
+     path_Node_a3_r0_Leaf_a4_l0
+       (U_Root_a1, U_Node_a2, U_Node_a3, U_Leaf_a4, x_0, x_r0)) =>
+    one_Node_a3_n0_request_snd_l0_request_rcv_r0_request_rcv_0_flow
+      (X_l0_q0, X_l0_q1, X_l0_q2, X_n0_q0, X_n0_q1, X_n0_q2, X_n0_q3, X_r0_q0, X_r0_q2, X_x_q0, X_x_q1,
+       x_n0, x_l0, x_r0)) ;
+
+pred one_Node_a3_n0_reply_rcv_l0_reply_snd_r0_reply_snd_0_flow
+  (var2 X_l0_q0, X_l0_q1, X_l0_q2, X_n0_q0, X_n0_q1, X_n0_q2, X_n0_q3, X_r0_q0, X_r0_q2, X_x_q0, X_x_q1,
+   var1 x_n0, x_l0, x_r0) =
+   one_transition_flow_3(x_n0, X_n0_q2, X_n0_q3, x_l0, X_l0_q2, X_l0_q0, x_r0, X_l0_q2, X_l0_q0);
+
+pred one_Node_a3_n0_reply_rcv_l0_reply_snd_r0_reply_snd_flow
+  (var2 U_Root_a1, U_Node_a2, U_Node_a3, U_Leaf_a4,
+   var2 X_l0_q0, X_l0_q1, X_l0_q2, X_n0_q0, X_n0_q1, X_n0_q2, X_n0_q3, X_r0_q0, X_r0_q2, X_x_q0, X_x_q1) =
+  (all1 x_0, x_n0, x_l0, x_r0 :
+    (x_0 in U_Node_a3 & 
+     x_0 = x_n0 & 
+     path_Node_a3_l0_Leaf_a4_l0
+       (U_Root_a1, U_Node_a2, U_Node_a3, U_Leaf_a4, x_0, x_l0) &
+     path_Node_a3_r0_Leaf_a4_l0
+       (U_Root_a1, U_Node_a2, U_Node_a3, U_Leaf_a4, x_0, x_r0)) =>
+    one_Node_a3_n0_reply_rcv_l0_reply_snd_r0_reply_snd_0_flow
+      (X_l0_q0, X_l0_q1, X_l0_q2, X_n0_q0, X_n0_q1, X_n0_q2, X_n0_q3, X_r0_q0, X_r0_q2, X_x_q0, X_x_q1,
+       x_n0, x_l0, x_r0)) ;
+
+pred one_Node_a3_l0_token_snd_r0_token_rcv_0_flow
+  (var2 X_l0_q0, X_l0_q1, X_l0_q2, X_n0_q0, X_n0_q1, X_n0_q2, X_n0_q3, X_r0_q0, X_r0_q2, X_x_q0, X_x_q1,
+   var1 x_l0, x_r0) =
+   one_transition_flow_2(x_l0, X_l0_q1, X_l0_q0, x_r0, X_l0_q0, X_l0_q1);
+
+pred one_Node_a3_l0_token_snd_r0_token_rcv_flow
+  (var2 U_Root_a1, U_Node_a2, U_Node_a3, U_Leaf_a4,
+   var2 X_l0_q0, X_l0_q1, X_l0_q2, X_n0_q0, X_n0_q1, X_n0_q2, X_n0_q3, X_r0_q0, X_r0_q2, X_x_q0, X_x_q1) =
+  (all1 x_0, x_l0, x_r0 :
+    (x_0 in U_Node_a3
+     & 
+     path_Node_a3_l0_Leaf_a4_l0
+       (U_Root_a1, U_Node_a2, U_Node_a3, U_Leaf_a4, x_0, x_l0) &
+     path_Node_a3_r0_Leaf_a4_l0
+       (U_Root_a1, U_Node_a2, U_Node_a3, U_Leaf_a4, x_0, x_r0)) =>
+    one_Node_a3_l0_token_snd_r0_token_rcv_0_flow
+      (X_l0_q0, X_l0_q1, X_l0_q2, X_n0_q0, X_n0_q1, X_n0_q2, X_n0_q3, X_r0_q0, X_r0_q2, X_x_q0, X_x_q1,
+       x_l0, x_r0)) ;
+
+pred one_flow
+  (var2 U_Root_a1, U_Node_a2, U_Node_a3, U_Leaf_a4,
+   var2 X_l0_q0, X_l0_q1, X_l0_q2, X_n0_q0, X_n0_q1, X_n0_q2, X_n0_q3, X_r0_q0, X_r0_q2, X_x_q0, X_x_q1) =
+  ext_configuration
+    (U_Root_a1, U_Node_a2, U_Node_a3, U_Leaf_a4,
+     X_l0_q0, X_l0_q1, X_l0_q2, X_n0_q0, X_n0_q1, X_n0_q2, X_n0_q3, X_r0_q0, X_r0_q2, X_x_q0, X_x_q1) &
+  one_Root_a1_r0_request_snd_n1_request_rcv_flow
+    (U_Root_a1, U_Node_a2, U_Node_a3, U_Leaf_a4,
+     X_l0_q0, X_l0_q1, X_l0_q2, X_n0_q0, X_n0_q1, X_n0_q2, X_n0_q3, X_r0_q0, X_r0_q2, X_x_q0, X_x_q1)  &
+  one_Root_a1_r0_reply_rcv_n1_reply_snd_flow
+    (U_Root_a1, U_Node_a2, U_Node_a3, U_Leaf_a4,
+     X_l0_q0, X_l0_q1, X_l0_q2, X_n0_q0, X_n0_q1, X_n0_q2, X_n0_q3, X_r0_q0, X_r0_q2, X_x_q0, X_x_q1)  &
+  one_Root_a1_x_token_snd_l1_token_rcv_flow
+    (U_Root_a1, U_Node_a2, U_Node_a3, U_Leaf_a4,
+     X_l0_q0, X_l0_q1, X_l0_q2, X_n0_q0, X_n0_q1, X_n0_q2, X_n0_q3, X_r0_q0, X_r0_q2, X_x_q0, X_x_q1)  &
+  one_Root_a1_r1_token_snd_x_token_rcv_flow
+    (U_Root_a1, U_Node_a2, U_Node_a3, U_Leaf_a4,
+     X_l0_q0, X_l0_q1, X_l0_q2, X_n0_q0, X_n0_q1, X_n0_q2, X_n0_q3, X_r0_q0, X_r0_q2, X_x_q0, X_x_q1)  &
+  one_Node_a2_n0_request_snd_n1_request_rcv_n2_request_rcv_flow
+    (U_Root_a1, U_Node_a2, U_Node_a3, U_Leaf_a4,
+     X_l0_q0, X_l0_q1, X_l0_q2, X_n0_q0, X_n0_q1, X_n0_q2, X_n0_q3, X_r0_q0, X_r0_q2, X_x_q0, X_x_q1)  &
+  one_Node_a2_n0_reply_rcv_n1_reply_snd_n2_reply_snd_flow
+    (U_Root_a1, U_Node_a2, U_Node_a3, U_Leaf_a4,
+     X_l0_q0, X_l0_q1, X_l0_q2, X_n0_q0, X_n0_q1, X_n0_q2, X_n0_q3, X_r0_q0, X_r0_q2, X_x_q0, X_x_q1)  &
+  one_Node_a2_r1_token_snd_l2_token_rcv_flow
+    (U_Root_a1, U_Node_a2, U_Node_a3, U_Leaf_a4,
+     X_l0_q0, X_l0_q1, X_l0_q2, X_n0_q0, X_n0_q1, X_n0_q2, X_n0_q3, X_r0_q0, X_r0_q2, X_x_q0, X_x_q1)  &
+  one_Node_a3_n0_request_snd_l0_request_rcv_r0_request_rcv_flow
+    (U_Root_a1, U_Node_a2, U_Node_a3, U_Leaf_a4,
+     X_l0_q0, X_l0_q1, X_l0_q2, X_n0_q0, X_n0_q1, X_n0_q2, X_n0_q3, X_r0_q0, X_r0_q2, X_x_q0, X_x_q1)  &
+  one_Node_a3_n0_reply_rcv_l0_reply_snd_r0_reply_snd_flow
+    (U_Root_a1, U_Node_a2, U_Node_a3, U_Leaf_a4,
+     X_l0_q0, X_l0_q1, X_l0_q2, X_n0_q0, X_n0_q1, X_n0_q2, X_n0_q3, X_r0_q0, X_r0_q2, X_x_q0, X_x_q1)  &
+  one_Node_a3_l0_token_snd_r0_token_rcv_flow
+    (U_Root_a1, U_Node_a2, U_Node_a3, U_Leaf_a4,
+     X_l0_q0, X_l0_q1, X_l0_q2, X_n0_q0, X_n0_q1, X_n0_q2, X_n0_q3, X_r0_q0, X_r0_q2, X_x_q0, X_x_q1) ;
+
+pred one_constraints
+  (var2 U_Root_a1, U_Node_a2, U_Node_a3, U_Leaf_a4,
+   var2 Z_l0_q0, Z_l0_q1, Z_l0_q2, Z_n0_q0, Z_n0_q1, Z_n0_q2, Z_n0_q3, Z_r0_q0, Z_r0_q2, Z_x_q0, Z_x_q1) =
+   ext_configuration
+     (U_Root_a1, U_Node_a2, U_Node_a3, U_Leaf_a4,
+      Z_l0_q0, Z_l0_q1, Z_l0_q2, Z_n0_q0, Z_n0_q1, Z_n0_q2, Z_n0_q3, Z_r0_q0, Z_r0_q2, Z_x_q0, Z_x_q1) &
+   one_initially_exactly_one
+     (U_Root_a1, U_Node_a2, U_Node_a3, U_Leaf_a4,
+      Z_l0_q0, Z_l0_q1, Z_l0_q2, Z_n0_q0, Z_n0_q1, Z_n0_q2, Z_n0_q3, Z_r0_q0, Z_r0_q2, Z_x_q0, Z_x_q1) &
+   one_flow
+     (U_Root_a1, U_Node_a2, U_Node_a3, U_Leaf_a4,
+      Z_l0_q0, Z_l0_q1, Z_l0_q2, Z_n0_q0, Z_n0_q1, Z_n0_q2, Z_n0_q3, Z_r0_q0, Z_r0_q2, Z_x_q0, Z_x_q1);
+
+pred one_invariant
+  (var2 U_Root_a1, U_Node_a2, U_Node_a3, U_Leaf_a4,
+   var2 X_l0_q0, X_l0_q1, X_l0_q2, X_n0_q0, X_n0_q1, X_n0_q2, X_n0_q3, X_r0_q0, X_r0_q2, X_x_q0, X_x_q1) =
+   configuration
+     (U_Root_a1, U_Node_a2, U_Node_a3, U_Leaf_a4,
+      X_l0_q0, X_l0_q1, X_l0_q2, X_n0_q0, X_n0_q1, X_n0_q2, X_n0_q3, X_r0_q0, X_r0_q2, X_x_q0, X_x_q1) &
+   all2 Z_l0_q0, Z_l0_q1, Z_l0_q2, Z_n0_q0, Z_n0_q1, Z_n0_q2, Z_n0_q3, Z_r0_q0, Z_r0_q2, Z_x_q0, Z_x_q1 :
+     one_constraints
+       (U_Root_a1, U_Node_a2, U_Node_a3, U_Leaf_a4,
+        Z_l0_q0, Z_l0_q1, Z_l0_q2, Z_n0_q0, Z_n0_q1, Z_n0_q2, Z_n0_q3, Z_r0_q0, Z_r0_q2, Z_x_q0, Z_x_q1) =>
+     uniquely_intersects_11
+       (Z_l0_q0, Z_l0_q1, Z_l0_q2, Z_n0_q0, Z_n0_q1, Z_n0_q2, Z_n0_q3, Z_r0_q0, Z_r0_q2, Z_x_q0, Z_x_q1,
+        X_l0_q0, X_l0_q1, X_l0_q2, X_n0_q0, X_n0_q1, X_n0_q2, X_n0_q3, X_r0_q0, X_r0_q2, X_x_q0, X_x_q1);
+
+
+
+#
+# tree-linked-leaves_mutex.mona
+#
+
+
+
+pred not_mutex
+  (var2 U_Root_a1, U_Node_a2, U_Node_a3, U_Leaf_a4,
+   var2 X_l0_q0, X_l0_q1, X_l0_q2, X_n0_q0, X_n0_q1, X_n0_q2, X_n0_q3, X_r0_q0, X_r0_q2, X_x_q0, X_x_q1) =
+   configuration
+     (U_Root_a1, U_Node_a2, U_Node_a3, U_Leaf_a4,
+      X_l0_q0, X_l0_q1, X_l0_q2, X_n0_q0, X_n0_q1, X_n0_q2, X_n0_q3, X_r0_q0, X_r0_q2, X_x_q0, X_x_q1) &
+   ex1 x1, x2:
+     ( x1 ~= x2 &
+       (x1 in X_l0_q1 | x1 in X_x_q0 ) &
+       (x2 in X_l0_q1 | x2 in X_x_q0 ));
+
+
+#
+# assertions checking
+#
+
+var2 U_Root_a1, U_Node_a2, U_Node_a3, U_Leaf_a4;
+
+var2 X_l0_q0, X_l0_q1, X_l0_q2, X_n0_q0, X_n0_q1, X_n0_q2, X_n0_q3, X_r0_q0, X_r0_q2, X_x_q0, X_x_q1;
+
+trap_invariant
+  (U_Root_a1, U_Node_a2, U_Node_a3, U_Leaf_a4,
+   X_l0_q0, X_l0_q1, X_l0_q2, X_n0_q0, X_n0_q1, X_n0_q2, X_n0_q3, X_r0_q0, X_r0_q2, X_x_q0, X_x_q1) &
+one_invariant
+  (U_Root_a1, U_Node_a2, U_Node_a3, U_Leaf_a4,
+   X_l0_q0, X_l0_q1, X_l0_q2, X_n0_q0, X_n0_q1, X_n0_q2, X_n0_q3, X_r0_q0, X_r0_q2, X_x_q0, X_x_q1) &
+not_mutex
+  (U_Root_a1, U_Node_a2, U_Node_a3, U_Leaf_a4,
+   X_l0_q0, X_l0_q1, X_l0_q2, X_n0_q0, X_n0_q1, X_n0_q2, X_n0_q3, X_r0_q0, X_r0_q2, X_x_q0, X_x_q1);

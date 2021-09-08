@@ -1,0 +1,37 @@
+Root() := 
+  [a1] _let_ r0, l1, n1, r1, x _in_
+    (r0.request_snd n1.request_rcv +
+     r0.reply_rcv n1.reply_snd +
+     x.token_snd l1.token_rcv + 
+     r1.token_snd x.token_rcv)
+    (r0 : root, x : leaf_init, Node(l1, n1, r1))
+;
+
+Node(l0, n0, r0) :=
+  [a2] _let_ n1, r1, l2, n2 _in_
+     (n0.request_snd n1.request_rcv n2.request_rcv +
+      n0.reply_rcv n1.reply_snd n2.reply_snd +
+      r1.token_snd l2.token_rcv)
+    (n0 : node, Node(l0, n1, r1), Node(l2, n2, r0))
+| [a3] 
+     (n0.request_snd l0.request_rcv r0.request_rcv +
+      n0.reply_rcv l0.reply_snd r0.reply_snd +
+      l0.token_snd r0.token_rcv)
+    (n0 : node, Leaf(l0), Leaf(r0))
+| [a4]
+     (n0.request_snd l0.request_rcv +
+      n0.reply_rcv l0.reply_snd +
+      l0.token_snd r0.token_rcv)
+    (n0 : node, Leaf(l0), LeafInit(r0))
+| [a5]
+     (n0.request_snd r0.request_rcv +
+      n0.reply_rcv r0.reply_snd +
+      l0.token_snd r0.token_rcv)
+    (n0 : node, LeafInit(l0), Leaf(r0))
+;
+
+Leaf(l0) :=
+  [a6] () (l0 : leaf);
+
+LeafInit(x) :=
+  [a7] () (x : leaf_init);

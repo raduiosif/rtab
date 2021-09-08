@@ -1,0 +1,26 @@
+Master() :=
+	 [a0] _let_ m, s0, s1 _in_
+	 (s1.out s0.in)
+	 (m : master, Slave1(s0, s1 / m))
+;
+
+Slave1(s0, s1 / m) := 
+	 [a1] _let_ s2 _in_ 
+	 (m.snd s0.rcv + s0.snd m.rcv +
+	   s0.out s2.in)
+	 (s0 : slaveIO, Slave1(s2, s1 / m))
+|	 [a2] 
+	 (m.snd s0.rcv + s0.snd m.rcv +
+	  m.snd s1.rcv + s1.snd m.rcv +
+	    s0.out s1.in)
+	 (s0 : slaveIO, s1 : slaveOI)
+|   	 [a3]
+	 () (Slave2(s0, s1 / m))
+;
+
+Slave2(s1, s0 / m) := 
+	   [a4] _let_ s3 _in_ 
+	 (m.snd s1.rcv + s1.snd m.rcv +
+	   s1.out s3.in)
+	 (s1 : slaveOI, Slave1(s3, s0 / m))
+;

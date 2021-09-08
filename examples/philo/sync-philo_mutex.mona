@@ -1,0 +1,14 @@
+pred not_mutex
+  (var2 U_Ring_a1, U_Pipe_a2, U_Pipe_a3,
+   var2 X_f0_f, X_f0_b, X_fn_f, X_fn_b, X_p0_w, X_p0_e) =
+   configuration
+     (U_Ring_a1, U_Pipe_a2, U_Pipe_a3,
+      X_f0_f, X_f0_b, X_fn_f, X_fn_b, X_p0_w, X_p0_e) &
+   ex1 x1, x2:
+     (  # x1 ~= x2 &
+        # x1 = x2 + 1 &
+	( x1 = x2 + 1 | (x1 = 0 & (x2+1) notin U_Ring_a1 &
+	                          (x2+1) notin U_Pipe_a2 &
+				  (x2+1) notin U_Pipe_a3)) &
+       (x1 in X_p0_e) &
+       (x2 in X_p0_e) );

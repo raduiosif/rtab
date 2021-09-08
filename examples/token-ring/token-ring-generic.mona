@@ -1,0 +1,1066 @@
+ws1s;
+
+pred intersects_1(var2 X, Y) =
+  (ex1 x: (x in X) & (x in Y));
+
+pred included_1(var2 X, Y) =
+  (all1 x: (x in X) => (x in Y));
+
+pred intersects_4
+  (var2 X_1, X_2, X_3, X_4,
+   var2 Y_1, Y_2, Y_3, Y_4) =
+   intersects_1(X_1, Y_1) |
+   intersects_1(X_2, Y_2) |
+   intersects_1(X_3, Y_3) |
+   intersects_1(X_4, Y_4);
+
+pred uniquely_intersects_4
+  (var2 X_1, X_2, X_3, X_4,
+   var2 Y_1, Y_2, Y_3, Y_4) =
+  (ex1 x: (
+( (x in X_1 & x in Y_1) &
+ ~(x in X_2 & x in Y_2) &
+ ~(x in X_3 & x in Y_3) &
+ ~(x in X_4 & x in Y_4)) |
+(~(x in X_1 & x in Y_1) &
+  (x in X_2 & x in Y_2) &
+ ~(x in X_3 & x in Y_3) &
+ ~(x in X_4 & x in Y_4)) |
+(~(x in X_1 & x in Y_1) &
+ ~(x in X_2 & x in Y_2) &
+  (x in X_3 & x in Y_3) &
+ ~(x in X_4 & x in Y_4)) |
+(~(x in X_1 & x in Y_1) &
+ ~(x in X_2 & x in Y_2) &
+ ~(x in X_3 & x in Y_3) &
+  (x in X_4 & x in Y_4)))
+& (all1 y:
+((y in X_1 & y in Y_1) |
+ (y in X_2 & y in Y_2) |
+ (y in X_3 & y in Y_3) |
+ (y in X_4 & y in Y_4)) => x = y));
+
+pred partition_5
+  (var2 Y, X_1, X_2, X_3, X_4, X_5) =
+  (all1 x: x in Y <=>
+    (x in X_1 | x in X_2 | x in X_3 | x in X_4 | x in X_5))  &
+  ~intersects_1(X_1, X_2) &
+  ~intersects_1(X_1, X_3) &
+  ~intersects_1(X_1, X_4) &
+  ~intersects_1(X_1, X_5) &
+  ~intersects_1(X_2, X_3) &
+  ~intersects_1(X_2, X_4) &
+  ~intersects_1(X_2, X_5) &
+  ~intersects_1(X_3, X_4) &
+  ~intersects_1(X_3, X_5) &
+  ~intersects_1(X_4, X_5);
+
+pred partition_2
+  (var2 Y, X_1, X_2) =
+  (all1 x: x in Y <=>
+    (x in X_1 | x in X_2))  &
+  ~intersects_1(X_1, X_2);
+
+pred partition_3
+  (var2 Y, X_1, X_2, X_3) =
+  (all1 x: x in Y <=>
+    (x in X_1 | x in X_2 | x in X_3))  &
+  ~intersects_1(X_1, X_2) &
+  ~intersects_1(X_1, X_3) &
+  ~intersects_1(X_2, X_3);
+
+pred partition_4
+  (var2 Y, X_1, X_2, X_3, X_4) =
+  (all1 x: x in Y <=>
+    (x in X_1 | x in X_2 | x in X_3 | x in X_4))  &
+  ~intersects_1(X_1, X_2) &
+  ~intersects_1(X_1, X_3) &
+  ~intersects_1(X_1, X_4) &
+  ~intersects_1(X_2, X_3) &
+  ~intersects_1(X_2, X_4) &
+  ~intersects_1(X_3, X_4);
+
+pred one_transition_flow_2
+  (var1 z1, var2 X1, Y1,
+   var1 z2, var2 X2, Y2) =
+   (z1 notin X1 & z2 notin X2  &  z1 notin Y1 & z2 notin Y2) |
+
+   (z1    in X1 & z2 notin X2  &  z1    in Y1 & z2 notin Y2) |
+   (z1    in X1 & z2 notin X2  &  z1 notin Y1 & z2    in Y2) |
+   (z1 notin X1 & z2    in X2  &  z1    in Y1 & z2 notin Y2) |
+   (z1 notin X1 & z2    in X2  &  z1 notin Y1 & z2    in Y2) |
+
+   (z1    in X1 & z2    in X2);
+
+pred one_transition_flow_3
+  (var1 z1, var2 X1, Y1,
+   var1 z2, var2 X2, Y2,
+   var1 z3, var2 X3, Y3) =
+   (z1 notin X1 & z2 notin X2 & z3 notin X3  &  z1 notin Y1 & z2 notin Y2 & z3 notin Y3) |
+
+   (z1    in X1 & z2 notin X2 & z3 notin X3  &  z1    in Y1 & z2 notin Y2 & z3 notin Y3) |
+   (z1    in X1 & z2 notin X2 & z3 notin X3  &  z1 notin Y1 & z2    in Y2 & z3 notin Y3) |
+   (z1    in X1 & z2 notin X2 & z3 notin X3  &  z1 notin Y1 & z2 notin Y2 & z3    in Y3) |
+   (z1 notin X1 & z2    in X2 & z3 notin X3  &  z1    in Y1 & z2 notin Y2 & z3 notin Y3) |
+   (z1 notin X1 & z2    in X2 & z3 notin X3  &  z1 notin Y1 & z2    in Y2 & z3 notin Y3) |
+   (z1 notin X1 & z2    in X2 & z3 notin X3  &  z1 notin Y1 & z2 notin Y2 & z3    in Y3) |
+   (z1 notin X1 & z2 notin X2 & z3    in X3  &  z1    in Y1 & z2 notin Y2 & z3 notin Y3) |
+   (z1 notin X1 & z2 notin X2 & z3    in X3  &  z1 notin Y1 & z2    in Y2 & z3 notin Y3) |
+   (z1 notin X1 & z2 notin X2 & z3    in X3  &  z1 notin Y1 & z2 notin Y2 & z3    in Y3) |
+
+   (z1    in X1 & z2    in X2              ) |
+   (z1    in X1               & z3    in X3) |
+   (              z2    in X2 & z3    in X3);
+
+
+#
+# backbone tree
+#
+
+
+
+pred backbone_tree
+  (var2 U_A0_r1, U_A1_r2, U_A1_r3, U_A1_r4, U_A2_r5) =
+  (ex2 U:
+    partition_5
+      (U, U_A0_r1, U_A1_r2, U_A1_r3, U_A1_r4, U_A2_r5) &
+    (all1 u : (u ~= 0 & u in U) => (u-1 in U) ) &
+    (all1 u: (u in U_A0_r1) => (
+        (u+1 in U_A1_r2)  | 
+        (u+1 in U_A1_r3)  | 
+        (u+1 in U_A1_r4) 
+      )) &
+    (all1 u: (u in U_A1_r2) => (
+        (u+1 in U_A1_r2)  | 
+        (u+1 in U_A1_r3)  | 
+        (u+1 in U_A1_r4) 
+      )) &
+    (all1 u: (u in U_A1_r3) =>
+        (u+1 notin U)) &
+    (all1 u: (u in U_A1_r4) => (
+        (u+1 in U_A2_r5) 
+      )) &
+    (all1 u: (u in U_A2_r5) => (
+        (u+1 in U_A1_r2)  | 
+        (u+1 in U_A1_r3)  | 
+        (u+1 in U_A1_r4) 
+      )) &
+    (0 in U_A0_r1)
+  );
+
+
+#
+# ext / configurations
+#
+
+
+
+pred ext_configuration
+  (var2 U_A0_r1, U_A1_r2, U_A1_r3, U_A1_r4, U_A2_r5,
+   var2 X_x1_q0, X_x1_q1, X_x2_q0, X_x2_q1) =
+   backbone_tree
+     (U_A0_r1, U_A1_r2, U_A1_r3, U_A1_r4, U_A2_r5) &
+   (all1 x : x in X_x1_q0 =>
+      (x in U_A1_r2 | x in U_A1_r3)) &
+   (all1 x : x in X_x1_q1 =>
+      (x in U_A1_r2 | x in U_A1_r3)) &
+   (all1 x : x in X_x2_q0 =>
+      (x in U_A1_r3 | x in U_A2_r5)) &
+   (all1 x : x in X_x2_q1 =>
+      (x in U_A1_r3 | x in U_A2_r5));
+
+pred configuration
+  (var2 U_A0_r1, U_A1_r2, U_A1_r3, U_A1_r4, U_A2_r5,
+   var2 X_x1_q0, X_x1_q1, X_x2_q0, X_x2_q1) =
+   ext_configuration
+     (U_A0_r1, U_A1_r2, U_A1_r3, U_A1_r4, U_A2_r5,
+      X_x1_q0, X_x1_q1, X_x2_q0, X_x2_q1) &
+   (all1 x: x in U_A1_r2 =>
+     (x in X_x1_q0 | x in X_x1_q1)) &
+   (all1 x: x in U_A1_r3 =>
+     (x in X_x1_q0 | x in X_x1_q1)) &
+   (all1 x: x in U_A1_r3 =>
+     (x in X_x2_q0 | x in X_x2_q1)) &
+   (all1 x: x in U_A2_r5 =>
+     (x in X_x2_q0 | x in X_x2_q1)) & 
+   ~intersects_1(X_x1_q0, X_x1_q1) &
+   ~intersects_1(X_x2_q0, X_x2_q1);
+
+
+#
+# backbone tree paths
+#
+
+
+
+
+
+pred path_A0_r1_x1_A1_r2_x1
+  (var2 U_A0_r1, U_A1_r2, U_A1_r3, U_A1_r4, U_A2_r5,
+   var1 u0, u1) =
+   backbone_tree
+     (U_A0_r1, U_A1_r2, U_A1_r3, U_A1_r4, U_A2_r5) &
+   ex2 W_A0_r1_x1, W_A1_r2_x1 :
+   ex2 W_up, W_down :
+   ex1 w_top :
+     included_1(W_A0_r1_x1, U_A0_r1) &
+     included_1(W_A1_r2_x1, U_A1_r2) &
+     ~intersects_1(W_down, W_up) &
+     partition_2(W_down, W_A0_r1_x1, W_A1_r2_x1) &
+     (w_top in W_down) &
+     (0 in W_down => w_top = 0) &
+     (all1 w : (w in W_down & w ~= w_top) => w-1 in W_down) &
+     (all1 w1, w2: (w1 in W_down & w1 ~= 0 &
+                    w2 in W_down & w2 ~= 0 & w1-1 = w2-1) => w1 = w2) &
+     (all1 w: (w in W_A0_r1_x1) =>
+       (w+1 in W_A1_r2_x1)) &
+     u0 in W_A0_r1_x1 &
+     u1 in W_A1_r2_x1 &
+     (all1 w : w in W_A1_r2_x1 => w = u1);
+
+
+pred path_A0_r1_x1_A1_r3_x1
+  (var2 U_A0_r1, U_A1_r2, U_A1_r3, U_A1_r4, U_A2_r5,
+   var1 u0, u1) =
+   backbone_tree
+     (U_A0_r1, U_A1_r2, U_A1_r3, U_A1_r4, U_A2_r5) &
+   ex2 W_A0_r1_x1, W_A1_r3_x1 :
+   ex2 W_up, W_down :
+   ex1 w_top :
+     included_1(W_A0_r1_x1, U_A0_r1) &
+     included_1(W_A1_r3_x1, U_A1_r3) &
+     ~intersects_1(W_down, W_up) &
+     partition_2(W_down, W_A0_r1_x1, W_A1_r3_x1) &
+     (w_top in W_down) &
+     (0 in W_down => w_top = 0) &
+     (all1 w : (w in W_down & w ~= w_top) => w-1 in W_down) &
+     (all1 w1, w2: (w1 in W_down & w1 ~= 0 &
+                    w2 in W_down & w2 ~= 0 & w1-1 = w2-1) => w1 = w2) &
+     (all1 w: (w in W_A0_r1_x1) =>
+       (w+1 in W_A1_r3_x1)) &
+     u0 in W_A0_r1_x1 &
+     u1 in W_A1_r3_x1 &
+     (all1 w : w in W_A1_r3_x1 => w = u1);
+
+
+pred path_A0_r1_x1_A2_r5_x2
+  (var2 U_A0_r1, U_A1_r2, U_A1_r3, U_A1_r4, U_A2_r5,
+   var1 u0, u1) =
+   backbone_tree
+     (U_A0_r1, U_A1_r2, U_A1_r3, U_A1_r4, U_A2_r5) &
+   ex2 W_A0_r1_x1, W_A1_r4_x1, W_A2_r5_x2 :
+   ex2 W_up, W_down :
+   ex1 w_top :
+     included_1(W_A0_r1_x1, U_A0_r1) &
+     included_1(W_A1_r4_x1, U_A1_r4) &
+     included_1(W_A2_r5_x2, U_A2_r5) &
+     ~intersects_1(W_down, W_up) &
+     partition_3(W_down, W_A0_r1_x1, W_A1_r4_x1, W_A2_r5_x2) &
+     (w_top in W_down) &
+     (0 in W_down => w_top = 0) &
+     (all1 w : (w in W_down & w ~= w_top) => w-1 in W_down) &
+     (all1 w1, w2: (w1 in W_down & w1 ~= 0 &
+                    w2 in W_down & w2 ~= 0 & w1-1 = w2-1) => w1 = w2) &
+     (all1 w: (w in W_A0_r1_x1) =>
+       (w+1 in W_A1_r4_x1)) &
+     (all1 w: (w in W_A1_r4_x1) =>
+       (w+1 in W_A2_r5_x2)) &
+     u0 in W_A0_r1_x1 &
+     u1 in W_A2_r5_x2 &
+     (all1 w : w in W_A2_r5_x2 => w = u1);
+
+
+pred path_A0_r1_x2_A1_r3_x2
+  (var2 U_A0_r1, U_A1_r2, U_A1_r3, U_A1_r4, U_A2_r5,
+   var1 u0, u1) =
+   backbone_tree
+     (U_A0_r1, U_A1_r2, U_A1_r3, U_A1_r4, U_A2_r5) &
+   ex2 W_A0_r1_x2, W_A1_r2_x2, W_A1_r3_x2, W_A1_r4_x2, W_A2_r5_x1 :
+   ex2 W_up, W_down :
+   ex1 w_top :
+     included_1(W_A0_r1_x2, U_A0_r1) &
+     included_1(W_A1_r2_x2, U_A1_r2) &
+     included_1(W_A1_r3_x2, U_A1_r3) &
+     included_1(W_A1_r4_x2, U_A1_r4) &
+     included_1(W_A2_r5_x1, U_A2_r5) &
+     ~intersects_1(W_down, W_up) &
+     partition_5(W_down, W_A0_r1_x2, W_A1_r2_x2, W_A1_r3_x2, W_A1_r4_x2, W_A2_r5_x1) &
+     (w_top in W_down) &
+     (0 in W_down => w_top = 0) &
+     (all1 w : (w in W_down & w ~= w_top) => w-1 in W_down) &
+     (all1 w1, w2: (w1 in W_down & w1 ~= 0 &
+                    w2 in W_down & w2 ~= 0 & w1-1 = w2-1) => w1 = w2) &
+     (all1 w: (w in W_A0_r1_x2) =>
+       (w+1 in W_A1_r2_x2 | w+1 in W_A1_r3_x2 | w+1 in W_A1_r4_x2)) &
+     (all1 w: (w in W_A1_r2_x2) =>
+       (w+1 in W_A1_r2_x2 | w+1 in W_A1_r3_x2 | w+1 in W_A1_r4_x2)) &
+     (all1 w: (w in W_A1_r4_x2) =>
+       (w+1 in W_A2_r5_x1)) &
+     (all1 w: (w in W_A2_r5_x1) =>
+       (w+1 in W_A1_r2_x2 | w+1 in W_A1_r3_x2 | w+1 in W_A1_r4_x2)) &
+     u0 in W_A0_r1_x2 &
+     u1 in W_A1_r3_x2 &
+     (all1 w : w in W_A1_r3_x2 => w = u1);
+
+
+pred path_A1_r2_x2_A1_r3_x2
+  (var2 U_A0_r1, U_A1_r2, U_A1_r3, U_A1_r4, U_A2_r5,
+   var1 u0, u1) =
+   backbone_tree
+     (U_A0_r1, U_A1_r2, U_A1_r3, U_A1_r4, U_A2_r5) &
+   ex2 W_A1_r2_x2, W_A1_r3_x2, W_A1_r4_x2, W_A2_r5_x1 :
+   ex2 W_up, W_down :
+   ex1 w_top :
+     included_1(W_A1_r2_x2, U_A1_r2) &
+     included_1(W_A1_r3_x2, U_A1_r3) &
+     included_1(W_A1_r4_x2, U_A1_r4) &
+     included_1(W_A2_r5_x1, U_A2_r5) &
+     ~intersects_1(W_down, W_up) &
+     partition_4(W_down, W_A1_r2_x2, W_A1_r3_x2, W_A1_r4_x2, W_A2_r5_x1) &
+     (w_top in W_down) &
+     (0 in W_down => w_top = 0) &
+     (all1 w : (w in W_down & w ~= w_top) => w-1 in W_down) &
+     (all1 w1, w2: (w1 in W_down & w1 ~= 0 &
+                    w2 in W_down & w2 ~= 0 & w1-1 = w2-1) => w1 = w2) &
+     (all1 w: (w in W_A1_r2_x2) =>
+       (w+1 in W_A1_r2_x2 | w+1 in W_A1_r3_x2 | w+1 in W_A1_r4_x2)) &
+     (all1 w: (w in W_A1_r4_x2) =>
+       (w+1 in W_A2_r5_x1)) &
+     (all1 w: (w in W_A2_r5_x1) =>
+       (w+1 in W_A1_r2_x2 | w+1 in W_A1_r3_x2 | w+1 in W_A1_r4_x2)) &
+     u0 in W_A1_r2_x2 &
+     u1 in W_A1_r3_x2 &
+     (all1 w : w in W_A1_r3_x2 => w = u1);
+
+
+pred path_A1_r2_x3_A1_r2_x1
+  (var2 U_A0_r1, U_A1_r2, U_A1_r3, U_A1_r4, U_A2_r5,
+   var1 u0, u1) =
+   backbone_tree
+     (U_A0_r1, U_A1_r2, U_A1_r3, U_A1_r4, U_A2_r5) &
+   ex2 W_A1_r2_x3, W_A1_r2_x1 :
+   ex2 W_up, W_down :
+   ex1 w_top :
+     included_1(W_A1_r2_x3, U_A1_r2) &
+     included_1(W_A1_r2_x1, U_A1_r2) &
+     ~intersects_1(W_down, W_up) &
+     partition_2(W_down, W_A1_r2_x3, W_A1_r2_x1) &
+     (w_top in W_down) &
+     (0 in W_down => w_top = 0) &
+     (all1 w : (w in W_down & w ~= w_top) => w-1 in W_down) &
+     (all1 w1, w2: (w1 in W_down & w1 ~= 0 &
+                    w2 in W_down & w2 ~= 0 & w1-1 = w2-1) => w1 = w2) &
+     (all1 w: (w in W_A1_r2_x3) =>
+       (w+1 in W_A1_r2_x1)) &
+     u0 in W_A1_r2_x3 &
+     u1 in W_A1_r2_x1 &
+     (all1 w : w in W_A1_r2_x1 => w = u1);
+
+
+pred path_A1_r2_x3_A1_r3_x1
+  (var2 U_A0_r1, U_A1_r2, U_A1_r3, U_A1_r4, U_A2_r5,
+   var1 u0, u1) =
+   backbone_tree
+     (U_A0_r1, U_A1_r2, U_A1_r3, U_A1_r4, U_A2_r5) &
+   ex2 W_A1_r2_x3, W_A1_r3_x1 :
+   ex2 W_up, W_down :
+   ex1 w_top :
+     included_1(W_A1_r2_x3, U_A1_r2) &
+     included_1(W_A1_r3_x1, U_A1_r3) &
+     ~intersects_1(W_down, W_up) &
+     partition_2(W_down, W_A1_r2_x3, W_A1_r3_x1) &
+     (w_top in W_down) &
+     (0 in W_down => w_top = 0) &
+     (all1 w : (w in W_down & w ~= w_top) => w-1 in W_down) &
+     (all1 w1, w2: (w1 in W_down & w1 ~= 0 &
+                    w2 in W_down & w2 ~= 0 & w1-1 = w2-1) => w1 = w2) &
+     (all1 w: (w in W_A1_r2_x3) =>
+       (w+1 in W_A1_r3_x1)) &
+     u0 in W_A1_r2_x3 &
+     u1 in W_A1_r3_x1 &
+     (all1 w : w in W_A1_r3_x1 => w = u1);
+
+
+pred path_A1_r2_x3_A2_r5_x2
+  (var2 U_A0_r1, U_A1_r2, U_A1_r3, U_A1_r4, U_A2_r5,
+   var1 u0, u1) =
+   backbone_tree
+     (U_A0_r1, U_A1_r2, U_A1_r3, U_A1_r4, U_A2_r5) &
+   ex2 W_A1_r2_x3, W_A1_r4_x1, W_A2_r5_x2 :
+   ex2 W_up, W_down :
+   ex1 w_top :
+     included_1(W_A1_r2_x3, U_A1_r2) &
+     included_1(W_A1_r4_x1, U_A1_r4) &
+     included_1(W_A2_r5_x2, U_A2_r5) &
+     ~intersects_1(W_down, W_up) &
+     partition_3(W_down, W_A1_r2_x3, W_A1_r4_x1, W_A2_r5_x2) &
+     (w_top in W_down) &
+     (0 in W_down => w_top = 0) &
+     (all1 w : (w in W_down & w ~= w_top) => w-1 in W_down) &
+     (all1 w1, w2: (w1 in W_down & w1 ~= 0 &
+                    w2 in W_down & w2 ~= 0 & w1-1 = w2-1) => w1 = w2) &
+     (all1 w: (w in W_A1_r2_x3) =>
+       (w+1 in W_A1_r4_x1)) &
+     (all1 w: (w in W_A1_r4_x1) =>
+       (w+1 in W_A2_r5_x2)) &
+     u0 in W_A1_r2_x3 &
+     u1 in W_A2_r5_x2 &
+     (all1 w : w in W_A2_r5_x2 => w = u1);
+
+
+pred path_A1_r4_x1_A2_r5_x2
+  (var2 U_A0_r1, U_A1_r2, U_A1_r3, U_A1_r4, U_A2_r5,
+   var1 u0, u1) =
+   backbone_tree
+     (U_A0_r1, U_A1_r2, U_A1_r3, U_A1_r4, U_A2_r5) &
+   ex2 W_A1_r4_x1, W_A2_r5_x2 :
+   ex2 W_up, W_down :
+   ex1 w_top :
+     included_1(W_A1_r4_x1, U_A1_r4) &
+     included_1(W_A2_r5_x2, U_A2_r5) &
+     ~intersects_1(W_down, W_up) &
+     partition_2(W_down, W_A1_r4_x1, W_A2_r5_x2) &
+     (w_top in W_down) &
+     (0 in W_down => w_top = 0) &
+     (all1 w : (w in W_down & w ~= w_top) => w-1 in W_down) &
+     (all1 w1, w2: (w1 in W_down & w1 ~= 0 &
+                    w2 in W_down & w2 ~= 0 & w1-1 = w2-1) => w1 = w2) &
+     (all1 w: (w in W_A1_r4_x1) =>
+       (w+1 in W_A2_r5_x2)) &
+     u0 in W_A1_r4_x1 &
+     u1 in W_A2_r5_x2 &
+     (all1 w : w in W_A2_r5_x2 => w = u1);
+
+
+pred path_A1_r4_x2_A1_r3_x2
+  (var2 U_A0_r1, U_A1_r2, U_A1_r3, U_A1_r4, U_A2_r5,
+   var1 u0, u1) =
+   backbone_tree
+     (U_A0_r1, U_A1_r2, U_A1_r3, U_A1_r4, U_A2_r5) &
+   ex2 W_A1_r4_x2, W_A2_r5_x1, W_A1_r2_x2, W_A1_r3_x2 :
+   ex2 W_up, W_down :
+   ex1 w_top :
+     included_1(W_A1_r4_x2, U_A1_r4) &
+     included_1(W_A2_r5_x1, U_A2_r5) &
+     included_1(W_A1_r2_x2, U_A1_r2) &
+     included_1(W_A1_r3_x2, U_A1_r3) &
+     ~intersects_1(W_down, W_up) &
+     partition_4(W_down, W_A1_r4_x2, W_A2_r5_x1, W_A1_r2_x2, W_A1_r3_x2) &
+     (w_top in W_down) &
+     (0 in W_down => w_top = 0) &
+     (all1 w : (w in W_down & w ~= w_top) => w-1 in W_down) &
+     (all1 w1, w2: (w1 in W_down & w1 ~= 0 &
+                    w2 in W_down & w2 ~= 0 & w1-1 = w2-1) => w1 = w2) &
+     (all1 w: (w in W_A1_r4_x2) =>
+       (w+1 in W_A2_r5_x1)) &
+     (all1 w: (w in W_A2_r5_x1) =>
+       (w+1 in W_A1_r2_x2 | w+1 in W_A1_r3_x2 | w+1 in W_A1_r4_x2)) &
+     (all1 w: (w in W_A1_r2_x2) =>
+       (w+1 in W_A1_r2_x2 | w+1 in W_A1_r3_x2 | w+1 in W_A1_r4_x2)) &
+     u0 in W_A1_r4_x2 &
+     u1 in W_A1_r3_x2 &
+     (all1 w : w in W_A1_r3_x2 => w = u1);
+
+
+pred path_A2_r5_x1_A1_r3_x2
+  (var2 U_A0_r1, U_A1_r2, U_A1_r3, U_A1_r4, U_A2_r5,
+   var1 u0, u1) =
+   backbone_tree
+     (U_A0_r1, U_A1_r2, U_A1_r3, U_A1_r4, U_A2_r5) &
+   ex2 W_A2_r5_x1, W_A1_r2_x2, W_A1_r3_x2, W_A1_r4_x2 :
+   ex2 W_up, W_down :
+   ex1 w_top :
+     included_1(W_A2_r5_x1, U_A2_r5) &
+     included_1(W_A1_r2_x2, U_A1_r2) &
+     included_1(W_A1_r3_x2, U_A1_r3) &
+     included_1(W_A1_r4_x2, U_A1_r4) &
+     ~intersects_1(W_down, W_up) &
+     partition_4(W_down, W_A2_r5_x1, W_A1_r2_x2, W_A1_r3_x2, W_A1_r4_x2) &
+     (w_top in W_down) &
+     (0 in W_down => w_top = 0) &
+     (all1 w : (w in W_down & w ~= w_top) => w-1 in W_down) &
+     (all1 w1, w2: (w1 in W_down & w1 ~= 0 &
+                    w2 in W_down & w2 ~= 0 & w1-1 = w2-1) => w1 = w2) &
+     (all1 w: (w in W_A2_r5_x1) =>
+       (w+1 in W_A1_r2_x2 | w+1 in W_A1_r3_x2 | w+1 in W_A1_r4_x2)) &
+     (all1 w: (w in W_A1_r2_x2) =>
+       (w+1 in W_A1_r2_x2 | w+1 in W_A1_r3_x2 | w+1 in W_A1_r4_x2)) &
+     (all1 w: (w in W_A1_r4_x2) =>
+       (w+1 in W_A2_r5_x1)) &
+     u0 in W_A2_r5_x1 &
+     u1 in W_A1_r3_x2 &
+     (all1 w : w in W_A1_r3_x2 => w = u1);
+
+
+pred path_A2_r5_x3_A1_r2_x1
+  (var2 U_A0_r1, U_A1_r2, U_A1_r3, U_A1_r4, U_A2_r5,
+   var1 u0, u1) =
+   backbone_tree
+     (U_A0_r1, U_A1_r2, U_A1_r3, U_A1_r4, U_A2_r5) &
+   ex2 W_A2_r5_x3, W_A1_r2_x1 :
+   ex2 W_up, W_down :
+   ex1 w_top :
+     included_1(W_A2_r5_x3, U_A2_r5) &
+     included_1(W_A1_r2_x1, U_A1_r2) &
+     ~intersects_1(W_down, W_up) &
+     partition_2(W_down, W_A2_r5_x3, W_A1_r2_x1) &
+     (w_top in W_down) &
+     (0 in W_down => w_top = 0) &
+     (all1 w : (w in W_down & w ~= w_top) => w-1 in W_down) &
+     (all1 w1, w2: (w1 in W_down & w1 ~= 0 &
+                    w2 in W_down & w2 ~= 0 & w1-1 = w2-1) => w1 = w2) &
+     (all1 w: (w in W_A2_r5_x3) =>
+       (w+1 in W_A1_r2_x1)) &
+     u0 in W_A2_r5_x3 &
+     u1 in W_A1_r2_x1 &
+     (all1 w : w in W_A1_r2_x1 => w = u1);
+
+
+pred path_A2_r5_x3_A1_r3_x1
+  (var2 U_A0_r1, U_A1_r2, U_A1_r3, U_A1_r4, U_A2_r5,
+   var1 u0, u1) =
+   backbone_tree
+     (U_A0_r1, U_A1_r2, U_A1_r3, U_A1_r4, U_A2_r5) &
+   ex2 W_A2_r5_x3, W_A1_r3_x1 :
+   ex2 W_up, W_down :
+   ex1 w_top :
+     included_1(W_A2_r5_x3, U_A2_r5) &
+     included_1(W_A1_r3_x1, U_A1_r3) &
+     ~intersects_1(W_down, W_up) &
+     partition_2(W_down, W_A2_r5_x3, W_A1_r3_x1) &
+     (w_top in W_down) &
+     (0 in W_down => w_top = 0) &
+     (all1 w : (w in W_down & w ~= w_top) => w-1 in W_down) &
+     (all1 w1, w2: (w1 in W_down & w1 ~= 0 &
+                    w2 in W_down & w2 ~= 0 & w1-1 = w2-1) => w1 = w2) &
+     (all1 w: (w in W_A2_r5_x3) =>
+       (w+1 in W_A1_r3_x1)) &
+     u0 in W_A2_r5_x3 &
+     u1 in W_A1_r3_x1 &
+     (all1 w : w in W_A1_r3_x1 => w = u1);
+
+
+pred path_A2_r5_x3_A2_r5_x2
+  (var2 U_A0_r1, U_A1_r2, U_A1_r3, U_A1_r4, U_A2_r5,
+   var1 u0, u1) =
+   backbone_tree
+     (U_A0_r1, U_A1_r2, U_A1_r3, U_A1_r4, U_A2_r5) &
+   ex2 W_A2_r5_x3, W_A1_r4_x1, W_A2_r5_x2 :
+   ex2 W_up, W_down :
+   ex1 w_top :
+     included_1(W_A2_r5_x3, U_A2_r5) &
+     included_1(W_A1_r4_x1, U_A1_r4) &
+     included_1(W_A2_r5_x2, U_A2_r5) &
+     ~intersects_1(W_down, W_up) &
+     partition_3(W_down, W_A2_r5_x3, W_A1_r4_x1, W_A2_r5_x2) &
+     (w_top in W_down) &
+     (0 in W_down => w_top = 0) &
+     (all1 w : (w in W_down & w ~= w_top) => w-1 in W_down) &
+     (all1 w1, w2: (w1 in W_down & w1 ~= 0 &
+                    w2 in W_down & w2 ~= 0 & w1-1 = w2-1) => w1 = w2) &
+     (all1 w: (w in W_A2_r5_x3) =>
+       (w+1 in W_A1_r4_x1)) &
+     (all1 w: (w in W_A1_r4_x1) =>
+       (w+1 in W_A2_r5_x2)) &
+     u0 in W_A2_r5_x3 &
+     u1 in W_A2_r5_x2 &
+     (all1 w : w in W_A2_r5_x2 => w = u1);
+
+
+
+#
+# trap invariants
+#
+
+
+
+pred trap_initially_not_empty
+  (var2 U_A0_r1, U_A1_r2, U_A1_r3, U_A1_r4, U_A2_r5,
+   var2 X_x1_q0, X_x1_q1, X_x2_q0, X_x2_q1) =
+   ext_configuration
+     (U_A0_r1, U_A1_r2, U_A1_r3, U_A1_r4, U_A2_r5,
+      X_x1_q0, X_x1_q1, X_x2_q0, X_x2_q1) &
+   ((ex1 x : x in U_A1_r2 & x in X_x1_q0) |
+    (ex1 x : x in U_A1_r3 & x in X_x1_q0) |
+    (ex1 x : x in U_A1_r3 & x in X_x2_q0) |
+    (ex1 x : x in U_A2_r5 & x in X_x2_q0));
+
+pred trap_A0_r1_x2_out_x1_in_0_flow
+  (var2 X_x1_q0, X_x1_q1, X_x2_q0, X_x2_q1,
+   var1 x_x2, x_x1) =
+   ((x_x2 in X_x2_q0 | x_x1 in X_x1_q0) =>
+    (x_x2 in X_x2_q1 | x_x1 in X_x1_q1));
+
+pred trap_A0_r1_x2_out_x1_in_1_flow
+  (var2 X_x1_q0, X_x1_q1, X_x2_q0, X_x2_q1,
+   var1 x_x2, x_x1) =
+   ((x_x2 in X_x2_q0 | x_x1 in X_x1_q0) =>
+    (x_x2 in X_x2_q1 | x_x1 in X_x1_q1));
+
+pred trap_A0_r1_x2_out_x1_in_2_flow
+  (var2 X_x1_q0, X_x1_q1, X_x2_q0, X_x2_q1,
+   var1 x_x2, x_x1) =
+   ((x_x2 in X_x2_q0 | x_x1 in X_x2_q1) =>
+    (x_x2 in X_x2_q1 | x_x1 in X_x2_q0));
+
+pred trap_A0_r1_x2_out_x1_in_flow
+  (var2 U_A0_r1, U_A1_r2, U_A1_r3, U_A1_r4, U_A2_r5,
+   var2 X_x1_q0, X_x1_q1, X_x2_q0, X_x2_q1) =
+  (all1 x_0, x_x2, x_x1 :
+    (x_0 in U_A0_r1
+     & 
+     path_A0_r1_x2_A1_r3_x2
+       (U_A0_r1, U_A1_r2, U_A1_r3, U_A1_r4, U_A2_r5, x_0, x_x2) &
+     path_A0_r1_x1_A1_r2_x1
+       (U_A0_r1, U_A1_r2, U_A1_r3, U_A1_r4, U_A2_r5, x_0, x_x1)) =>
+    trap_A0_r1_x2_out_x1_in_0_flow
+      (X_x1_q0, X_x1_q1, X_x2_q0, X_x2_q1,
+       x_x2, x_x1))  &
+  (all1 x_0, x_x2, x_x1 :
+    (x_0 in U_A0_r1
+     & 
+     path_A0_r1_x2_A1_r3_x2
+       (U_A0_r1, U_A1_r2, U_A1_r3, U_A1_r4, U_A2_r5, x_0, x_x2) &
+     path_A0_r1_x1_A1_r3_x1
+       (U_A0_r1, U_A1_r2, U_A1_r3, U_A1_r4, U_A2_r5, x_0, x_x1)) =>
+    trap_A0_r1_x2_out_x1_in_1_flow
+      (X_x1_q0, X_x1_q1, X_x2_q0, X_x2_q1,
+       x_x2, x_x1))  &
+  (all1 x_0, x_x2, x_x1 :
+    (x_0 in U_A0_r1
+     & 
+     path_A0_r1_x2_A1_r3_x2
+       (U_A0_r1, U_A1_r2, U_A1_r3, U_A1_r4, U_A2_r5, x_0, x_x2) &
+     path_A0_r1_x1_A2_r5_x2
+       (U_A0_r1, U_A1_r2, U_A1_r3, U_A1_r4, U_A2_r5, x_0, x_x1)) =>
+    trap_A0_r1_x2_out_x1_in_2_flow
+      (X_x1_q0, X_x1_q1, X_x2_q0, X_x2_q1,
+       x_x2, x_x1)) ;
+
+pred trap_A1_r2_x1_out_x3_in_0_flow
+  (var2 X_x1_q0, X_x1_q1, X_x2_q0, X_x2_q1,
+   var1 x_x1, x_x3) =
+   ((x_x1 in X_x1_q1 | x_x3 in X_x1_q0) =>
+    (x_x1 in X_x1_q0 | x_x3 in X_x1_q1));
+
+pred trap_A1_r2_x1_out_x3_in_1_flow
+  (var2 X_x1_q0, X_x1_q1, X_x2_q0, X_x2_q1,
+   var1 x_x1, x_x3) =
+   ((x_x1 in X_x1_q1 | x_x3 in X_x1_q0) =>
+    (x_x1 in X_x1_q0 | x_x3 in X_x1_q1));
+
+pred trap_A1_r2_x1_out_x3_in_2_flow
+  (var2 X_x1_q0, X_x1_q1, X_x2_q0, X_x2_q1,
+   var1 x_x1, x_x3) =
+   ((x_x1 in X_x1_q1 | x_x3 in X_x2_q1) =>
+    (x_x1 in X_x1_q0 | x_x3 in X_x2_q0));
+
+pred trap_A1_r2_x1_out_x3_in_flow
+  (var2 U_A0_r1, U_A1_r2, U_A1_r3, U_A1_r4, U_A2_r5,
+   var2 X_x1_q0, X_x1_q1, X_x2_q0, X_x2_q1) =
+  (all1 x_0, x_x1, x_x3 :
+    (x_0 in U_A1_r2 & 
+     x_0 = x_x1 & 
+     path_A1_r2_x3_A1_r2_x1
+       (U_A0_r1, U_A1_r2, U_A1_r3, U_A1_r4, U_A2_r5, x_0, x_x3)) =>
+    trap_A1_r2_x1_out_x3_in_0_flow
+      (X_x1_q0, X_x1_q1, X_x2_q0, X_x2_q1,
+       x_x1, x_x3))  &
+  (all1 x_0, x_x1, x_x3 :
+    (x_0 in U_A1_r2 & 
+     x_0 = x_x1 & 
+     path_A1_r2_x3_A1_r3_x1
+       (U_A0_r1, U_A1_r2, U_A1_r3, U_A1_r4, U_A2_r5, x_0, x_x3)) =>
+    trap_A1_r2_x1_out_x3_in_1_flow
+      (X_x1_q0, X_x1_q1, X_x2_q0, X_x2_q1,
+       x_x1, x_x3))  &
+  (all1 x_0, x_x1, x_x3 :
+    (x_0 in U_A1_r2 & 
+     x_0 = x_x1 & 
+     path_A1_r2_x3_A2_r5_x2
+       (U_A0_r1, U_A1_r2, U_A1_r3, U_A1_r4, U_A2_r5, x_0, x_x3)) =>
+    trap_A1_r2_x1_out_x3_in_2_flow
+      (X_x1_q0, X_x1_q1, X_x2_q0, X_x2_q1,
+       x_x1, x_x3)) ;
+
+pred trap_A1_r3_x1_out_x2_in_0_flow
+  (var2 X_x1_q0, X_x1_q1, X_x2_q0, X_x2_q1,
+   var1 x_x1, x_x2) =
+   ((x_x1 in X_x1_q1 | x_x2 in X_x2_q1) =>
+    (x_x1 in X_x1_q0 | x_x2 in X_x2_q0));
+
+pred trap_A1_r3_x1_out_x2_in_flow
+  (var2 U_A0_r1, U_A1_r2, U_A1_r3, U_A1_r4, U_A2_r5,
+   var2 X_x1_q0, X_x1_q1, X_x2_q0, X_x2_q1) =
+  (all1 x_0, x_x1, x_x2 :
+    (x_0 in U_A1_r3 & 
+     x_0 = x_x1 &
+     x_0 = x_x2
+    ) =>
+    trap_A1_r3_x1_out_x2_in_0_flow
+      (X_x1_q0, X_x1_q1, X_x2_q0, X_x2_q1,
+       x_x1, x_x2)) ;
+
+pred trap_A2_r5_x2_out_x3_in_0_flow
+  (var2 X_x1_q0, X_x1_q1, X_x2_q0, X_x2_q1,
+   var1 x_x2, x_x3) =
+   ((x_x2 in X_x2_q0 | x_x3 in X_x1_q0) =>
+    (x_x2 in X_x2_q1 | x_x3 in X_x1_q1));
+
+pred trap_A2_r5_x2_out_x3_in_1_flow
+  (var2 X_x1_q0, X_x1_q1, X_x2_q0, X_x2_q1,
+   var1 x_x2, x_x3) =
+   ((x_x2 in X_x2_q0 | x_x3 in X_x1_q0) =>
+    (x_x2 in X_x2_q1 | x_x3 in X_x1_q1));
+
+pred trap_A2_r5_x2_out_x3_in_2_flow
+  (var2 X_x1_q0, X_x1_q1, X_x2_q0, X_x2_q1,
+   var1 x_x2, x_x3) =
+   ((x_x2 in X_x2_q0 | x_x3 in X_x2_q1) =>
+    (x_x2 in X_x2_q1 | x_x3 in X_x2_q0));
+
+pred trap_A2_r5_x2_out_x3_in_flow
+  (var2 U_A0_r1, U_A1_r2, U_A1_r3, U_A1_r4, U_A2_r5,
+   var2 X_x1_q0, X_x1_q1, X_x2_q0, X_x2_q1) =
+  (all1 x_0, x_x2, x_x3 :
+    (x_0 in U_A2_r5 & 
+     x_0 = x_x2 & 
+     path_A2_r5_x3_A1_r2_x1
+       (U_A0_r1, U_A1_r2, U_A1_r3, U_A1_r4, U_A2_r5, x_0, x_x3)) =>
+    trap_A2_r5_x2_out_x3_in_0_flow
+      (X_x1_q0, X_x1_q1, X_x2_q0, X_x2_q1,
+       x_x2, x_x3))  &
+  (all1 x_0, x_x2, x_x3 :
+    (x_0 in U_A2_r5 & 
+     x_0 = x_x2 & 
+     path_A2_r5_x3_A1_r3_x1
+       (U_A0_r1, U_A1_r2, U_A1_r3, U_A1_r4, U_A2_r5, x_0, x_x3)) =>
+    trap_A2_r5_x2_out_x3_in_1_flow
+      (X_x1_q0, X_x1_q1, X_x2_q0, X_x2_q1,
+       x_x2, x_x3))  &
+  (all1 x_0, x_x2, x_x3 :
+    (x_0 in U_A2_r5 & 
+     x_0 = x_x2 & 
+     path_A2_r5_x3_A2_r5_x2
+       (U_A0_r1, U_A1_r2, U_A1_r3, U_A1_r4, U_A2_r5, x_0, x_x3)) =>
+    trap_A2_r5_x2_out_x3_in_2_flow
+      (X_x1_q0, X_x1_q1, X_x2_q0, X_x2_q1,
+       x_x2, x_x3)) ;
+
+pred trap_flow
+  (var2 U_A0_r1, U_A1_r2, U_A1_r3, U_A1_r4, U_A2_r5,
+   var2 X_x1_q0, X_x1_q1, X_x2_q0, X_x2_q1) =
+  ext_configuration
+    (U_A0_r1, U_A1_r2, U_A1_r3, U_A1_r4, U_A2_r5,
+     X_x1_q0, X_x1_q1, X_x2_q0, X_x2_q1) &
+  trap_A0_r1_x2_out_x1_in_flow
+    (U_A0_r1, U_A1_r2, U_A1_r3, U_A1_r4, U_A2_r5,
+     X_x1_q0, X_x1_q1, X_x2_q0, X_x2_q1)  &
+  trap_A1_r2_x1_out_x3_in_flow
+    (U_A0_r1, U_A1_r2, U_A1_r3, U_A1_r4, U_A2_r5,
+     X_x1_q0, X_x1_q1, X_x2_q0, X_x2_q1)  &
+  trap_A1_r3_x1_out_x2_in_flow
+    (U_A0_r1, U_A1_r2, U_A1_r3, U_A1_r4, U_A2_r5,
+     X_x1_q0, X_x1_q1, X_x2_q0, X_x2_q1)  &
+  trap_A2_r5_x2_out_x3_in_flow
+    (U_A0_r1, U_A1_r2, U_A1_r3, U_A1_r4, U_A2_r5,
+     X_x1_q0, X_x1_q1, X_x2_q0, X_x2_q1) ;
+
+pred trap_constraints
+  (var2 U_A0_r1, U_A1_r2, U_A1_r3, U_A1_r4, U_A2_r5,
+   var2 Z_x1_q0, Z_x1_q1, Z_x2_q0, Z_x2_q1) =
+   ext_configuration
+     (U_A0_r1, U_A1_r2, U_A1_r3, U_A1_r4, U_A2_r5,
+      Z_x1_q0, Z_x1_q1, Z_x2_q0, Z_x2_q1) &
+   trap_initially_not_empty
+     (U_A0_r1, U_A1_r2, U_A1_r3, U_A1_r4, U_A2_r5,
+      Z_x1_q0, Z_x1_q1, Z_x2_q0, Z_x2_q1) &
+   trap_flow
+     (U_A0_r1, U_A1_r2, U_A1_r3, U_A1_r4, U_A2_r5,
+      Z_x1_q0, Z_x1_q1, Z_x2_q0, Z_x2_q1);
+
+pred trap_invariant
+  (var2 U_A0_r1, U_A1_r2, U_A1_r3, U_A1_r4, U_A2_r5,
+   var2 X_x1_q0, X_x1_q1, X_x2_q0, X_x2_q1) =
+   configuration
+     (U_A0_r1, U_A1_r2, U_A1_r3, U_A1_r4, U_A2_r5,
+      X_x1_q0, X_x1_q1, X_x2_q0, X_x2_q1) &
+   all2 Z_x1_q0, Z_x1_q1, Z_x2_q0, Z_x2_q1:
+     trap_constraints
+       (U_A0_r1, U_A1_r2, U_A1_r3, U_A1_r4, U_A2_r5,
+        Z_x1_q0, Z_x1_q1, Z_x2_q0, Z_x2_q1) =>
+     intersects_4
+       (Z_x1_q0, Z_x1_q1, Z_x2_q0, Z_x2_q1,
+        X_x1_q0, X_x1_q1, X_x2_q0, X_x2_q1);
+
+
+
+#
+# one invariants
+#
+
+
+
+pred one_initially_exactly_one
+  (var2 U_A0_r1, U_A1_r2, U_A1_r3, U_A1_r4, U_A2_r5,
+   var2 X_x1_q0, X_x1_q1, X_x2_q0, X_x2_q1) =
+   ext_configuration
+     (U_A0_r1, U_A1_r2, U_A1_r3, U_A1_r4, U_A2_r5,
+      X_x1_q0, X_x1_q1, X_x2_q0, X_x2_q1) &
+   (((ex1 x0 : x0 in X_x1_q0 & x0 in U_A1_r2 &
+        all1 x : ((x in X_x1_q0 & x in U_A1_r2) => x = x0)) &
+     (all1 x : (x notin X_x1_q0 | x notin U_A1_r3)) &
+     (all1 x : (x notin X_x2_q0 | x notin U_A1_r3)) &
+     (all1 x : (x notin X_x2_q0 | x notin U_A2_r5))) |
+    ((ex1 x0 : x0 in X_x1_q0 & x0 in U_A1_r3 &
+        all1 x : ((x in X_x1_q0 & x in U_A1_r3) => x = x0)) &
+     (all1 x : (x notin X_x1_q0 | x notin U_A1_r2)) &
+     (all1 x : (x notin X_x2_q0 | x notin U_A1_r3)) &
+     (all1 x : (x notin X_x2_q0 | x notin U_A2_r5))) |
+    ((ex1 x0 : x0 in X_x2_q0 & x0 in U_A1_r3 &
+        all1 x : ((x in X_x2_q0 & x in U_A1_r3) => x = x0)) &
+     (all1 x : (x notin X_x1_q0 | x notin U_A1_r2)) &
+     (all1 x : (x notin X_x1_q0 | x notin U_A1_r3)) &
+     (all1 x : (x notin X_x2_q0 | x notin U_A2_r5))) |
+    ((ex1 x0 : x0 in X_x2_q0 & x0 in U_A2_r5 &
+        all1 x : ((x in X_x2_q0 & x in U_A2_r5) => x = x0)) &
+     (all1 x : (x notin X_x1_q0 | x notin U_A1_r2)) &
+     (all1 x : (x notin X_x1_q0 | x notin U_A1_r3)) &
+     (all1 x : (x notin X_x2_q0 | x notin U_A1_r3))));
+
+
+pred one_A0_r1_x2_out_x1_in_0_flow
+  (var2 X_x1_q0, X_x1_q1, X_x2_q0, X_x2_q1,
+   var1 x_x2, x_x1) =
+   one_transition_flow_2(x_x2, X_x2_q0, X_x2_q1, x_x1, X_x1_q0, X_x1_q1);
+
+pred one_A0_r1_x2_out_x1_in_1_flow
+  (var2 X_x1_q0, X_x1_q1, X_x2_q0, X_x2_q1,
+   var1 x_x2, x_x1) =
+   one_transition_flow_2(x_x2, X_x2_q0, X_x2_q1, x_x1, X_x1_q0, X_x1_q1);
+
+pred one_A0_r1_x2_out_x1_in_2_flow
+  (var2 X_x1_q0, X_x1_q1, X_x2_q0, X_x2_q1,
+   var1 x_x2, x_x1) =
+   one_transition_flow_2(x_x2, X_x2_q0, X_x2_q1, x_x1, X_x2_q1, X_x2_q0);
+
+pred one_A0_r1_x2_out_x1_in_flow
+  (var2 U_A0_r1, U_A1_r2, U_A1_r3, U_A1_r4, U_A2_r5,
+   var2 X_x1_q0, X_x1_q1, X_x2_q0, X_x2_q1) =
+  (all1 x_0, x_x2, x_x1 :
+    (x_0 in U_A0_r1
+     & 
+     path_A0_r1_x2_A1_r3_x2
+       (U_A0_r1, U_A1_r2, U_A1_r3, U_A1_r4, U_A2_r5, x_0, x_x2) &
+     path_A0_r1_x1_A1_r2_x1
+       (U_A0_r1, U_A1_r2, U_A1_r3, U_A1_r4, U_A2_r5, x_0, x_x1)) =>
+    one_A0_r1_x2_out_x1_in_0_flow
+      (X_x1_q0, X_x1_q1, X_x2_q0, X_x2_q1,
+       x_x2, x_x1))  &
+  (all1 x_0, x_x2, x_x1 :
+    (x_0 in U_A0_r1
+     & 
+     path_A0_r1_x2_A1_r3_x2
+       (U_A0_r1, U_A1_r2, U_A1_r3, U_A1_r4, U_A2_r5, x_0, x_x2) &
+     path_A0_r1_x1_A1_r3_x1
+       (U_A0_r1, U_A1_r2, U_A1_r3, U_A1_r4, U_A2_r5, x_0, x_x1)) =>
+    one_A0_r1_x2_out_x1_in_1_flow
+      (X_x1_q0, X_x1_q1, X_x2_q0, X_x2_q1,
+       x_x2, x_x1))  &
+  (all1 x_0, x_x2, x_x1 :
+    (x_0 in U_A0_r1
+     & 
+     path_A0_r1_x2_A1_r3_x2
+       (U_A0_r1, U_A1_r2, U_A1_r3, U_A1_r4, U_A2_r5, x_0, x_x2) &
+     path_A0_r1_x1_A2_r5_x2
+       (U_A0_r1, U_A1_r2, U_A1_r3, U_A1_r4, U_A2_r5, x_0, x_x1)) =>
+    one_A0_r1_x2_out_x1_in_2_flow
+      (X_x1_q0, X_x1_q1, X_x2_q0, X_x2_q1,
+       x_x2, x_x1)) ;
+
+pred one_A1_r2_x1_out_x3_in_0_flow
+  (var2 X_x1_q0, X_x1_q1, X_x2_q0, X_x2_q1,
+   var1 x_x1, x_x3) =
+   one_transition_flow_2(x_x1, X_x1_q1, X_x1_q0, x_x3, X_x1_q0, X_x1_q1);
+
+pred one_A1_r2_x1_out_x3_in_1_flow
+  (var2 X_x1_q0, X_x1_q1, X_x2_q0, X_x2_q1,
+   var1 x_x1, x_x3) =
+   one_transition_flow_2(x_x1, X_x1_q1, X_x1_q0, x_x3, X_x1_q0, X_x1_q1);
+
+pred one_A1_r2_x1_out_x3_in_2_flow
+  (var2 X_x1_q0, X_x1_q1, X_x2_q0, X_x2_q1,
+   var1 x_x1, x_x3) =
+   one_transition_flow_2(x_x1, X_x1_q1, X_x1_q0, x_x3, X_x2_q1, X_x2_q0);
+
+pred one_A1_r2_x1_out_x3_in_flow
+  (var2 U_A0_r1, U_A1_r2, U_A1_r3, U_A1_r4, U_A2_r5,
+   var2 X_x1_q0, X_x1_q1, X_x2_q0, X_x2_q1) =
+  (all1 x_0, x_x1, x_x3 :
+    (x_0 in U_A1_r2 & 
+     x_0 = x_x1 & 
+     path_A1_r2_x3_A1_r2_x1
+       (U_A0_r1, U_A1_r2, U_A1_r3, U_A1_r4, U_A2_r5, x_0, x_x3)) =>
+    one_A1_r2_x1_out_x3_in_0_flow
+      (X_x1_q0, X_x1_q1, X_x2_q0, X_x2_q1,
+       x_x1, x_x3))  &
+  (all1 x_0, x_x1, x_x3 :
+    (x_0 in U_A1_r2 & 
+     x_0 = x_x1 & 
+     path_A1_r2_x3_A1_r3_x1
+       (U_A0_r1, U_A1_r2, U_A1_r3, U_A1_r4, U_A2_r5, x_0, x_x3)) =>
+    one_A1_r2_x1_out_x3_in_1_flow
+      (X_x1_q0, X_x1_q1, X_x2_q0, X_x2_q1,
+       x_x1, x_x3))  &
+  (all1 x_0, x_x1, x_x3 :
+    (x_0 in U_A1_r2 & 
+     x_0 = x_x1 & 
+     path_A1_r2_x3_A2_r5_x2
+       (U_A0_r1, U_A1_r2, U_A1_r3, U_A1_r4, U_A2_r5, x_0, x_x3)) =>
+    one_A1_r2_x1_out_x3_in_2_flow
+      (X_x1_q0, X_x1_q1, X_x2_q0, X_x2_q1,
+       x_x1, x_x3)) ;
+
+pred one_A1_r3_x1_out_x2_in_0_flow
+  (var2 X_x1_q0, X_x1_q1, X_x2_q0, X_x2_q1,
+   var1 x_x1, x_x2) =
+   one_transition_flow_2(x_x1, X_x1_q1, X_x1_q0, x_x2, X_x2_q1, X_x2_q0);
+
+pred one_A1_r3_x1_out_x2_in_flow
+  (var2 U_A0_r1, U_A1_r2, U_A1_r3, U_A1_r4, U_A2_r5,
+   var2 X_x1_q0, X_x1_q1, X_x2_q0, X_x2_q1) =
+  (all1 x_0, x_x1, x_x2 :
+    (x_0 in U_A1_r3 & 
+     x_0 = x_x1 &
+     x_0 = x_x2
+    ) =>
+    one_A1_r3_x1_out_x2_in_0_flow
+      (X_x1_q0, X_x1_q1, X_x2_q0, X_x2_q1,
+       x_x1, x_x2)) ;
+
+pred one_A2_r5_x2_out_x3_in_0_flow
+  (var2 X_x1_q0, X_x1_q1, X_x2_q0, X_x2_q1,
+   var1 x_x2, x_x3) =
+   one_transition_flow_2(x_x2, X_x2_q0, X_x2_q1, x_x3, X_x1_q0, X_x1_q1);
+
+pred one_A2_r5_x2_out_x3_in_1_flow
+  (var2 X_x1_q0, X_x1_q1, X_x2_q0, X_x2_q1,
+   var1 x_x2, x_x3) =
+   one_transition_flow_2(x_x2, X_x2_q0, X_x2_q1, x_x3, X_x1_q0, X_x1_q1);
+
+pred one_A2_r5_x2_out_x3_in_2_flow
+  (var2 X_x1_q0, X_x1_q1, X_x2_q0, X_x2_q1,
+   var1 x_x2, x_x3) =
+   one_transition_flow_2(x_x2, X_x2_q0, X_x2_q1, x_x3, X_x2_q1, X_x2_q0);
+
+pred one_A2_r5_x2_out_x3_in_flow
+  (var2 U_A0_r1, U_A1_r2, U_A1_r3, U_A1_r4, U_A2_r5,
+   var2 X_x1_q0, X_x1_q1, X_x2_q0, X_x2_q1) =
+  (all1 x_0, x_x2, x_x3 :
+    (x_0 in U_A2_r5 & 
+     x_0 = x_x2 & 
+     path_A2_r5_x3_A1_r2_x1
+       (U_A0_r1, U_A1_r2, U_A1_r3, U_A1_r4, U_A2_r5, x_0, x_x3)) =>
+    one_A2_r5_x2_out_x3_in_0_flow
+      (X_x1_q0, X_x1_q1, X_x2_q0, X_x2_q1,
+       x_x2, x_x3))  &
+  (all1 x_0, x_x2, x_x3 :
+    (x_0 in U_A2_r5 & 
+     x_0 = x_x2 & 
+     path_A2_r5_x3_A1_r3_x1
+       (U_A0_r1, U_A1_r2, U_A1_r3, U_A1_r4, U_A2_r5, x_0, x_x3)) =>
+    one_A2_r5_x2_out_x3_in_1_flow
+      (X_x1_q0, X_x1_q1, X_x2_q0, X_x2_q1,
+       x_x2, x_x3))  &
+  (all1 x_0, x_x2, x_x3 :
+    (x_0 in U_A2_r5 & 
+     x_0 = x_x2 & 
+     path_A2_r5_x3_A2_r5_x2
+       (U_A0_r1, U_A1_r2, U_A1_r3, U_A1_r4, U_A2_r5, x_0, x_x3)) =>
+    one_A2_r5_x2_out_x3_in_2_flow
+      (X_x1_q0, X_x1_q1, X_x2_q0, X_x2_q1,
+       x_x2, x_x3)) ;
+
+pred one_flow
+  (var2 U_A0_r1, U_A1_r2, U_A1_r3, U_A1_r4, U_A2_r5,
+   var2 X_x1_q0, X_x1_q1, X_x2_q0, X_x2_q1) =
+  ext_configuration
+    (U_A0_r1, U_A1_r2, U_A1_r3, U_A1_r4, U_A2_r5,
+     X_x1_q0, X_x1_q1, X_x2_q0, X_x2_q1) &
+  one_A0_r1_x2_out_x1_in_flow
+    (U_A0_r1, U_A1_r2, U_A1_r3, U_A1_r4, U_A2_r5,
+     X_x1_q0, X_x1_q1, X_x2_q0, X_x2_q1)  &
+  one_A1_r2_x1_out_x3_in_flow
+    (U_A0_r1, U_A1_r2, U_A1_r3, U_A1_r4, U_A2_r5,
+     X_x1_q0, X_x1_q1, X_x2_q0, X_x2_q1)  &
+  one_A1_r3_x1_out_x2_in_flow
+    (U_A0_r1, U_A1_r2, U_A1_r3, U_A1_r4, U_A2_r5,
+     X_x1_q0, X_x1_q1, X_x2_q0, X_x2_q1)  &
+  one_A2_r5_x2_out_x3_in_flow
+    (U_A0_r1, U_A1_r2, U_A1_r3, U_A1_r4, U_A2_r5,
+     X_x1_q0, X_x1_q1, X_x2_q0, X_x2_q1) ;
+
+pred one_constraints
+  (var2 U_A0_r1, U_A1_r2, U_A1_r3, U_A1_r4, U_A2_r5,
+   var2 Z_x1_q0, Z_x1_q1, Z_x2_q0, Z_x2_q1) =
+   ext_configuration
+     (U_A0_r1, U_A1_r2, U_A1_r3, U_A1_r4, U_A2_r5,
+      Z_x1_q0, Z_x1_q1, Z_x2_q0, Z_x2_q1) &
+   one_initially_exactly_one
+     (U_A0_r1, U_A1_r2, U_A1_r3, U_A1_r4, U_A2_r5,
+      Z_x1_q0, Z_x1_q1, Z_x2_q0, Z_x2_q1) &
+   one_flow
+     (U_A0_r1, U_A1_r2, U_A1_r3, U_A1_r4, U_A2_r5,
+      Z_x1_q0, Z_x1_q1, Z_x2_q0, Z_x2_q1);
+
+pred one_invariant
+  (var2 U_A0_r1, U_A1_r2, U_A1_r3, U_A1_r4, U_A2_r5,
+   var2 X_x1_q0, X_x1_q1, X_x2_q0, X_x2_q1) =
+   configuration
+     (U_A0_r1, U_A1_r2, U_A1_r3, U_A1_r4, U_A2_r5,
+      X_x1_q0, X_x1_q1, X_x2_q0, X_x2_q1) &
+   all2 Z_x1_q0, Z_x1_q1, Z_x2_q0, Z_x2_q1 :
+     one_constraints
+       (U_A0_r1, U_A1_r2, U_A1_r3, U_A1_r4, U_A2_r5,
+        Z_x1_q0, Z_x1_q1, Z_x2_q0, Z_x2_q1) =>
+     uniquely_intersects_4
+       (Z_x1_q0, Z_x1_q1, Z_x2_q0, Z_x2_q1,
+        X_x1_q0, X_x1_q1, X_x2_q0, X_x2_q1);
+
+
+
+#
+# token-ring-generic_mutex.mona
+#
+
+
+
+pred not_mutex
+  (var2 U_A0_r1, U_A1_r2, U_A1_r3, U_A1_r4, U_A2_r5,
+   var2 X_x1_q0, X_x1_q1, X_x2_q0, X_x2_q1) =
+   configuration
+     (U_A0_r1, U_A1_r2, U_A1_r3, U_A1_r4, U_A2_r5,
+      X_x1_q0, X_x1_q1, X_x2_q0, X_x2_q1) &
+   ex1 x1, x2:
+     ( x1 ~= x2 &
+       (x1 in X_x1_q1 | x1 in X_x2_q0 ) &
+       (x2 in X_x1_q1 | x2 in X_x2_q0 ));
+
+
+#
+# assertions checking
+#
+
+var2 U_A0_r1, U_A1_r2, U_A1_r3, U_A1_r4, U_A2_r5;
+
+var2 X_x1_q0, X_x1_q1, X_x2_q0, X_x2_q1;
+
+trap_invariant
+  (U_A0_r1, U_A1_r2, U_A1_r3, U_A1_r4, U_A2_r5,
+   X_x1_q0, X_x1_q1, X_x2_q0, X_x2_q1) &
+one_invariant
+  (U_A0_r1, U_A1_r2, U_A1_r3, U_A1_r4, U_A2_r5,
+   X_x1_q0, X_x1_q1, X_x2_q0, X_x2_q1) &
+not_mutex
+  (U_A0_r1, U_A1_r2, U_A1_r3, U_A1_r4, U_A2_r5,
+   X_x1_q0, X_x1_q1, X_x2_q0, X_x2_q1);

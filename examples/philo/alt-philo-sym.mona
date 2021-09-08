@@ -1,0 +1,1038 @@
+ws1s;
+
+pred intersects_1(var2 X, Y) =
+  (ex1 x: (x in X) & (x in Y));
+
+pred included_1(var2 X, Y) =
+  (all1 x: (x in X) => (x in Y));
+
+pred intersects_7
+  (var2 X_1, X_2, X_3, X_4, X_5, X_6, X_7,
+   var2 Y_1, Y_2, Y_3, Y_4, Y_5, Y_6, Y_7) =
+   intersects_1(X_1, Y_1) |
+   intersects_1(X_2, Y_2) |
+   intersects_1(X_3, Y_3) |
+   intersects_1(X_4, Y_4) |
+   intersects_1(X_5, Y_5) |
+   intersects_1(X_6, Y_6) |
+   intersects_1(X_7, Y_7);
+
+pred uniquely_intersects_7
+  (var2 X_1, X_2, X_3, X_4, X_5, X_6, X_7,
+   var2 Y_1, Y_2, Y_3, Y_4, Y_5, Y_6, Y_7) =
+  (ex1 x: (
+( (x in X_1 & x in Y_1) &
+ ~(x in X_2 & x in Y_2) &
+ ~(x in X_3 & x in Y_3) &
+ ~(x in X_4 & x in Y_4) &
+ ~(x in X_5 & x in Y_5) &
+ ~(x in X_6 & x in Y_6) &
+ ~(x in X_7 & x in Y_7)) |
+(~(x in X_1 & x in Y_1) &
+  (x in X_2 & x in Y_2) &
+ ~(x in X_3 & x in Y_3) &
+ ~(x in X_4 & x in Y_4) &
+ ~(x in X_5 & x in Y_5) &
+ ~(x in X_6 & x in Y_6) &
+ ~(x in X_7 & x in Y_7)) |
+(~(x in X_1 & x in Y_1) &
+ ~(x in X_2 & x in Y_2) &
+  (x in X_3 & x in Y_3) &
+ ~(x in X_4 & x in Y_4) &
+ ~(x in X_5 & x in Y_5) &
+ ~(x in X_6 & x in Y_6) &
+ ~(x in X_7 & x in Y_7)) |
+(~(x in X_1 & x in Y_1) &
+ ~(x in X_2 & x in Y_2) &
+ ~(x in X_3 & x in Y_3) &
+  (x in X_4 & x in Y_4) &
+ ~(x in X_5 & x in Y_5) &
+ ~(x in X_6 & x in Y_6) &
+ ~(x in X_7 & x in Y_7)) |
+(~(x in X_1 & x in Y_1) &
+ ~(x in X_2 & x in Y_2) &
+ ~(x in X_3 & x in Y_3) &
+ ~(x in X_4 & x in Y_4) &
+  (x in X_5 & x in Y_5) &
+ ~(x in X_6 & x in Y_6) &
+ ~(x in X_7 & x in Y_7)) |
+(~(x in X_1 & x in Y_1) &
+ ~(x in X_2 & x in Y_2) &
+ ~(x in X_3 & x in Y_3) &
+ ~(x in X_4 & x in Y_4) &
+ ~(x in X_5 & x in Y_5) &
+  (x in X_6 & x in Y_6) &
+ ~(x in X_7 & x in Y_7)) |
+(~(x in X_1 & x in Y_1) &
+ ~(x in X_2 & x in Y_2) &
+ ~(x in X_3 & x in Y_3) &
+ ~(x in X_4 & x in Y_4) &
+ ~(x in X_5 & x in Y_5) &
+ ~(x in X_6 & x in Y_6) &
+  (x in X_7 & x in Y_7)))
+& (all1 y:
+((y in X_1 & y in Y_1) |
+ (y in X_2 & y in Y_2) |
+ (y in X_3 & y in Y_3) |
+ (y in X_4 & y in Y_4) |
+ (y in X_5 & y in Y_5) |
+ (y in X_6 & y in Y_6) |
+ (y in X_7 & y in Y_7)) => x = y));
+
+pred partition_3
+  (var2 Y, X_1, X_2, X_3) =
+  (all1 x: x in Y <=>
+    (x in X_1 | x in X_2 | x in X_3))  &
+  ~intersects_1(X_1, X_2) &
+  ~intersects_1(X_1, X_3) &
+  ~intersects_1(X_2, X_3);
+
+pred partition_2
+  (var2 Y, X_1, X_2) =
+  (all1 x: x in Y <=>
+    (x in X_1 | x in X_2))  &
+  ~intersects_1(X_1, X_2);
+
+pred one_transition_flow_2
+  (var1 z1, var2 X1, Y1,
+   var1 z2, var2 X2, Y2) =
+   (z1 notin X1 & z2 notin X2  &  z1 notin Y1 & z2 notin Y2) |
+
+   (z1    in X1 & z2 notin X2  &  z1    in Y1 & z2 notin Y2) |
+   (z1    in X1 & z2 notin X2  &  z1 notin Y1 & z2    in Y2) |
+   (z1 notin X1 & z2    in X2  &  z1    in Y1 & z2 notin Y2) |
+   (z1 notin X1 & z2    in X2  &  z1 notin Y1 & z2    in Y2) |
+
+   (z1    in X1 & z2    in X2);
+
+pred one_transition_flow_3
+  (var1 z1, var2 X1, Y1,
+   var1 z2, var2 X2, Y2,
+   var1 z3, var2 X3, Y3) =
+   (z1 notin X1 & z2 notin X2 & z3 notin X3  &  z1 notin Y1 & z2 notin Y2 & z3 notin Y3) |
+
+   (z1    in X1 & z2 notin X2 & z3 notin X3  &  z1    in Y1 & z2 notin Y2 & z3 notin Y3) |
+   (z1    in X1 & z2 notin X2 & z3 notin X3  &  z1 notin Y1 & z2    in Y2 & z3 notin Y3) |
+   (z1    in X1 & z2 notin X2 & z3 notin X3  &  z1 notin Y1 & z2 notin Y2 & z3    in Y3) |
+   (z1 notin X1 & z2    in X2 & z3 notin X3  &  z1    in Y1 & z2 notin Y2 & z3 notin Y3) |
+   (z1 notin X1 & z2    in X2 & z3 notin X3  &  z1 notin Y1 & z2    in Y2 & z3 notin Y3) |
+   (z1 notin X1 & z2    in X2 & z3 notin X3  &  z1 notin Y1 & z2 notin Y2 & z3    in Y3) |
+   (z1 notin X1 & z2 notin X2 & z3    in X3  &  z1    in Y1 & z2 notin Y2 & z3 notin Y3) |
+   (z1 notin X1 & z2 notin X2 & z3    in X3  &  z1 notin Y1 & z2    in Y2 & z3 notin Y3) |
+   (z1 notin X1 & z2 notin X2 & z3    in X3  &  z1 notin Y1 & z2 notin Y2 & z3    in Y3) |
+
+   (z1    in X1 & z2    in X2              ) |
+   (z1    in X1               & z3    in X3) |
+   (              z2    in X2 & z3    in X3);
+
+
+#
+# backbone tree
+#
+
+
+
+pred backbone_tree
+  (var2 U_Ring_a1, U_Pipe_a2, U_Pipe_a3) =
+  (ex2 U:
+    partition_3
+      (U, U_Ring_a1, U_Pipe_a2, U_Pipe_a3) &
+    (all1 u : (u ~= 0 & u in U) => (u-1 in U) ) &
+    (all1 u: (u in U_Ring_a1) => (
+        (u+1 in U_Pipe_a2)  | 
+        (u+1 in U_Pipe_a3) 
+      )) &
+    (all1 u: (u in U_Pipe_a2) => (
+        (u+1 in U_Pipe_a2)  | 
+        (u+1 in U_Pipe_a3) 
+      )) &
+    (all1 u: (u in U_Pipe_a3) =>
+        (u+1 notin U)) &
+    (0 in U_Ring_a1)
+  );
+
+
+#
+# ext / configurations
+#
+
+
+
+pred ext_configuration
+  (var2 U_Ring_a1, U_Pipe_a2, U_Pipe_a3,
+   var2 X_f0_f, X_f0_b, X_fn_f, X_fn_b, X_p0_w, X_p0_h, X_p0_e) =
+   backbone_tree
+     (U_Ring_a1, U_Pipe_a2, U_Pipe_a3) &
+   (all1 x : x in X_f0_f =>
+      (x in U_Pipe_a2 | x in U_Pipe_a3)) &
+   (all1 x : x in X_f0_b =>
+      (x in U_Pipe_a2 | x in U_Pipe_a3)) &
+   (all1 x : x in X_fn_f =>
+      (x in U_Pipe_a3)) &
+   (all1 x : x in X_fn_b =>
+      (x in U_Pipe_a3)) &
+   (all1 x : x in X_p0_w =>
+      (x in U_Ring_a1 | x in U_Pipe_a2 | x in U_Pipe_a3)) &
+   (all1 x : x in X_p0_h =>
+      (x in U_Ring_a1 | x in U_Pipe_a2 | x in U_Pipe_a3)) &
+   (all1 x : x in X_p0_e =>
+      (x in U_Ring_a1 | x in U_Pipe_a2 | x in U_Pipe_a3));
+
+pred configuration
+  (var2 U_Ring_a1, U_Pipe_a2, U_Pipe_a3,
+   var2 X_f0_f, X_f0_b, X_fn_f, X_fn_b, X_p0_w, X_p0_h, X_p0_e) =
+   ext_configuration
+     (U_Ring_a1, U_Pipe_a2, U_Pipe_a3,
+      X_f0_f, X_f0_b, X_fn_f, X_fn_b, X_p0_w, X_p0_h, X_p0_e) &
+   (all1 x: x in U_Ring_a1 =>
+     (x in X_p0_w | x in X_p0_h | x in X_p0_e)) &
+   (all1 x: x in U_Pipe_a2 =>
+     (x in X_f0_f | x in X_f0_b)) &
+   (all1 x: x in U_Pipe_a2 =>
+     (x in X_p0_w | x in X_p0_h | x in X_p0_e)) &
+   (all1 x: x in U_Pipe_a3 =>
+     (x in X_f0_f | x in X_f0_b)) &
+   (all1 x: x in U_Pipe_a3 =>
+     (x in X_p0_w | x in X_p0_h | x in X_p0_e)) &
+   (all1 x: x in U_Pipe_a3 =>
+     (x in X_fn_f | x in X_fn_b)) & 
+   ~intersects_1(X_f0_b, X_f0_f) &
+   ~intersects_1(X_fn_b, X_fn_f) &
+   ~intersects_1(X_p0_h, X_p0_w) &
+   ~intersects_1(X_p0_e, X_p0_w) &
+   ~intersects_1(X_p0_e, X_p0_h);
+
+
+#
+# backbone tree paths
+#
+
+
+
+
+
+pred path_Ring_a1_f0_Pipe_a2_f0
+  (var2 U_Ring_a1, U_Pipe_a2, U_Pipe_a3,
+   var1 u0, u1) =
+   backbone_tree
+     (U_Ring_a1, U_Pipe_a2, U_Pipe_a3) &
+   ex2 W_Ring_a1_f0, W_Pipe_a2_f0 :
+   ex2 W_up, W_down :
+   ex1 w_top :
+     included_1(W_Ring_a1_f0, U_Ring_a1) &
+     included_1(W_Pipe_a2_f0, U_Pipe_a2) &
+     ~intersects_1(W_down, W_up) &
+     partition_2(W_down, W_Ring_a1_f0, W_Pipe_a2_f0) &
+     (w_top in W_down) &
+     (0 in W_down => w_top = 0) &
+     (all1 w : (w in W_down & w ~= w_top) => w-1 in W_down) &
+     (all1 w1, w2: (w1 in W_down & w1 ~= 0 &
+                    w2 in W_down & w2 ~= 0 & w1-1 = w2-1) => w1 = w2) &
+     (all1 w: (w in W_Ring_a1_f0) =>
+       (w+1 in W_Pipe_a2_f0)) &
+     u0 in W_Ring_a1_f0 &
+     u1 in W_Pipe_a2_f0 &
+     (all1 w : w in W_Pipe_a2_f0 => w = u1);
+
+
+pred path_Ring_a1_f0_Pipe_a3_f0
+  (var2 U_Ring_a1, U_Pipe_a2, U_Pipe_a3,
+   var1 u0, u1) =
+   backbone_tree
+     (U_Ring_a1, U_Pipe_a2, U_Pipe_a3) &
+   ex2 W_Ring_a1_f0, W_Pipe_a3_f0 :
+   ex2 W_up, W_down :
+   ex1 w_top :
+     included_1(W_Ring_a1_f0, U_Ring_a1) &
+     included_1(W_Pipe_a3_f0, U_Pipe_a3) &
+     ~intersects_1(W_down, W_up) &
+     partition_2(W_down, W_Ring_a1_f0, W_Pipe_a3_f0) &
+     (w_top in W_down) &
+     (0 in W_down => w_top = 0) &
+     (all1 w : (w in W_down & w ~= w_top) => w-1 in W_down) &
+     (all1 w1, w2: (w1 in W_down & w1 ~= 0 &
+                    w2 in W_down & w2 ~= 0 & w1-1 = w2-1) => w1 = w2) &
+     (all1 w: (w in W_Ring_a1_f0) =>
+       (w+1 in W_Pipe_a3_f0)) &
+     u0 in W_Ring_a1_f0 &
+     u1 in W_Pipe_a3_f0 &
+     (all1 w : w in W_Pipe_a3_f0 => w = u1);
+
+
+pred path_Ring_a1_fn_Pipe_a3_fn
+  (var2 U_Ring_a1, U_Pipe_a2, U_Pipe_a3,
+   var1 u0, u1) =
+   backbone_tree
+     (U_Ring_a1, U_Pipe_a2, U_Pipe_a3) &
+   ex2 W_Ring_a1_fn, W_Pipe_a2_fn, W_Pipe_a3_fn :
+   ex2 W_up, W_down :
+   ex1 w_top :
+     included_1(W_Ring_a1_fn, U_Ring_a1) &
+     included_1(W_Pipe_a2_fn, U_Pipe_a2) &
+     included_1(W_Pipe_a3_fn, U_Pipe_a3) &
+     ~intersects_1(W_down, W_up) &
+     partition_3(W_down, W_Ring_a1_fn, W_Pipe_a2_fn, W_Pipe_a3_fn) &
+     (w_top in W_down) &
+     (0 in W_down => w_top = 0) &
+     (all1 w : (w in W_down & w ~= w_top) => w-1 in W_down) &
+     (all1 w1, w2: (w1 in W_down & w1 ~= 0 &
+                    w2 in W_down & w2 ~= 0 & w1-1 = w2-1) => w1 = w2) &
+     (all1 w: (w in W_Ring_a1_fn) =>
+       (w+1 in W_Pipe_a2_fn | w+1 in W_Pipe_a3_fn)) &
+     (all1 w: (w in W_Pipe_a2_fn) =>
+       (w+1 in W_Pipe_a2_fn | w+1 in W_Pipe_a3_fn)) &
+     u0 in W_Ring_a1_fn &
+     u1 in W_Pipe_a3_fn &
+     (all1 w : w in W_Pipe_a3_fn => w = u1);
+
+
+pred path_Pipe_a2_fn_Pipe_a3_fn
+  (var2 U_Ring_a1, U_Pipe_a2, U_Pipe_a3,
+   var1 u0, u1) =
+   backbone_tree
+     (U_Ring_a1, U_Pipe_a2, U_Pipe_a3) &
+   ex2 W_Pipe_a2_fn, W_Pipe_a3_fn :
+   ex2 W_up, W_down :
+   ex1 w_top :
+     included_1(W_Pipe_a2_fn, U_Pipe_a2) &
+     included_1(W_Pipe_a3_fn, U_Pipe_a3) &
+     ~intersects_1(W_down, W_up) &
+     partition_2(W_down, W_Pipe_a2_fn, W_Pipe_a3_fn) &
+     (w_top in W_down) &
+     (0 in W_down => w_top = 0) &
+     (all1 w : (w in W_down & w ~= w_top) => w-1 in W_down) &
+     (all1 w1, w2: (w1 in W_down & w1 ~= 0 &
+                    w2 in W_down & w2 ~= 0 & w1-1 = w2-1) => w1 = w2) &
+     (all1 w: (w in W_Pipe_a2_fn) =>
+       (w+1 in W_Pipe_a2_fn | w+1 in W_Pipe_a3_fn)) &
+     u0 in W_Pipe_a2_fn &
+     u1 in W_Pipe_a3_fn &
+     (all1 w : w in W_Pipe_a3_fn => w = u1);
+
+
+pred path_Pipe_a2_f1_Pipe_a2_f0
+  (var2 U_Ring_a1, U_Pipe_a2, U_Pipe_a3,
+   var1 u0, u1) =
+   backbone_tree
+     (U_Ring_a1, U_Pipe_a2, U_Pipe_a3) &
+   ex2 W_Pipe_a2_f1, W_Pipe_a2_f0 :
+   ex2 W_up, W_down :
+   ex1 w_top :
+     included_1(W_Pipe_a2_f1, U_Pipe_a2) &
+     included_1(W_Pipe_a2_f0, U_Pipe_a2) &
+     ~intersects_1(W_down, W_up) &
+     partition_2(W_down, W_Pipe_a2_f1, W_Pipe_a2_f0) &
+     (w_top in W_down) &
+     (0 in W_down => w_top = 0) &
+     (all1 w : (w in W_down & w ~= w_top) => w-1 in W_down) &
+     (all1 w1, w2: (w1 in W_down & w1 ~= 0 &
+                    w2 in W_down & w2 ~= 0 & w1-1 = w2-1) => w1 = w2) &
+     (all1 w: (w in W_Pipe_a2_f1) =>
+       (w+1 in W_Pipe_a2_f0)) &
+     u0 in W_Pipe_a2_f1 &
+     u1 in W_Pipe_a2_f0 &
+     (all1 w : w in W_Pipe_a2_f0 => w = u1);
+
+
+pred path_Pipe_a2_f1_Pipe_a3_f0
+  (var2 U_Ring_a1, U_Pipe_a2, U_Pipe_a3,
+   var1 u0, u1) =
+   backbone_tree
+     (U_Ring_a1, U_Pipe_a2, U_Pipe_a3) &
+   ex2 W_Pipe_a2_f1, W_Pipe_a3_f0 :
+   ex2 W_up, W_down :
+   ex1 w_top :
+     included_1(W_Pipe_a2_f1, U_Pipe_a2) &
+     included_1(W_Pipe_a3_f0, U_Pipe_a3) &
+     ~intersects_1(W_down, W_up) &
+     partition_2(W_down, W_Pipe_a2_f1, W_Pipe_a3_f0) &
+     (w_top in W_down) &
+     (0 in W_down => w_top = 0) &
+     (all1 w : (w in W_down & w ~= w_top) => w-1 in W_down) &
+     (all1 w1, w2: (w1 in W_down & w1 ~= 0 &
+                    w2 in W_down & w2 ~= 0 & w1-1 = w2-1) => w1 = w2) &
+     (all1 w: (w in W_Pipe_a2_f1) =>
+       (w+1 in W_Pipe_a3_f0)) &
+     u0 in W_Pipe_a2_f1 &
+     u1 in W_Pipe_a3_f0 &
+     (all1 w : w in W_Pipe_a3_f0 => w = u1);
+
+
+
+#
+# trap invariants
+#
+
+
+
+pred trap_initially_not_empty
+  (var2 U_Ring_a1, U_Pipe_a2, U_Pipe_a3,
+   var2 X_f0_f, X_f0_b, X_fn_f, X_fn_b, X_p0_w, X_p0_h, X_p0_e) =
+   ext_configuration
+     (U_Ring_a1, U_Pipe_a2, U_Pipe_a3,
+      X_f0_f, X_f0_b, X_fn_f, X_fn_b, X_p0_w, X_p0_h, X_p0_e) &
+   ((ex1 x : x in U_Ring_a1 & x in X_p0_w) |
+    (ex1 x : x in U_Pipe_a2 & x in X_f0_f) |
+    (ex1 x : x in U_Pipe_a2 & x in X_p0_w) |
+    (ex1 x : x in U_Pipe_a3 & x in X_f0_f) |
+    (ex1 x : x in U_Pipe_a3 & x in X_p0_w) |
+    (ex1 x : x in U_Pipe_a3 & x in X_fn_f));
+
+pred trap_Ring_a1_p0_take_left_fn_grb_0_flow
+  (var2 X_f0_f, X_f0_b, X_fn_f, X_fn_b, X_p0_w, X_p0_h, X_p0_e,
+   var1 x_p0, x_fn) =
+   ((x_p0 in X_p0_w | x_fn in X_fn_f) =>
+    (x_p0 in X_p0_h | x_fn in X_fn_b));
+
+pred trap_Ring_a1_p0_take_left_fn_grb_flow
+  (var2 U_Ring_a1, U_Pipe_a2, U_Pipe_a3,
+   var2 X_f0_f, X_f0_b, X_fn_f, X_fn_b, X_p0_w, X_p0_h, X_p0_e) =
+  (all1 x_0, x_p0, x_fn :
+    (x_0 in U_Ring_a1 & 
+     x_0 = x_p0 & 
+     path_Ring_a1_fn_Pipe_a3_fn
+       (U_Ring_a1, U_Pipe_a2, U_Pipe_a3, x_0, x_fn)) =>
+    trap_Ring_a1_p0_take_left_fn_grb_0_flow
+      (X_f0_f, X_f0_b, X_fn_f, X_fn_b, X_p0_w, X_p0_h, X_p0_e,
+       x_p0, x_fn)) ;
+
+pred trap_Ring_a1_p0_take_right_f0_grb_0_flow
+  (var2 X_f0_f, X_f0_b, X_fn_f, X_fn_b, X_p0_w, X_p0_h, X_p0_e,
+   var1 x_p0, x_f0) =
+   ((x_p0 in X_p0_h | x_f0 in X_f0_f) =>
+    (x_p0 in X_p0_e | x_f0 in X_f0_b));
+
+pred trap_Ring_a1_p0_take_right_f0_grb_1_flow
+  (var2 X_f0_f, X_f0_b, X_fn_f, X_fn_b, X_p0_w, X_p0_h, X_p0_e,
+   var1 x_p0, x_f0) =
+   ((x_p0 in X_p0_h | x_f0 in X_f0_f) =>
+    (x_p0 in X_p0_e | x_f0 in X_f0_b));
+
+pred trap_Ring_a1_p0_take_right_f0_grb_flow
+  (var2 U_Ring_a1, U_Pipe_a2, U_Pipe_a3,
+   var2 X_f0_f, X_f0_b, X_fn_f, X_fn_b, X_p0_w, X_p0_h, X_p0_e) =
+  (all1 x_0, x_p0, x_f0 :
+    (x_0 in U_Ring_a1 & 
+     x_0 = x_p0 & 
+     path_Ring_a1_f0_Pipe_a2_f0
+       (U_Ring_a1, U_Pipe_a2, U_Pipe_a3, x_0, x_f0)) =>
+    trap_Ring_a1_p0_take_right_f0_grb_0_flow
+      (X_f0_f, X_f0_b, X_fn_f, X_fn_b, X_p0_w, X_p0_h, X_p0_e,
+       x_p0, x_f0))  &
+  (all1 x_0, x_p0, x_f0 :
+    (x_0 in U_Ring_a1 & 
+     x_0 = x_p0 & 
+     path_Ring_a1_f0_Pipe_a3_f0
+       (U_Ring_a1, U_Pipe_a2, U_Pipe_a3, x_0, x_f0)) =>
+    trap_Ring_a1_p0_take_right_f0_grb_1_flow
+      (X_f0_f, X_f0_b, X_fn_f, X_fn_b, X_p0_w, X_p0_h, X_p0_e,
+       x_p0, x_f0)) ;
+
+pred trap_Ring_a1_p0_leave_f0_rel_fn_rel_0_flow
+  (var2 X_f0_f, X_f0_b, X_fn_f, X_fn_b, X_p0_w, X_p0_h, X_p0_e,
+   var1 x_p0, x_f0, x_fn) =
+   ((x_p0 in X_p0_e | x_f0 in X_f0_b | x_fn in X_fn_b) =>
+    (x_p0 in X_p0_w | x_f0 in X_f0_f | x_fn in X_fn_f));
+
+pred trap_Ring_a1_p0_leave_f0_rel_fn_rel_1_flow
+  (var2 X_f0_f, X_f0_b, X_fn_f, X_fn_b, X_p0_w, X_p0_h, X_p0_e,
+   var1 x_p0, x_f0, x_fn) =
+   ((x_p0 in X_p0_e | x_f0 in X_f0_b | x_fn in X_fn_b) =>
+    (x_p0 in X_p0_w | x_f0 in X_f0_f | x_fn in X_fn_f));
+
+pred trap_Ring_a1_p0_leave_f0_rel_fn_rel_flow
+  (var2 U_Ring_a1, U_Pipe_a2, U_Pipe_a3,
+   var2 X_f0_f, X_f0_b, X_fn_f, X_fn_b, X_p0_w, X_p0_h, X_p0_e) =
+  (all1 x_0, x_p0, x_f0, x_fn :
+    (x_0 in U_Ring_a1 & 
+     x_0 = x_p0 & 
+     path_Ring_a1_f0_Pipe_a2_f0
+       (U_Ring_a1, U_Pipe_a2, U_Pipe_a3, x_0, x_f0) &
+     path_Ring_a1_fn_Pipe_a3_fn
+       (U_Ring_a1, U_Pipe_a2, U_Pipe_a3, x_0, x_fn)) =>
+    trap_Ring_a1_p0_leave_f0_rel_fn_rel_0_flow
+      (X_f0_f, X_f0_b, X_fn_f, X_fn_b, X_p0_w, X_p0_h, X_p0_e,
+       x_p0, x_f0, x_fn))  &
+  (all1 x_0, x_p0, x_f0, x_fn :
+    (x_0 in U_Ring_a1 & 
+     x_0 = x_p0 & 
+     path_Ring_a1_f0_Pipe_a3_f0
+       (U_Ring_a1, U_Pipe_a2, U_Pipe_a3, x_0, x_f0) &
+     path_Ring_a1_fn_Pipe_a3_fn
+       (U_Ring_a1, U_Pipe_a2, U_Pipe_a3, x_0, x_fn)) =>
+    trap_Ring_a1_p0_leave_f0_rel_fn_rel_1_flow
+      (X_f0_f, X_f0_b, X_fn_f, X_fn_b, X_p0_w, X_p0_h, X_p0_e,
+       x_p0, x_f0, x_fn)) ;
+
+pred trap_Pipe_a2_p0_take_left_f0_grb_0_flow
+  (var2 X_f0_f, X_f0_b, X_fn_f, X_fn_b, X_p0_w, X_p0_h, X_p0_e,
+   var1 x_p0, x_f0) =
+   ((x_p0 in X_p0_w | x_f0 in X_f0_f) =>
+    (x_p0 in X_p0_h | x_f0 in X_f0_b));
+
+pred trap_Pipe_a2_p0_take_left_f0_grb_flow
+  (var2 U_Ring_a1, U_Pipe_a2, U_Pipe_a3,
+   var2 X_f0_f, X_f0_b, X_fn_f, X_fn_b, X_p0_w, X_p0_h, X_p0_e) =
+  (all1 x_0, x_p0, x_f0 :
+    (x_0 in U_Pipe_a2 & 
+     x_0 = x_p0 &
+     x_0 = x_f0
+    ) =>
+    trap_Pipe_a2_p0_take_left_f0_grb_0_flow
+      (X_f0_f, X_f0_b, X_fn_f, X_fn_b, X_p0_w, X_p0_h, X_p0_e,
+       x_p0, x_f0)) ;
+
+pred trap_Pipe_a2_p0_take_right_f1_grb_0_flow
+  (var2 X_f0_f, X_f0_b, X_fn_f, X_fn_b, X_p0_w, X_p0_h, X_p0_e,
+   var1 x_p0, x_f1) =
+   ((x_p0 in X_p0_h | x_f1 in X_f0_f) =>
+    (x_p0 in X_p0_e | x_f1 in X_f0_b));
+
+pred trap_Pipe_a2_p0_take_right_f1_grb_1_flow
+  (var2 X_f0_f, X_f0_b, X_fn_f, X_fn_b, X_p0_w, X_p0_h, X_p0_e,
+   var1 x_p0, x_f1) =
+   ((x_p0 in X_p0_h | x_f1 in X_f0_f) =>
+    (x_p0 in X_p0_e | x_f1 in X_f0_b));
+
+pred trap_Pipe_a2_p0_take_right_f1_grb_flow
+  (var2 U_Ring_a1, U_Pipe_a2, U_Pipe_a3,
+   var2 X_f0_f, X_f0_b, X_fn_f, X_fn_b, X_p0_w, X_p0_h, X_p0_e) =
+  (all1 x_0, x_p0, x_f1 :
+    (x_0 in U_Pipe_a2 & 
+     x_0 = x_p0 & 
+     path_Pipe_a2_f1_Pipe_a2_f0
+       (U_Ring_a1, U_Pipe_a2, U_Pipe_a3, x_0, x_f1)) =>
+    trap_Pipe_a2_p0_take_right_f1_grb_0_flow
+      (X_f0_f, X_f0_b, X_fn_f, X_fn_b, X_p0_w, X_p0_h, X_p0_e,
+       x_p0, x_f1))  &
+  (all1 x_0, x_p0, x_f1 :
+    (x_0 in U_Pipe_a2 & 
+     x_0 = x_p0 & 
+     path_Pipe_a2_f1_Pipe_a3_f0
+       (U_Ring_a1, U_Pipe_a2, U_Pipe_a3, x_0, x_f1)) =>
+    trap_Pipe_a2_p0_take_right_f1_grb_1_flow
+      (X_f0_f, X_f0_b, X_fn_f, X_fn_b, X_p0_w, X_p0_h, X_p0_e,
+       x_p0, x_f1)) ;
+
+pred trap_Pipe_a2_p0_leave_f0_rel_f1_rel_0_flow
+  (var2 X_f0_f, X_f0_b, X_fn_f, X_fn_b, X_p0_w, X_p0_h, X_p0_e,
+   var1 x_p0, x_f0, x_f1) =
+   ((x_p0 in X_p0_e | x_f0 in X_f0_b | x_f1 in X_f0_b) =>
+    (x_p0 in X_p0_w | x_f0 in X_f0_f | x_f1 in X_f0_f));
+
+pred trap_Pipe_a2_p0_leave_f0_rel_f1_rel_1_flow
+  (var2 X_f0_f, X_f0_b, X_fn_f, X_fn_b, X_p0_w, X_p0_h, X_p0_e,
+   var1 x_p0, x_f0, x_f1) =
+   ((x_p0 in X_p0_e | x_f0 in X_f0_b | x_f1 in X_f0_b) =>
+    (x_p0 in X_p0_w | x_f0 in X_f0_f | x_f1 in X_f0_f));
+
+pred trap_Pipe_a2_p0_leave_f0_rel_f1_rel_flow
+  (var2 U_Ring_a1, U_Pipe_a2, U_Pipe_a3,
+   var2 X_f0_f, X_f0_b, X_fn_f, X_fn_b, X_p0_w, X_p0_h, X_p0_e) =
+  (all1 x_0, x_p0, x_f0, x_f1 :
+    (x_0 in U_Pipe_a2 & 
+     x_0 = x_p0 &
+     x_0 = x_f0 & 
+     path_Pipe_a2_f1_Pipe_a2_f0
+       (U_Ring_a1, U_Pipe_a2, U_Pipe_a3, x_0, x_f1)) =>
+    trap_Pipe_a2_p0_leave_f0_rel_f1_rel_0_flow
+      (X_f0_f, X_f0_b, X_fn_f, X_fn_b, X_p0_w, X_p0_h, X_p0_e,
+       x_p0, x_f0, x_f1))  &
+  (all1 x_0, x_p0, x_f0, x_f1 :
+    (x_0 in U_Pipe_a2 & 
+     x_0 = x_p0 &
+     x_0 = x_f0 & 
+     path_Pipe_a2_f1_Pipe_a3_f0
+       (U_Ring_a1, U_Pipe_a2, U_Pipe_a3, x_0, x_f1)) =>
+    trap_Pipe_a2_p0_leave_f0_rel_f1_rel_1_flow
+      (X_f0_f, X_f0_b, X_fn_f, X_fn_b, X_p0_w, X_p0_h, X_p0_e,
+       x_p0, x_f0, x_f1)) ;
+
+pred trap_Pipe_a3_p0_take_left_f0_grb_0_flow
+  (var2 X_f0_f, X_f0_b, X_fn_f, X_fn_b, X_p0_w, X_p0_h, X_p0_e,
+   var1 x_p0, x_f0) =
+   ((x_p0 in X_p0_w | x_f0 in X_f0_f) =>
+    (x_p0 in X_p0_h | x_f0 in X_f0_b));
+
+pred trap_Pipe_a3_p0_take_left_f0_grb_flow
+  (var2 U_Ring_a1, U_Pipe_a2, U_Pipe_a3,
+   var2 X_f0_f, X_f0_b, X_fn_f, X_fn_b, X_p0_w, X_p0_h, X_p0_e) =
+  (all1 x_0, x_p0, x_f0 :
+    (x_0 in U_Pipe_a3 & 
+     x_0 = x_p0 &
+     x_0 = x_f0
+    ) =>
+    trap_Pipe_a3_p0_take_left_f0_grb_0_flow
+      (X_f0_f, X_f0_b, X_fn_f, X_fn_b, X_p0_w, X_p0_h, X_p0_e,
+       x_p0, x_f0)) ;
+
+pred trap_Pipe_a3_p0_take_right_fn_grb_0_flow
+  (var2 X_f0_f, X_f0_b, X_fn_f, X_fn_b, X_p0_w, X_p0_h, X_p0_e,
+   var1 x_p0, x_fn) =
+   ((x_p0 in X_p0_h | x_fn in X_fn_f) =>
+    (x_p0 in X_p0_e | x_fn in X_fn_b));
+
+pred trap_Pipe_a3_p0_take_right_fn_grb_flow
+  (var2 U_Ring_a1, U_Pipe_a2, U_Pipe_a3,
+   var2 X_f0_f, X_f0_b, X_fn_f, X_fn_b, X_p0_w, X_p0_h, X_p0_e) =
+  (all1 x_0, x_p0, x_fn :
+    (x_0 in U_Pipe_a3 & 
+     x_0 = x_p0 &
+     x_0 = x_fn
+    ) =>
+    trap_Pipe_a3_p0_take_right_fn_grb_0_flow
+      (X_f0_f, X_f0_b, X_fn_f, X_fn_b, X_p0_w, X_p0_h, X_p0_e,
+       x_p0, x_fn)) ;
+
+pred trap_Pipe_a3_p0_leave_f0_rel_fn_rel_0_flow
+  (var2 X_f0_f, X_f0_b, X_fn_f, X_fn_b, X_p0_w, X_p0_h, X_p0_e,
+   var1 x_p0, x_f0, x_fn) =
+   ((x_p0 in X_p0_e | x_f0 in X_f0_b | x_fn in X_fn_b) =>
+    (x_p0 in X_p0_w | x_f0 in X_f0_f | x_fn in X_fn_f));
+
+pred trap_Pipe_a3_p0_leave_f0_rel_fn_rel_flow
+  (var2 U_Ring_a1, U_Pipe_a2, U_Pipe_a3,
+   var2 X_f0_f, X_f0_b, X_fn_f, X_fn_b, X_p0_w, X_p0_h, X_p0_e) =
+  (all1 x_0, x_p0, x_f0, x_fn :
+    (x_0 in U_Pipe_a3 & 
+     x_0 = x_p0 &
+     x_0 = x_f0 &
+     x_0 = x_fn
+    ) =>
+    trap_Pipe_a3_p0_leave_f0_rel_fn_rel_0_flow
+      (X_f0_f, X_f0_b, X_fn_f, X_fn_b, X_p0_w, X_p0_h, X_p0_e,
+       x_p0, x_f0, x_fn)) ;
+
+pred trap_flow
+  (var2 U_Ring_a1, U_Pipe_a2, U_Pipe_a3,
+   var2 X_f0_f, X_f0_b, X_fn_f, X_fn_b, X_p0_w, X_p0_h, X_p0_e) =
+  ext_configuration
+    (U_Ring_a1, U_Pipe_a2, U_Pipe_a3,
+     X_f0_f, X_f0_b, X_fn_f, X_fn_b, X_p0_w, X_p0_h, X_p0_e) &
+  trap_Ring_a1_p0_take_left_fn_grb_flow
+    (U_Ring_a1, U_Pipe_a2, U_Pipe_a3,
+     X_f0_f, X_f0_b, X_fn_f, X_fn_b, X_p0_w, X_p0_h, X_p0_e)  &
+  trap_Ring_a1_p0_take_right_f0_grb_flow
+    (U_Ring_a1, U_Pipe_a2, U_Pipe_a3,
+     X_f0_f, X_f0_b, X_fn_f, X_fn_b, X_p0_w, X_p0_h, X_p0_e)  &
+  trap_Ring_a1_p0_leave_f0_rel_fn_rel_flow
+    (U_Ring_a1, U_Pipe_a2, U_Pipe_a3,
+     X_f0_f, X_f0_b, X_fn_f, X_fn_b, X_p0_w, X_p0_h, X_p0_e)  &
+  trap_Pipe_a2_p0_take_left_f0_grb_flow
+    (U_Ring_a1, U_Pipe_a2, U_Pipe_a3,
+     X_f0_f, X_f0_b, X_fn_f, X_fn_b, X_p0_w, X_p0_h, X_p0_e)  &
+  trap_Pipe_a2_p0_take_right_f1_grb_flow
+    (U_Ring_a1, U_Pipe_a2, U_Pipe_a3,
+     X_f0_f, X_f0_b, X_fn_f, X_fn_b, X_p0_w, X_p0_h, X_p0_e)  &
+  trap_Pipe_a2_p0_leave_f0_rel_f1_rel_flow
+    (U_Ring_a1, U_Pipe_a2, U_Pipe_a3,
+     X_f0_f, X_f0_b, X_fn_f, X_fn_b, X_p0_w, X_p0_h, X_p0_e)  &
+  trap_Pipe_a3_p0_take_left_f0_grb_flow
+    (U_Ring_a1, U_Pipe_a2, U_Pipe_a3,
+     X_f0_f, X_f0_b, X_fn_f, X_fn_b, X_p0_w, X_p0_h, X_p0_e)  &
+  trap_Pipe_a3_p0_take_right_fn_grb_flow
+    (U_Ring_a1, U_Pipe_a2, U_Pipe_a3,
+     X_f0_f, X_f0_b, X_fn_f, X_fn_b, X_p0_w, X_p0_h, X_p0_e)  &
+  trap_Pipe_a3_p0_leave_f0_rel_fn_rel_flow
+    (U_Ring_a1, U_Pipe_a2, U_Pipe_a3,
+     X_f0_f, X_f0_b, X_fn_f, X_fn_b, X_p0_w, X_p0_h, X_p0_e) ;
+
+pred trap_constraints
+  (var2 U_Ring_a1, U_Pipe_a2, U_Pipe_a3,
+   var2 Z_f0_f, Z_f0_b, Z_fn_f, Z_fn_b, Z_p0_w, Z_p0_h, Z_p0_e) =
+   ext_configuration
+     (U_Ring_a1, U_Pipe_a2, U_Pipe_a3,
+      Z_f0_f, Z_f0_b, Z_fn_f, Z_fn_b, Z_p0_w, Z_p0_h, Z_p0_e) &
+   trap_initially_not_empty
+     (U_Ring_a1, U_Pipe_a2, U_Pipe_a3,
+      Z_f0_f, Z_f0_b, Z_fn_f, Z_fn_b, Z_p0_w, Z_p0_h, Z_p0_e) &
+   trap_flow
+     (U_Ring_a1, U_Pipe_a2, U_Pipe_a3,
+      Z_f0_f, Z_f0_b, Z_fn_f, Z_fn_b, Z_p0_w, Z_p0_h, Z_p0_e);
+
+pred trap_invariant
+  (var2 U_Ring_a1, U_Pipe_a2, U_Pipe_a3,
+   var2 X_f0_f, X_f0_b, X_fn_f, X_fn_b, X_p0_w, X_p0_h, X_p0_e) =
+   configuration
+     (U_Ring_a1, U_Pipe_a2, U_Pipe_a3,
+      X_f0_f, X_f0_b, X_fn_f, X_fn_b, X_p0_w, X_p0_h, X_p0_e) &
+   all2 Z_f0_f, Z_f0_b, Z_fn_f, Z_fn_b, Z_p0_w, Z_p0_h, Z_p0_e:
+     trap_constraints
+       (U_Ring_a1, U_Pipe_a2, U_Pipe_a3,
+        Z_f0_f, Z_f0_b, Z_fn_f, Z_fn_b, Z_p0_w, Z_p0_h, Z_p0_e) =>
+     intersects_7
+       (Z_f0_f, Z_f0_b, Z_fn_f, Z_fn_b, Z_p0_w, Z_p0_h, Z_p0_e,
+        X_f0_f, X_f0_b, X_fn_f, X_fn_b, X_p0_w, X_p0_h, X_p0_e);
+
+
+
+#
+# one invariants
+#
+
+
+
+pred one_initially_exactly_one
+  (var2 U_Ring_a1, U_Pipe_a2, U_Pipe_a3,
+   var2 X_f0_f, X_f0_b, X_fn_f, X_fn_b, X_p0_w, X_p0_h, X_p0_e) =
+   ext_configuration
+     (U_Ring_a1, U_Pipe_a2, U_Pipe_a3,
+      X_f0_f, X_f0_b, X_fn_f, X_fn_b, X_p0_w, X_p0_h, X_p0_e) &
+   (((ex1 x0 : x0 in X_p0_w & x0 in U_Ring_a1 &
+        all1 x : ((x in X_p0_w & x in U_Ring_a1) => x = x0)) &
+     (all1 x : (x notin X_f0_f | x notin U_Pipe_a2)) &
+     (all1 x : (x notin X_p0_w | x notin U_Pipe_a2)) &
+     (all1 x : (x notin X_f0_f | x notin U_Pipe_a3)) &
+     (all1 x : (x notin X_p0_w | x notin U_Pipe_a3)) &
+     (all1 x : (x notin X_fn_f | x notin U_Pipe_a3))) |
+    ((ex1 x0 : x0 in X_f0_f & x0 in U_Pipe_a2 &
+        all1 x : ((x in X_f0_f & x in U_Pipe_a2) => x = x0)) &
+     (all1 x : (x notin X_p0_w | x notin U_Ring_a1)) &
+     (all1 x : (x notin X_p0_w | x notin U_Pipe_a2)) &
+     (all1 x : (x notin X_f0_f | x notin U_Pipe_a3)) &
+     (all1 x : (x notin X_p0_w | x notin U_Pipe_a3)) &
+     (all1 x : (x notin X_fn_f | x notin U_Pipe_a3))) |
+    ((ex1 x0 : x0 in X_p0_w & x0 in U_Pipe_a2 &
+        all1 x : ((x in X_p0_w & x in U_Pipe_a2) => x = x0)) &
+     (all1 x : (x notin X_p0_w | x notin U_Ring_a1)) &
+     (all1 x : (x notin X_f0_f | x notin U_Pipe_a2)) &
+     (all1 x : (x notin X_f0_f | x notin U_Pipe_a3)) &
+     (all1 x : (x notin X_p0_w | x notin U_Pipe_a3)) &
+     (all1 x : (x notin X_fn_f | x notin U_Pipe_a3))) |
+    ((ex1 x0 : x0 in X_f0_f & x0 in U_Pipe_a3 &
+        all1 x : ((x in X_f0_f & x in U_Pipe_a3) => x = x0)) &
+     (all1 x : (x notin X_p0_w | x notin U_Ring_a1)) &
+     (all1 x : (x notin X_f0_f | x notin U_Pipe_a2)) &
+     (all1 x : (x notin X_p0_w | x notin U_Pipe_a2)) &
+     (all1 x : (x notin X_p0_w | x notin U_Pipe_a3)) &
+     (all1 x : (x notin X_fn_f | x notin U_Pipe_a3))) |
+    ((ex1 x0 : x0 in X_p0_w & x0 in U_Pipe_a3 &
+        all1 x : ((x in X_p0_w & x in U_Pipe_a3) => x = x0)) &
+     (all1 x : (x notin X_p0_w | x notin U_Ring_a1)) &
+     (all1 x : (x notin X_f0_f | x notin U_Pipe_a2)) &
+     (all1 x : (x notin X_p0_w | x notin U_Pipe_a2)) &
+     (all1 x : (x notin X_f0_f | x notin U_Pipe_a3)) &
+     (all1 x : (x notin X_fn_f | x notin U_Pipe_a3))) |
+    ((ex1 x0 : x0 in X_fn_f & x0 in U_Pipe_a3 &
+        all1 x : ((x in X_fn_f & x in U_Pipe_a3) => x = x0)) &
+     (all1 x : (x notin X_p0_w | x notin U_Ring_a1)) &
+     (all1 x : (x notin X_f0_f | x notin U_Pipe_a2)) &
+     (all1 x : (x notin X_p0_w | x notin U_Pipe_a2)) &
+     (all1 x : (x notin X_f0_f | x notin U_Pipe_a3)) &
+     (all1 x : (x notin X_p0_w | x notin U_Pipe_a3))));
+
+
+pred one_Ring_a1_p0_take_left_fn_grb_0_flow
+  (var2 X_f0_f, X_f0_b, X_fn_f, X_fn_b, X_p0_w, X_p0_h, X_p0_e,
+   var1 x_p0, x_fn) =
+   one_transition_flow_2(x_p0, X_p0_w, X_p0_h, x_fn, X_fn_f, X_fn_b);
+
+pred one_Ring_a1_p0_take_left_fn_grb_flow
+  (var2 U_Ring_a1, U_Pipe_a2, U_Pipe_a3,
+   var2 X_f0_f, X_f0_b, X_fn_f, X_fn_b, X_p0_w, X_p0_h, X_p0_e) =
+  (all1 x_0, x_p0, x_fn :
+    (x_0 in U_Ring_a1 & 
+     x_0 = x_p0 & 
+     path_Ring_a1_fn_Pipe_a3_fn
+       (U_Ring_a1, U_Pipe_a2, U_Pipe_a3, x_0, x_fn)) =>
+    one_Ring_a1_p0_take_left_fn_grb_0_flow
+      (X_f0_f, X_f0_b, X_fn_f, X_fn_b, X_p0_w, X_p0_h, X_p0_e,
+       x_p0, x_fn)) ;
+
+pred one_Ring_a1_p0_take_right_f0_grb_0_flow
+  (var2 X_f0_f, X_f0_b, X_fn_f, X_fn_b, X_p0_w, X_p0_h, X_p0_e,
+   var1 x_p0, x_f0) =
+   one_transition_flow_2(x_p0, X_p0_h, X_p0_e, x_f0, X_f0_f, X_f0_b);
+
+pred one_Ring_a1_p0_take_right_f0_grb_1_flow
+  (var2 X_f0_f, X_f0_b, X_fn_f, X_fn_b, X_p0_w, X_p0_h, X_p0_e,
+   var1 x_p0, x_f0) =
+   one_transition_flow_2(x_p0, X_p0_h, X_p0_e, x_f0, X_f0_f, X_f0_b);
+
+pred one_Ring_a1_p0_take_right_f0_grb_flow
+  (var2 U_Ring_a1, U_Pipe_a2, U_Pipe_a3,
+   var2 X_f0_f, X_f0_b, X_fn_f, X_fn_b, X_p0_w, X_p0_h, X_p0_e) =
+  (all1 x_0, x_p0, x_f0 :
+    (x_0 in U_Ring_a1 & 
+     x_0 = x_p0 & 
+     path_Ring_a1_f0_Pipe_a2_f0
+       (U_Ring_a1, U_Pipe_a2, U_Pipe_a3, x_0, x_f0)) =>
+    one_Ring_a1_p0_take_right_f0_grb_0_flow
+      (X_f0_f, X_f0_b, X_fn_f, X_fn_b, X_p0_w, X_p0_h, X_p0_e,
+       x_p0, x_f0))  &
+  (all1 x_0, x_p0, x_f0 :
+    (x_0 in U_Ring_a1 & 
+     x_0 = x_p0 & 
+     path_Ring_a1_f0_Pipe_a3_f0
+       (U_Ring_a1, U_Pipe_a2, U_Pipe_a3, x_0, x_f0)) =>
+    one_Ring_a1_p0_take_right_f0_grb_1_flow
+      (X_f0_f, X_f0_b, X_fn_f, X_fn_b, X_p0_w, X_p0_h, X_p0_e,
+       x_p0, x_f0)) ;
+
+pred one_Ring_a1_p0_leave_f0_rel_fn_rel_0_flow
+  (var2 X_f0_f, X_f0_b, X_fn_f, X_fn_b, X_p0_w, X_p0_h, X_p0_e,
+   var1 x_p0, x_f0, x_fn) =
+   one_transition_flow_3(x_p0, X_p0_e, X_p0_w, x_f0, X_f0_b, X_f0_f, x_fn, X_fn_b, X_fn_f);
+
+pred one_Ring_a1_p0_leave_f0_rel_fn_rel_1_flow
+  (var2 X_f0_f, X_f0_b, X_fn_f, X_fn_b, X_p0_w, X_p0_h, X_p0_e,
+   var1 x_p0, x_f0, x_fn) =
+   one_transition_flow_3(x_p0, X_p0_e, X_p0_w, x_f0, X_f0_b, X_f0_f, x_fn, X_fn_b, X_fn_f);
+
+pred one_Ring_a1_p0_leave_f0_rel_fn_rel_flow
+  (var2 U_Ring_a1, U_Pipe_a2, U_Pipe_a3,
+   var2 X_f0_f, X_f0_b, X_fn_f, X_fn_b, X_p0_w, X_p0_h, X_p0_e) =
+  (all1 x_0, x_p0, x_f0, x_fn :
+    (x_0 in U_Ring_a1 & 
+     x_0 = x_p0 & 
+     path_Ring_a1_f0_Pipe_a2_f0
+       (U_Ring_a1, U_Pipe_a2, U_Pipe_a3, x_0, x_f0) &
+     path_Ring_a1_fn_Pipe_a3_fn
+       (U_Ring_a1, U_Pipe_a2, U_Pipe_a3, x_0, x_fn)) =>
+    one_Ring_a1_p0_leave_f0_rel_fn_rel_0_flow
+      (X_f0_f, X_f0_b, X_fn_f, X_fn_b, X_p0_w, X_p0_h, X_p0_e,
+       x_p0, x_f0, x_fn))  &
+  (all1 x_0, x_p0, x_f0, x_fn :
+    (x_0 in U_Ring_a1 & 
+     x_0 = x_p0 & 
+     path_Ring_a1_f0_Pipe_a3_f0
+       (U_Ring_a1, U_Pipe_a2, U_Pipe_a3, x_0, x_f0) &
+     path_Ring_a1_fn_Pipe_a3_fn
+       (U_Ring_a1, U_Pipe_a2, U_Pipe_a3, x_0, x_fn)) =>
+    one_Ring_a1_p0_leave_f0_rel_fn_rel_1_flow
+      (X_f0_f, X_f0_b, X_fn_f, X_fn_b, X_p0_w, X_p0_h, X_p0_e,
+       x_p0, x_f0, x_fn)) ;
+
+pred one_Pipe_a2_p0_take_left_f0_grb_0_flow
+  (var2 X_f0_f, X_f0_b, X_fn_f, X_fn_b, X_p0_w, X_p0_h, X_p0_e,
+   var1 x_p0, x_f0) =
+   one_transition_flow_2(x_p0, X_p0_w, X_p0_h, x_f0, X_f0_f, X_f0_b);
+
+pred one_Pipe_a2_p0_take_left_f0_grb_flow
+  (var2 U_Ring_a1, U_Pipe_a2, U_Pipe_a3,
+   var2 X_f0_f, X_f0_b, X_fn_f, X_fn_b, X_p0_w, X_p0_h, X_p0_e) =
+  (all1 x_0, x_p0, x_f0 :
+    (x_0 in U_Pipe_a2 & 
+     x_0 = x_p0 &
+     x_0 = x_f0
+    ) =>
+    one_Pipe_a2_p0_take_left_f0_grb_0_flow
+      (X_f0_f, X_f0_b, X_fn_f, X_fn_b, X_p0_w, X_p0_h, X_p0_e,
+       x_p0, x_f0)) ;
+
+pred one_Pipe_a2_p0_take_right_f1_grb_0_flow
+  (var2 X_f0_f, X_f0_b, X_fn_f, X_fn_b, X_p0_w, X_p0_h, X_p0_e,
+   var1 x_p0, x_f1) =
+   one_transition_flow_2(x_p0, X_p0_h, X_p0_e, x_f1, X_f0_f, X_f0_b);
+
+pred one_Pipe_a2_p0_take_right_f1_grb_1_flow
+  (var2 X_f0_f, X_f0_b, X_fn_f, X_fn_b, X_p0_w, X_p0_h, X_p0_e,
+   var1 x_p0, x_f1) =
+   one_transition_flow_2(x_p0, X_p0_h, X_p0_e, x_f1, X_f0_f, X_f0_b);
+
+pred one_Pipe_a2_p0_take_right_f1_grb_flow
+  (var2 U_Ring_a1, U_Pipe_a2, U_Pipe_a3,
+   var2 X_f0_f, X_f0_b, X_fn_f, X_fn_b, X_p0_w, X_p0_h, X_p0_e) =
+  (all1 x_0, x_p0, x_f1 :
+    (x_0 in U_Pipe_a2 & 
+     x_0 = x_p0 & 
+     path_Pipe_a2_f1_Pipe_a2_f0
+       (U_Ring_a1, U_Pipe_a2, U_Pipe_a3, x_0, x_f1)) =>
+    one_Pipe_a2_p0_take_right_f1_grb_0_flow
+      (X_f0_f, X_f0_b, X_fn_f, X_fn_b, X_p0_w, X_p0_h, X_p0_e,
+       x_p0, x_f1))  &
+  (all1 x_0, x_p0, x_f1 :
+    (x_0 in U_Pipe_a2 & 
+     x_0 = x_p0 & 
+     path_Pipe_a2_f1_Pipe_a3_f0
+       (U_Ring_a1, U_Pipe_a2, U_Pipe_a3, x_0, x_f1)) =>
+    one_Pipe_a2_p0_take_right_f1_grb_1_flow
+      (X_f0_f, X_f0_b, X_fn_f, X_fn_b, X_p0_w, X_p0_h, X_p0_e,
+       x_p0, x_f1)) ;
+
+pred one_Pipe_a2_p0_leave_f0_rel_f1_rel_0_flow
+  (var2 X_f0_f, X_f0_b, X_fn_f, X_fn_b, X_p0_w, X_p0_h, X_p0_e,
+   var1 x_p0, x_f0, x_f1) =
+   one_transition_flow_3(x_p0, X_p0_e, X_p0_w, x_f0, X_f0_b, X_f0_f, x_f1, X_f0_b, X_f0_f);
+
+pred one_Pipe_a2_p0_leave_f0_rel_f1_rel_1_flow
+  (var2 X_f0_f, X_f0_b, X_fn_f, X_fn_b, X_p0_w, X_p0_h, X_p0_e,
+   var1 x_p0, x_f0, x_f1) =
+   one_transition_flow_3(x_p0, X_p0_e, X_p0_w, x_f0, X_f0_b, X_f0_f, x_f1, X_f0_b, X_f0_f);
+
+pred one_Pipe_a2_p0_leave_f0_rel_f1_rel_flow
+  (var2 U_Ring_a1, U_Pipe_a2, U_Pipe_a3,
+   var2 X_f0_f, X_f0_b, X_fn_f, X_fn_b, X_p0_w, X_p0_h, X_p0_e) =
+  (all1 x_0, x_p0, x_f0, x_f1 :
+    (x_0 in U_Pipe_a2 & 
+     x_0 = x_p0 &
+     x_0 = x_f0 & 
+     path_Pipe_a2_f1_Pipe_a2_f0
+       (U_Ring_a1, U_Pipe_a2, U_Pipe_a3, x_0, x_f1)) =>
+    one_Pipe_a2_p0_leave_f0_rel_f1_rel_0_flow
+      (X_f0_f, X_f0_b, X_fn_f, X_fn_b, X_p0_w, X_p0_h, X_p0_e,
+       x_p0, x_f0, x_f1))  &
+  (all1 x_0, x_p0, x_f0, x_f1 :
+    (x_0 in U_Pipe_a2 & 
+     x_0 = x_p0 &
+     x_0 = x_f0 & 
+     path_Pipe_a2_f1_Pipe_a3_f0
+       (U_Ring_a1, U_Pipe_a2, U_Pipe_a3, x_0, x_f1)) =>
+    one_Pipe_a2_p0_leave_f0_rel_f1_rel_1_flow
+      (X_f0_f, X_f0_b, X_fn_f, X_fn_b, X_p0_w, X_p0_h, X_p0_e,
+       x_p0, x_f0, x_f1)) ;
+
+pred one_Pipe_a3_p0_take_left_f0_grb_0_flow
+  (var2 X_f0_f, X_f0_b, X_fn_f, X_fn_b, X_p0_w, X_p0_h, X_p0_e,
+   var1 x_p0, x_f0) =
+   one_transition_flow_2(x_p0, X_p0_w, X_p0_h, x_f0, X_f0_f, X_f0_b);
+
+pred one_Pipe_a3_p0_take_left_f0_grb_flow
+  (var2 U_Ring_a1, U_Pipe_a2, U_Pipe_a3,
+   var2 X_f0_f, X_f0_b, X_fn_f, X_fn_b, X_p0_w, X_p0_h, X_p0_e) =
+  (all1 x_0, x_p0, x_f0 :
+    (x_0 in U_Pipe_a3 & 
+     x_0 = x_p0 &
+     x_0 = x_f0
+    ) =>
+    one_Pipe_a3_p0_take_left_f0_grb_0_flow
+      (X_f0_f, X_f0_b, X_fn_f, X_fn_b, X_p0_w, X_p0_h, X_p0_e,
+       x_p0, x_f0)) ;
+
+pred one_Pipe_a3_p0_take_right_fn_grb_0_flow
+  (var2 X_f0_f, X_f0_b, X_fn_f, X_fn_b, X_p0_w, X_p0_h, X_p0_e,
+   var1 x_p0, x_fn) =
+   one_transition_flow_2(x_p0, X_p0_h, X_p0_e, x_fn, X_fn_f, X_fn_b);
+
+pred one_Pipe_a3_p0_take_right_fn_grb_flow
+  (var2 U_Ring_a1, U_Pipe_a2, U_Pipe_a3,
+   var2 X_f0_f, X_f0_b, X_fn_f, X_fn_b, X_p0_w, X_p0_h, X_p0_e) =
+  (all1 x_0, x_p0, x_fn :
+    (x_0 in U_Pipe_a3 & 
+     x_0 = x_p0 &
+     x_0 = x_fn
+    ) =>
+    one_Pipe_a3_p0_take_right_fn_grb_0_flow
+      (X_f0_f, X_f0_b, X_fn_f, X_fn_b, X_p0_w, X_p0_h, X_p0_e,
+       x_p0, x_fn)) ;
+
+pred one_Pipe_a3_p0_leave_f0_rel_fn_rel_0_flow
+  (var2 X_f0_f, X_f0_b, X_fn_f, X_fn_b, X_p0_w, X_p0_h, X_p0_e,
+   var1 x_p0, x_f0, x_fn) =
+   one_transition_flow_3(x_p0, X_p0_e, X_p0_w, x_f0, X_f0_b, X_f0_f, x_fn, X_fn_b, X_fn_f);
+
+pred one_Pipe_a3_p0_leave_f0_rel_fn_rel_flow
+  (var2 U_Ring_a1, U_Pipe_a2, U_Pipe_a3,
+   var2 X_f0_f, X_f0_b, X_fn_f, X_fn_b, X_p0_w, X_p0_h, X_p0_e) =
+  (all1 x_0, x_p0, x_f0, x_fn :
+    (x_0 in U_Pipe_a3 & 
+     x_0 = x_p0 &
+     x_0 = x_f0 &
+     x_0 = x_fn
+    ) =>
+    one_Pipe_a3_p0_leave_f0_rel_fn_rel_0_flow
+      (X_f0_f, X_f0_b, X_fn_f, X_fn_b, X_p0_w, X_p0_h, X_p0_e,
+       x_p0, x_f0, x_fn)) ;
+
+pred one_flow
+  (var2 U_Ring_a1, U_Pipe_a2, U_Pipe_a3,
+   var2 X_f0_f, X_f0_b, X_fn_f, X_fn_b, X_p0_w, X_p0_h, X_p0_e) =
+  ext_configuration
+    (U_Ring_a1, U_Pipe_a2, U_Pipe_a3,
+     X_f0_f, X_f0_b, X_fn_f, X_fn_b, X_p0_w, X_p0_h, X_p0_e) &
+  one_Ring_a1_p0_take_left_fn_grb_flow
+    (U_Ring_a1, U_Pipe_a2, U_Pipe_a3,
+     X_f0_f, X_f0_b, X_fn_f, X_fn_b, X_p0_w, X_p0_h, X_p0_e)  &
+  one_Ring_a1_p0_take_right_f0_grb_flow
+    (U_Ring_a1, U_Pipe_a2, U_Pipe_a3,
+     X_f0_f, X_f0_b, X_fn_f, X_fn_b, X_p0_w, X_p0_h, X_p0_e)  &
+  one_Ring_a1_p0_leave_f0_rel_fn_rel_flow
+    (U_Ring_a1, U_Pipe_a2, U_Pipe_a3,
+     X_f0_f, X_f0_b, X_fn_f, X_fn_b, X_p0_w, X_p0_h, X_p0_e)  &
+  one_Pipe_a2_p0_take_left_f0_grb_flow
+    (U_Ring_a1, U_Pipe_a2, U_Pipe_a3,
+     X_f0_f, X_f0_b, X_fn_f, X_fn_b, X_p0_w, X_p0_h, X_p0_e)  &
+  one_Pipe_a2_p0_take_right_f1_grb_flow
+    (U_Ring_a1, U_Pipe_a2, U_Pipe_a3,
+     X_f0_f, X_f0_b, X_fn_f, X_fn_b, X_p0_w, X_p0_h, X_p0_e)  &
+  one_Pipe_a2_p0_leave_f0_rel_f1_rel_flow
+    (U_Ring_a1, U_Pipe_a2, U_Pipe_a3,
+     X_f0_f, X_f0_b, X_fn_f, X_fn_b, X_p0_w, X_p0_h, X_p0_e)  &
+  one_Pipe_a3_p0_take_left_f0_grb_flow
+    (U_Ring_a1, U_Pipe_a2, U_Pipe_a3,
+     X_f0_f, X_f0_b, X_fn_f, X_fn_b, X_p0_w, X_p0_h, X_p0_e)  &
+  one_Pipe_a3_p0_take_right_fn_grb_flow
+    (U_Ring_a1, U_Pipe_a2, U_Pipe_a3,
+     X_f0_f, X_f0_b, X_fn_f, X_fn_b, X_p0_w, X_p0_h, X_p0_e)  &
+  one_Pipe_a3_p0_leave_f0_rel_fn_rel_flow
+    (U_Ring_a1, U_Pipe_a2, U_Pipe_a3,
+     X_f0_f, X_f0_b, X_fn_f, X_fn_b, X_p0_w, X_p0_h, X_p0_e) ;
+
+pred one_constraints
+  (var2 U_Ring_a1, U_Pipe_a2, U_Pipe_a3,
+   var2 Z_f0_f, Z_f0_b, Z_fn_f, Z_fn_b, Z_p0_w, Z_p0_h, Z_p0_e) =
+   ext_configuration
+     (U_Ring_a1, U_Pipe_a2, U_Pipe_a3,
+      Z_f0_f, Z_f0_b, Z_fn_f, Z_fn_b, Z_p0_w, Z_p0_h, Z_p0_e) &
+   one_initially_exactly_one
+     (U_Ring_a1, U_Pipe_a2, U_Pipe_a3,
+      Z_f0_f, Z_f0_b, Z_fn_f, Z_fn_b, Z_p0_w, Z_p0_h, Z_p0_e) &
+   one_flow
+     (U_Ring_a1, U_Pipe_a2, U_Pipe_a3,
+      Z_f0_f, Z_f0_b, Z_fn_f, Z_fn_b, Z_p0_w, Z_p0_h, Z_p0_e);
+
+pred one_invariant
+  (var2 U_Ring_a1, U_Pipe_a2, U_Pipe_a3,
+   var2 X_f0_f, X_f0_b, X_fn_f, X_fn_b, X_p0_w, X_p0_h, X_p0_e) =
+   configuration
+     (U_Ring_a1, U_Pipe_a2, U_Pipe_a3,
+      X_f0_f, X_f0_b, X_fn_f, X_fn_b, X_p0_w, X_p0_h, X_p0_e) &
+   all2 Z_f0_f, Z_f0_b, Z_fn_f, Z_fn_b, Z_p0_w, Z_p0_h, Z_p0_e :
+     one_constraints
+       (U_Ring_a1, U_Pipe_a2, U_Pipe_a3,
+        Z_f0_f, Z_f0_b, Z_fn_f, Z_fn_b, Z_p0_w, Z_p0_h, Z_p0_e) =>
+     uniquely_intersects_7
+       (Z_f0_f, Z_f0_b, Z_fn_f, Z_fn_b, Z_p0_w, Z_p0_h, Z_p0_e,
+        X_f0_f, X_f0_b, X_fn_f, X_fn_b, X_p0_w, X_p0_h, X_p0_e);
+
+
+
+#
+# alt-philo-sym_mutex.mona
+#
+
+
+
+pred not_mutex
+  (var2 U_Ring_a1, U_Pipe_a2, U_Pipe_a3,
+   var2 X_f0_f, X_f0_b, X_fn_f, X_fn_b, X_p0_w, X_p0_h, X_p0_e) =
+   configuration
+     (U_Ring_a1, U_Pipe_a2, U_Pipe_a3,
+      X_f0_f, X_f0_b, X_fn_f, X_fn_b, X_p0_w, X_p0_h, X_p0_e) &
+   ex1 x1, x2:
+     (  # x1 ~= x2 &
+        # x1 = x2 + 1 &
+	( x1 = x2 + 1 | (x1 = 0 & (x2+1) notin U_Ring_a1 &
+	                          (x2+1) notin U_Pipe_a2 &
+				  (x2+1) notin U_Pipe_a3)) & 
+       (x1 in X_p0_e) &
+       (x2 in X_p0_e) );
+
+
+#
+# assertions checking
+#
+
+var2 U_Ring_a1, U_Pipe_a2, U_Pipe_a3;
+
+var2 X_f0_f, X_f0_b, X_fn_f, X_fn_b, X_p0_w, X_p0_h, X_p0_e;
+
+trap_invariant
+  (U_Ring_a1, U_Pipe_a2, U_Pipe_a3,
+   X_f0_f, X_f0_b, X_fn_f, X_fn_b, X_p0_w, X_p0_h, X_p0_e) &
+one_invariant
+  (U_Ring_a1, U_Pipe_a2, U_Pipe_a3,
+   X_f0_f, X_f0_b, X_fn_f, X_fn_b, X_p0_w, X_p0_h, X_p0_e) &
+not_mutex
+  (U_Ring_a1, U_Pipe_a2, U_Pipe_a3,
+   X_f0_f, X_f0_b, X_fn_f, X_fn_b, X_p0_w, X_p0_h, X_p0_e);

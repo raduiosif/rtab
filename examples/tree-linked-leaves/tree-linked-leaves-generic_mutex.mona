@@ -1,0 +1,10 @@
+pred not_mutex
+  (var2 U_Root_a1, U_Node_a2, U_Node_a3, U_Node_a4, U_Node_a5, U_Leaf_a6, U_LeafInit_a7,
+   var2 X_l0_q0, X_l0_q1, X_l0_q2, X_n0_q0, X_n0_q1, X_n0_q2, X_n0_q3, X_r0_q0, X_r0_q2, X_x_q0, X_x_q1) = 
+   configuration
+     (U_Root_a1, U_Node_a2, U_Node_a3, U_Node_a4, U_Node_a5, U_Leaf_a6, U_LeafInit_a7,
+     X_l0_q0, X_l0_q1, X_l0_q2, X_n0_q0, X_n0_q1, X_n0_q2, X_n0_q3, X_r0_q0, X_r0_q2, X_x_q0, X_x_q1) & 
+   ex1 x1, x2:
+     ( x1 ~= x2 &
+       (x1 in X_l0_q1 | x1 in X_x_q0 ) &
+       (x2 in X_l0_q1 | x2 in X_x_q0 ));
