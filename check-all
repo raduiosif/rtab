@@ -14,24 +14,42 @@ CHECK ()
     echo "$EXDIR / $EXNAME / $OPT"
     cd $EXDIR
     ../../ws2s-encoder $OPT $EXNAME > /dev/null
-    $MONA -t -q $EXNAME.mona | egrep "Formula|counter-example|Total"
+    $MONA -t -q $EXNAME.mona | egrep "unsatisfiable|satisfying|time"
     cd ..
 }
 
 # ws1s
 
-CHECK ring ring -ws1s
-CHECK star star -ws1s
-CHECK star star-ring -ws1s
-CHECK philo philo_binary_sim "-1 -ws1s"
-CHECK philo philo_binary_asim_tweak "-1 -ws1s"
-CHECK philo philo_ternary -ws1s
+time CHECK token-ring token-ring "-ws1s -1 -g deadlock"
+time CHECK token-ring token-ring "-ws1s -1 -i token-ring_mutex.mona -g not_mutex"
+time CHECK token-ring token-ring-generic "-ws1s -1 -g deadlock"
+time CHECK token-ring token-ring-generic "-ws1s -1 -i token-ring-generic_mutex.mona -g not_mutex"
+
+time CHECK philo sync-philo "-ws1s -1 -g deadlock"
+time CHECK philo sync-philo "-ws1s -1 -i sync-philo_mutex.mona -g not_mutex"
+
+time CHECK philo alt-philo-sym "-ws1s -1 -g deadlock"
+time CHECK philo alt-philo-sym "-ws1s -1 -i alt-philo-sym_mutex.mona -g not_mutex"
+
+time CHECK philo alt-philo-asym "-ws1s -1 -g deadlock"
+time CHECK philo alt-philo-asym "-ws1s -1 -i alt-philo-asym_mutex.mona -g not_mutex"
+
+time CHECK philo alt-philo-generic "-ws1s -1 -g deadlock"
+time CHECK philo alt-philo-generic "-ws1s -1 -i alt-philo-generic_mutex.mona -g not_mutex"
+
+time CHECK star star "-ws1s -g deadlock"
+time CHECK star star-ring "-ws1s -g deadlock"
+time CHECK star star-ring "-ws1s -1 -i star-ring_mutex.mona -g not_mutex"
+time CHECK star star-ring-generic "-ws1s -g deadlock"
+time CHECK star star-ring-generic "-ws1s -1 -i star-ring-generic_mutex.mona -g not_mutex"
 
 #ws2s
 
-CHECK tree-dfs tree -ws2s
-CHECK tree-back-root tree -ws2s
-CHECK tree-linked-leaves tll_full -ws2s
-
+time CHECK tree-dfs tree-dfs "-ws2s -g deadlock"
+time CHECK tree-back-root tree-back-root "-ws2s -g deadlock"
+time CHECK tree-linked-leaves tree-linked-leaves "-ws2s -g deadlock"
+time CHECK tree-linked-leaves tree-linked-leaves "-ws2s -1 -i tree-linked-leaves_mutex.mona -g not_mutex"
+time CHECK tree-linked-leaves tree-linked-leaves-generic "-ws2s -g deadlock"
+time CHECK tree-linked-leaves tree-linked-leaves-generic "-ws2s -1 -i tree-linked-leaves-generic_mutex.mona -g not_mutex"
 
 
