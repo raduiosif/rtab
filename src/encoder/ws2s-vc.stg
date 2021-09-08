@@ -522,6 +522,7 @@ pred intersects_<size>
    <indexes: {idx| intersects_1(X_<idx.i>, Y_<idx.i>)}; separator=" |\n">;
 >>
 
+/*
 uniquely_intersects(size, indexes, pairs) ::= <<
 
 pred uniquely_intersects_<size>
@@ -529,8 +530,17 @@ pred uniquely_intersects_<size>
    var2 <indexes: {idx| Y_<idx.i>}; separator=", ">) =
   (<indexes: {idx| (ex1 z1: (z1 in X_<idx.i> & z1 in Y_<idx.i>) &
      (all1 z2: (z2 in X_<idx.i> & z2 in Y_<idx.i>) => z1 = z2))}; separator=" |\n   ">) &
-  (all1 z:
-     <pairs: {pair| (z notin X_<pair.i> | z notin Y_<pair.i> | z notin X_<pair.j> | z notin Y_<pair.j>) }; separator=" &\n">);
+  ~(ex1 z1, z2:
+     <pairs: {pair| (z1 in X_<pair.i> & z1 in Y_<pair.i> & z2 in X_<pair.j> & z2 in Y_<pair.j>) }; separator=" |\n">);
+>>
+*/
+
+uniquely_intersects(size, indexes, body) ::= <<
+
+pred uniquely_intersects_<size>
+  (var2 <indexes: {idx| X_<idx.i>}; separator=", ">,
+   var2 <indexes: {idx| Y_<idx.i>}; separator=", ">) =
+  (<body>);
 >>
 
 included(size, indexes, pairs) ::= <<
